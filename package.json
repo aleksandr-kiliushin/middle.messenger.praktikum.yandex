@@ -1,6 +1,14 @@
 {
   "author": "aleksandr-kiliushin",
   "description": "",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "parcel": "2.8.3"
+  },
   "name": "middle.messenger.praktikum.yandex",
+  "scripts": {
+    "dev": "parcel index.hbs",
+    "build": "parcel build index.hbs"
+  },
   "version": "1.0.0"
 }
