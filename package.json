@@ -12,8 +12,8 @@
   },
   "name": "middle.messenger.praktikum.yandex",
   "scripts": {
-    "build": "parcel build index.hbs",
-    "start": "parcel ./src/**/*.hbs"
+    "build": "rm -rf ./dist && parcel build ./src/**/.*hbs",
+    "start": "rm -rf ./dist && parcel ./src/**/*.hbs"
   },
   "version": "1.0.0"
 }
