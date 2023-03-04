@@ -45,17 +45,19 @@ a {
   color: var(--primary-main);
   font-size: inherit;
 }
+
 a::after {
   position: absolute;
   content: "";
-  bottom: 0px;
-  left: 0px;
+  bottom: 0;
+  left: 0;
   height: 2px;
   width: 100%;
   background-color: var(--primary-main);
   transform: scaleX(0);
   transition: transform 0.3s;
 }
+
 a:hover::after {
   transform: scaleX(1);
 }
@@ -75,53 +77,68 @@ h4 {
 h1 {
   font-size: 2.7rem;
 }
+
 h2 {
   font-size: 2.5rem;
 }
+
 h3 {
   font-size: 2.3rem;
 }
+
 h4 {
   font-size: 2.1rem;
 }
+
 @media (min-width: 1440px) {
   h1 {
     font-size: 2.6rem;
   }
+
   h2 {
     font-size: 2.4rem;
   }
+
   h3 {
     font-size: 2.2rem;
   }
+
   h4 {
     font-size: 2rem;
   }
 }
+
 @media (min-width: 800px) {
   h1 {
     font-size: 2.5rem;
   }
+
   h2 {
     font-size: 2.3rem;
   }
+
   h3 {
     font-size: 2.1rem;
   }
+
   h4 {
     font-size: 1.9rem;
   }
 }
+
 @media (min-width: 360px) {
   h1 {
     font-size: 2.4rem;
   }
+
   h2 {
     font-size: 2.2rem;
   }
+
   h3 {
     font-size: 2rem;
   }
+
   h4 {
     font-size: 1.8rem;
   }
@@ -139,6 +156,7 @@ h4 {
   font-size: 1.4rem;
   cursor: pointer;
 }
+
 .button_primary {
   background-color: var(--primary-main);
   color: white;
