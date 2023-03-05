@@ -1,0 +1,17 @@
+.rows {
+  display: grid;
+  row-gap: 1.2rem;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.row {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+}
+
+.row-label {
+  color: gray;
+}
