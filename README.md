@@ -28,5 +28,7 @@ npm run start
 
 ## Технологии
 
+- TypeScript;
 - Handlebars;
+- PostCSS;
 - Node.js и Express (для разработки).
