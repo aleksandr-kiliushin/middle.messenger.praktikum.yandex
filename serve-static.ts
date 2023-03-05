@@ -1,7 +1,11 @@
+import dotenv from "dotenv"
 import express from "express"
 
+dotenv.config({ path: "./.env" })
+
 const app = express()
-const PORT = 3000
+
+const PORT = process.env.EXPRESS_SERVER_PORT ?? "3000"
 
 app.use(express.static("./dist"))
 
