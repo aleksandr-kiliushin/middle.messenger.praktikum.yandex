@@ -28,6 +28,5 @@ npm run start
 
 ## Технологии
 
-- Handlebars
-- Node.js (для разработки)
-- Express (для разработки)
+- Handlebars;
+- Node.js и Express (для разработки).
