@@ -3,19 +3,21 @@
   <body>
     {{> header }}
     <main>
-      <h1>Вход</h1>
-      <form>
-        <div>
-          <label class="row-label" for="login">Логин</label>
-          <input id="login" name="login" type="text" />
-        </div>
-        <div>
-          <label class="row-label" for="password">Пароль</label>
-          <input id="password" name="password" type="password" />
-        </div>
-        {{> button text="Авторизоваться" }}
-      </form>
-      <a href="/sign-up">Нет аккаунта?</a>
+      <div class="rows">
+        <h1>Вход</h1>
+        <form class="rows">
+          <div class="row">
+            <label class="row-label" for="login">Логин</label>
+            <input id="login" name="login" type="text" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="password">Пароль</label>
+            <input id="password" name="password" type="password" />
+          </div>
+          {{> button text="Авторизоваться" }}
+        </form>
+        <a href="/sign-up">Нет аккаунта?</a>
+      </div>
     </main>
   </body>
 </html>

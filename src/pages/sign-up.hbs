@@ -3,39 +3,41 @@
   <body>
     {{> header }}
     <main>
-      <h1>Регистрация</h1>
-      <form>
-        <div>
-          <label class="row-label" for="email">Почта</label>
-          <input id="email" name="email" type="text" />
-        </div>
-        <div>
-          <label class="row-label" for="login">Логин</label>
-          <input id="login" name="login" type="text" />
-        </div>
-        <div>
-          <label class="row-label" for="first_name">Имя</label>
-          <input id="first_name" name="first_name" type="text" />
-        </div>
-        <div>
-          <label class="row-label" for="second_name">Фамилия</label>
-          <input id="second_name" name="second_name" type="text" />
-        </div>
-        <div>
-          <label class="row-label" for="phone">Телефон</label>
-          <input id="phone" name="phone" type="text" />
-        </div>
-        <div>
-          <label class="row-label" for="password">Пароль</label>
-          <input id="password" name="password" type="password" />
-        </div>
-        <div>
-          <label class="row-label" for="password_confirmation">Пароль (ещё раз)</label>
-          <input id="password_confirmation" name="password_confirmation" type="password" />
-        </div>
-        {{> button text="Зарегистрироваться" }}
-      </form>
-      <a href="/sign-in">Войти</a>
+      <div class="rows">
+        <h1>Регистрация</h1>
+        <form class="rows">
+          <div class="row">
+            <label class="row-label" for="email">Почта</label>
+            <input id="email" name="email" type="text" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="login">Логин</label>
+            <input id="login" name="login" type="text" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="first_name">Имя</label>
+            <input id="first_name" name="first_name" type="text" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="second_name">Фамилия</label>
+            <input id="second_name" name="second_name" type="text" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="phone">Телефон</label>
+            <input id="phone" name="phone" type="text" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="password">Пароль</label>
+            <input id="password" name="password" type="password" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="password_confirmation">Пароль (ещё раз)</label>
+            <input id="password_confirmation" name="password_confirmation" type="password" />
+          </div>
+          {{> button text="Зарегистрироваться" }}
+        </form>
+        <a href="/sign-in">Войти</a>
+      </div>
     </main>
   </body>
 </html>
