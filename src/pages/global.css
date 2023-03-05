@@ -14,14 +14,8 @@ button {
 }
 
 body {
-  font-size: 1.6rem;
-}
-
-main {
-  max-width: 1024px;
-  margin: 0 auto;
   padding: 0.8rem 1.6rem;
-  overflow-y: scroll;
+  font-size: 1.6rem;
 }
 
 * {
@@ -160,4 +154,8 @@ h4 {
 .button_primary {
   background-color: var(--primary-main);
   color: white;
+}
+
+.page-header {
+  border-bottom: 1px solid black;
 }
