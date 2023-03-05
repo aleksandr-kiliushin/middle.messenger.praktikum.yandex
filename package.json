@@ -32,11 +32,11 @@
     "check-types:watch": "tsc --noEmit --watch",
     "lint": "eslint \"**/*.{js,ts}\" && stylelint \"**/*.css\"",
     "lint-staged": "lint-staged",
-    "parcel-watch": "rm -rf ./dist && rm -rf ./.parcel-cache && parcel ./src/pages/**/*{.hbs,.css}",
+    "dev": "rm -rf ./dist && rm -rf ./.parcel-cache && parcel ./src/pages/**/*{.hbs,.css}",
     "prepare": "husky install",
     "prettier": "prettier --write \"**/*.{css,js,json,md,ts}\"",
     "serve-static": "ts-node ./serve-static.ts",
-    "start": "concurrently --kill-others \"npm run parcel-watch\" \"npm run serve-static\""
+    "start": "concurrently --kill-others \"npm run dev\" \"npm run serve-static\""
   },
   "version": "1.0.0"
 }
