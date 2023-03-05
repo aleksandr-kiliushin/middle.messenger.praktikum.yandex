@@ -3,40 +3,38 @@
   <body>
     {{> header }}
     <main>
-      <h1>Профиль</h1>
-      <a href="/chats">Назад</a>
-      <br />
-      <img alt="Ваш аватар" height="160" width="160" src="https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_1280.png" />
-      <h2>Иван</h2>
-      <div>
-        <label class="row-label">Почта</label>
-        <span>pochta@yandex.ru</span>
+      <div class="rows">
+        <h1>Профиль</h1>
+        <img alt="Ваш аватар" class="avatar" height="160" width="160" src="https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_1280.png" />
+        <h2>Иван</h2>
+        <div class="row">
+          <label class="row-label">Почта</label>
+          <span>pochta@yandex.ru</span>
+        </div>
+        <div class="row">
+          <label class="row-label">Логин</label>
+          <span>ivanivanov</span>
+        </div>
+        <div class="row">
+          <label class="row-label">Имя</label>
+          <span>ivan</span>
+        </div>
+        <div class="row">
+          <label class="row-label">Фамилия</label>
+          <span>ivanov</span>
+        </div>
+        <div class="row">
+          <label class="row-label">Имя в чате</label>
+          <span>Иван</span>
+        </div>
+        <div class="row">
+          <label class="row-label">Телефон</label>
+          <span>+7 (909) 967 30 30</span>
+        </div>
+        <a href="/settings">Изменить данные</a>
+        <a href="/change-password">Изменить пароль</a>
+        {{> button text="Выйти" }}
       </div>
-      <div>
-        <label class="row-label">Логин</label>
-        <span>ivanivanov</span>
-      </div>
-      <div>
-        <label class="row-label">Имя</label>
-        <span>ivan</span>
-      </div>
-      <div>
-        <label class="row-label">Фамилия</label>
-        <span>ivanov</span>
-      </div>
-      <div>
-        <label class="row-label">Имя в чате</label>
-        <span>Иван</span>
-      </div>
-      <div>
-        <label class="row-label">Телефон</label>
-        <span>+7 (909) 967 30 30</span>
-      </div>
-      <a href="/settings">Изменить данные</a>
-      <br />
-      <a href="/change-password">Изменить пароль</a>
-      <br />
-      {{> button text="Выйти" }}
     </main>
   </body>
 </html>

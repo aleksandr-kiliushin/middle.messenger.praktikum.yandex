@@ -3,41 +3,41 @@
   <body>
     {{> header }}
     <main>
-      <h1>Настройки профиля</h1>
-      <a href="/profile">Назад</a>
-      <br />
-      <div>
-        <label class="row-label" for="avatar">Аватар</label>
-        <input id="avatar" name="avatar" type="file" />
+      <div class="rows">
+        <h1>Настройки профиля</h1>
+        <div class="row">
+          <label class="row-label" for="avatar">Аватар</label>
+          <input id="avatar" name="avatar" type="file" />
+        </div>
+        <h2>Иван</h2>
+        <form class="rows">
+          <div class="row">
+            <label class="row-label" for="email">Почта</label>
+            <input id="email" name="email" type="text" value="pochta@yandex.ru" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="login">Логин</label>
+            <input id="login" name="login" type="text" value="ivanivanov" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="first_name">Имя</label>
+            <input id="first_name" name="first_name" type="text" value="ivan" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="second_name">Фамилия</label>
+            <input id="second_name" name="second_name" type="text" value="ivanov" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="display_name">Имя в чате</label>
+            <input id="display_name" name="display_name" type="text" value="Иван" />
+          </div>
+          <div class="row">
+            <label class="row-label" for="phone">Телефон</label>
+            <input id="phone" name="phone" type="text" value="+7 (909) 967 30 30" />
+          </div>
+          {{> button text="Сохранить" }}
+        </form>
       </div>
-      <h2>Иван</h2>
-      <form>
-        <div>
-          <label class="row-label" for="email">Почта</label>
-          <input id="email" name="email" type="text" value="pochta@yandex.ru" />
-        </div>
-        <div>
-          <label class="row-label" for="login">Логин</label>
-          <input id="login" name="login" type="text" value="ivanivanov" />
-        </div>
-        <div>
-          <label class="row-label" for="first_name">Имя</label>
-          <input id="first_name" name="first_name" type="text" value="ivan" />
-        </div>
-        <div>
-          <label class="row-label" for="second_name">Фамилия</label>
-          <input id="second_name" name="second_name" type="text" value="ivanov" />
-        </div>
-        <div>
-          <label class="row-label" for="display_name">Имя в чате</label>
-          <input id="display_name" name="display_name" type="text" value="Иван" />
-        </div>
-        <div>
-          <label class="row-label" for="phone">Телефон</label>
-          <input id="phone" name="phone" type="text" value="+7 (909) 967 30 30" />
-        </div>
-        {{> button text="Сохранить" }}
-      </form>
     </main>
   </body>
 </html>

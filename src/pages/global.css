@@ -1,5 +1,7 @@
 :root {
   --primary-main: royalblue;
+  --primary-dark: #0b35af;
+  --page-header-height: 60px;
 }
 
 html {
@@ -18,7 +20,8 @@ body {
 }
 
 main {
-  margin: 60px auto 0;
+  height: calc(100% - var(--page-header-height));
+  margin: var(--page-header-height) auto 0;
   padding: 8px 16px;
   overflow-y: scroll;
 }
@@ -39,26 +42,13 @@ ul {
 }
 
 a {
-  position: relative;
   text-decoration: none;
   color: var(--primary-main);
   font-size: inherit;
 }
 
-a::after {
-  position: absolute;
-  content: "";
-  bottom: 0;
-  left: 0;
-  height: 0.2rem;
-  width: 100%;
-  background-color: var(--primary-main);
-  transform: scaleX(0);
-  transition: transform 0.3s;
-}
-
-a:hover::after {
-  transform: scaleX(1);
+a:hover {
+  color: var(--primary-dark);
 }
 
 ul,
@@ -161,6 +151,10 @@ h4 {
   color: white;
 }
 
+.button_primary:hover {
+  background-color: var(--primary-dark);
+}
+
 .page-header {
   position: fixed;
   z-index: 1;
@@ -170,7 +164,7 @@ h4 {
   grid-auto-flow: column;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
+  height: var(--page-header-height);
   width: 100%;
   padding: 8px 16px;
   box-shadow: 0 0 6px rgba(0 0 0 / 16%);
@@ -187,6 +181,25 @@ h4 {
   }
 }
 
+.rows {
+  display: grid;
+  row-gap: 1.2rem;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.row {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+}
+
 .row-label {
   color: gray;
+}
+
+.avatar {
+  border: 2px solid black;
+  border-radius: 50%;
 }
