@@ -32,3 +32,7 @@ npm run dev
 - Handlebars;
 - PostCSS;
 - Node.js и Express (для разработки).
+
+## Другое
+
+Ссылка на PR для спринта №2 [тут](https://github.com/aleksandr-kiliushin/middle.messenger.praktikum.yandex/pull/3).
