@@ -44,20 +44,27 @@
 
 .chat {
   display: grid;
+  grid-template-rows: min-content 1fr min-content;
   border: 1px solid black;
+  overflow-y: hidden;
 }
 
 .chat_header {
   display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
   border: 1px solid black;
 }
 
 .chat_messages {
   display: grid;
+  row-gap: 12px;
   border: 1px solid black;
+  overflow-y: auto;
 }
 
 .chat_form {
   display: grid;
+  grid-template-columns: min-content 1fr min-content;
   border: 1px solid black;
 }
