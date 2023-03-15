@@ -1,4 +1,58 @@
+.chats-list-item {
+  display: grid;
+  grid-template-areas:
+    "avatar name datetime"
+    "avatar message unread-messages-count";
+  grid-template-columns: min-content 1fr min-content;
+  column-gap: 8px;
+  row-gap: 4px;
+  height: 48px;
+}
+
 .chats-list-item_avatar {
+  grid-area: avatar;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.chats-list-item_name {
+  grid-area: name;
+  font-size: 1.4rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chats-list-item_message {
+  grid-area: message;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #999;
+  font-size: 1.4rem;
+}
+
+.chats-list-item_datetime {
+  grid-area: datetime;
+  align-self: start;
+  justify-self: end;
+  color: #999;
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
+
+.chats-list-item_unread-messages-count {
+  grid-area: unread-messages-count;
+  align-self: end;
+  justify-self: end;
+  height: 20px;
+  width: 20px;
+  background-color: var(--primary-main);
+  border-radius: 50%;
+  color: white;
+  font-size: 1.2rem;
+  line-height: 20px;
+  text-align: center;
 }
