@@ -16,7 +16,10 @@ button {
 }
 
 body {
+  position: absolute;
+  height: 100vh;
   font-size: 1.6rem;
+  overflow-y: hidden;
 }
 
 main {
