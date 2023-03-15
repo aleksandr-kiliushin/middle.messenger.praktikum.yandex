@@ -57,7 +57,8 @@
 }
 
 .chat_messages {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   row-gap: 12px;
   border: 1px solid black;
   overflow-y: auto;
