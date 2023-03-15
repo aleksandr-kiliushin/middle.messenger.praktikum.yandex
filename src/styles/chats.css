@@ -3,7 +3,6 @@
   grid-auto-flow: column;
   grid-template-columns: 1fr 3fr;
   height: 100%;
-  border: 1px solid black;
 }
 
 .chats-pane {
@@ -36,10 +35,24 @@
 }
 
 .chats-pane_chats-list {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
   height: 100%;
-  border: 1px solid black;
   overflow-y: auto;
+}
+
+.chats-pane_chats-list .chats-list-item {
+  position: relative;
+}
+
+.chats-pane_chats-list .chats-list-item:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  height: 1px;
+  width: 100%;
+  background-color: #eaeaea;
 }
 
 .chat {
