@@ -1,0 +1,4 @@
+.chats-list-item_avatar {
+  object-fit: cover;
+  border-radius: 50%;
+}

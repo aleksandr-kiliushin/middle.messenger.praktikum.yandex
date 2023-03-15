@@ -10,15 +10,15 @@
             <input name="search" placeholder="Поиск" type="text">
           </div>
           <div class="chats-pane_chats-list">
-            <p>Андрей</p>
-            <p>Киноклуб</p>
-            <p>Илья</p>
-            <p>Вадим</p>
-            <p>тет-а-теты</p>
-            <p>1, 2 ,3</p>
-            <p>Design destroyer</p>
-            <p>Day.</p>
-            <p>Стас Рогозин</p>
+            {{> chats-list-item name="Андрей"           message="Круто!"                                                                                                    datetime="15:30"       unread-messages-count="4"  }}
+            {{> chats-list-item name="Киноклуб"         message="Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным." datetime="12:00"       unread-messages-count="0"  }}
+            {{> chats-list-item name="Илья"             message="Давно не виделись."                                                                                        datetime="пт"          unread-messages-count="23" }}
+            {{> chats-list-item name="Вадим"            message="Привет! Как ты? Как прошло твое выходное? У нас была забавная вечеринка вчера."                            datetime="ср"          unread-messages-count="0"  }}
+            {{> chats-list-item name="тет-а-теты"       message="Хей! Давно не общались. Что нового в твоей жизни? У меня на прошлой неделе была интересная поездка."       datetime="вт"          unread-messages-count="2"  }}
+            {{> chats-list-item name="1, 2 ,3"          message="Круто!"                                                                                                    datetime="пн"          unread-messages-count="2"  }}
+            {{> chats-list-item name="Design destroyer" message="Мда."                                                                                                      datetime="21 фев 2023" unread-messages-count="0"  }}
+            {{> chats-list-item name="Day."             message="Привет, как дела на работе? Я слышал, что у вас там были некоторые изменения в компании!"                  datetime="20 янв 2023" unread-messages-count="91" }}
+            {{> chats-list-item name="Стас Рогозин"     message="Мда."                                                                                                      datetime="15 мая 2022" unread-messages-count="4"  }}
           </div>
         </div>
         <div class="chat">

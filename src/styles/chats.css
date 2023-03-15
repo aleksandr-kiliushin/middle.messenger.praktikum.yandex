@@ -25,6 +25,7 @@
   height: 32px;
   background-color: #efefef;
   border: none;
+  border-radius: 8px;
 }
 
 .chats-pane_header input::placeholder {
