@@ -2,6 +2,7 @@
   "extends": "stylelint-config-standard",
   "ignoreFiles": ["./dist/**/*.css", "./node_modules/**/*.css"],
   "rules": {
+    "comment-empty-line-before": null,
     "selector-class-pattern": null,
     "selector-nested-pattern": ".+"
   }

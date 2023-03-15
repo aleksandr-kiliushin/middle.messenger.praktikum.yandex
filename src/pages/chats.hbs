@@ -3,10 +3,51 @@
   <body>
     {{> header }}
     <main>
-      <h1>Чаты</h1>
-      <p>Ваши чаты будут здесь.</p>
-      <div id="chats-body"></div>
-      <script src="./chats.ts" type="module"></script>
+      <div class="chats">
+        <div class="chats-pane">
+          <div class="chats-pane_header">
+            <a href="#">Профиль</a>
+            <input name="search" placeholder="Поиск" type="text">
+          </div>
+          <div class="chats-pane_chats-list">
+            <p>Андрей</p>
+            <p>Киноклуб</p>
+            <p>Илья</p>
+            <p>Вадим</p>
+            <p>тет-а-теты</p>
+            <p>1, 2 ,3</p>
+            <p>Design destroyer</p>
+            <p>Day.</p>
+            <p>Стас Рогозин</p>
+          </div>
+        </div>
+        <div class="chat">
+          <div class="chat_header">
+            <p>Вадим</p>
+            <button>Опции</button>
+          </div>
+          <div class="chat_messages">
+            <p>19 июня</p>
+            <p>
+              Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.
+              <br>
+              Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.
+            </p>
+            <img alt="message-photo" height="250" src="https://images.unsplash.com/photo-1610826340363-4b13a6fb6e01?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2132&q=80" width="400">
+            <p>11:56</p>
+            <p>
+              Круто!
+            </p>
+            <p>12:00</p>
+          </div>
+          <div class="chat_form">
+            <button>Прикрепить файл</button>
+            <textarea name="message" placeholder="Сообщение"></textarea>
+            <button>Отправить</button>
+          </div>
+        </div>
+      </div>
     </main>
   </body>
+  <script src="./chats.ts" type="module"></script>
 </html>
