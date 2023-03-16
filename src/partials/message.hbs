@@ -1,4 +1,4 @@
-<p class="message">
+<p class="message {{#if by-authorized-user}}message__by-authorized-user{{else}}message__by-another-user{{/if}}">
   {{{text}}}
   <span class="message_time">{{time}}</span>
 </p>
