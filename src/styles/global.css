@@ -15,6 +15,11 @@ button {
   font-family: "Sofia Sans", sans-serif;
 }
 
+input,
+textarea {
+  font-family: "Sofia Sans", sans-serif;
+}
+
 body {
   position: absolute;
   height: 100vh;

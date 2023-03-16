@@ -15,6 +15,7 @@
             {{> chats-list-item name="Константинопольский Константин Константинович" message="Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным." datetime="12:00"  unread-messages-count="0"  }}
             {{> chats-list-item name="Вадим"                                         message="Привет! Как ты? Как прошло твое выходное? У нас была забавная вечеринка вчера."                            datetime="ср"     unread-messages-count="0"  }}
             {{> chats-list-item name="тет-а-теты"                                    message="Хей! Давно не общались. Что нового в твоей жизни? У меня на прошлой неделе была интересная поездка."       datetime="вт"     unread-messages-count="21" }}
+            {{> chats-list-item name="Киноклуб"                                      message="Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным." datetime="12:00"  unread-messages-count="0"  }}
             {{> chats-list-item name="Design destroyer"                              message="Мда."                                                                                                      datetime="21 фев" unread-messages-count="0"  }}
 
             {{> chats-list-item name="Андрей"                                        message="Круто!"                                                                                                    datetime="15:30"  unread-messages-count="4"  }}
@@ -22,6 +23,7 @@
             {{> chats-list-item name="Константинопольский Константин Константинович" message="Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным." datetime="12:00"  unread-messages-count="0"  }}
             {{> chats-list-item name="Вадим"                                         message="Привет! Как ты? Как прошло твое выходное? У нас была забавная вечеринка вчера."                            datetime="ср"     unread-messages-count="0"  }}
             {{> chats-list-item name="тет-а-теты"                                    message="Хей! Давно не общались. Что нового в твоей жизни? У меня на прошлой неделе была интересная поездка."       datetime="вт"     unread-messages-count="21" }}
+            {{> chats-list-item name="Киноклуб"                                      message="Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным." datetime="12:00"  unread-messages-count="0"  }}
             {{> chats-list-item name="Design destroyer"                              message="Мда."                                                                                                      datetime="21 фев" unread-messages-count="0"  }}
           </div>
         </div>
@@ -55,7 +57,7 @@
           </div>
           <div class="chat_form">
             {{> button start-icon-name="attach_file" }}
-            <textarea name="message" placeholder="Сообщение"></textarea>
+            <textarea name="message" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"; placeholder="Сообщение" rows="1"></textarea>
             {{> button start-icon-name="send" }}
           </div>
         </div>

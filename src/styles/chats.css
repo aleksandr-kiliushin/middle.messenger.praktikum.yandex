@@ -9,7 +9,7 @@
   display: grid;
   grid-template-rows: min-content auto;
   row-gap: 16px;
-  padding: 8px;
+  padding: 8px 8px 0;
   overflow-y: hidden;
   background-color: #fbfbfb;
   border-right: 1px solid #eaeaea;
@@ -39,8 +39,9 @@
 .chats-pane_chats-list {
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
+  row-gap: 16px;
   height: 100%;
+  padding-bottom: 8px;
   overflow-y: auto;
 }
 
@@ -51,7 +52,7 @@
 .chats-pane_chats-list .chats-list-item:not(:last-of-type)::after {
   content: "";
   position: absolute;
-  bottom: -12px;
+  bottom: -8px;
   height: 1px;
   width: 100%;
   background-color: #eaeaea;
@@ -87,12 +88,29 @@
   display: flex;
   flex-direction: column;
   row-gap: 12px;
-  border: 1px solid black;
   overflow-y: auto;
 }
 
 .chat_form {
   display: grid;
+  align-items: end;
   grid-template-columns: min-content 1fr min-content;
-  border: 1px solid black;
+  column-gap: 4px;
+  padding: 8px;
+  border-top: 1px solid #eaeaea;
+}
+
+.chat_form textarea {
+  height: min-content;
+  padding: 11px 16px;
+  background-color: #efefef;
+  border: none;
+  border-radius: 18px;
+  resize: none;
+}
+
+.chat_form textarea::placeholder {
+  background-color: #efefef;
+  border: none;
+  border-radius: 36px;
 }
