@@ -25,7 +25,6 @@ body {
 main {
   height: calc(100% - var(--page-header-height));
   margin: var(--page-header-height) auto 0;
-  padding: 8px 16px;
   overflow-y: scroll;
 }
 

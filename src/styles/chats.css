@@ -11,6 +11,8 @@
   row-gap: 16px;
   padding: 8px;
   overflow-y: hidden;
+  background-color: #fbfbfb;
+  border-right: 1px solid #eaeaea;
 }
 
 .chats-pane_header {
@@ -58,7 +60,6 @@
 .chat {
   display: grid;
   grid-template-rows: min-content 1fr min-content;
-  border: 1px solid black;
   overflow-y: hidden;
 }
 
@@ -66,7 +67,20 @@
   display: grid;
   grid-auto-flow: column;
   justify-content: space-between;
-  border: 1px solid black;
+  padding: 8px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.currently-open-chat {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.currently-open-chat_avatar {
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .chat_messages {

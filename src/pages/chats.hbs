@@ -27,8 +27,17 @@
         </div>
         <div class="chat">
           <div class="chat_header">
-            <p>Вадим</p>
-            <button>Опции</button>
+            <div class="currently-open-chat">
+              <img
+                alt="Chat avatar"
+                class="currently-open-chat_avatar"
+                height="36"
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
+                width="36"
+              />
+              <span class="currently-open-chat_name">Вадим</span>
+            </div>
+            {{> button start-icon-name="more_vert" }}
           </div>
           <div class="chat_messages">
             <p>19 июня</p>
@@ -45,9 +54,9 @@
             <p>12:00</p>
           </div>
           <div class="chat_form">
-            <button>Прикрепить файл</button>
+            {{> button start-icon-name="attach_file" }}
             <textarea name="message" placeholder="Сообщение"></textarea>
-            <button>Отправить</button>
+            {{> button start-icon-name="send" }}
           </div>
         </div>
       </div>

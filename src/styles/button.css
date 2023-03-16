@@ -1,10 +1,15 @@
 .button {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+  column-gap: 4px;
   height: 3.6rem;
-  padding: 0 1.2rem;
+  padding: 0 0.8rem;
   border: none;
   border-radius: 0.8rem;
-  font-size: 1.6rem;
   cursor: pointer;
+  font-size: 1.6rem;
 }
 
 .button_primary {

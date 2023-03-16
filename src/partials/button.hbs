@@ -1,1 +1,13 @@
-<button class="button button_primary">{{text}}</button>
+<button class="button button_primary">
+  {{#if start-icon-name}}
+    <span class="material-icons">
+      {{start-icon-name}}
+    </span>
+  {{/if}}
+  {{text}}
+  {{#if end-icon-name}}
+    <span class="material-icons">
+      {{end-icon-name}}
+    </span>
+  {{/if}}
+</button>
