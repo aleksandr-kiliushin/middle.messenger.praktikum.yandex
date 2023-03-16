@@ -2,18 +2,35 @@
   position: relative;
   width: fit-content;
   max-width: 500px;
+}
+
+.message__with-text {
   padding: 12px 12px 24px;
 }
 
+.message__with-image {
+  border-radius: 12px;
+  border: 1px solid #eaeaea;
+}
+
 .message__by-authorized-user {
+  align-self: flex-end;
+}
+
+.message__by-authorized-user.message__with-text {
   align-self: flex-end;
   background-color: #e4edfd;
   border-radius: 12px 12px 0;
 }
 
-.message__by-another-user {
+.message__by-another-user.message__with-text {
   background-color: #f8f8f8;
   border-radius: 0 12px 12px;
+}
+
+.message_image {
+  border-radius: 12px;
+  width: 100%;
 }
 
 .message_time {
@@ -29,4 +46,19 @@
 
 .message__by-another-user .message_time {
   color: #999;
+}
+
+.message__with-image .message_time {
+  padding: 2px 4px;
+  border-radius: 9px;
+}
+
+.message__by-another-user.message__with-image .message_time {
+  background-color: #f8f8f8;
+  color: #999;
+}
+
+.message__by-authorized-user.message__with-image .message_time {
+  background-color: #e4edfd;
+  color: var(--primary-main);
 }
