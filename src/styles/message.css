@@ -1,0 +1,14 @@
+.message {
+  position: relative;
+  padding: 12px 12px 24px;
+  background-color: #f8f8f8;
+  border-radius: 0 8px 8px;
+}
+
+.message_time {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  color: #999;
+  font-size: 1.4rem;
+}

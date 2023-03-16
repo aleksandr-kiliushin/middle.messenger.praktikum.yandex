@@ -1,5 +1,6 @@
 import "../styles/global.css"
 import "../styles/button.css"
+import "../styles/message.css"
 import "../styles/page-header.css"
 import "../styles/rows.css"
 import "../styles/chats-list-item.css"

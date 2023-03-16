@@ -87,8 +87,19 @@
 .chat_messages {
   display: flex;
   flex-direction: column;
-  row-gap: 12px;
+  row-gap: 44px;
   overflow-y: auto;
+}
+
+.messages-date-block {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.messages-date-block_date {
+  align-self: center;
+  color: #999;
 }
 
 .chat_form {
