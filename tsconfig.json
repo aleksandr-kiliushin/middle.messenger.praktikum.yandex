@@ -23,8 +23,7 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "suppressExcessPropertyErrors": false,
-    "target": "es6",
-    "types": ["node"]
+    "target": "es6"
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*.ts", ".eslintrc.js", "serve-static.ts"]
