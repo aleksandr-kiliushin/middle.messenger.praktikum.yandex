@@ -1,14 +1,15 @@
 type TFieldName = string
 type TValidationErrorText = string
 
-type TFieldConfig = Partial<{
-  type: "string"
-}>
+type TValueType = "string"
+type TFieldConfig = {
+  type: TValueType
+}
 export class FieldValidator {
   public config: TFieldConfig
 
-  constructor() {
-    this.config = {}
+  constructor({ type }: { type: TValueType }) {
+    this.config = { type }
   }
 
   public string() {

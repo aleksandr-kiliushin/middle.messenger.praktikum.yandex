@@ -25,7 +25,7 @@ if (chatForm instanceof HTMLFormElement) {
 
     const errorsByFieldName = validateForm({
       rules: {
-        message: new FieldValidator().string(),
+        message: new FieldValidator({ type: "string" }),
       },
       values: {
         message: chatForm.elements.message.value,

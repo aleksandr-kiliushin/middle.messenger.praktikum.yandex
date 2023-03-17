@@ -4,7 +4,7 @@ describe("validateForm", () => {
   test("string()", () => {
     expect(
       validateForm({
-        rules: { firstName: new FieldValidator().string() },
+        rules: { firstName: new FieldValidator({ type: "string" }) },
         values: { firstName: 123 },
       })
     ).toEqual({
