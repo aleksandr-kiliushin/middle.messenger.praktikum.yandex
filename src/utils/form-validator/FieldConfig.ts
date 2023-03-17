@@ -1,6 +1,7 @@
 import { TValueType } from "./types"
 
 type TFieldConfig = {
+  isRequired: boolean
   maximumLength: number
   minimumLength: number
   prohibitedWords: string[]
@@ -12,6 +13,7 @@ export class FieldConfig {
 
   constructor({ type }: { type: TValueType }) {
     this.config = {
+      isRequired: false,
       maximumLength: Infinity,
       minimumLength: 0,
       prohibitedWords: [],
@@ -31,6 +33,11 @@ export class FieldConfig {
 
   public prohibitedWords(words: string[]) {
     this.config.prohibitedWords = words
+    return this
+  }
+
+  public isRequired() {
+    this.config.isRequired = true
     return this
   }
 }

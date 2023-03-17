@@ -19,6 +19,8 @@ export const validateFields = ({ rules, values }: IValidateFormParams): TValidat
       case "string": {
         if (typeof fieldValue !== "string") {
           result[fieldName] = "Должно быть строкой."
+        } else if (fieldConfig.isRequired && fieldValue === "") {
+          result[fieldName] = `Обязательное поле.`
         } else if (fieldValue.length > fieldConfig.maximumLength) {
           result[fieldName] = `Не более ${fieldConfig.maximumLength} символов.`
         } else if (fieldValue.length < fieldConfig.minimumLength) {

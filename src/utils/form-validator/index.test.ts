@@ -12,10 +12,23 @@ describe("validate", () => {
           firstName: new FieldConfig({ type: "string" }),
         },
         values: {
-          firstName: "Привет.",
+          firstName: "",
         },
       },
       output: {},
+    },
+    {
+      input: {
+        rules: {
+          firstName: new FieldConfig({ type: "string" }).isRequired(),
+        },
+        values: {
+          firstName: "",
+        },
+      },
+      output: {
+        firstName: "Обязательное поле.",
+      },
     },
     {
       input: {
