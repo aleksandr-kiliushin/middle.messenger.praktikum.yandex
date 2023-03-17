@@ -39,11 +39,16 @@ export const validateForm = ({ rules, values }: IValidateFormParams): TValidateF
 
   for (const fieldName in values) {
     const value = values[fieldName]
+    const fieldConfig = rules[fieldName].config
 
-    switch (rules[fieldName].config.type) {
+    switch (fieldConfig.type) {
       case "string": {
         if (typeof value !== "string") {
           result[fieldName] = "Должно быть строкой."
+        } else if (value.length > fieldConfig.maximumLength) {
+          result[fieldName] = `Не более ${fieldConfig.maximumLength} символов.`
+        } else if (value.length < fieldConfig.minimumLength) {
+          result[fieldName] = `Не менее ${fieldConfig.minimumLength} символов.`
         }
         break
       }

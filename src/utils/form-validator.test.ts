@@ -11,11 +11,48 @@ describe("validateForm", () => {
           firstName: new FieldValidator({ type: "string" }),
         },
         values: {
+          firstName: "Привет.",
+        },
+      },
+      output: {},
+    },
+    {
+      input: {
+        rules: {
+          firstName: new FieldValidator({ type: "string" }),
+        },
+        values: {
           firstName: 123,
         },
       },
       output: {
         firstName: "Должно быть строкой.",
+      },
+    },
+    {
+      input: {
+        rules: {
+          firstName: new FieldValidator({ type: "string" }).minimumLength(10),
+        },
+        values: {
+          firstName: "Привет.",
+        },
+      },
+      output: {
+        firstName: "Не менее 10 символов.",
+      },
+    },
+    {
+      input: {
+        rules: {
+          firstName: new FieldValidator({ type: "string" }).maximumLength(10),
+        },
+        values: {
+          firstName: "Привет, мир.",
+        },
+      },
+      output: {
+        firstName: "Не более 10 символов.",
       },
     },
   ])("$output", async ({ input, output }) => {
