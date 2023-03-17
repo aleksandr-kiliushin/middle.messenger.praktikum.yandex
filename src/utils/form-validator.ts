@@ -3,26 +3,38 @@ type TValidationErrorText = string
 
 type TValueType = "string"
 type TFieldConfig = {
+  maximumLength: number
+  minimumLength: number
   type: TValueType
 }
 export class FieldValidator {
   public config: TFieldConfig
 
   constructor({ type }: { type: TValueType }) {
-    this.config = { type }
+    this.config = {
+      maximumLength: Infinity,
+      minimumLength: 0,
+      type,
+    }
   }
 
-  public string() {
-    this.config = { ...this.config, type: "string" }
+  public maximumLength(length: number) {
+    this.config.maximumLength = length
+    return this
+  }
+
+  public minimumLength(length: number) {
+    this.config.minimumLength = length
     return this
   }
 }
 
-type TValidateForm = (params: {
+export interface IValidateFormParams {
   rules: Record<TFieldName, FieldValidator>
   values: Record<TFieldName, unknown>
-}) => Record<TFieldName, string>
-export const validateForm: TValidateForm = ({ rules, values }) => {
+}
+export type TValidateFormReturnValue = Record<TFieldName, string>
+export const validateForm = ({ rules, values }: IValidateFormParams): TValidateFormReturnValue => {
   const result: Record<TFieldName, TValidationErrorText> = {}
 
   for (const fieldName in values) {
@@ -32,7 +44,6 @@ export const validateForm: TValidateForm = ({ rules, values }) => {
       case "string": {
         if (typeof value !== "string") {
           result[fieldName] = "Должно быть строкой."
-          break
         }
         break
       }
