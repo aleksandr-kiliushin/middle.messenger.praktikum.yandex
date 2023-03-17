@@ -1,3 +1,5 @@
+import { validateForm, setFieldsErrors } from "../utils/form-validator"
+
 interface IChatFormControlsCollection extends HTMLFormControlsCollection {
   message: HTMLTextAreaElement
 }
@@ -18,6 +20,20 @@ if (chatForm instanceof HTMLFormElement) {
 
     if (!doesFormContainCorrectFields(chatForm.elements)) {
       console.error("Form does not contain appropriate fields.")
+      return
+    }
+
+    const errorsByFieldName = validateForm({
+      rules: {
+        message: [],
+      },
+      values: {
+        message: chatForm.elements.message.value,
+      },
+    })
+
+    if (Object.keys(errorsByFieldName).length !== 0) {
+      setFieldsErrors({ errorsByFieldName })
       return
     }
 
