@@ -1,4 +1,4 @@
-import { validateForm, setFieldsErrors, FieldValidator } from "../utils/form-validator"
+import { FieldConfig, renderFieldsErrors, validateFields } from "../utils/form-validator"
 
 interface IChatFormControlsCollection extends HTMLFormControlsCollection {
   message: HTMLTextAreaElement
@@ -23,9 +23,9 @@ if (chatForm instanceof HTMLFormElement) {
       return
     }
 
-    const errorsByFieldName = validateForm({
+    const errorsByFieldName = validateFields({
       rules: {
-        message: new FieldValidator({ type: "string" }),
+        message: new FieldConfig({ type: "string" }),
       },
       values: {
         message: chatForm.elements.message.value,
@@ -33,7 +33,7 @@ if (chatForm instanceof HTMLFormElement) {
     })
 
     if (Object.keys(errorsByFieldName).length !== 0) {
-      setFieldsErrors({ errorsByFieldName })
+      renderFieldsErrors({ errorsByFieldName })
       return
     }
 

@@ -1,6 +1,7 @@
-import { validateForm, FieldValidator, IValidateFormParams, TValidateFormReturnValue } from "./form-validator"
+import { FieldConfig, validateFields } from "./index"
+import { IValidateFormParams, TValidateFormReturnValue } from "./validateFields"
 
-describe("validateForm", () => {
+describe("validate", () => {
   test.each<{
     input: IValidateFormParams
     output: TValidateFormReturnValue
@@ -8,7 +9,7 @@ describe("validateForm", () => {
     {
       input: {
         rules: {
-          firstName: new FieldValidator({ type: "string" }),
+          firstName: new FieldConfig({ type: "string" }),
         },
         values: {
           firstName: "Привет.",
@@ -19,7 +20,7 @@ describe("validateForm", () => {
     {
       input: {
         rules: {
-          firstName: new FieldValidator({ type: "string" }),
+          firstName: new FieldConfig({ type: "string" }),
         },
         values: {
           firstName: 123,
@@ -32,7 +33,7 @@ describe("validateForm", () => {
     {
       input: {
         rules: {
-          firstName: new FieldValidator({ type: "string" }).minimumLength(10),
+          firstName: new FieldConfig({ type: "string" }).minimumLength(10),
         },
         values: {
           firstName: "Привет.",
@@ -45,7 +46,7 @@ describe("validateForm", () => {
     {
       input: {
         rules: {
-          firstName: new FieldValidator({ type: "string" }).maximumLength(10),
+          firstName: new FieldConfig({ type: "string" }).maximumLength(10),
         },
         values: {
           firstName: "Привет, мир.",
@@ -58,7 +59,7 @@ describe("validateForm", () => {
     {
       input: {
         rules: {
-          firstName: new FieldValidator({ type: "string" }).prohibitedWords(["блин", "чудак"]),
+          firstName: new FieldConfig({ type: "string" }).prohibitedWords(["блин", "чудак"]),
         },
         values: {
           firstName: "Привет, чудак.",
@@ -69,6 +70,6 @@ describe("validateForm", () => {
       },
     },
   ])("$output", async ({ input, output }) => {
-    expect(validateForm(input)).toEqual(output)
+    expect(validateFields(input)).toEqual(output)
   })
 })
