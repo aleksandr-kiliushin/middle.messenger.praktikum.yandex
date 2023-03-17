@@ -3,6 +3,10 @@
   "transformers": {
     "*.hbs": [
       "@anikin/parcel-transformer-handlebars"
+    ],
+    "*.{js,ts}": [
+      "@parcel/transformer-js",
+      "@parcel/transformer-react-refresh-wrap"
     ]
   }
 }
