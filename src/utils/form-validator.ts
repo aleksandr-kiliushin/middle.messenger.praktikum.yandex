@@ -5,6 +5,7 @@ type TValueType = "string"
 type TFieldConfig = {
   maximumLength: number
   minimumLength: number
+  prohibitedWords: string[]
   type: TValueType
 }
 export class FieldValidator {
@@ -14,6 +15,7 @@ export class FieldValidator {
     this.config = {
       maximumLength: Infinity,
       minimumLength: 0,
+      prohibitedWords: [],
       type,
     }
   }
@@ -27,6 +29,11 @@ export class FieldValidator {
     this.config.minimumLength = length
     return this
   }
+
+  public prohibitedWords(words: string[]) {
+    this.config.prohibitedWords = words
+    return this
+  }
 }
 
 export interface IValidateFormParams {
@@ -38,17 +45,19 @@ export const validateForm = ({ rules, values }: IValidateFormParams): TValidateF
   const result: Record<TFieldName, TValidationErrorText> = {}
 
   for (const fieldName in values) {
-    const value = values[fieldName]
+    const fieldValue = values[fieldName]
     const fieldConfig = rules[fieldName].config
 
     switch (fieldConfig.type) {
       case "string": {
-        if (typeof value !== "string") {
+        if (typeof fieldValue !== "string") {
           result[fieldName] = "Должно быть строкой."
-        } else if (value.length > fieldConfig.maximumLength) {
+        } else if (fieldValue.length > fieldConfig.maximumLength) {
           result[fieldName] = `Не более ${fieldConfig.maximumLength} символов.`
-        } else if (value.length < fieldConfig.minimumLength) {
+        } else if (fieldValue.length < fieldConfig.minimumLength) {
           result[fieldName] = `Не менее ${fieldConfig.minimumLength} символов.`
+        } else if (fieldConfig.prohibitedWords.some((word) => new RegExp(word, "gi").test(fieldValue))) {
+          result[fieldName] = `Нецензурная лексика запрещена.`
         }
         break
       }

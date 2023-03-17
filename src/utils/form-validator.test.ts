@@ -55,6 +55,19 @@ describe("validateForm", () => {
         firstName: "Не более 10 символов.",
       },
     },
+    {
+      input: {
+        rules: {
+          firstName: new FieldValidator({ type: "string" }).prohibitedWords(["блин", "чудак"]),
+        },
+        values: {
+          firstName: "Привет, чудак.",
+        },
+      },
+      output: {
+        firstName: "Нецензурная лексика запрещена.",
+      },
+    },
   ])("$output", async ({ input, output }) => {
     expect(validateForm(input)).toEqual(output)
   })
