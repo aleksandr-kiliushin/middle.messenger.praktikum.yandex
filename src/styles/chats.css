@@ -115,10 +115,11 @@
 
 .chat_form textarea {
   height: min-content;
-  padding: 11px 16px;
+  padding: 10px 16px;
   background-color: #efefef;
   border: none;
   border-radius: 18px;
+  font-size: 1.6rem;
   resize: none;
 }
 

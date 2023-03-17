@@ -13,6 +13,14 @@ const doesFormContainCorrectFields = (
 }
 
 const chatForm = document.querySelector(".chat_form")
+const chatFormMessageField = document.querySelector(".chat_form textarea")
+
+if (chatFormMessageField instanceof HTMLTextAreaElement) {
+  chatFormMessageField.addEventListener("input", () => {
+    chatFormMessageField.style.height = ""
+    chatFormMessageField.style.height = chatFormMessageField.scrollHeight + "px"
+  })
+}
 
 if (chatForm instanceof HTMLFormElement) {
   chatForm.addEventListener("submit", (event) => {
