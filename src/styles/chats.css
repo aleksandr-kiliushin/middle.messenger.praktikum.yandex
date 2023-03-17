@@ -108,6 +108,7 @@
   align-items: end;
   grid-template-columns: min-content 1fr min-content;
   column-gap: 4px;
+  margin-bottom: 0;
   padding: 8px;
   border-top: 1px solid #eaeaea;
 }

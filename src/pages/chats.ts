@@ -1,7 +1,28 @@
-import { sum } from "../utils/sum"
+interface IChatFormControlsCollection extends HTMLFormControlsCollection {
+  message: HTMLTextAreaElement
+}
 
-const root = document.querySelector("#chats-body")
-if (root instanceof HTMLDivElement) {
-  const calculationResult = sum(6, -1).toString()
-  root.textContent = `6 + (-1) = ${calculationResult} (TypeScript works)`
+const doesFormContainCorrectFields = (
+  chatFormElements: HTMLFormControlsCollection
+): chatFormElements is IChatFormControlsCollection => {
+  if (!("message" in chatFormElements)) return false
+  if (!(chatFormElements.message instanceof HTMLTextAreaElement)) return false
+  return true
+}
+
+const chatForm = document.querySelector(".chat_form")
+
+if (chatForm instanceof HTMLFormElement) {
+  chatForm.addEventListener("submit", (event) => {
+    event.preventDefault()
+
+    if (!doesFormContainCorrectFields(chatForm.elements)) {
+      console.error("Form does not contain appropriate fields.")
+      return
+    }
+
+    console.log({
+      message: chatForm.elements.message.value,
+    })
+  })
 }
