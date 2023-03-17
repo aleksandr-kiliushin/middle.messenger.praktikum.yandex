@@ -1,7 +1,14 @@
+import { validateForm, FieldValidator } from "./form-validator"
+
 describe("validateForm", () => {
-  test("A dummy test", () => {
-    const firstNumber: unknown = 42
-    const secondNumber: unknown = 42
-    expect(firstNumber).toEqual(secondNumber)
+  test("string()", () => {
+    expect(
+      validateForm({
+        rules: { firstName: new FieldValidator().string() },
+        values: { firstName: 123 },
+      })
+    ).toEqual({
+      firstName: "Должно быть строкой.",
+    })
   })
 })
