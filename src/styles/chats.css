@@ -29,10 +29,10 @@
   background-color: #efefef;
   border: none;
   border-radius: 8px;
+  font-size: 1.6rem;
 }
 
 .chats-pane_header input::placeholder {
-  color: #999;
   text-align: center;
 }
 
@@ -113,18 +113,12 @@
   border-top: 1px solid #eaeaea;
 }
 
-.chat_form textarea {
-  height: min-content;
-  padding: 10px 16px;
+.chat_message-field {
+  min-height: 36px;
+  padding: 9px 16px;
   background-color: #efefef;
-  border: none;
+  border: 1px solid #efefef;
   border-radius: 18px;
   font-size: 1.6rem;
   resize: none;
-}
-
-.chat_form textarea::placeholder {
-  background-color: #efefef;
-  border: none;
-  border-radius: 36px;
 }

@@ -20,6 +20,16 @@ textarea {
   font-family: "Sofia Sans", sans-serif;
 }
 
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border: 1px solid #de0000;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #999;
+}
+
 body {
   position: absolute;
   height: 100vh;
