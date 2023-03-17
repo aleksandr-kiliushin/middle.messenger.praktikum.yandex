@@ -12,11 +12,11 @@
   font-size: 1.6rem;
 }
 
-.button_primary {
+.button__primary {
   background-color: var(--primary-main);
   color: white;
 }
 
-.button_primary:hover {
+.button__primary:hover {
   background-color: var(--primary-dark);
 }

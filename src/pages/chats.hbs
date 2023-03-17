@@ -77,7 +77,7 @@
             </div>
           </div>
           <form class="chat_form">
-            {{> button start-icon-name="attach_file" }}
+            {{> file-input }}
             <textarea required name="message" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"; placeholder="Сообщение" rows="1"></textarea>
             {{> button start-icon-name="send" type="submit" }}
           </form>
