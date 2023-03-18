@@ -67,11 +67,6 @@
   column-gap: 8px;
 }
 
-.currently-open-chat_avatar {
-  object-fit: cover;
-  border-radius: 50%;
-}
-
 .chat_messages {
   display: flex;
   flex-direction: column;

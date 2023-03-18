@@ -11,8 +11,6 @@
 
 .chats-list-item_avatar {
   grid-area: avatar;
-  object-fit: cover;
-  border-radius: 50%;
 }
 
 .chats-list-item_name {
