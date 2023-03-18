@@ -3,21 +3,20 @@
   <body>
     {{> navigation }}
     <main>
-      <div class="rows">
+      <form class="rows">
         <h1>Вход</h1>
-        <form class="rows">
-          <div class="row">
-            <label class="row-label" for="login">Логин</label>
-            <input id="login" name="login" type="text" />
-          </div>
-          <div class="row">
-            <label class="row-label" for="password">Пароль</label>
-            <input id="password" name="password" type="password" />
-          </div>
-          {{> button text="Авторизоваться" }}
-        </form>
+        <div class="row">
+          <label class="row-label" for="login">Логин</label>
+          <input id="login" name="login" type="text" />
+        </div>
+        <div class="row">
+          <label class="row-label" for="password">Пароль</label>
+          <input id="password" name="password" type="password" />
+        </div>
+        {{> button text="Авторизоваться" type="submit" }}
         <a href="/sign-up">Нет аккаунта?</a>
-      </div>
+      </form>
     </main>
   </body>
+  <script src="./sign-in.ts" type="module"></script>
 </html>
