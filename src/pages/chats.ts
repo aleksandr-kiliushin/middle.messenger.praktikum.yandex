@@ -14,6 +14,11 @@ const doesFormContainCorrectFields = (
 
 const chatForm = document.querySelector(".chat_form")
 const chatFormMessageField = document.querySelector(".chat_form textarea")
+const chatMessagesBlock = document.querySelector(".chat_messages")
+
+if (chatMessagesBlock instanceof HTMLDivElement) {
+  chatMessagesBlock.scrollTo(0, chatMessagesBlock.scrollHeight)
+}
 
 if (chatForm instanceof HTMLFormElement && chatFormMessageField instanceof HTMLTextAreaElement) {
   chatFormMessageField.addEventListener("input", () => {

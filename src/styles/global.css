@@ -30,6 +30,15 @@ textarea::placeholder {
   color: #999;
 }
 
+input {
+  height: 32px;
+  padding: 9px 16px;
+  background-color: #efefef;
+  border: 1px solid #efefef;
+  border-radius: 18px;
+  font-size: 1.6rem;
+}
+
 body {
   position: absolute;
   height: 100vh;

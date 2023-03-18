@@ -24,18 +24,6 @@
   margin: 12px 12px 24px auto;
 }
 
-.chats-pane_header input {
-  height: 32px;
-  background-color: #efefef;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.6rem;
-}
-
-.chats-pane_header input::placeholder {
-  text-align: center;
-}
-
 .chats-pane_chats-list {
   display: flex;
   flex-direction: column;
