@@ -18,7 +18,7 @@ const doesFormContainCorrectFields = (
 }
 
 const form = document.querySelector("form")
-const fieldsNames = ["login", "", "password", "login", "phone", "second_name"]
+const fieldsNames = ["login", "password"]
 
 if (form instanceof HTMLFormElement) {
   const handleFieldBlur = () => {

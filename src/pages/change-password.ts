@@ -22,7 +22,7 @@ const doesFormContainCorrectFields = (
 }
 
 const form = document.querySelector("form")
-const fieldsNames = ["oldPassword", "newPasswordConfirmation", "newPassword", "login", "phone", "second_name"]
+const fieldsNames = ["oldPassword", "newPassword", "newPasswordConfirmation"]
 
 if (form instanceof HTMLFormElement) {
   const handleFieldBlur = () => {
