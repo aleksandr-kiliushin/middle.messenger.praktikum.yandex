@@ -1,40 +1,28 @@
 import { FieldConfig, renderFieldsErrors, validateFields } from "../utils/form-validator"
 
 interface ISettingsFormControlsCollection extends HTMLFormControlsCollection {
-  display_name: HTMLInputElement
-  first_name: HTMLInputElement
-  email: HTMLInputElement
-  login: HTMLInputElement
-  phone: HTMLInputElement
-  second_name: HTMLInputElement
+  oldPassword: HTMLInputElement
+  newPassword: HTMLInputElement
+  newPasswordConfirmation: HTMLInputElement
 }
 
 const doesFormContainCorrectFields = (
   chatFormElements: HTMLFormControlsCollection
 ): chatFormElements is ISettingsFormControlsCollection => {
-  if (!("display_name" in chatFormElements)) return false
-  if (!(chatFormElements.display_name instanceof HTMLInputElement)) return false
+  if (!("oldPassword" in chatFormElements)) return false
+  if (!(chatFormElements.oldPassword instanceof HTMLInputElement)) return false
 
-  if (!("first_name" in chatFormElements)) return false
-  if (!(chatFormElements.first_name instanceof HTMLInputElement)) return false
+  if (!("newPassword" in chatFormElements)) return false
+  if (!(chatFormElements.newPassword instanceof HTMLInputElement)) return false
 
-  if (!("email" in chatFormElements)) return false
-  if (!(chatFormElements.email instanceof HTMLInputElement)) return false
-
-  if (!("login" in chatFormElements)) return false
-  if (!(chatFormElements.login instanceof HTMLInputElement)) return false
-
-  if (!("phone" in chatFormElements)) return false
-  if (!(chatFormElements.phone instanceof HTMLInputElement)) return false
-
-  if (!("second_name" in chatFormElements)) return false
-  if (!(chatFormElements.second_name instanceof HTMLInputElement)) return false
+  if (!("newPasswordConfirmation" in chatFormElements)) return false
+  if (!(chatFormElements.newPasswordConfirmation instanceof HTMLInputElement)) return false
 
   return true
 }
 
 const form = document.querySelector("form")
-const fieldsNames = ["display_name", "email", "first_name", "login", "phone", "second_name"]
+const fieldsNames = ["oldPassword", "newPasswordConfirmation", "newPassword", "login", "phone", "second_name"]
 
 if (form instanceof HTMLFormElement) {
   const handleFieldBlur = () => {
@@ -45,20 +33,14 @@ if (form instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        display_name: new FieldConfig({ type: "string" }).isRequired(),
-        email: new FieldConfig({ type: "string" }).isRequired(),
-        first_name: new FieldConfig({ type: "string" }).isRequired(),
-        login: new FieldConfig({ type: "string" }).isRequired(),
-        phone: new FieldConfig({ type: "string" }).isRequired(),
-        second_name: new FieldConfig({ type: "string" }).isRequired(),
+        oldPassword: new FieldConfig({ type: "string" }).isRequired(),
+        newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired(),
+        newPassword: new FieldConfig({ type: "string" }).isRequired(),
       },
       values: {
-        display_name: form.elements.display_name.value,
-        email: form.elements.email.value,
-        first_name: form.elements.first_name.value,
-        login: form.elements.login.value,
-        phone: form.elements.phone.value,
-        second_name: form.elements.second_name.value,
+        oldPassword: form.elements.oldPassword.value,
+        newPasswordConfirmation: form.elements.newPasswordConfirmation.value,
+        newPassword: form.elements.newPassword.value,
       },
     })
     renderFieldsErrors({ errorTextByFieldName })
@@ -83,20 +65,14 @@ if (form instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        display_name: new FieldConfig({ type: "string" }).isRequired(),
-        email: new FieldConfig({ type: "string" }).isRequired(),
-        first_name: new FieldConfig({ type: "string" }).isRequired(),
-        login: new FieldConfig({ type: "string" }).isRequired(),
-        phone: new FieldConfig({ type: "string" }).isRequired(),
-        second_name: new FieldConfig({ type: "string" }).isRequired(),
+        oldPassword: new FieldConfig({ type: "string" }).isRequired(),
+        newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired(),
+        newPassword: new FieldConfig({ type: "string" }).isRequired(),
       },
       values: {
-        display_name: form.elements.display_name.value,
-        email: form.elements.email.value,
-        first_name: form.elements.first_name.value,
-        login: form.elements.login.value,
-        phone: form.elements.phone.value,
-        second_name: form.elements.second_name.value,
+        oldPassword: form.elements.oldPassword.value,
+        newPasswordConfirmation: form.elements.newPasswordConfirmation.value,
+        newPassword: form.elements.newPassword.value,
       },
     })
     renderFieldsErrors({ errorTextByFieldName })
@@ -105,12 +81,9 @@ if (form instanceof HTMLFormElement) {
     if (hasFormErrors) return
 
     console.log({
-      display_name: form.elements.display_name.value,
-      email: form.elements.email.value,
-      first_name: form.elements.first_name.value,
-      login: form.elements.login.value,
-      phone: form.elements.phone.value,
-      second_name: form.elements.second_name.value,
+      oldPassword: form.elements.oldPassword.value,
+      newPasswordConfirmation: form.elements.newPasswordConfirmation.value,
+      newPassword: form.elements.newPassword.value,
     })
   })
 }
