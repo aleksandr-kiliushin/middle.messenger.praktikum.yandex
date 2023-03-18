@@ -33,7 +33,7 @@ if (chatForm instanceof HTMLFormElement) {
 
     const errorsByFieldName = validateFields({
       rules: {
-        message: new FieldConfig({ type: "string" }).isRequired(),
+        message: new FieldConfig({ type: "string" }).prohibitedWords(["блин"]),
       },
       values: {
         message: chatForm.elements.message.value,
