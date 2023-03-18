@@ -1,7 +1,6 @@
 :root {
   --primary-main: royalblue;
   --primary-dark: #0b35af;
-  --page-header-height: 60px;
 }
 
 html {
@@ -47,9 +46,8 @@ body {
 }
 
 main {
-  height: calc(100% - var(--page-header-height));
-  margin: var(--page-header-height) auto 0;
-  overflow-y: scroll;
+  height: 100%;
+  overflow-y: auto;
 }
 
 * {
