@@ -17,7 +17,6 @@ module.exports = {
   root: true,
   rules: {
     "arrow-parens": 1,
-    camelcase: 1,
     "max-params": ["error", 2],
     "no-duplicate-imports": 1,
     "no-restricted-syntax": [1, { selector: "ExportDefaultDeclaration", message: "Prefer named exports." }],

@@ -30,12 +30,16 @@ textarea::placeholder {
 }
 
 input {
-  height: 32px;
+  height: 36px;
   padding: 9px 16px;
   background-color: #efefef;
   border: 1px solid #efefef;
   border-radius: 18px;
   font-size: 1.6rem;
+}
+
+input[type="file"] {
+  display: none;
 }
 
 body {
