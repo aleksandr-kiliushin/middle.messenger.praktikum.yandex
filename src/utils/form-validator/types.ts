@@ -1,3 +1,3 @@
 export type TFieldName = string
-export type TValidationErrorText = string
+export type TErrorText = string
 export type TValueType = "string"

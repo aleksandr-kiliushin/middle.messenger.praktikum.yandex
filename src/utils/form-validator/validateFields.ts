@@ -1,5 +1,5 @@
 import { FieldConfig } from "./index"
-import { TFieldName, TValidationErrorText } from "./types"
+import { TFieldName, TErrorText } from "./types"
 
 export interface IValidateFormParams {
   rules: Record<TFieldName, FieldConfig>
@@ -9,7 +9,7 @@ export interface IValidateFormParams {
 export type TValidateFormReturnValue = Record<TFieldName, string>
 
 export const validateFields = ({ rules, values }: IValidateFormParams): TValidateFormReturnValue => {
-  const result: Record<TFieldName, TValidationErrorText> = {}
+  const errorTextByFieldName: Record<TFieldName, TErrorText> = {}
 
   for (const fieldName in values) {
     const fieldValue = values[fieldName]
@@ -18,25 +18,27 @@ export const validateFields = ({ rules, values }: IValidateFormParams): TValidat
     switch (fieldConfig.type) {
       case "string": {
         if (typeof fieldValue !== "string") {
-          result[fieldName] = "Должно быть строкой."
+          errorTextByFieldName[fieldName] = "Должно быть строкой."
         } else if (fieldConfig.isRequired && fieldValue === "") {
-          result[fieldName] = `Обязательное поле.`
+          errorTextByFieldName[fieldName] = `Обязательное поле.`
         } else if (fieldValue.length > fieldConfig.maximumLength) {
-          result[fieldName] = `Не более ${fieldConfig.maximumLength} символов.`
+          errorTextByFieldName[fieldName] = `Не более ${fieldConfig.maximumLength} символов.`
         } else if (fieldValue.length < fieldConfig.minimumLength) {
-          result[fieldName] = `Не менее ${fieldConfig.minimumLength} символов.`
+          errorTextByFieldName[fieldName] = `Не менее ${fieldConfig.minimumLength} символов.`
         } else if (fieldConfig.prohibitedWords.some((word) => new RegExp(word, "gi").test(fieldValue))) {
-          result[fieldName] = `Нецензурная лексика запрещена.`
+          errorTextByFieldName[fieldName] = `Нецензурная лексика запрещена.`
+        } else {
+          errorTextByFieldName[fieldName] = ""
         }
         break
       }
 
       default: {
-        result[fieldName] = "Неверный тип данных."
+        errorTextByFieldName[fieldName] = "Неверный тип данных."
         break
       }
     }
   }
 
-  return result
+  return errorTextByFieldName
 }

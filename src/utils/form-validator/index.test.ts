@@ -8,79 +8,45 @@ describe("validate", () => {
   }>([
     {
       input: {
-        rules: {
-          firstName: new FieldConfig({ type: "string" }),
-        },
-        values: {
-          firstName: "",
-        },
+        rules: { firstName: new FieldConfig({ type: "string" }) },
+        values: { firstName: "" },
       },
-      output: {},
+      output: { firstName: "" },
     },
     {
       input: {
-        rules: {
-          firstName: new FieldConfig({ type: "string" }).isRequired(),
-        },
-        values: {
-          firstName: "",
-        },
+        rules: { firstName: new FieldConfig({ type: "string" }).isRequired() },
+        values: { firstName: "" },
       },
-      output: {
-        firstName: "Обязательное поле.",
-      },
+      output: { firstName: "Обязательное поле." },
     },
     {
       input: {
-        rules: {
-          firstName: new FieldConfig({ type: "string" }),
-        },
-        values: {
-          firstName: 123,
-        },
+        rules: { firstName: new FieldConfig({ type: "string" }) },
+        values: { firstName: 123 },
       },
-      output: {
-        firstName: "Должно быть строкой.",
-      },
+      output: { firstName: "Должно быть строкой." },
     },
     {
       input: {
-        rules: {
-          firstName: new FieldConfig({ type: "string" }).minimumLength(10),
-        },
-        values: {
-          firstName: "Привет.",
-        },
+        rules: { firstName: new FieldConfig({ type: "string" }).minimumLength(10) },
+        values: { firstName: "Привет." },
       },
-      output: {
-        firstName: "Не менее 10 символов.",
-      },
+      output: { firstName: "Не менее 10 символов." },
     },
     {
       input: {
-        rules: {
-          firstName: new FieldConfig({ type: "string" }).maximumLength(10),
-        },
-        values: {
-          firstName: "Привет, мир.",
-        },
+        rules: { firstName: new FieldConfig({ type: "string" }).maximumLength(10) },
+        values: { firstName: "Привет, мир." },
       },
-      output: {
-        firstName: "Не более 10 символов.",
-      },
+      output: { firstName: "Не более 10 символов." },
     },
     {
       input: {
-        rules: {
-          firstName: new FieldConfig({ type: "string" }).prohibitedWords(["блин", "чудак"]),
-        },
-        values: {
-          firstName: "Привет, чудак.",
-        },
+        rules: { firstName: new FieldConfig({ type: "string" }).prohibitedWords(["блин", "чудак"]) },
+        values: { firstName: "Привет, чудак." },
       },
-      output: {
-        firstName: "Нецензурная лексика запрещена.",
-      },
+      output: { firstName: "Нецензурная лексика запрещена." },
     },
   ])("$output", async ({ input, output }) => {
     expect(validateFields(input)).toEqual(output)

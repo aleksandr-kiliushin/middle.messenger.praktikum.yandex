@@ -15,10 +15,27 @@ const doesFormContainCorrectFields = (
 const chatForm = document.querySelector(".chat_form")
 const chatFormMessageField = document.querySelector(".chat_form textarea")
 
-if (chatFormMessageField instanceof HTMLTextAreaElement) {
+if (chatForm instanceof HTMLFormElement && chatFormMessageField instanceof HTMLTextAreaElement) {
   chatFormMessageField.addEventListener("input", () => {
     chatFormMessageField.style.height = ""
     chatFormMessageField.style.height = chatFormMessageField.scrollHeight + "px"
+  })
+
+  chatFormMessageField.addEventListener("blur", () => {
+    if (!doesFormContainCorrectFields(chatForm.elements)) {
+      console.error("Form does not contain appropriate fields.")
+      return
+    }
+
+    const errorTextByFieldName = validateFields({
+      rules: {
+        message: new FieldConfig({ type: "string" }).prohibitedWords(["блин"]),
+      },
+      values: {
+        message: chatForm.elements.message.value,
+      },
+    })
+    renderFieldsErrors({ errorTextByFieldName })
   })
 }
 
@@ -31,7 +48,7 @@ if (chatForm instanceof HTMLFormElement) {
       return
     }
 
-    const errorsByFieldName = validateFields({
+    const errorTextByFieldName = validateFields({
       rules: {
         message: new FieldConfig({ type: "string" }).prohibitedWords(["блин"]),
       },
@@ -39,11 +56,10 @@ if (chatForm instanceof HTMLFormElement) {
         message: chatForm.elements.message.value,
       },
     })
+    renderFieldsErrors({ errorTextByFieldName })
 
-    if (Object.keys(errorsByFieldName).length !== 0) {
-      renderFieldsErrors({ errorsByFieldName })
-      return
-    }
+    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== "")
+    if (hasFormErrors) return
 
     console.log({
       message: chatForm.elements.message.value,
