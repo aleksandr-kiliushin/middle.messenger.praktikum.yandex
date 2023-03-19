@@ -1,12 +1,12 @@
 import { FieldConfig, renderFieldsErrors, validateFields } from "../../utils/form-validator"
 
-interface IChatFormControlsCollection extends HTMLFormControlsCollection {
+interface IFormControlsCollection extends HTMLFormControlsCollection {
   message: HTMLTextAreaElement
 }
 
 const doesFormContainCorrectFields = (
   chatFormElements: HTMLFormControlsCollection
-): chatFormElements is IChatFormControlsCollection => {
+): chatFormElements is IFormControlsCollection => {
   if (!("message" in chatFormElements)) return false
   if (!(chatFormElements.message instanceof HTMLTextAreaElement)) return false
   return true

@@ -1,6 +1,6 @@
 import { FieldConfig, renderFieldsErrors, validateFields } from "../../utils/form-validator"
 
-interface ISettingsFormControlsCollection extends HTMLFormControlsCollection {
+interface IFormControlsCollection extends HTMLFormControlsCollection {
   display_name: HTMLInputElement
   first_name: HTMLInputElement
   email: HTMLInputElement
@@ -11,7 +11,7 @@ interface ISettingsFormControlsCollection extends HTMLFormControlsCollection {
 
 const doesFormContainCorrectFields = (
   chatFormElements: HTMLFormControlsCollection
-): chatFormElements is ISettingsFormControlsCollection => {
+): chatFormElements is IFormControlsCollection => {
   if (!("display_name" in chatFormElements)) return false
   if (!(chatFormElements.display_name instanceof HTMLInputElement)) return false
 
