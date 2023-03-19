@@ -1,4 +1,5 @@
 import { FieldConfig, renderFieldsErrors, validateFields } from "../../utils/form-validator"
+import "./index.css"
 
 interface IFormControlsCollection extends HTMLFormControlsCollection {
   message: HTMLTextAreaElement
