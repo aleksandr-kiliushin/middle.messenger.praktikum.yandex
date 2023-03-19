@@ -1,80 +1,58 @@
-import { FieldConfig, renderFieldsErrors, validateFields } from "../../utils/form-validator"
+import { FieldConfig, validateFields } from "../../utils/form-validator"
 
 interface IFormControlsCollection extends HTMLFormControlsCollection {
   login: HTMLInputElement
   password: HTMLInputElement
 }
 
+const fieldClassByFieldName: [string, typeof HTMLElement][] = [
+  ["login", HTMLInputElement],
+  ["password", HTMLInputElement],
+]
+
 const doesFormContainCorrectFields = (
   chatFormElements: HTMLFormControlsCollection
 ): chatFormElements is IFormControlsCollection => {
-  if (!("login" in chatFormElements)) return false
-  if (!(chatFormElements.login instanceof HTMLInputElement)) return false
+  return fieldClassByFieldName.every(([fieldName, fieldClass]) => {
+    return chatFormElements.namedItem(fieldName) instanceof fieldClass
+  })
+}
 
-  if (!("password" in chatFormElements)) return false
-  if (!(chatFormElements.password instanceof HTMLInputElement)) return false
-
-  return true
+const fieldsRulesConfig = {
+  login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
 }
 
 const form = document.querySelector("form")
-const fieldsNames = ["login", "password"]
 
-if (form instanceof HTMLFormElement) {
-  const handleFieldBlur = () => {
-    if (!doesFormContainCorrectFields(form.elements)) {
-      console.error("Form does not contain appropriate fields.")
-      return
-    }
+if (!(form instanceof HTMLFormElement)) throw new Error("Form is not found.")
+if (!doesFormContainCorrectFields(form.elements)) throw new Error("Form does not have appropriate elements.")
 
-    const errorTextByFieldName = validateFields({
-      rules: {
-        login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-      },
-      values: {
-        login: form.elements.login.value,
-        password: form.elements.password.value,
-      },
-    })
-    renderFieldsErrors({ errorTextByFieldName })
-  }
+const formElements = form.elements
 
-  for (const fieldName of fieldsNames) {
-    const field = document.querySelector(`[name="${fieldName}"]`)
-    if (field === null) continue
+const getFieldsValues = () => ({
+  login: formElements.login.value,
+  password: formElements.password.value,
+})
 
-    field.addEventListener("blur", handleFieldBlur)
-  }
-}
+form.addEventListener("focusout", () => {
+  const fieldsValidationResult = validateFields({
+    rules: fieldsRulesConfig,
+    values: getFieldsValues(),
+  }).renderErrors()
+  fieldsValidationResult.renderErrors()
+})
 
-if (form instanceof HTMLFormElement) {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault()
+form.addEventListener("submit", (event) => {
+  event.preventDefault()
 
-    if (!doesFormContainCorrectFields(form.elements)) {
-      console.error("Form does not contain appropriate fields.")
-      return
-    }
+  const fieldsValidationResult = validateFields({
+    rules: fieldsRulesConfig,
+    values: getFieldsValues(),
+  }).renderErrors()
+  fieldsValidationResult.renderErrors()
 
-    const errorTextByFieldName = validateFields({
-      rules: {
-        login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-      },
-      values: {
-        login: form.elements.login.value,
-        password: form.elements.password.value,
-      },
-    })
-    renderFieldsErrors({ errorTextByFieldName })
+  if (!fieldsValidationResult.isValid()) return
 
-    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== null)
-    if (hasFormErrors) return
-
-    console.log({
-      login: form.elements.login.value,
-      password: form.elements.password.value,
-    })
-  })
-}
+  console.log(getFieldsValues())
+})

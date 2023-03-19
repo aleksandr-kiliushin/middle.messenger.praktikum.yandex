@@ -1,10 +1,10 @@
 import { FieldConfig, validateFields } from "./index"
-import { IValidateFormParams, TValidateFormReturnValue } from "./validateFields"
+import { IValidateFieldsParams, FieldsValidationResult } from "./validateFields"
 
 describe("validate", () => {
   test.each<{
-    input: IValidateFormParams
-    output: TValidateFormReturnValue
+    input: IValidateFieldsParams
+    output: FieldsValidationResult["errorTextByFieldName"]
   }>([
     {
       input: {
@@ -72,6 +72,6 @@ describe("validate", () => {
       output: { email: "Некорректный формат почты." },
     },
   ])("$output", async ({ input, output }) => {
-    expect(validateFields(input)).toEqual(output)
+    expect(validateFields(input).errorTextByFieldName).toEqual(output)
   })
 })
