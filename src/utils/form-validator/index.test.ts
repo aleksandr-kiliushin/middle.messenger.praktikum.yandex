@@ -59,6 +59,18 @@ describe("validate", () => {
       },
       output: { firstName: "Нецензурная лексика запрещена." },
     },
+    {
+      input: {
+        rules: {
+          email: new FieldConfig({ type: "string" }).matches({
+            errorText: "Некорректный формат почты.",
+            value: /[\w-]+@\w+\.\w+/g,
+          }),
+        },
+        values: { email: "me@.com" },
+      },
+      output: { email: "Некорректный формат почты." },
+    },
   ])("$output", async ({ input, output }) => {
     expect(validateFields(input)).toEqual(output)
   })

@@ -7,6 +7,7 @@ interface IFieldConfigParameter<TValue> {
 
 type TFieldConfig = {
   isRequired: IFieldConfigParameter<boolean>
+  matches: IFieldConfigParameter<RegExp>
   maximumLength: IFieldConfigParameter<number>
   minimumLength: IFieldConfigParameter<number>
   prohibitedWords: IFieldConfigParameter<string[]>
@@ -19,6 +20,7 @@ export class FieldConfig {
   constructor({ type }: { type: TValueType }) {
     this.config = {
       isRequired: { errorText: null, value: false },
+      matches: { errorText: "", value: /.*/ },
       maximumLength: { errorText: null, value: Infinity },
       minimumLength: { errorText: null, value: 0 },
       prohibitedWords: { errorText: null, value: [] },
@@ -28,6 +30,11 @@ export class FieldConfig {
 
   public isRequired(params: TFieldConfig["isRequired"]) {
     this.config.isRequired = params
+    return this
+  }
+
+  public matches(params: TFieldConfig["matches"]) {
+    this.config.matches = params
     return this
   }
 

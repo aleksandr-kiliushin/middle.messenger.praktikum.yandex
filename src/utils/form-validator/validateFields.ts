@@ -29,6 +29,8 @@ export const validateFields = ({ rules, values }: IValidateFormParams): TValidat
             fieldConfig.maximumLength.errorText ?? `Не менее ${fieldConfig.minimumLength.value} символов.`
         } else if (fieldConfig.prohibitedWords.value.some((word) => new RegExp(word, "gi").test(fieldValue))) {
           errorTextByFieldName[fieldName] = fieldConfig.prohibitedWords.errorText ?? "Найдены недопустимые символы."
+        } else if (!fieldConfig.matches.value.test(fieldValue)) {
+          errorTextByFieldName[fieldName] = fieldConfig.matches.errorText ?? "Проверьте правильность значения."
         } else {
           errorTextByFieldName[fieldName] = null
         }
