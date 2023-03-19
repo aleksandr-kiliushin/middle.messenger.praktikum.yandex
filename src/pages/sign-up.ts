@@ -49,13 +49,13 @@ if (form instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        email: new FieldConfig({ type: "string" }).isRequired(),
-        first_name: new FieldConfig({ type: "string" }).isRequired(),
-        login: new FieldConfig({ type: "string" }).isRequired(),
-        password: new FieldConfig({ type: "string" }).isRequired(),
-        passwordConfirmation: new FieldConfig({ type: "string" }).isRequired(),
-        phone: new FieldConfig({ type: "string" }).isRequired(),
-        second_name: new FieldConfig({ type: "string" }).isRequired(),
+        email: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        first_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        passwordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        phone: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
       },
       values: {
         email: form.elements.email.value,
@@ -89,13 +89,13 @@ if (form instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        email: new FieldConfig({ type: "string" }).isRequired(),
-        first_name: new FieldConfig({ type: "string" }).isRequired(),
-        login: new FieldConfig({ type: "string" }).isRequired(),
-        password: new FieldConfig({ type: "string" }).isRequired(),
-        passwordConfirmation: new FieldConfig({ type: "string" }).isRequired(),
-        phone: new FieldConfig({ type: "string" }).isRequired(),
-        second_name: new FieldConfig({ type: "string" }).isRequired(),
+        email: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        first_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        passwordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        phone: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
       },
       values: {
         email: form.elements.email.value,
@@ -109,7 +109,7 @@ if (form instanceof HTMLFormElement) {
     })
     renderFieldsErrors({ errorTextByFieldName })
 
-    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== "")
+    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== null)
     if (hasFormErrors) return
 
     console.log({

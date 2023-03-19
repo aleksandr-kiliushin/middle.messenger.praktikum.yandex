@@ -11,11 +11,13 @@ describe("validate", () => {
         rules: { firstName: new FieldConfig({ type: "string" }) },
         values: { firstName: "" },
       },
-      output: { firstName: "" },
+      output: { firstName: null },
     },
     {
       input: {
-        rules: { firstName: new FieldConfig({ type: "string" }).isRequired() },
+        rules: {
+          firstName: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        },
         values: { firstName: "" },
       },
       output: { firstName: "Обязательное поле." },
@@ -29,21 +31,30 @@ describe("validate", () => {
     },
     {
       input: {
-        rules: { firstName: new FieldConfig({ type: "string" }).minimumLength(10) },
+        rules: {
+          firstName: new FieldConfig({ type: "string" }).minimumLength({ value: 10 }),
+        },
         values: { firstName: "Привет." },
       },
       output: { firstName: "Не менее 10 символов." },
     },
     {
       input: {
-        rules: { firstName: new FieldConfig({ type: "string" }).maximumLength(10) },
+        rules: {
+          firstName: new FieldConfig({ type: "string" }).maximumLength({ value: 10 }),
+        },
         values: { firstName: "Привет, мир." },
       },
       output: { firstName: "Не более 10 символов." },
     },
     {
       input: {
-        rules: { firstName: new FieldConfig({ type: "string" }).prohibitedWords(["блин", "чудак"]) },
+        rules: {
+          firstName: new FieldConfig({ type: "string" }).prohibitedWords({
+            errorText: "Нецензурная лексика запрещена.",
+            value: ["блин", "чудак"],
+          }),
+        },
         values: { firstName: "Привет, чудак." },
       },
       output: { firstName: "Нецензурная лексика запрещена." },

@@ -33,14 +33,14 @@ if (form instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        oldPassword: new FieldConfig({ type: "string" }).isRequired(),
-        newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired(),
-        newPassword: new FieldConfig({ type: "string" }).isRequired(),
+        oldPassword: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        newPassword: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
       },
       values: {
         oldPassword: form.elements.oldPassword.value,
-        newPasswordConfirmation: form.elements.newPasswordConfirmation.value,
         newPassword: form.elements.newPassword.value,
+        newPasswordConfirmation: form.elements.newPasswordConfirmation.value,
       },
     })
     renderFieldsErrors({ errorTextByFieldName })
@@ -65,9 +65,9 @@ if (form instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        oldPassword: new FieldConfig({ type: "string" }).isRequired(),
-        newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired(),
-        newPassword: new FieldConfig({ type: "string" }).isRequired(),
+        oldPassword: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        newPassword: new FieldConfig({ type: "string" }).isRequired({ value: true }),
       },
       values: {
         oldPassword: form.elements.oldPassword.value,
@@ -77,7 +77,7 @@ if (form instanceof HTMLFormElement) {
     })
     renderFieldsErrors({ errorTextByFieldName })
 
-    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== "")
+    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== null)
     if (hasFormErrors) return
 
     console.log({

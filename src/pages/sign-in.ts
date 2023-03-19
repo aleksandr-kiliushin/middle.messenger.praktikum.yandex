@@ -29,8 +29,8 @@ if (form instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        login: new FieldConfig({ type: "string" }).isRequired(),
-        password: new FieldConfig({ type: "string" }).isRequired(),
+        login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
       },
       values: {
         login: form.elements.login.value,
@@ -59,8 +59,8 @@ if (form instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        login: new FieldConfig({ type: "string" }).isRequired(),
-        password: new FieldConfig({ type: "string" }).isRequired(),
+        login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
       },
       values: {
         login: form.elements.login.value,
@@ -69,7 +69,7 @@ if (form instanceof HTMLFormElement) {
     })
     renderFieldsErrors({ errorTextByFieldName })
 
-    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== "")
+    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== null)
     if (hasFormErrors) return
 
     console.log({

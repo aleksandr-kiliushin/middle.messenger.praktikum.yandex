@@ -34,7 +34,10 @@ if (chatForm instanceof HTMLFormElement && chatFormMessageField instanceof HTMLT
 
     const errorTextByFieldName = validateFields({
       rules: {
-        message: new FieldConfig({ type: "string" }).prohibitedWords(["блин"]),
+        message: new FieldConfig({ type: "string" }).prohibitedWords({
+          value: ["блин"],
+          errorText: "Нецензурная лексика запрещена.",
+        }),
       },
       values: {
         message: chatForm.elements.message.value,
@@ -55,7 +58,10 @@ if (chatForm instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        message: new FieldConfig({ type: "string" }).prohibitedWords(["блин"]),
+        message: new FieldConfig({ type: "string" }).prohibitedWords({
+          value: ["блин"],
+          errorText: "Нецензурная лексика запрещена.",
+        }),
       },
       values: {
         message: chatForm.elements.message.value,
@@ -63,7 +69,7 @@ if (chatForm instanceof HTMLFormElement) {
     })
     renderFieldsErrors({ errorTextByFieldName })
 
-    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== "")
+    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== null)
     if (hasFormErrors) return
 
     console.log({

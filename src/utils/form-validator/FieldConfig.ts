@@ -1,11 +1,16 @@
-import { TValueType } from "./types"
+import { TErrorText, TValueType } from "./types"
+
+interface IFieldConfigParameter<TValue> {
+  errorText?: TErrorText | null
+  value: TValue
+}
 
 type TFieldConfig = {
-  isRequired: boolean
-  maximumLength: number
-  minimumLength: number
-  prohibitedWords: string[]
-  type: TValueType
+  isRequired: IFieldConfigParameter<boolean>
+  maximumLength: IFieldConfigParameter<number>
+  minimumLength: IFieldConfigParameter<number>
+  prohibitedWords: IFieldConfigParameter<string[]>
+  type: IFieldConfigParameter<TValueType>
 }
 
 export class FieldConfig {
@@ -13,31 +18,31 @@ export class FieldConfig {
 
   constructor({ type }: { type: TValueType }) {
     this.config = {
-      isRequired: false,
-      maximumLength: Infinity,
-      minimumLength: 0,
-      prohibitedWords: [],
-      type,
+      isRequired: { errorText: null, value: false },
+      maximumLength: { errorText: null, value: Infinity },
+      minimumLength: { errorText: null, value: 0 },
+      prohibitedWords: { errorText: null, value: [] },
+      type: { errorText: null, value: type },
     }
   }
 
-  public maximumLength(length: number) {
-    this.config.maximumLength = length
+  public isRequired(params: TFieldConfig["isRequired"]) {
+    this.config.isRequired = params
     return this
   }
 
-  public minimumLength(length: number) {
-    this.config.minimumLength = length
+  public maximumLength(params: TFieldConfig["maximumLength"]) {
+    this.config.maximumLength = params
     return this
   }
 
-  public prohibitedWords(words: string[]) {
-    this.config.prohibitedWords = words
+  public minimumLength(params: TFieldConfig["minimumLength"]) {
+    this.config.minimumLength = params
     return this
   }
 
-  public isRequired() {
-    this.config.isRequired = true
+  public prohibitedWords(params: TFieldConfig["prohibitedWords"]) {
+    this.config.prohibitedWords = params
     return this
   }
 }

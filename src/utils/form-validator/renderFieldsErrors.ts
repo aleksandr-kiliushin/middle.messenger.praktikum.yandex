@@ -1,12 +1,12 @@
-import { TFieldName, TErrorText } from "./types"
+import { TValidateFormReturnValue } from "./validateFields"
 
-type TRenderFieldsErrors = (params: { errorTextByFieldName: Record<TFieldName, TErrorText> }) => void
+type TRenderFieldsErrors = (params: { errorTextByFieldName: TValidateFormReturnValue }) => void
 export const renderFieldsErrors: TRenderFieldsErrors = ({ errorTextByFieldName }) => {
   for (const fieldName in errorTextByFieldName) {
     const field = document.querySelector(`[name="${fieldName}"]`)
     const errorText = errorTextByFieldName[fieldName]
     if (field !== null) {
-      field.ariaInvalid = errorText == "" ? "false" : "true"
+      field.ariaInvalid = errorText == null ? "false" : "true"
     }
   }
 }
