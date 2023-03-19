@@ -1,4 +1,4 @@
-import { FieldConfig, renderFieldsErrors, validateFields } from "../utils/form-validator"
+import { FieldConfig, renderFieldsErrors, validateFields } from "../../utils/form-validator"
 
 interface ISettingsFormControlsCollection extends HTMLFormControlsCollection {
   login: HTMLInputElement

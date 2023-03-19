@@ -1,10 +1,11 @@
-import { FieldConfig, renderFieldsErrors, validateFields } from "../utils/form-validator"
+import { FieldConfig, renderFieldsErrors, validateFields } from "../../utils/form-validator"
 
 interface ISettingsFormControlsCollection extends HTMLFormControlsCollection {
-  display_name: HTMLInputElement
   first_name: HTMLInputElement
   email: HTMLInputElement
   login: HTMLInputElement
+  password: HTMLInputElement
+  passwordConfirmation: HTMLInputElement
   phone: HTMLInputElement
   second_name: HTMLInputElement
 }
@@ -12,9 +13,6 @@ interface ISettingsFormControlsCollection extends HTMLFormControlsCollection {
 const doesFormContainCorrectFields = (
   chatFormElements: HTMLFormControlsCollection
 ): chatFormElements is ISettingsFormControlsCollection => {
-  if (!("display_name" in chatFormElements)) return false
-  if (!(chatFormElements.display_name instanceof HTMLInputElement)) return false
-
   if (!("first_name" in chatFormElements)) return false
   if (!(chatFormElements.first_name instanceof HTMLInputElement)) return false
 
@@ -23,6 +21,12 @@ const doesFormContainCorrectFields = (
 
   if (!("login" in chatFormElements)) return false
   if (!(chatFormElements.login instanceof HTMLInputElement)) return false
+
+  if (!("password" in chatFormElements)) return false
+  if (!(chatFormElements.password instanceof HTMLInputElement)) return false
+
+  if (!("passwordConfirmation" in chatFormElements)) return false
+  if (!(chatFormElements.passwordConfirmation instanceof HTMLInputElement)) return false
 
   if (!("phone" in chatFormElements)) return false
   if (!(chatFormElements.phone instanceof HTMLInputElement)) return false
@@ -34,7 +38,7 @@ const doesFormContainCorrectFields = (
 }
 
 const form = document.querySelector("form")
-const fieldsNames = ["display_name", "email", "first_name", "login", "phone", "second_name"]
+const fieldsNames = ["email", "first_name", "login", "password", "passwordConfirmation", "phone", "second_name"]
 
 if (form instanceof HTMLFormElement) {
   const handleFieldBlur = () => {
@@ -45,18 +49,20 @@ if (form instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        display_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
         email: new FieldConfig({ type: "string" }).isRequired({ value: true }),
         first_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
         login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        passwordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
         phone: new FieldConfig({ type: "string" }).isRequired({ value: true }),
         second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
       },
       values: {
-        display_name: form.elements.display_name.value,
         email: form.elements.email.value,
         first_name: form.elements.first_name.value,
         login: form.elements.login.value,
+        password: form.elements.password.value,
+        passwordConfirmation: form.elements.passwordConfirmation.value,
         phone: form.elements.phone.value,
         second_name: form.elements.second_name.value,
       },
@@ -83,18 +89,20 @@ if (form instanceof HTMLFormElement) {
 
     const errorTextByFieldName = validateFields({
       rules: {
-        display_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
         email: new FieldConfig({ type: "string" }).isRequired({ value: true }),
         first_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
         login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+        passwordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
         phone: new FieldConfig({ type: "string" }).isRequired({ value: true }),
         second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
       },
       values: {
-        display_name: form.elements.display_name.value,
         email: form.elements.email.value,
         first_name: form.elements.first_name.value,
         login: form.elements.login.value,
+        password: form.elements.password.value,
+        passwordConfirmation: form.elements.passwordConfirmation.value,
         phone: form.elements.phone.value,
         second_name: form.elements.second_name.value,
       },
@@ -105,10 +113,11 @@ if (form instanceof HTMLFormElement) {
     if (hasFormErrors) return
 
     console.log({
-      display_name: form.elements.display_name.value,
       email: form.elements.email.value,
       first_name: form.elements.first_name.value,
       login: form.elements.login.value,
+      password: form.elements.password.value,
+      passwordConfirmation: form.elements.passwordConfirmation.value,
       phone: form.elements.phone.value,
       second_name: form.elements.second_name.value,
     })
