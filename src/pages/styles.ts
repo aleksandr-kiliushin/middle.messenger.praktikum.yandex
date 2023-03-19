@@ -1,7 +1,8 @@
 import "../styles/global.css"
-import "../styles/button.css"
-import "../styles/message.css"
-import "../styles/navigation.css"
 import "../styles/rows.css"
-import "../styles/chats-list-item.css"
 import "../styles/chats.css"
+
+import "../components/button/index.css"
+import "../components/message/index.css"
+import "../components/navigation/index.css"
+import "../components/chats-list-item/index.css"
