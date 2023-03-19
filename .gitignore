@@ -1,4 +1,5 @@
-/node_modules
-/dist
 /.parcel-cache
+/dist
+/node_modules
+/temp
 /**/*.env

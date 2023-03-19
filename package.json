@@ -38,7 +38,7 @@
     "dev": "concurrently --kill-others \"npm run parcel:watch\" \"npm run serve-static:watch\"",
     "lint": "eslint \"**/*.{js,ts}\" && stylelint \"**/*.css\"",
     "lint-staged": "lint-staged",
-    "parcel:watch": "rm -rf ./dist && rm -rf ./.parcel-cache && parcel ./src/pages/**/*{.hbs,.css}",
+    "parcel:watch": "ts-node ./pre-build.ts && parcel ./src/pages/**/*{.hbs,.css}",
     "prepare": "husky install",
     "prettier": "prettier --write \"**/*.{css,js,json,md,ts}\"",
     "serve-static": "ts-node ./serve-static.ts",
