@@ -1,3 +1,4 @@
+import { request } from "../../utils/request"
 import { FieldConfig, validateFields } from "../../utils/form-validator"
 import "./index.css"
 
@@ -75,3 +76,7 @@ const chatMessagesBlock = document.querySelector(".chat_messages")
 if (chatMessagesBlock instanceof HTMLDivElement) {
   chatMessagesBlock.scrollTo(0, chatMessagesBlock.scrollHeight)
 }
+
+request({ method: "GET", url: "https://jsonplaceholder.typicode.com/posts/1" }).then((response) =>
+  console.log(JSON.parse(response.response))
+)
