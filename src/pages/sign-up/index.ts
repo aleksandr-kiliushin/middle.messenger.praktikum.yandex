@@ -52,7 +52,14 @@ const fieldsRulesConfig = {
       value: /^(?=.*[A-Z])(?=.*\d).*$/,
     }),
   passwordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-  phone: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  phone: new FieldConfig({ type: "string" })
+    .isRequired({ value: true })
+    .minimumLength({ value: 10 })
+    .maximumLength({ value: 15 })
+    .matches({
+      errorText: "Должен состоять из цифр, может начинается с плюса",
+      value: /^(\+?)\d+$/,
+    }),
   second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({
     errorText: "Должно начинаться с большой буквы. Из символов разрешен только дефис.",
     value: /^[А-ЯA-Z][A-Za-zА-Яа-я-]*$/g,
