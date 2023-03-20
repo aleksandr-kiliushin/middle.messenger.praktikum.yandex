@@ -29,7 +29,7 @@ const doesFormContainCorrectFields = (
 }
 
 const fieldsRulesConfig = {
-  email: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  email: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({ value: /[\w-]+@\w+\.\w+/g }),
   first_name: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({
     errorText: "Должно начинаться с большой буквы. Из символов разрешен только дефис.",
     value: /^[А-ЯA-Z][A-Za-zА-Яа-я-]*$/g,
