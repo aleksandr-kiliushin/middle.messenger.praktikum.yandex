@@ -22,7 +22,14 @@ const doesFormContainCorrectFields = (
 
 const fieldsRulesConfig = {
   oldPassword: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-  newPassword: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  newPassword: new FieldConfig({ type: "string" })
+    .isRequired({ value: true })
+    .minimumLength({ value: 8 })
+    .maximumLength({ value: 40 })
+    .matches({
+      errorText: "Обязательны хотя бы одна заглавная буква и цифра.",
+      value: /^(?=.*[A-Z])(?=.*\d).*$/,
+    }),
   newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
 }
 
