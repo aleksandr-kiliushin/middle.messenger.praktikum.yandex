@@ -33,7 +33,15 @@ const fieldsRulesConfig = {
     errorText: "Должно начинаться с большой буквы. Из символов разрешен только дефис.",
     value: /^[А-ЯA-Z][A-Za-zА-Яа-я-]*$/g,
   }),
-  login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  login: new FieldConfig({ type: "string" })
+    .isRequired({ value: true })
+    .maximumLength({ value: 20 })
+    .minimumLength({ value: 3 })
+    .matches({
+      errorText:
+        "Не должен состоять только из цифр, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание).",
+      value: /^(?=[a-z0-9_-]*$)(?![0-9]+$)[a-z0-9_-]*$/gi,
+    }),
   phone: new FieldConfig({ type: "string" }).isRequired({ value: true }),
   second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({
     errorText: "Должно начинаться с большой буквы. Из символов разрешен только дефис.",
