@@ -1,4 +1,4 @@
-import { FieldConfig, renderFieldsErrors, validateFields } from "../../utils/form-validator"
+import { FieldConfig, validateFields } from "../../utils/form-validator"
 
 interface IFormControlsCollection extends HTMLFormControlsCollection {
   first_name: HTMLInputElement
@@ -10,116 +10,69 @@ interface IFormControlsCollection extends HTMLFormControlsCollection {
   second_name: HTMLInputElement
 }
 
+const fieldClassByFieldName: [string, typeof HTMLElement][] = [
+  ["first_name", HTMLInputElement],
+  ["email", HTMLInputElement],
+  ["login", HTMLInputElement],
+  ["password", HTMLInputElement],
+  ["passwordConfirmation", HTMLInputElement],
+  ["phone", HTMLInputElement],
+  ["second_name", HTMLInputElement],
+]
+
 const doesFormContainCorrectFields = (
   chatFormElements: HTMLFormControlsCollection
 ): chatFormElements is IFormControlsCollection => {
-  if (!("first_name" in chatFormElements)) return false
-  if (!(chatFormElements.first_name instanceof HTMLInputElement)) return false
+  return fieldClassByFieldName.every(([fieldName, fieldClass]) => {
+    return chatFormElements.namedItem(fieldName) instanceof fieldClass
+  })
+}
 
-  if (!("email" in chatFormElements)) return false
-  if (!(chatFormElements.email instanceof HTMLInputElement)) return false
-
-  if (!("login" in chatFormElements)) return false
-  if (!(chatFormElements.login instanceof HTMLInputElement)) return false
-
-  if (!("password" in chatFormElements)) return false
-  if (!(chatFormElements.password instanceof HTMLInputElement)) return false
-
-  if (!("passwordConfirmation" in chatFormElements)) return false
-  if (!(chatFormElements.passwordConfirmation instanceof HTMLInputElement)) return false
-
-  if (!("phone" in chatFormElements)) return false
-  if (!(chatFormElements.phone instanceof HTMLInputElement)) return false
-
-  if (!("second_name" in chatFormElements)) return false
-  if (!(chatFormElements.second_name instanceof HTMLInputElement)) return false
-
-  return true
+const fieldsRulesConfig = {
+  email: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  first_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  passwordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  phone: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
 }
 
 const form = document.querySelector("form")
-const fieldsNames = ["email", "first_name", "login", "password", "passwordConfirmation", "phone", "second_name"]
 
-if (form instanceof HTMLFormElement) {
-  const handleFieldBlur = () => {
-    if (!doesFormContainCorrectFields(form.elements)) {
-      console.error("Form does not contain appropriate fields.")
-      return
-    }
+if (!(form instanceof HTMLFormElement)) throw new Error("Form is not found.")
+if (!doesFormContainCorrectFields(form.elements)) throw new Error("Form does not have appropriate elements.")
 
-    const errorTextByFieldName = validateFields({
-      rules: {
-        email: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        first_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        passwordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        phone: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-      },
-      values: {
-        email: form.elements.email.value,
-        first_name: form.elements.first_name.value,
-        login: form.elements.login.value,
-        password: form.elements.password.value,
-        passwordConfirmation: form.elements.passwordConfirmation.value,
-        phone: form.elements.phone.value,
-        second_name: form.elements.second_name.value,
-      },
-    })
-    renderFieldsErrors({ errorTextByFieldName })
-  }
+const formElements = form.elements
 
-  for (const fieldName of fieldsNames) {
-    const field = document.querySelector(`[name="${fieldName}"]`)
-    if (field === null) continue
+const getFieldsValues = () => ({
+  email: formElements.email.value,
+  first_name: formElements.first_name.value,
+  login: formElements.login.value,
+  password: formElements.password.value,
+  passwordConfirmation: formElements.passwordConfirmation.value,
+  phone: formElements.phone.value,
+  second_name: formElements.second_name.value,
+})
 
-    field.addEventListener("blur", handleFieldBlur)
-  }
-}
+form.addEventListener("focusout", () => {
+  const fieldsValidationResult = validateFields({
+    rules: fieldsRulesConfig,
+    values: getFieldsValues(),
+  }).renderErrors()
+  fieldsValidationResult.renderErrors()
+})
 
-if (form instanceof HTMLFormElement) {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault()
+form.addEventListener("submit", (event) => {
+  event.preventDefault()
 
-    if (!doesFormContainCorrectFields(form.elements)) {
-      console.error("Form does not contain appropriate fields.")
-      return
-    }
+  const fieldsValidationResult = validateFields({
+    rules: fieldsRulesConfig,
+    values: getFieldsValues(),
+  }).renderErrors()
+  fieldsValidationResult.renderErrors()
 
-    const errorTextByFieldName = validateFields({
-      rules: {
-        email: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        first_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        passwordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        phone: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-        second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-      },
-      values: {
-        email: form.elements.email.value,
-        first_name: form.elements.first_name.value,
-        login: form.elements.login.value,
-        password: form.elements.password.value,
-        passwordConfirmation: form.elements.passwordConfirmation.value,
-        phone: form.elements.phone.value,
-        second_name: form.elements.second_name.value,
-      },
-    })
-    renderFieldsErrors({ errorTextByFieldName })
+  if (!fieldsValidationResult.isValid()) return
 
-    const hasFormErrors = Object.values(errorTextByFieldName).some((errorText) => errorText !== null)
-    if (hasFormErrors) return
-
-    console.log({
-      email: form.elements.email.value,
-      first_name: form.elements.first_name.value,
-      login: form.elements.login.value,
-      password: form.elements.password.value,
-      passwordConfirmation: form.elements.passwordConfirmation.value,
-      phone: form.elements.phone.value,
-      second_name: form.elements.second_name.value,
-    })
-  })
-}
+  console.log(getFieldsValues())
+})
