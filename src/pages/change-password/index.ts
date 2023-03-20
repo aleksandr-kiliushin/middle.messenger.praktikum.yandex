@@ -58,7 +58,7 @@ form.addEventListener("focusout", (event) => {
   const fieldsValidationResult = validateFields({
     rules: { [fieldName]: fieldsRulesConfig[fieldName] },
     values: { [fieldName]: getFieldsValues()[fieldName] },
-  }).renderErrors()
+  })
   fieldsValidationResult.renderErrors()
 })
 
@@ -68,7 +68,7 @@ form.addEventListener("submit", (event) => {
   const fieldsValidationResult = validateFields({
     rules: fieldsRulesConfig,
     values: getFieldsValues(),
-  }).renderErrors()
+  })
   fieldsValidationResult.renderErrors()
 
   if (!fieldsValidationResult.isValid()) return
