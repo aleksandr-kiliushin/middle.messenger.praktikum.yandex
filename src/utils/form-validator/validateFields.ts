@@ -21,7 +21,7 @@ export class FieldsValidationResult {
   }
 
   public isValid() {
-    return Object.values(this.errorTextByFieldName).some((errorText) => errorText !== null)
+    return Object.values(this.errorTextByFieldName).every((errorText) => errorText === null)
   }
 
   public renderErrors() {
