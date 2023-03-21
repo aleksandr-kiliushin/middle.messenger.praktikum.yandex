@@ -10,7 +10,7 @@ export const Profile = () => {
         startIconName: "logout",
         text: "Выйти",
         type: "button",
-      }),
+      }).render(),
     }),
   })
 }

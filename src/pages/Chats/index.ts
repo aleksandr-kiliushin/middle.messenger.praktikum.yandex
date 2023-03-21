@@ -15,14 +15,14 @@ export const Chats = () => {
       ChatOptionsButton: new Button({
         startIconName: "more_vert",
         type: "button",
-      }),
+      }).render(),
       FileInput: FileInput({
         name: "attachment",
       }),
       SendMessageButton: new Button({
         startIconName: "send",
         type: "submit",
-      }),
+      }).render(),
 
       ChatListItem1: ChatListItem({
         datetime: "15:30",

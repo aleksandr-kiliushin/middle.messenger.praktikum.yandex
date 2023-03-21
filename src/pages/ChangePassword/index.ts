@@ -12,7 +12,7 @@ export const ChangePassword = () => {
         startIconName: "save",
         text: "Сохранить",
         type: "submit",
-      }),
+      }).render(),
     }),
   })
 }

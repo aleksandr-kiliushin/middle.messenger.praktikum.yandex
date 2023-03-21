@@ -11,7 +11,7 @@ export const SignUp = () => {
       SubmitButton: new Button({
         text: "Зарегистрироваться",
         type: "submit",
-      }),
+      }).render(),
     }),
   })
 }

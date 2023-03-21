@@ -12,7 +12,7 @@ export const Settings = () => {
         startIconName: "save",
         text: "Сохранить",
         type: "submit",
-      }),
+      }).render(),
     }),
   })
 }
