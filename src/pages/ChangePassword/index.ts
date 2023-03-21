@@ -8,7 +8,7 @@ import "./script"
 export const ChangePassword = () => {
   return PageWrapper({
     content: Handlebars.compile(template)({
-      SubmitButton: Button({
+      SubmitButton: new Button({
         startIconName: "save",
         text: "Сохранить",
         type: "submit",

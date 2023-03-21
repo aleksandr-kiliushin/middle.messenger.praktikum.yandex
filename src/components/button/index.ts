@@ -1,22 +1,21 @@
 import Handlebars from "handlebars"
 import { template } from "./template"
 import "./index.css"
+import { Block } from "../../utils/Block"
 
-export const Button = ({
-  endIconName,
-  startIconName,
-  text,
-  type,
-}: {
+interface IButtonProps {
   endIconName?: string
   startIconName?: string
   text?: string
   type: "button" | "submit"
-}) => {
-  return Handlebars.compile(template)({
-    endIconName,
-    startIconName,
-    text,
-    type,
-  })
+}
+
+export class Button extends Block<IButtonProps> {
+  constructor(props: IButtonProps) {
+    super(props)
+  }
+
+  public render() {
+    return Handlebars.compile(template)(this.props)
+  }
 }

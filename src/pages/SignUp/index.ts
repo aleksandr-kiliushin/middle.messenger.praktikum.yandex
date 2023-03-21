@@ -8,7 +8,7 @@ import "./script"
 export const SignUp = () => {
   return PageWrapper({
     content: Handlebars.compile(template)({
-      SubmitButton: Button({
+      SubmitButton: new Button({
         text: "Зарегистрироваться",
         type: "submit",
       }),

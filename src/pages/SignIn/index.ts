@@ -8,11 +8,11 @@ import "./script"
 export const SignIn = () => {
   return PageWrapper({
     content: Handlebars.compile(template)({
-      SubmitButton: Button({
+      SubmitButton: new Button({
         startIconName: "login",
         text: "Авторизоваться",
         type: "submit",
-      }),
+      }).render(),
     }),
   })
 }

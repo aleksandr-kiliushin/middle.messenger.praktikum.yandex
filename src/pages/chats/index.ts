@@ -12,14 +12,14 @@ import "./index.css"
 export const Chats = () => {
   return PageWrapper({
     content: Handlebars.compile(template)({
-      ChatOptionsButton: Button({
+      ChatOptionsButton: new Button({
         startIconName: "more_vert",
         type: "button",
       }),
       FileInput: FileInput({
         name: "attachment",
       }),
-      SendMessageButton: Button({
+      SendMessageButton: new Button({
         startIconName: "send",
         type: "submit",
       }),

@@ -6,7 +6,7 @@ import { template } from "./template"
 export const Profile = () => {
   return PageWrapper({
     content: Handlebars.compile(template)({
-      LogoutButton: Button({
+      LogoutButton: new Button({
         startIconName: "logout",
         text: "Выйти",
         type: "button",
