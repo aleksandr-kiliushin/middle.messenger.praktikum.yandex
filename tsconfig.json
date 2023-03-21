@@ -26,12 +26,5 @@
     "target": "es6"
   },
   "exclude": ["node_modules"],
-  "include": [
-    "src/**/*.ts",
-    ".eslintrc.js",
-    "serve-static.ts",
-    "jest.config.ts",
-    "handlebars.config.js",
-    "pre-build.ts"
-  ]
+  "include": ["src/**/*.ts", ".eslintrc.js", "serve-static.ts", "jest.config.ts"]
 }

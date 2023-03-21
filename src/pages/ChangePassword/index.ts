@@ -5,7 +5,7 @@ import { template } from "./template"
 
 import "./script"
 
-export const Settings = () => {
+export const ChangePassword = () => {
   return PageWrapper({
     content: Handlebars.compile(template)({
       SubmitButton: Button({

@@ -1,82 +1,109 @@
-import { request } from "../../utils/request"
-import { FieldConfig, validateFields } from "../../utils/form-validator"
+import Handlebars from "handlebars"
+import { Button } from "../../components/Button"
+import { PageWrapper } from "../../components/PageWrapper"
+import { ChatListItem } from "../../components/ChatListItem"
+import { Message } from "../../components/Message"
+import { FileInput } from "../../components/FileInput"
+import { template } from "./template"
+
+import "./script"
 import "./index.css"
 
-interface IFormControlsCollection extends HTMLFormControlsCollection {
-  message: HTMLTextAreaElement
-}
+export const Chats = () => {
+  return PageWrapper({
+    content: Handlebars.compile(template)({
+      ChatOptionsButton: Button({
+        startIconName: "more_vert",
+        type: "button",
+      }),
+      FileInput: FileInput({
+        name: "attachment",
+      }),
+      SendMessageButton: Button({
+        startIconName: "send",
+        type: "submit",
+      }),
 
-const fieldClassByFieldName: [string, typeof HTMLElement][] = [["message", HTMLTextAreaElement]]
+      ChatListItem1: ChatListItem({
+        datetime: "15:30",
+        message: "Круто!",
+        name: "Андрей",
+        unreadMessagesCount: 4,
+      }),
+      ChatListItem2: ChatListItem({
+        datetime: "12:00",
+        message:
+          "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
+        name: "Киноклуб",
+        unreadMessagesCount: 0,
+      }),
+      ChatListItem3: ChatListItem({
+        datetime: "12:00",
+        message:
+          "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
+        name: "Константинопольский Константин Константинович",
+        unreadMessagesCount: 0,
+      }),
+      ChatListItem4: ChatListItem({
+        datetime: "ср",
+        message: "Привет! Как ты? Как прошло твое выходное? У нас была забавная вечеринка вчера.",
+        name: "Вадим",
+        unreadMessagesCount: 0,
+      }),
+      ChatListItem5: ChatListItem({
+        datetime: "вт",
+        message: "Хей! Давно не общались. Что нового в твоей жизни? У меня на прошлой неделе была интересная поездка.",
+        name: "тет-а-теты",
+        unreadMessagesCount: 21,
+      }),
+      ChatListItem6: ChatListItem({
+        datetime: "12:00",
+        message:
+          "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
+        name: "Киноклуб 2",
+        unreadMessagesCount: 0,
+      }),
+      ChatListItem7: ChatListItem({
+        datetime: "21 фев",
+        message: "Мда.",
+        name: "Design destroyer",
+        unreadMessagesCount: 0,
+      }),
 
-const doesFormContainCorrectFields = (
-  chatFormElements: HTMLFormControlsCollection
-): chatFormElements is IFormControlsCollection => {
-  return fieldClassByFieldName.every(([fieldName, fieldClass]) => {
-    return chatFormElements.namedItem(fieldName) instanceof fieldClass
+      Message1: Message({
+        text: "Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.<br>Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.",
+        time: "11:56",
+      }),
+      Message2: Message({
+        imageSrc:
+          "https://images.unsplash.com/photo-1610826340363-4b13a6fb6e01?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2132&q=80",
+        time: "11:56",
+      }),
+      Message3: Message({
+        isMessageByAuthorizedUser: true,
+        text: "Привет,<br>Я думал о NASA недавно и решил поделиться с тобой своими мыслями. Космические исследования всегда вызывали у меня восторг, и NASA является ярким примером того, что человеческий разум способен на достижения, кажущиеся невозможными.<br>А фотографии космоса и Луны просто ошеломляющие! Они заставляют задуматься о нашем месте во Вселенной и о том, насколько малы мы на фоне ее бесконечности.<br>Для меня NASA является символом науки, исследований и прогресса. Я уверен, что они продолжат работать над технологиями, которые помогут нам лучше понимать нашу Вселенную и наше место в ней.<br>Как тебе такая тема? А как тебе космос и Луна? Расскажи мне о своих мыслях!",
+        time: "11:59",
+      }),
+      Message4: Message({
+        isMessageByAuthorizedUser: true,
+        text: "Круто!",
+        time: "12:00",
+      }),
+      Message5: Message({
+        isMessageByAuthorizedUser: true,
+        text: "Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.<br>Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.",
+        time: "08:02",
+      }),
+      Message6: Message({
+        imageSrc:
+          "https://images.unsplash.com/photo-1598945768336-8d34de50056e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
+        isMessageByAuthorizedUser: true,
+        time: "08:05",
+      }),
+      Message7: Message({
+        text: "Круто!",
+        time: "08:31",
+      }),
+    }),
   })
 }
-
-const fieldsRulesConfig = {
-  message: new FieldConfig({ type: "string" }).prohibitedWords({
-    value: ["блин"],
-    errorText: "Нецензурная лексика запрещена.",
-  }),
-}
-
-const isEventTargetField = (fieldName: unknown): fieldName is keyof typeof fieldsRulesConfig => {
-  return typeof fieldName === "string" && fieldName in fieldsRulesConfig
-}
-
-const form = document.querySelector("form")
-
-if (!(form instanceof HTMLFormElement)) throw new Error("Form is not found.")
-if (!doesFormContainCorrectFields(form.elements)) throw new Error("Form does not have appropriate elements.")
-
-const formElements = form.elements
-
-const getFieldsValues = () => ({
-  message: formElements.message.value,
-})
-
-form.addEventListener("focusout", (event) => {
-  if (!(event.target instanceof HTMLElement)) return
-  const fieldName = event.target.getAttribute("name")
-  if (!isEventTargetField(fieldName)) return
-
-  const fieldsValidationResult = validateFields({
-    rules: { [fieldName]: fieldsRulesConfig[fieldName] },
-    values: { [fieldName]: getFieldsValues()[fieldName] },
-  })
-  fieldsValidationResult.renderErrors()
-})
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault()
-
-  const fieldsValidationResult = validateFields({
-    rules: fieldsRulesConfig,
-    values: getFieldsValues(),
-  })
-  fieldsValidationResult.renderErrors()
-
-  if (!fieldsValidationResult.isValid()) return
-
-  console.log(getFieldsValues())
-})
-
-const chatFormMessageField = document.querySelector("textarea[name='message']")
-if (chatFormMessageField instanceof HTMLTextAreaElement) {
-  chatFormMessageField.addEventListener("input", () => {
-    chatFormMessageField.style.height = ""
-    chatFormMessageField.style.height = chatFormMessageField.scrollHeight + "px"
-  })
-}
-
-const chatMessagesBlock = document.querySelector(".chat_messages")
-if (chatMessagesBlock instanceof HTMLDivElement) {
-  chatMessagesBlock.scrollTo(0, chatMessagesBlock.scrollHeight)
-}
-
-request({ method: "GET", url: "https://jsonplaceholder.typicode.com/posts/1" }).then((response) =>
-  console.log(JSON.parse(response.response))
-)

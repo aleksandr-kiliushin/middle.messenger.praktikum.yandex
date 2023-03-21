@@ -1,9 +1,12 @@
 {
   "author": "aleksandr-kiliushin",
   "description": "",
+  "dependencies": {
+    "handlebars": "4.7.7"
+  },
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "1.0.9",
     "@types/express": "4.17.17",
+    "@types/handlebars": "4.1.0",
     "@types/jest": "29.5.0",
     "@typescript-eslint/eslint-plugin": "5.54.0",
     "@typescript-eslint/parser": "5.54.0",
@@ -32,13 +35,13 @@
   },
   "name": "middle.messenger.praktikum.yandex",
   "scripts": {
-    "build": "ts-node ./pre-build.ts  && parcel build ./src/pages/**/*{.hbs,.css}",
+    "build": "rm -rf ./dist && rm -rf .parcel-cache && parcel build ./static/index.html",
     "check-types": "tsc --noEmit",
     "check-types:watch": "tsc --noEmit --watch",
     "dev": "concurrently --kill-others \"npm run parcel:watch\" \"npm run serve-static:watch\"",
     "lint": "eslint \"**/*.{js,ts}\" && stylelint \"**/*.css\"",
     "lint-staged": "lint-staged",
-    "parcel:watch": "ts-node ./pre-build.ts && parcel ./src/pages/**/*{.hbs,.css}",
+    "parcel:watch": "rm -rf ./dist && rm -rf .parcel-cache && parcel ./static/index.html",
     "prepare": "husky install",
     "prettier": "prettier --write \"**/*.{css,js,json,md,ts}\"",
     "serve-static": "ts-node ./serve-static.ts",

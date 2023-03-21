@@ -5,12 +5,12 @@ import { template } from "./template"
 
 import "./script"
 
-export const Settings = () => {
+export const SignIn = () => {
   return PageWrapper({
     content: Handlebars.compile(template)({
       SubmitButton: Button({
-        startIconName: "save",
-        text: "Сохранить",
+        startIconName: "login",
+        text: "Авторизоваться",
         type: "submit",
       }),
     }),

@@ -5,12 +5,11 @@ import { template } from "./template"
 
 import "./script"
 
-export const Settings = () => {
+export const SignUp = () => {
   return PageWrapper({
     content: Handlebars.compile(template)({
       SubmitButton: Button({
-        startIconName: "save",
-        text: "Сохранить",
+        text: "Зарегистрироваться",
         type: "submit",
       }),
     }),

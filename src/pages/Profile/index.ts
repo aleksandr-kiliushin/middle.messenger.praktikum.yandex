@@ -3,15 +3,13 @@ import { Button } from "../../components/Button"
 import { PageWrapper } from "../../components/PageWrapper"
 import { template } from "./template"
 
-import "./script"
-
-export const Settings = () => {
+export const Profile = () => {
   return PageWrapper({
     content: Handlebars.compile(template)({
-      SubmitButton: Button({
-        startIconName: "save",
-        text: "Сохранить",
-        type: "submit",
+      LogoutButton: Button({
+        startIconName: "logout",
+        text: "Выйти",
+        type: "button",
       }),
     }),
   })
