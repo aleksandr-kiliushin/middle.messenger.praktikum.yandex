@@ -32,7 +32,7 @@
   },
   "name": "middle.messenger.praktikum.yandex",
   "scripts": {
-    "build": "rm -rf ./dist && rm -rf ./.parcel-cache && parcel build ./src/pages/**/*{.hbs,.css}",
+    "build": "ts-node ./pre-build.ts  && parcel build ./src/pages/**/*{.hbs,.css}",
     "check-types": "tsc --noEmit",
     "check-types:watch": "tsc --noEmit --watch",
     "dev": "concurrently --kill-others \"npm run parcel:watch\" \"npm run serve-static:watch\"",
