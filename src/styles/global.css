@@ -14,33 +14,8 @@ button {
   font-family: "Sofia Sans", sans-serif;
 }
 
-input,
-textarea {
-  min-width: 200px;
-  font-family: "Sofia Sans", sans-serif;
-}
-
-input[aria-invalid="true"],
-textarea[aria-invalid="true"] {
-  border: 1px solid #de0000;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: #999;
-}
-
-input {
-  height: 36px;
-  padding: 9px 16px;
-  background-color: #efefef;
-  border: 1px solid #efefef;
-  border-radius: 18px;
-  font-size: 1.6rem;
-}
-
-input[type="file"] {
-  display: none;
+#root {
+  height: 100%;
 }
 
 body {
@@ -165,4 +140,33 @@ h4 {
 .avatar {
   object-fit: cover;
   border-radius: 50%;
+}
+
+input,
+textarea {
+  min-width: 200px;
+  font-family: "Sofia Sans", sans-serif;
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border: 1px solid #de0000;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #999;
+}
+
+input {
+  height: 36px;
+  padding: 9px 16px;
+  background-color: #efefef;
+  border: 1px solid #efefef;
+  border-radius: 18px;
+  font-size: 1.6rem;
+}
+
+input[type="file"] {
+  display: none;
 }
