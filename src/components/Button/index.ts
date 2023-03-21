@@ -11,10 +11,6 @@ interface IButtonProps {
 }
 
 export class Button extends Block<IButtonProps> {
-  constructor(props: IButtonProps) {
-    super(props)
-  }
-
   public render() {
     return Handlebars.compile(template)(this.props)
   }
