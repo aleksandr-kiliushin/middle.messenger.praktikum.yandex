@@ -1,7 +1,6 @@
 import dotenv from "dotenv"
 import express from "express"
 import path from "node:path"
-import fs from "node:fs"
 
 dotenv.config({ path: "./.env" })
 
@@ -11,16 +10,8 @@ const PORT = process.env.EXPRESS_SERVER_PORT ?? "3000"
 
 app.use(express.static("./dist"))
 
-app.get("*", (req, res) => {
-  const correspondingHtmlFilePath = path.join(__dirname, "dist", req.url + ".html")
-  const pageNotFoundHtmlFilePath = path.join(__dirname, "dist", "404.html")
-
-  if (!fs.existsSync(correspondingHtmlFilePath)) {
-    res.sendFile(pageNotFoundHtmlFilePath)
-    return
-  }
-
-  res.sendFile(correspondingHtmlFilePath)
+app.get("*", (_reqest, response) => {
+  response.sendFile(path.join(__dirname, "dist", "index.html"))
 })
 
 app.listen(PORT, () => {
