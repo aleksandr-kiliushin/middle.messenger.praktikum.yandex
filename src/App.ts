@@ -14,7 +14,7 @@ export const App = () => {
     case "/chats":
       return Chats()
     case "/profile":
-      return Profile()
+      return new Profile().markup
     case "/settings":
       return Settings()
     case "/sign-in":

@@ -56,6 +56,8 @@ export abstract class Block<TProps extends TBlockBaseProps> {
   }
 
   private hangEventsListeners = () => {
+    if (this.props.eventsListeners === undefined) return
+
     for (const eventName in this.props.eventsListeners) {
       const eventListener = this.props.eventsListeners[eventName as keyof HTMLElementEventMap]
       if (eventListener === undefined) continue

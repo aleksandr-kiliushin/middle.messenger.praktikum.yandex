@@ -1,6 +1,8 @@
 export const template = `
-{{{ Navigation }}}
-<main>
-  {{{ content }}}
-</main>
+<div id="page-wrapper">
+  {{{ Navigation }}}
+  <main>
+    {{{ content }}}
+  </main>
+</div>
 `
