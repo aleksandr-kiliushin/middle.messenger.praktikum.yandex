@@ -11,7 +11,6 @@ export const Profile = () => {
       LogoutButton: new Button({
         eventsListeners: {
           click() {
-            console.log("Logged out!")
             ;(this as Button).props.text = `Вы вышли ${++demoCounter} раз.`
           },
         },

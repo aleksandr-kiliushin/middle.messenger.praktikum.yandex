@@ -18,6 +18,7 @@ export abstract class Block<TProps extends TBlockBaseProps> {
     this.props = this.makePropsProxy(props)
 
     this.eventBus = new EventBus()
+
     this.eventBus.registerEventListener({
       eventListener: this.initialize.bind(this),
       eventName: "INITIALIZE",
@@ -35,78 +36,66 @@ export abstract class Block<TProps extends TBlockBaseProps> {
   }
 
   private initialize = () => {
-    this.createElement()
-    if (this.element === null) throw new Error("`this.element` is null.")
-
-    this.element.setAttribute("block-id", this.blockId)
-
-    // private hangListeners() {}
-    // document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-      const block = document.querySelector(`[block-id="${this.blockId}"]`)
-      if (block === null) return
-
-      for (const eventName in this.props.eventsListeners) {
-        const eventListener = this.props.eventsListeners[eventName as keyof HTMLElementEventMap]
-        if (eventListener === undefined) continue
-        block.addEventListener(eventName, eventListener.bind(this))
-      }
-    }, 0)
-    // })
+    this.element = this.generateHtmlElement()
+    document.addEventListener("DOMContentLoaded", this.hangEventsListeners)
   }
 
   private componentDidUpdate() {
-    console.log("Block's componentDidUpdate is called.")
     this.eventBus.emitEvent({ eventName: "RERENDER" })
   }
 
-  private createElement() {
+  private generateHtmlElement(): HTMLElement {
     const container = document.createElement("template")
     container.innerHTML = Handlebars.compile(this.template)(this.props).trim()
     const element = container.content.firstChild
     if (!(element instanceof HTMLElement)) {
       throw new Error("`element` is not an HTMLElement instance.")
     }
-    this.element = element
+    element.setAttribute("block-id", this.blockId)
+    return element
+  }
+
+  private hangEventsListeners = () => {
+    for (const eventName in this.props.eventsListeners) {
+      const eventListener = this.props.eventsListeners[eventName as keyof HTMLElementEventMap]
+      if (eventListener === undefined) continue
+      this.elementOnPage.addEventListener(eventName, eventListener.bind(this))
+    }
   }
 
   private makePropsProxy = (props: TProps): TProps => {
     return new Proxy(props, {
       set: (previousProps: TProps, propName, value: TProps[keyof TProps]) => {
-        const nextProps = {
+        this.props = {
           ...previousProps,
           [propName]: value,
         }
 
-        this.props = nextProps
-
         this.eventBus.emitEvent({
           eventName: "COMPONENT_DID_UPDATE",
-          eventListenerArguments: {
-            previousProps,
-            nextProps: nextProps,
-          },
         })
         return true
-      },
-      deleteProperty() {
-        throw new Error("Access denied.")
       },
     })
   }
 
   public get markup() {
     if (this.element === null) return ""
-    console.log("Block's markup getter is called.")
     return this.element.outerHTML
   }
 
-  private rerender() {
-    console.log("Block's render is called.")
-    this.props = this.makePropsProxy(this.props)
-    this.initialize()
+  private get elementOnPage() {
+    const element = document.querySelector(`[block-id="${this.blockId}"]`)
+    if (!(element instanceof HTMLElement)) {
+      throw new Error("Block is not found in the web page.")
+    }
+    return element
+  }
 
-    console.log("this.props >>", this.props)
-    document.querySelector(`[block-id="${this.blockId}"]`)!.outerHTML = this.markup
+  private rerender() {
+    this.props = this.makePropsProxy(this.props)
+    this.element = this.generateHtmlElement()
+    this.elementOnPage.outerHTML = this.markup
+    this.hangEventsListeners()
   }
 }
