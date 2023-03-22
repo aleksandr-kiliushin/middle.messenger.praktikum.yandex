@@ -16,9 +16,9 @@ export const Chats = () => {
         startIconName: "more_vert",
         type: "button",
       }).markup,
-      FileInput: FileInput({
+      FileInput: new FileInput({
         name: "attachment",
-      }),
+      }).markup,
       SendMessageButton: new Button({
         startIconName: "send",
         type: "submit",

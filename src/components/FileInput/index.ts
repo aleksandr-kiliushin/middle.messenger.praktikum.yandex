@@ -1,6 +1,12 @@
-import Handlebars from "handlebars"
+import { Block } from "../../utils/Block"
 import { template } from "./template"
 
-export const FileInput = (props: { name: string }) => {
-  return Handlebars.compile(template)(props)
+type TFileInputProps = {
+  name: string
+}
+
+export class FileInput extends Block<TFileInputProps> {
+  constructor(props: TFileInputProps) {
+    super(template, props)
+  }
 }
