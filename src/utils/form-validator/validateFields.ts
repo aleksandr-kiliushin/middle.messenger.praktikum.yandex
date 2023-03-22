@@ -78,7 +78,7 @@ export const validateFields = ({ rules, values }: IValidateFieldsParams): Fields
           })
         } else if (!fieldConfig.matches.value.test(fieldValue)) {
           fieldsValidationResult.setFieldError({
-            errorText: fieldConfig.matches.errorText ?? "Проверьте правильность.",
+            errorText: fieldConfig.matches.errorText ?? "Некорректное значение.",
             fieldName,
           })
         } else {

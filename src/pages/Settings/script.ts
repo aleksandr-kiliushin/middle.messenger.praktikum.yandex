@@ -47,7 +47,7 @@ const fieldsRulesConfig = {
     .minimumLength({ value: 10 })
     .maximumLength({ value: 15 })
     .matches({
-      errorText: "Должен состоять из цифр, может начинается с плюса",
+      errorText: "Должен состоять из цифр, может начинается с плюса.",
       value: /^(\+?)\d+$/,
     }),
   second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({
