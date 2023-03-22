@@ -2,7 +2,7 @@ import { template } from "./template"
 import "./index.css"
 import { Block } from "../../utils/Block"
 
-type TChatListItemProps = {
+export type TChatListItemProps = {
   datetime: string
   message: string
   name: string

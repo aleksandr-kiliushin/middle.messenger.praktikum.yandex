@@ -2,7 +2,7 @@ import { Block } from "../../utils/Block"
 import { template } from "./template"
 import "./index.css"
 
-type TMessageProps = {
+export type TMessageProps = {
   imageSrc?: string
   isMessageByAuthorizedUser?: boolean
   text?: string
