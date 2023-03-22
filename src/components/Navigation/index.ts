@@ -1,7 +1,9 @@
-import Handlebars from "handlebars"
 import { template } from "./template"
 import "./index.css"
+import { Block } from "../../utils/Block"
 
-export const Navigation = () => {
-  return Handlebars.compile(template)({})
+export class Navigation extends Block {
+  constructor() {
+    super(template, {})
+  }
 }

@@ -6,7 +6,7 @@ export type TBlockBaseProps = {
   eventsListeners?: Partial<Record<keyof HTMLElementEventMap, () => void>>
 }
 
-export abstract class Block<TProps extends TBlockBaseProps> {
+export abstract class Block<TProps extends TBlockBaseProps = Record<string, never>> {
   protected element: HTMLElement | null
   private blockId: string
   private eventBus: EventBus<"COMPONENT_DID_UPDATE" | "INITIALIZE" | "RERENDER">
