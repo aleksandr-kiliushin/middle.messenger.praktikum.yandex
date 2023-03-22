@@ -24,51 +24,51 @@ export const Chats = () => {
         type: "submit",
       }).markup,
 
-      ChatListItem1: ChatListItem({
+      ChatListItem1: new ChatListItem({
         datetime: "15:30",
         message: "Круто!",
         name: "Андрей",
         unreadMessagesCount: 4,
-      }),
-      ChatListItem2: ChatListItem({
+      }).markup,
+      ChatListItem2: new ChatListItem({
         datetime: "12:00",
         message:
           "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
         name: "Киноклуб",
         unreadMessagesCount: 0,
-      }),
-      ChatListItem3: ChatListItem({
+      }).markup,
+      ChatListItem3: new ChatListItem({
         datetime: "12:00",
         message:
           "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
         name: "Константинопольский Константин Константинович",
         unreadMessagesCount: 0,
-      }),
-      ChatListItem4: ChatListItem({
+      }).markup,
+      ChatListItem4: new ChatListItem({
         datetime: "ср",
         message: "Привет! Как ты? Как прошло твое выходное? У нас была забавная вечеринка вчера.",
         name: "Вадим",
         unreadMessagesCount: 0,
-      }),
-      ChatListItem5: ChatListItem({
+      }).markup,
+      ChatListItem5: new ChatListItem({
         datetime: "вт",
         message: "Хей! Давно не общались. Что нового в твоей жизни? У меня на прошлой неделе была интересная поездка.",
         name: "тет-а-теты",
         unreadMessagesCount: 21,
-      }),
-      ChatListItem6: ChatListItem({
+      }).markup,
+      ChatListItem6: new ChatListItem({
         datetime: "12:00",
         message:
           "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
         name: "Киноклуб 2",
         unreadMessagesCount: 0,
-      }),
-      ChatListItem7: ChatListItem({
+      }).markup,
+      ChatListItem7: new ChatListItem({
         datetime: "21 фев",
         message: "Мда.",
         name: "Design destroyer",
         unreadMessagesCount: 0,
-      }),
+      }).markup,
 
       Message1: Message({
         text: "Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.<br>Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.",

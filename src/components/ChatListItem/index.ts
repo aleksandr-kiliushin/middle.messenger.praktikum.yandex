@@ -1,22 +1,16 @@
-import Handlebars from "handlebars"
 import { template } from "./template"
 import "./index.css"
+import { Block } from "../../utils/Block"
 
-export const ChatListItem = ({
-  datetime,
-  message,
-  name,
-  unreadMessagesCount,
-}: {
+type TChatListItemProps = {
   datetime: string
   message: string
   name: string
   unreadMessagesCount: number
-}) => {
-  return Handlebars.compile(template)({
-    datetime,
-    message,
-    name,
-    unreadMessagesCount,
-  })
+}
+
+export class ChatListItem extends Block<TChatListItemProps> {
+  constructor(props: TChatListItemProps) {
+    super(template, props)
+  }
 }
