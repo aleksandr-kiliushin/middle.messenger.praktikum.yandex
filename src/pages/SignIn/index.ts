@@ -12,7 +12,7 @@ export const SignIn = () => {
         startIconName: "login",
         text: "Авторизоваться",
         type: "submit",
-      }).render(),
+      }).markup,
     }),
   })
 }
