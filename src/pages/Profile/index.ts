@@ -7,6 +7,11 @@ export const Profile = () => {
   return PageWrapper({
     content: Handlebars.compile(template)({
       LogoutButton: new Button({
+        eventsListeners: {
+          click: () => {
+            console.log("Logged out!")
+          },
+        },
         startIconName: "logout",
         text: "Выйти",
         type: "button",
