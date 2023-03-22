@@ -12,7 +12,7 @@ export abstract class Block<TProps extends TBlockBaseProps> {
   private eventBus: EventBus<"COMPONENT_DID_UPDATE" | "INITIALIZE" | "RERENDER">
   public props: TProps
 
-  constructor(props: TProps, protected template: string) {
+  constructor(protected template: string, props: TProps) {
     this.blockId = nanoid(4)
     this.element = null
     this.props = this.makePropsProxy(props)
