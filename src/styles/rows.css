@@ -1,11 +1,12 @@
 .rows {
   display: grid;
-  row-gap: 1.2rem;
+  row-gap: 20px;
   width: 500px;
   margin: 0 auto;
 }
 
 .row {
+  position: relative;
   display: grid;
   grid-auto-flow: column;
   justify-content: space-between;
@@ -20,4 +21,12 @@
 
 .row-value {
   line-height: 36px;
+}
+
+.row-error {
+  position: absolute;
+  top: 38px;
+  left: calc(40% + 12px);
+  color: #de0000;
+  font-size: 1.4rem;
 }

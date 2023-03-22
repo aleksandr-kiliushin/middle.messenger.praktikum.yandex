@@ -17,26 +17,32 @@ export const template = `
   <div class="row">
     <label class="row-label" for="email">Почта</label>
     <input id="email" name="email" type="text" value="pochta@yandex.ru" />
+    <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="login">Логин</label>
     <input id="login" name="login" type="text" value="ivanivanov" />
+    <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="first_name">Имя</label>
     <input id="first_name" name="first_name" type="text" value="ivan" />
+    <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="second_name">Фамилия</label>
     <input id="second_name" name="second_name" type="text" value="ivanov" />
+    <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="display_name">Имя в чате</label>
     <input id="display_name" name="display_name" type="text" value="Иван" />
+    <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="phone">Телефон</label>
     <input id="phone" name="phone" type="text" value="+7 (909) 967 30 30" />
+    <p class="row-error"></p>
   </div>
   {{{ SubmitButton }}}
 </form>
