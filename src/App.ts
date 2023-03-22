@@ -10,20 +10,20 @@ import { PageNotFound } from "./pages/PageNotFound"
 export const App = () => {
   switch (window.location.pathname) {
     case "/change-password":
-      return ChangePassword()
+      return new ChangePassword().markup
     case "/chats":
-      return Chats()
+      return new Chats().markup
     case "/profile":
       return new Profile().markup
     case "/settings":
-      return Settings()
+      return new Settings().markup
     case "/sign-in":
-      return SignIn()
+      return new SignIn().markup
     case "/sign-up":
-      return SignUp()
+      return new SignUp().markup
     case "/500":
-      return InternalServerError()
+      return new InternalServerError().markup
     default:
-      return PageNotFound()
+      return new PageNotFound().markup
   }
 }
