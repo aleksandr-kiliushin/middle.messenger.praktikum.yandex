@@ -21,7 +21,7 @@ export abstract class Block<TProps extends TBlockBaseProps> {
     this.eventBus.emitEvent({ eventName: "INITIALIZE" })
   }
 
-  protected initialize() {
+  private initialize() {
     this.createElement()
     if (this.element === null) throw new Error("`this.element` is null.")
 
