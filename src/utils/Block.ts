@@ -2,9 +2,10 @@ import { nanoid } from "nanoid"
 import Handlebars from "handlebars"
 import { EventBus } from "./EventBus"
 
-export type TBlockBaseProps = {
-  eventsListeners?: Partial<Record<keyof HTMLElementEventMap, () => void>>
-}
+export type TBlockBaseProps = Partial<{
+  eventsListeners: Partial<Record<keyof HTMLElementEventMap, () => void>>
+  [key: string]: unknown
+}>
 
 export abstract class Block<TProps extends TBlockBaseProps = Record<string, never>> {
   protected element: HTMLElement | null

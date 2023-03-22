@@ -6,7 +6,7 @@ import { template } from "./template"
 import "./script"
 
 export const ChangePassword = () => {
-  return PageWrapper({
+  return new PageWrapper({
     content: Handlebars.compile(template)({
       SubmitButton: new Button({
         startIconName: "save",
@@ -14,5 +14,5 @@ export const ChangePassword = () => {
         type: "submit",
       }).markup,
     }),
-  })
+  }).markup
 }

@@ -6,7 +6,7 @@ import { template } from "./template"
 import "./script"
 
 export const SignIn = () => {
-  return PageWrapper({
+  return new PageWrapper({
     content: Handlebars.compile(template)({
       SubmitButton: new Button({
         startIconName: "login",
@@ -14,5 +14,5 @@ export const SignIn = () => {
         type: "submit",
       }).markup,
     }),
-  })
+  }).markup
 }

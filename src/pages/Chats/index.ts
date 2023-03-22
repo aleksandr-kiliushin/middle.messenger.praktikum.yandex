@@ -10,7 +10,7 @@ import "./script"
 import "./index.css"
 
 export const Chats = () => {
-  return PageWrapper({
+  return new PageWrapper({
     content: Handlebars.compile(template)({
       ChatOptionsButton: new Button({
         startIconName: "more_vert",
@@ -105,5 +105,5 @@ export const Chats = () => {
         time: "08:31",
       }),
     }),
-  })
+  }).markup
 }
