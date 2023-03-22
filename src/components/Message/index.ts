@@ -1,12 +1,16 @@
-import Handlebars from "handlebars"
+import { Block } from "../../utils/Block"
 import { template } from "./template"
 import "./index.css"
 
-export const Message = (props: {
+type TMessageProps = {
   imageSrc?: string
   isMessageByAuthorizedUser?: boolean
   text?: string
   time: string
-}) => {
-  return Handlebars.compile(template)(props)
+}
+
+export class Message extends Block<TMessageProps> {
+  constructor(props: TMessageProps) {
+    super(template, props)
+  }
 }
