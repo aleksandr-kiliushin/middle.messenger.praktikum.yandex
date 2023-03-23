@@ -1,55 +1,57 @@
 import { TErrorText, TValueType } from "./types"
 
-interface IFieldConfigParameter<TValue> {
+type TRuleBase<TRuleName, TRuleValue> = {
+  ruleName: TRuleName
   errorText?: TErrorText | null
-  value: TValue
+  value: TRuleValue
 }
 
-type TFieldConfig = {
-  isRequired: IFieldConfigParameter<boolean>
-  matches: IFieldConfigParameter<RegExp>
-  maximumLength: IFieldConfigParameter<number>
-  minimumLength: IFieldConfigParameter<number>
-  prohibitedWords: IFieldConfigParameter<string[]>
-  type: IFieldConfigParameter<TValueType>
-}
+type TRule_isRequired = TRuleBase<"isRequired", boolean>
+type TRule_matches = TRuleBase<"matches", RegExp>
+type TRule_maximumLength = TRuleBase<"maximumLength", number>
+type TRule_minimumLength = TRuleBase<"minimumLength", number>
+type TRule_prohibitedWords = TRuleBase<"prohibitedWords", string[]>
+type TRule_type = TRuleBase<"type", TValueType>
+
+type TRule = TRule_isRequired | TRule_matches | TRule_maximumLength | TRule_minimumLength | TRule_prohibitedWords | TRule_type
+
+type TRuleRegistrationParams<TFieldRule extends TRuleBase<unknown, unknown>> = Pick<TFieldRule, "value" | "errorText">
 
 export class FieldConfig {
-  public config: TFieldConfig
+  public rules: TRule[]
 
   constructor({ type }: { type: TValueType }) {
-    this.config = {
-      isRequired: { errorText: null, value: false },
-      matches: { errorText: "", value: /.*/ },
-      maximumLength: { errorText: null, value: Infinity },
-      minimumLength: { errorText: null, value: 0 },
-      prohibitedWords: { errorText: null, value: [] },
-      type: { errorText: null, value: type },
-    }
+    this.rules = [
+      {
+        ruleName: "type",
+        value: type,
+        errorText: null,
+      },
+    ]
   }
 
-  public isRequired(params: TFieldConfig["isRequired"]) {
-    this.config.isRequired = params
+  public isRequired(params: TRuleRegistrationParams<TRule_isRequired>) {
+    this.rules.push({ ruleName: "isRequired", ...params })
     return this
   }
 
-  public matches(params: TFieldConfig["matches"]) {
-    this.config.matches = params
+  public matches(params: TRuleRegistrationParams<TRule_matches>) {
+    this.rules.push({ ruleName: "matches", ...params })
     return this
   }
 
-  public maximumLength(params: TFieldConfig["maximumLength"]) {
-    this.config.maximumLength = params
+  public maximumLength(params: TRuleRegistrationParams<TRule_maximumLength>) {
+    this.rules.push({ ruleName: "maximumLength", ...params })
     return this
   }
 
-  public minimumLength(params: TFieldConfig["minimumLength"]) {
-    this.config.minimumLength = params
+  public minimumLength(params: TRuleRegistrationParams<TRule_minimumLength>) {
+    this.rules.push({ ruleName: "minimumLength", ...params })
     return this
   }
 
-  public prohibitedWords(params: TFieldConfig["prohibitedWords"]) {
-    this.config.prohibitedWords = params
+  public prohibitedWords(params: TRuleRegistrationParams<TRule_prohibitedWords>) {
+    this.rules.push({ ruleName: "prohibitedWords", ...params })
     return this
   }
 }

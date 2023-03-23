@@ -36,7 +36,7 @@ module.exports = {
       },
       {
         format: ["StrictPascalCase"],
-        prefix: ["are", "can", "did", "does", "has", "is", "should", "will"],
+        prefix: ["are", "can", "did", "does", "has", "is", "receives", "should", "will"],
         selector: "variable",
         types: ["boolean"],
       },

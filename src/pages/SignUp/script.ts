@@ -29,19 +29,26 @@ const doesFormContainCorrectFields = (
 }
 
 const fieldsRulesConfig = {
-  email: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({ value: /[\w-]+@\w+\.\w+/g }),
-  first_name: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({
-    errorText: "Должно начинаться с большой буквы. Из символов разрешен только дефис.",
-    value: /^[А-ЯA-Z][A-Za-zА-Яа-я-]*$/g,
-  }),
+  email: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({ value: /^\w+@\w+\.\w+$/ }),
+  first_name: new FieldConfig({ type: "string" })
+    .isRequired({ value: true })
+    .matches({
+      errorText: "Первая буква должна быть заглавной.",
+      value: /^[А-ЯA-Z]/,
+    })
+    .matches({
+      errorText: 'Из символов разрешен только "-".',
+      value: /^[a-zа-я-]+$/i,
+    }),
   login: new FieldConfig({ type: "string" })
     .isRequired({ value: true })
     .minimumLength({ value: 3 })
     .maximumLength({ value: 20 })
+    .matches({ value: /^[^\s]+$/, errorText: "Нельзя использовать пробелы." })
+    .matches({ value: /^\d*[^\d]+\d*$/, errorText: "Не должен состоять только из цифр." })
     .matches({
-      errorText:
-        "Не должен состоять только из цифр, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание).",
-      value: /^(?=[a-z0-9_-]*$)(?![0-9]+$)[a-z0-9_-]*$/gi,
+      value: /^[\w-]+$/,
+      errorText: 'Из спецсимволов допустимы только "-" и "_".',
     }),
   password: new FieldConfig({ type: "string" })
     .isRequired({ value: true })
@@ -60,10 +67,16 @@ const fieldsRulesConfig = {
       errorText: "Должен состоять из цифр, может начинается с плюса.",
       value: /^(\+?)\d+$/,
     }),
-  second_name: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({
-    errorText: "Должно начинаться с большой буквы. Из символов разрешен только дефис.",
-    value: /^[А-ЯA-Z][A-Za-zА-Яа-я-]*$/g,
-  }),
+  second_name: new FieldConfig({ type: "string" })
+    .isRequired({ value: true })
+    .matches({
+      errorText: "Первая буква должна быть заглавной.",
+      value: /^[А-ЯA-Z]/,
+    })
+    .matches({
+      errorText: 'Из символов разрешен только "-".',
+      value: /^[a-zа-я-]+$/i,
+    }),
 }
 
 const isEventTargetField = (fieldName: unknown): fieldName is keyof typeof fieldsRulesConfig => {

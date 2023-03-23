@@ -17,7 +17,6 @@ export class FieldsValidationResult {
 
   public setFieldError({ errorText, fieldName }: { errorText: string | null; fieldName: TFieldName }) {
     this.errorTextByFieldName[fieldName] = errorText
-    return this
   }
 
   public isValid() {
@@ -45,59 +44,67 @@ export class FieldsValidationResult {
 export const validateFields = ({ rules, values }: IValidateFieldsParams): FieldsValidationResult => {
   const fieldsValidationResult = new FieldsValidationResult()
 
-  for (const fieldName in values) {
+  fieldsNamesIteration: for (const fieldName in values) {
     const fieldValue = values[fieldName]
-    const fieldConfig = rules[fieldName].config
+    const fieldRules = rules[fieldName].rules
+    const valueTypeDefinedByRules = fieldRules[0].value
 
-    switch (fieldConfig.type.value) {
-      case "string": {
-        if (typeof fieldValue !== "string") {
-          fieldsValidationResult.setFieldError({
-            errorText: fieldConfig.type.errorText ?? "Должно быть строкой.",
-            fieldName,
-          })
-        } else if (fieldConfig.isRequired.value && fieldValue === "") {
-          fieldsValidationResult.setFieldError({
-            errorText: fieldConfig.isRequired.errorText ?? "Обязательное поле.",
-            fieldName,
-          })
-        } else if (fieldValue.length > fieldConfig.maximumLength.value) {
-          fieldsValidationResult.setFieldError({
-            errorText: fieldConfig.maximumLength.errorText ?? `Не более ${fieldConfig.maximumLength.value} символов.`,
-            fieldName,
-          })
-        } else if (fieldValue.length < fieldConfig.minimumLength.value) {
-          fieldsValidationResult.setFieldError({
-            errorText: fieldConfig.maximumLength.errorText ?? `Не менее ${fieldConfig.minimumLength.value} символов.`,
-            fieldName,
-          })
-        } else if (fieldConfig.prohibitedWords.value.some((word) => new RegExp(word, "gi").test(fieldValue))) {
-          fieldsValidationResult.setFieldError({
-            errorText: fieldConfig.prohibitedWords.errorText ?? "Найдены недопустимые символы.",
-            fieldName,
-          })
-        } else if (!fieldConfig.matches.value.test(fieldValue)) {
-          fieldsValidationResult.setFieldError({
-            errorText: fieldConfig.matches.errorText ?? "Некорректное значение.",
-            fieldName,
-          })
-        } else {
-          fieldsValidationResult.setFieldError({
-            errorText: null,
-            fieldName,
-          })
-        }
-        break
-      }
-
-      default: {
+    if (typeof valueTypeDefinedByRules === "string") {
+      if (typeof fieldValue !== "string") {
         fieldsValidationResult.setFieldError({
-          errorText: "Неверный тип данных.",
+          errorText: "Должно быть строкой.",
           fieldName,
         })
-        break
+        continue
+      }
+
+      for (const rule of fieldRules) {
+        if (rule.ruleName === "isRequired" && rule.value && fieldValue === "") {
+          fieldsValidationResult.setFieldError({
+            errorText: rule.errorText ?? "Обязательное поле.",
+            fieldName,
+          })
+          continue fieldsNamesIteration
+        }
+
+        if (rule.ruleName === "maximumLength" && fieldValue.length > rule.value) {
+          fieldsValidationResult.setFieldError({
+            errorText: rule.errorText ?? `Не более ${rule.value} символов.`,
+            fieldName,
+          })
+          continue fieldsNamesIteration
+        }
+
+        if (rule.ruleName === "minimumLength" && fieldValue.length < rule.value) {
+          fieldsValidationResult.setFieldError({
+            errorText: rule.errorText ?? `Не менее ${rule.value} символов.`,
+            fieldName,
+          })
+          continue fieldsNamesIteration
+        }
+
+        if (rule.ruleName === "prohibitedWords" && rule.value.some((word) => new RegExp(word, "gi").test(fieldValue))) {
+          fieldsValidationResult.setFieldError({
+            errorText: rule.errorText ?? "Найдены недопустимые символы.",
+            fieldName,
+          })
+          continue fieldsNamesIteration
+        }
+
+        if (rule.ruleName === "matches" && !rule.value.test(fieldValue)) {
+          fieldsValidationResult.setFieldError({
+            errorText: rule.errorText ?? "Некорректное значение.",
+            fieldName,
+          })
+          continue fieldsNamesIteration
+        }
       }
     }
+
+    fieldsValidationResult.setFieldError({
+      errorText: null,
+      fieldName,
+    })
   }
 
   return fieldsValidationResult
