@@ -17,7 +17,7 @@ const doesFormContainCorrectFields = (
 }
 
 const fieldsRulesConfig = {
-  message: new FieldConfig({ type: "string" }).prohibitedWords({
+  message: new FieldConfig({ type: "string" }).isRequired({ value: true }).prohibitedWords({
     value: ["блин"],
     errorText: "Нецензурная лексика запрещена.",
   }),
