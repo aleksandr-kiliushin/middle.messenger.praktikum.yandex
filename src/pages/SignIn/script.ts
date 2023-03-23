@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     password: formElements.password.value,
   })
 
-  form.addEventListener("focusout", (event) => {
+  const validateField = (event: HTMLElementEventMap["focusout"] | HTMLElementEventMap["input"]) => {
     if (!(event.target instanceof HTMLElement)) return
     const fieldName = event.target.getAttribute("name")
     if (!isEventTargetField(fieldName)) return
@@ -52,7 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
       values: { [fieldName]: getFieldsValues()[fieldName] },
     })
     fieldsValidationResult.renderErrors()
-  })
+  }
+  form.addEventListener("focusout", validateField) // Используется "focusout" в качестве всплывающего аналога "blur".
+  form.addEventListener("input", validateField)
 
   form.addEventListener("submit", (event) => {
     event.preventDefault()
