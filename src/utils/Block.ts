@@ -10,7 +10,7 @@ export type TBlockBaseProps = Partial<{
 export abstract class Block<TProps extends TBlockBaseProps = Record<string, never>> {
   protected element: HTMLElement | null
   private blockId: string
-  private eventBus: EventBus<"COMPONENT_DID_UPDATE" | "INITIALIZE" | "RERENDER">
+  private eventBus: EventBus<"COMPONENT_DID_MOUNT" | "COMPONENT_DID_UPDATE" | "INITIALIZE" | "RERENDER">
   public props: TProps
 
   constructor(protected template: string, props: TProps) {
@@ -23,6 +23,10 @@ export abstract class Block<TProps extends TBlockBaseProps = Record<string, neve
     this.eventBus.registerEventListener({
       eventListener: this.initialize.bind(this),
       eventName: "INITIALIZE",
+    })
+    this.eventBus.registerEventListener({
+      eventListener: this.componentDidMount.bind(this),
+      eventName: "COMPONENT_DID_MOUNT",
     })
     this.eventBus.registerEventListener({
       eventListener: this.componentDidUpdate.bind(this),
@@ -38,8 +42,13 @@ export abstract class Block<TProps extends TBlockBaseProps = Record<string, neve
 
   private initialize = () => {
     this.element = this.generateHtmlElement()
-    document.addEventListener("DOMContentLoaded", this.hangEventsListeners)
+    document.addEventListener("DOMContentLoaded", () => {
+      this.hangEventsListeners()
+      this.eventBus.emitEvent({ eventName: "COMPONENT_DID_MOUNT" })
+    })
   }
+
+  protected componentDidMount() {}
 
   private componentDidUpdate() {
     this.eventBus.emitEvent({ eventName: "RERENDER" })

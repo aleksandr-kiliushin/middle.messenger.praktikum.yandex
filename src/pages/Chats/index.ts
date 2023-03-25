@@ -7,7 +7,6 @@ import { FileInput } from "../../components/FileInput"
 import { TextArea } from "../../components/TextArea"
 import { template } from "./template"
 import "./index.css"
-import "./script"
 import { Block } from "../../utils/Block"
 import { chatListItems, messages } from "./data"
 import { FieldConfig } from "../../utils/form-validator"
@@ -88,5 +87,12 @@ export class Chats extends Block {
       }).markup,
       {}
     )
+  }
+
+  protected componentDidMount() {
+    const chatMessagesBlock = document.querySelector(".chat_messages")
+    if (chatMessagesBlock instanceof HTMLDivElement) {
+      chatMessagesBlock.scrollTo(0, chatMessagesBlock.scrollHeight)
+    }
   }
 }
