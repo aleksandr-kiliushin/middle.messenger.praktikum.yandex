@@ -11,23 +11,6 @@ export const template = `
       width="200"
     />
   </div>
-  <form class="rows">
-    <div class="row">
-      <label class="row-label" for="oldPassword">Старый пароль</label>
-      {{{ OldPasswordInput }}}
-      <p class="row-error"></p>
-    </div>
-    <div class="row">
-      <label class="row-label" for="newPassword">Новый пароль</label>
-      {{{ NewPasswordInput }}}
-      <p class="row-error"></p>
-    </div>
-    <div class="row">
-      <label class="row-label" for="newPasswordConfirmation">Повторите новый пароль</label>
-      {{{ NewPasswordConfirmationInput }}}
-      <p class="row-error"></p>
-    </div>
-    {{{ SubmitButton }}}
-  </form>
+  {{{ form }}}
 </div>
 `

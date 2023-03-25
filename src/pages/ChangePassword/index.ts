@@ -2,44 +2,71 @@ import Handlebars from "handlebars"
 import { Button } from "../../components/Button"
 import { PageWrapper } from "../../components/PageWrapper"
 import { template } from "./template"
-import "./script"
 import { Block } from "../../utils/Block"
 import { Input } from "../../components/Input"
-import { validateField } from "./helpers"
+import { FieldConfig } from "../../utils/form-validator"
+import { createFieldValidator } from "../../utils/createFieldValidator"
+import { validations } from "../../utils/validations"
+import { Form } from "../../components/Form"
+import { createFormSubmitter } from "../../utils/createFormSubmitter"
+import { Row } from "../../components/Row"
+
+export const fieldsRulesConfig = {
+  oldPassword: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  newPassword: validations.password,
+  newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+}
+
+export const validateField = createFieldValidator({ fieldsRulesConfig })
 
 export class ChangePassword extends Block {
   constructor() {
     super(
       new PageWrapper({
         content: Handlebars.compile(template)({
-          OldPasswordInput: new Input({
-            name: "oldPassword",
-            type: "text",
+          form: new Form({
+            rows: [
+              new Row({
+                field: new Input({
+                  name: "oldPassword",
+                  type: "password",
+                  eventsListeners: { input: validateField, blur: validateField },
+                }).markup,
+                label: "Старый пароль",
+                name: "oldPassword",
+              }).markup,
+              new Row({
+                field: new Input({
+                  name: "newPassword",
+                  type: "password",
+                  eventsListeners: { input: validateField, blur: validateField },
+                }).markup,
+                label: "Новый пароль",
+                name: "newPassword",
+              }).markup,
+              new Row({
+                field: new Input({
+                  name: "newPasswordConfirmation",
+                  type: "password",
+                  eventsListeners: { input: validateField, blur: validateField },
+                }).markup,
+                label: "Повторите новый пароль",
+                name: "newPasswordConfirmation",
+              }).markup,
+            ],
+            buttons: [
+              new Button({
+                startIconName: "save",
+                text: "Сохранить",
+                type: "submit",
+              }).markup,
+            ],
             eventsListeners: {
-              input: validateField,
-              blur: validateField,
+              submit: createFormSubmitter({
+                fieldsRulesConfig,
+                onValidationSuccess: console.log,
+              }),
             },
-          }).markup,
-          NewPasswordInput: new Input({
-            name: "newPassword",
-            type: "password",
-            eventsListeners: {
-              input: validateField,
-              blur: validateField,
-            },
-          }).markup,
-          NewPasswordConfirmationInput: new Input({
-            name: "newPasswordConfirmation",
-            type: "password",
-            eventsListeners: {
-              input: validateField,
-              blur: validateField,
-            },
-          }).markup,
-          SubmitButton: new Button({
-            startIconName: "save",
-            text: "Сохранить",
-            type: "submit",
           }).markup,
         }),
       }).markup,
