@@ -14,17 +14,17 @@ export const template = `
   <form class="rows">
     <div class="row">
       <label class="row-label" for="oldPassword">Старый пароль</label>
-      <input id="oldPassword" name="oldPassword" type="password" value="old-password" />
+      {{{ OldPasswordInput }}}
       <p class="row-error"></p>
     </div>
     <div class="row">
       <label class="row-label" for="newPassword">Новый пароль</label>
-      <input id="newPassword" name="newPassword" type="password" value="new-password" />
+      {{{ NewPasswordInput }}}
       <p class="row-error"></p>
     </div>
     <div class="row">
       <label class="row-label" for="newPasswordConfirmation">Повторите новый пароль</label>
-      <input id="newPasswordConfirmation" name="newPasswordConfirmation" type="password" value="new-password" />
+      {{{ NewPasswordConfirmationInput }}}
       <p class="row-error"></p>
     </div>
     {{{ SubmitButton }}}

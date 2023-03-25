@@ -1,11 +1,6 @@
-import { validations } from "../../utils/validations"
-import { FieldConfig, validateFields } from "../../utils/form-validator"
-
-interface IFormControlsCollection extends HTMLFormControlsCollection {
-  oldPassword: HTMLInputElement
-  newPassword: HTMLInputElement
-  newPasswordConfirmation: HTMLInputElement
-}
+import { validateFields } from "../../utils/form-validator"
+import { fieldsRulesConfig } from "./helpers"
+import { IFormControlsCollection } from "./types"
 
 const fieldClassByFieldName: [string, typeof HTMLElement][] = [
   ["oldPassword", HTMLInputElement],
@@ -19,16 +14,6 @@ const doesFormContainCorrectFields = (
   return fieldClassByFieldName.every(([fieldName, fieldClass]) => {
     return chatFormElements.namedItem(fieldName) instanceof fieldClass
   })
-}
-
-const fieldsRulesConfig = {
-  oldPassword: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-  newPassword: validations.password,
-  newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-}
-
-const isEventTargetField = (fieldName: unknown): fieldName is keyof typeof fieldsRulesConfig => {
-  return typeof fieldName === "string" && fieldName in fieldsRulesConfig
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -46,20 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     newPassword: formElements.newPassword.value,
     newPasswordConfirmation: formElements.newPasswordConfirmation.value,
   })
-
-  const validateField = (event: HTMLElementEventMap["focusout"] | HTMLElementEventMap["input"]) => {
-    if (!(event.target instanceof HTMLElement)) return
-    const fieldName = event.target.getAttribute("name")
-    if (!isEventTargetField(fieldName)) return
-
-    const fieldsValidationResult = validateFields({
-      rules: { [fieldName]: fieldsRulesConfig[fieldName] },
-      values: { [fieldName]: getFieldsValues()[fieldName] },
-    })
-    fieldsValidationResult.renderErrors()
-  }
-  form.addEventListener("focusout", validateField) // Используется "focusout" в качестве всплывающего аналога "blur".
-  form.addEventListener("input", validateField)
 
   form.addEventListener("submit", (event) => {
     event.preventDefault()
