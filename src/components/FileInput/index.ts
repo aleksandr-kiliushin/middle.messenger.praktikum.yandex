@@ -1,5 +1,6 @@
 import { Block } from "../../utils/Block"
 import { template } from "./template"
+import ".index.css"
 
 type TFileInputProps = {
   name: string

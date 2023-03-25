@@ -173,7 +173,3 @@ input {
   border-radius: 18px;
   font-size: 1.6rem;
 }
-
-input[type="file"] {
-  display: none;
-}
