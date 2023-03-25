@@ -2,68 +2,119 @@ import Handlebars from "handlebars"
 import { Button } from "../../components/Button"
 import { PageWrapper } from "../../components/PageWrapper"
 import { template } from "./template"
-import "./script"
 import { Block } from "../../utils/Block"
 import { Input } from "../../components/Input"
-import { validateField } from "./helpers"
+import { FieldConfig } from "../../utils/form-validator"
+import { validations } from "../../utils/validations"
+import { createFieldValidator } from "../../utils/createFieldValidator"
+import { Form } from "../../components/Form"
+import { createFormSubmitter } from "../../utils/createFormSubmitter"
+import { Row } from "../../components/Row"
+
+const fieldsRulesConfig = {
+  display_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  email: validations.email,
+  first_name: validations.name,
+  login: validations.login,
+  phone: validations.phone,
+  second_name: validations.name,
+}
+
+const validateField = createFieldValidator({ fieldsRulesConfig })
 
 export class Settings extends Block {
   constructor() {
     super(
       new PageWrapper({
         content: Handlebars.compile(template)({
-          EmailInput: new Input({
-            name: "email",
-            type: "text",
+          form: new Form({
+            rows: [
+              new Row({
+                field: new Input({
+                  name: "email",
+                  type: "text",
+                  eventsListeners: {
+                    input: validateField,
+                    blur: validateField,
+                  },
+                }).markup,
+                label: "Почта",
+                name: "email",
+              }).markup,
+              new Row({
+                field: new Input({
+                  name: "login",
+                  type: "text",
+                  eventsListeners: {
+                    input: validateField,
+                    blur: validateField,
+                  },
+                }).markup,
+                label: "Логин",
+                name: "login",
+              }).markup,
+              new Row({
+                field: new Input({
+                  name: "first_name",
+                  type: "text",
+                  eventsListeners: {
+                    input: validateField,
+                    blur: validateField,
+                  },
+                }).markup,
+                label: "Имя",
+                name: "first_name",
+              }).markup,
+              new Row({
+                field: new Input({
+                  name: "second_name",
+                  type: "text",
+                  eventsListeners: {
+                    input: validateField,
+                    blur: validateField,
+                  },
+                }).markup,
+                label: "Фамилия",
+                name: "second_name",
+              }).markup,
+              new Row({
+                field: new Input({
+                  name: "display_name",
+                  type: "text",
+                  eventsListeners: {
+                    input: validateField,
+                    blur: validateField,
+                  },
+                }).markup,
+                label: "Имя в чате",
+                name: "display_name",
+              }).markup,
+              new Row({
+                field: new Input({
+                  name: "phone",
+                  type: "text",
+                  eventsListeners: {
+                    input: validateField,
+                    blur: validateField,
+                  },
+                }).markup,
+                label: "Телефон",
+                name: "phone",
+              }).markup,
+            ],
+            buttons: [
+              new Button({
+                startIconName: "save",
+                text: "Сохранить",
+                type: "submit",
+              }).markup,
+            ],
             eventsListeners: {
-              input: validateField,
-              blur: validateField,
+              submit: createFormSubmitter({
+                fieldsRulesConfig,
+                onValidationSuccess: console.log,
+              }),
             },
-          }).markup,
-          LoginInput: new Input({
-            name: "login",
-            type: "text",
-            eventsListeners: {
-              input: validateField,
-              blur: validateField,
-            },
-          }).markup,
-          FirstNameInput: new Input({
-            name: "first_name",
-            type: "text",
-            eventsListeners: {
-              input: validateField,
-              blur: validateField,
-            },
-          }).markup,
-          SecondNameInput: new Input({
-            name: "second_name",
-            type: "text",
-            eventsListeners: {
-              input: validateField,
-              blur: validateField,
-            },
-          }).markup,
-          DisplayNameInput: new Input({
-            name: "display_name",
-            type: "text",
-            eventsListeners: {
-              input: validateField,
-              blur: validateField,
-            },
-          }).markup,
-          PhoneInput: new Input({
-            name: "phone",
-            type: "text",
-            eventsListeners: {
-              input: validateField,
-              blur: validateField,
-            },
-          }).markup,
-          SubmitButton: new Button({
-            startIconName: "save",
-            text: "Сохранить",
-            type: "submit",
           }).markup,
         }),
       }).markup,

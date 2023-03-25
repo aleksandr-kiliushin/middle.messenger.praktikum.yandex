@@ -1,5 +1,5 @@
 export const template = `
-<form class="rows">
+<div class="rows">
   <h1>Настройки профиля</h1>
   <div class="row">
     <label class="row-label" for="avatar">Аватар</label>
@@ -14,36 +14,6 @@ export const template = `
     </label>
     <input id="avatar" name="avatar" type="file" />
   </div>
-  <div class="row">
-    <label class="row-label" for="email">Почта</label>
-    {{{ EmailInput }}}
-    <p class="row-error"></p>
-  </div>
-  <div class="row">
-    <label class="row-label" for="login">Логин</label>
-    {{{ LoginInput }}}
-    <p class="row-error"></p>
-  </div>
-  <div class="row">
-    <label class="row-label" for="first_name">Имя</label>
-    {{{ FirstNameInput }}}
-    <p class="row-error"></p>
-  </div>
-  <div class="row">
-    <label class="row-label" for="second_name">Фамилия</label>
-    {{{ SecondNameInput }}}
-    <p class="row-error"></p>
-  </div>
-  <div class="row">
-    <label class="row-label" for="display_name">Имя в чате</label>
-    {{{ DisplayNameInput }}}
-    <p class="row-error"></p>
-  </div>
-  <div class="row">
-    <label class="row-label" for="phone">Телефон</label>
-    {{{ PhoneInput }}}
-    <p class="row-error"></p>
-  </div>
-  {{{ SubmitButton }}}
-</form>
+  {{{ form }}}
+</div>
 `
