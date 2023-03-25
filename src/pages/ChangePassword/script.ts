@@ -1,3 +1,4 @@
+import { validations } from "../../utils/validations"
 import { FieldConfig, validateFields } from "../../utils/form-validator"
 
 interface IFormControlsCollection extends HTMLFormControlsCollection {
@@ -22,14 +23,7 @@ const doesFormContainCorrectFields = (
 
 const fieldsRulesConfig = {
   oldPassword: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-  newPassword: new FieldConfig({ type: "string" })
-    .isRequired({ value: true })
-    .minimumLength({ value: 8 })
-    .maximumLength({ value: 40 })
-    .matches({
-      errorText: "Обязательны хотя бы одна заглавная буква и цифра.",
-      value: /^(?=.*[A-Z])(?=.*\d).*$/,
-    }),
+  newPassword: validations.password,
   newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
 }
 

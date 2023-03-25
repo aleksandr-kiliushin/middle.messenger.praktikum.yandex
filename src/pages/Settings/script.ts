@@ -1,3 +1,4 @@
+import { validations } from "../../utils/validations"
 import { FieldConfig, validateFields } from "../../utils/form-validator"
 
 interface IFormControlsCollection extends HTMLFormControlsCollection {
@@ -28,45 +29,11 @@ const doesFormContainCorrectFields = (
 
 const fieldsRulesConfig = {
   display_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-  email: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({ value: /[\w-]+@\w+\.\w+/ }),
-  first_name: new FieldConfig({ type: "string" })
-    .isRequired({ value: true })
-    .matches({
-      errorText: "Первая буква должна быть заглавной.",
-      value: /^[А-ЯA-Z]/,
-    })
-    .matches({
-      errorText: 'Из символов разрешен только "-".',
-      value: /^[a-zа-я-]+$/i,
-    }),
-  login: new FieldConfig({ type: "string" })
-    .isRequired({ value: true })
-    .minimumLength({ value: 3 })
-    .maximumLength({ value: 20 })
-    .matches({ value: /^[^\s]+$/, errorText: "Нельзя использовать пробелы." })
-    .matches({ value: /^\d*[^\d]+\d*$/, errorText: "Не должен состоять только из цифр." })
-    .matches({
-      value: /^[\w-]+$/,
-      errorText: 'Из спецсимволов допустимы только "-" и "_".',
-    }),
-  phone: new FieldConfig({ type: "string" })
-    .isRequired({ value: true })
-    .minimumLength({ value: 10 })
-    .maximumLength({ value: 15 })
-    .matches({
-      errorText: "Должен состоять из цифр, может начинается с плюса.",
-      value: /^(\+?)\d+$/,
-    }),
-  second_name: new FieldConfig({ type: "string" })
-    .isRequired({ value: true })
-    .matches({
-      errorText: "Первая буква должна быть заглавной.",
-      value: /^[А-ЯA-Z]/,
-    })
-    .matches({
-      errorText: 'Из символов разрешен только "-".',
-      value: /^[a-zа-я-]+$/i,
-    }),
+  email: validations.email,
+  first_name: validations.name,
+  login: validations.login,
+  phone: validations.phone,
+  second_name: validations.name,
 }
 
 const isEventTargetField = (fieldName: unknown): fieldName is keyof typeof fieldsRulesConfig => {

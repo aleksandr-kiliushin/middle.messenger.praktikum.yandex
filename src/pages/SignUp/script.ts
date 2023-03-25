@@ -1,4 +1,5 @@
 import { FieldConfig, validateFields } from "../../utils/form-validator"
+import { validations } from "../../utils/validations"
 
 interface IFormControlsCollection extends HTMLFormControlsCollection {
   first_name: HTMLInputElement
@@ -29,54 +30,13 @@ const doesFormContainCorrectFields = (
 }
 
 const fieldsRulesConfig = {
-  email: new FieldConfig({ type: "string" }).isRequired({ value: true }).matches({ value: /^\w+@\w+\.\w+$/ }),
-  first_name: new FieldConfig({ type: "string" })
-    .isRequired({ value: true })
-    .matches({
-      errorText: "Первая буква должна быть заглавной.",
-      value: /^[А-ЯA-Z]/,
-    })
-    .matches({
-      errorText: 'Из символов разрешен только "-".',
-      value: /^[a-zа-я-]+$/i,
-    }),
-  login: new FieldConfig({ type: "string" })
-    .isRequired({ value: true })
-    .minimumLength({ value: 3 })
-    .maximumLength({ value: 20 })
-    .matches({ value: /^[^\s]+$/, errorText: "Нельзя использовать пробелы." })
-    .matches({ value: /^\d*[^\d]+\d*$/, errorText: "Не должен состоять только из цифр." })
-    .matches({
-      value: /^[\w-]+$/,
-      errorText: 'Из спецсимволов допустимы только "-" и "_".',
-    }),
-  password: new FieldConfig({ type: "string" })
-    .isRequired({ value: true })
-    .minimumLength({ value: 8 })
-    .maximumLength({ value: 40 })
-    .matches({
-      errorText: "Обязательны хотя бы одна заглавная буква и цифра.",
-      value: /^(?=.*[A-Z])(?=.*\d).*$/,
-    }),
+  email: validations.email,
+  first_name: validations.name,
+  login: validations.login,
+  password: validations.password,
   passwordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
-  phone: new FieldConfig({ type: "string" })
-    .isRequired({ value: true })
-    .minimumLength({ value: 10 })
-    .maximumLength({ value: 15 })
-    .matches({
-      errorText: "Должен состоять из цифр, может начинается с плюса.",
-      value: /^(\+?)\d+$/,
-    }),
-  second_name: new FieldConfig({ type: "string" })
-    .isRequired({ value: true })
-    .matches({
-      errorText: "Первая буква должна быть заглавной.",
-      value: /^[А-ЯA-Z]/,
-    })
-    .matches({
-      errorText: 'Из символов разрешен только "-".',
-      value: /^[a-zа-я-]+$/i,
-    }),
+  phone: validations.phone,
+  second_name: validations.name,
 }
 
 const isEventTargetField = (fieldName: unknown): fieldName is keyof typeof fieldsRulesConfig => {
