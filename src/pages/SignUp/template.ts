@@ -3,37 +3,37 @@ export const template = `
   <h1>Регистрация</h1>
   <div class="row">
     <label class="row-label" for="email">Почта</label>
-    <input id="email" name="email" type="text" />
+    {{{ EmailInput }}}
     <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="login">Логин</label>
-    <input id="login" name="login" type="text" />
+    {{{ LoginInput }}}
     <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="first_name">Имя</label>
-    <input id="first_name" name="first_name" type="text" />
+    {{{ FirstNameInput }}}
     <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="second_name">Фамилия</label>
-    <input id="second_name" name="second_name" type="text" />
+    {{{ SecondNameInput }}}
     <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="phone">Телефон</label>
-    <input id="phone" name="phone" type="text" />
+    {{{ PhoneInput }}}
     <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="password">Пароль</label>
-    <input id="password" name="password" type="password" />
+    {{{ PasswordInput }}}
     <p class="row-error"></p>
   </div>
   <div class="row">
     <label class="row-label" for="passwordConfirmation">Пароль (ещё раз)</label>
-    <input id="passwordConfirmation" name="passwordConfirmation" type="password" />
+    {{{ PasswordConfirmationInput }}}
     <p class="row-error"></p>
   </div>
   {{{ SubmitButton }}}
