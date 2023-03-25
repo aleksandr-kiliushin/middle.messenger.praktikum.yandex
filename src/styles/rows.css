@@ -15,7 +15,7 @@
 }
 
 .row-label {
-  color: #999;
+  color: var(--secondary-600);
   line-height: 36px;
 }
 
@@ -27,6 +27,6 @@
   position: absolute;
   top: 38px;
   left: calc(40% + 12px);
-  color: #de0000;
+  color: var(--danger-500);
   font-size: 1.2rem;
 }

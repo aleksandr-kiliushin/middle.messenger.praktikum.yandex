@@ -10,7 +10,7 @@
 
 .message__with-image {
   border-radius: 12px;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--secondary-400);
 }
 
 .message__by-authorized-user {
@@ -19,12 +19,12 @@
 
 .message__by-authorized-user.message__with-text {
   align-self: flex-end;
-  background-color: #e4edfd;
+  background-color: var(--primary-200);
   border-radius: 12px 12px 0;
 }
 
 .message__by-another-user.message__with-text {
-  background-color: #f8f8f8;
+  background-color: var(--secondary-200);
   border-radius: 0 12px 12px;
 }
 
@@ -42,11 +42,11 @@
 }
 
 .message__by-authorized-user .message_time {
-  color: var(--primary-main);
+  color: var(--primary-500);
 }
 
 .message__by-another-user .message_time {
-  color: #999;
+  color: var(--secondary-600);
 }
 
 .message__with-image .message_time {
@@ -55,11 +55,11 @@
 }
 
 .message__by-another-user.message__with-image .message_time {
-  background-color: #f8f8f8;
-  color: #999;
+  background-color: var(--secondary-200);
+  color: var(--secondary-600);
 }
 
 .message__by-authorized-user.message__with-image .message_time {
-  background-color: #e4edfd;
-  color: var(--primary-main);
+  background-color: var(--primary-200);
+  color: var(--primary-500);
 }

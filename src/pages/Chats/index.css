@@ -11,8 +11,8 @@
   row-gap: 16px;
   padding: 8px 8px 0;
   overflow-y: hidden;
-  background-color: #fbfbfb;
-  border-right: 1px solid #eaeaea;
+  background-color: var(--secondary-200);
+  border-right: 1px solid var(--secondary-400);
 }
 
 .chats-pane_header {
@@ -43,7 +43,7 @@
   bottom: -8px;
   height: 1px;
   width: 100%;
-  background-color: #eaeaea;
+  background-color: var(--secondary-400);
 }
 
 .chat {
@@ -57,7 +57,7 @@
   grid-auto-flow: column;
   justify-content: space-between;
   padding: 8px;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid var(--secondary-400);
 }
 
 .currently-open-chat {
@@ -83,7 +83,7 @@
 
 .messages-date-block_date {
   align-self: center;
-  color: #999;
+  color: var(--secondary-600);
 }
 
 .chat_form {
@@ -93,14 +93,14 @@
   column-gap: 4px;
   margin-bottom: 0;
   padding: 8px;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid var(--secondary-400);
 }
 
 .chat_message-field {
   min-height: 36px;
   padding: 9px 16px;
-  background-color: #efefef;
-  border: 1px solid #efefef;
+  background-color: var(--secondary-300);
+  border: 1px solid var(--secondary-300);
   border-radius: 18px;
   font-size: 1.6rem;
   resize: none;

@@ -1,6 +1,12 @@
 :root {
-  --primary-main: royalblue;
-  --primary-dark: #0b35af;
+  --primary-200: #e4edfd;
+  --primary-500: royalblue;
+  --primary-800: #0b35af;
+  --secondary-200: #fbfbfb;
+  --secondary-300: #efefef;
+  --secondary-400: #eaeaea;
+  --secondary-600: #999;
+  --danger-500: #de0000;
 }
 
 html {
@@ -48,12 +54,12 @@ ul {
 
 a {
   text-decoration: none;
-  color: var(--primary-main);
+  color: var(--primary-500);
   font-size: inherit;
 }
 
 a:hover {
-  color: var(--primary-dark);
+  color: var(--primary-800);
 }
 
 ul,
@@ -151,19 +157,19 @@ textarea {
 
 input[aria-invalid="true"],
 textarea[aria-invalid="true"] {
-  border: 1px solid #de0000;
+  border: 1px solid var(--danger-500);
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #999;
+  color: var(--secondary-600);
 }
 
 input {
   height: 36px;
   padding: 9px 16px;
-  background-color: #efefef;
-  border: 1px solid #efefef;
+  background-color: var(--secondary-300);
+  border: 1px solid var(--secondary-300);
   border-radius: 18px;
   font-size: 1.6rem;
 }

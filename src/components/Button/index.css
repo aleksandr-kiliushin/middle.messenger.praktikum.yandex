@@ -13,10 +13,10 @@
 }
 
 .button__primary {
-  background-color: var(--primary-main);
+  background-color: var(--primary-500);
   color: white;
 }
 
 .button__primary:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--primary-800);
 }
