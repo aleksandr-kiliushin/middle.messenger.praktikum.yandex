@@ -3,7 +3,7 @@ import Handlebars from "handlebars"
 import { EventBus } from "./EventBus"
 
 export type TBlockBaseProps = Partial<{
-  eventsListeners: Partial<Record<keyof HTMLElementEventMap, () => void>>
+  eventsListeners: Partial<Record<keyof HTMLElementEventMap, (event: Event) => void>>
   [key: string]: unknown
 }>
 
