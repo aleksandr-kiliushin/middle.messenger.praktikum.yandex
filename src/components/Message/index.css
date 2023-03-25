@@ -24,7 +24,7 @@
 }
 
 .message__by-another-user.message__with-text {
-  background-color: var(--secondary-200);
+  background-color: var(--secondary-300);
   border-radius: 0 12px 12px;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .message__by-another-user.message__with-image .message_time {
-  background-color: var(--secondary-200);
+  background-color: var(--secondary-300);
   color: var(--secondary-600);
 }
 

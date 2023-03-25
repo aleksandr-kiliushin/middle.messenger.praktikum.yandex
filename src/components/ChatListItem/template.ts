@@ -10,8 +10,8 @@ export const template = `
   <p class="chats-list-item_name">{{name}}</p>
   <p class="chats-list-item_message">{{message}}</p>
   <p class="chats-list-item_datetime">{{datetime}}</p>
-  {{#if unread-messages-count}}
-    <p class="chats-list-item_unread-messages-count">{{unread-messages-count}}</p>
+  {{#if unreadMessagesCount}}
+    <p class="chats-list-item_unread-messages-count">{{unreadMessagesCount}}</p>
   {{/if}}
 </div>
 `

@@ -39,7 +39,13 @@ export class Chats extends Block {
           MessageField: new TextArea({
             name: "message",
             eventsListeners: {
-              input: validateField,
+              input: (event) => {
+                validateField(event)
+                if (event.target instanceof HTMLTextAreaElement) {
+                  event.target.style.height = ""
+                  event.target.style.height = event.target.scrollHeight + "px"
+                }
+              },
               blur: validateField,
             },
           }).markup,
