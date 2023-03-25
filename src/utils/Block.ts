@@ -50,9 +50,7 @@ export abstract class Block<TProps extends TBlockBaseProps = Record<string, neve
 
   protected componentDidMount() {}
 
-  private componentDidUpdate() {
-    this.eventBus.emitEvent({ eventName: "RERENDER" })
-  }
+  protected componentDidUpdate() {}
 
   private generateHtmlElement(): HTMLElement {
     const container = document.createElement("template")
@@ -78,14 +76,9 @@ export abstract class Block<TProps extends TBlockBaseProps = Record<string, neve
   private makePropsProxy = (props: TProps): TProps => {
     return new Proxy(props, {
       set: (previousProps: TProps, propName, value: TProps[keyof TProps]) => {
-        this.props = {
-          ...previousProps,
-          [propName]: value,
-        }
-
-        this.eventBus.emitEvent({
-          eventName: "COMPONENT_DID_UPDATE",
-        })
+        this.props = { ...previousProps, [propName]: value }
+        this.eventBus.emitEvent({ eventName: "COMPONENT_DID_UPDATE" })
+        this.eventBus.emitEvent({ eventName: "RERENDER" })
         return true
       },
     })
