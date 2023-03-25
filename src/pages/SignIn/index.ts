@@ -4,10 +4,18 @@ import { PageWrapper } from "../../components/PageWrapper"
 import { template } from "./template"
 import { Block } from "../../utils/Block"
 import { Input } from "../../components/Input"
-import { fieldsRulesConfig, validateField } from "./helpers"
 import { Form } from "../../components/Form"
 import { Row } from "../../components/Row"
 import { createFormSubmitter } from "../../utils/createFormSubmitter"
+import { FieldConfig } from "../../utils/form-validator"
+import { createFieldValidator } from "../../utils/createFieldValidator"
+
+const fieldsRulesConfig = {
+  login: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+  password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+}
+
+export const validateField = createFieldValidator({ fieldsRulesConfig })
 
 export class SignIn extends Block {
   constructor() {
