@@ -106,6 +106,7 @@ export class SignUp extends Block {
                 onValidationSuccess: console.log,
               }),
             },
+            className: "rows",
           }).markup,
         }),
       }).markup,

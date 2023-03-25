@@ -1,5 +1,9 @@
 export const template = `
-<form class="rows">
+<form
+  {{#if className}}
+    class="{{className}}"
+  {{/if}}
+>
   {{#rows}}
     {{{.}}}
   {{/rows}}

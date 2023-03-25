@@ -6,11 +6,21 @@ import { Message } from "../../components/Message"
 import { FileInput } from "../../components/FileInput"
 import { TextArea } from "../../components/TextArea"
 import { template } from "./template"
-import "./script"
 import "./index.css"
+import "./script"
 import { Block } from "../../utils/Block"
 import { chatListItems, messages } from "./data"
-import { validateField } from "./helpers"
+import { FieldConfig } from "../../utils/form-validator"
+import { createFieldValidator } from "../../utils/createFieldValidator"
+import { Form } from "../../components/Form"
+import { createFormSubmitter } from "../../utils/createFormSubmitter"
+import { Row } from "../../components/Row"
+
+const fieldsRulesConfig = {
+  message: new FieldConfig({ type: "string" }).isRequired({ value: true }),
+}
+
+const validateField = createFieldValidator({ fieldsRulesConfig })
 
 export class Chats extends Block {
   constructor() {
@@ -23,23 +33,6 @@ export class Chats extends Block {
           }).markup,
           FileInput: new FileInput({
             name: "attachment",
-          }).markup,
-          MessageField: new TextArea({
-            name: "message",
-            eventsListeners: {
-              input: (event) => {
-                validateField(event)
-                if (event.target instanceof HTMLTextAreaElement) {
-                  event.target.style.height = ""
-                  event.target.style.height = event.target.scrollHeight + "px"
-                }
-              },
-              blur: validateField,
-            },
-          }).markup,
-          SendMessageButton: new Button({
-            startIconName: "send",
-            type: "submit",
           }).markup,
 
           ChatListItem1: new ChatListItem(chatListItems.ChatListItem1).markup,
@@ -57,6 +50,40 @@ export class Chats extends Block {
           Message5: new Message(messages.Message5).markup,
           Message6: new Message(messages.Message6).markup,
           Message7: new Message(messages.Message7).markup,
+
+          form: new Form({
+            rows: [
+              new Row({
+                field: new TextArea({
+                  name: "message",
+                  eventsListeners: {
+                    input: (event) => {
+                      validateField(event)
+                      if (event.target instanceof HTMLTextAreaElement) {
+                        event.target.style.height = ""
+                        event.target.style.height = event.target.scrollHeight + "px"
+                      }
+                    },
+                    blur: validateField,
+                  },
+                }).markup,
+                name: "message",
+              }).markup,
+            ],
+            buttons: [
+              new Button({
+                startIconName: "send",
+                type: "submit",
+              }).markup,
+            ],
+            eventsListeners: {
+              submit: createFormSubmitter({
+                fieldsRulesConfig,
+                onValidationSuccess: console.log,
+              }),
+            },
+            className: "chat_form",
+          }).markup,
         }),
       }).markup,
       {}

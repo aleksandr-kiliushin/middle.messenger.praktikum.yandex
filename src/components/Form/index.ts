@@ -6,6 +6,7 @@ import { Button } from "../Button"
 interface IFormProps extends TBlockBaseProps {
   rows: Row["markup"][]
   buttons: Button["markup"][]
+  className?: string
 }
 
 export class Form extends Block<IFormProps> {

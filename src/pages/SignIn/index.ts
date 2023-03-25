@@ -56,6 +56,7 @@ export class SignIn extends Block {
                 onValidationSuccess: console.log,
               }),
             },
+            className: "rows",
           }).markup,
         }),
       }).markup,

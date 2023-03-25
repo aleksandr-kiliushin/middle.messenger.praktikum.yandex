@@ -44,11 +44,10 @@ export const template = `
         {{{ Message7 }}}
       </div>
     </div>
-    <form class="chat_form">
+    <div class="chat_form-container">
       {{{ FileInput }}}
-      {{{ MessageField }}}
-      {{{ SendMessageButton }}}
-    </form>
+      {{{ form }}}
+    </div>
   </div>
 </div>
 `

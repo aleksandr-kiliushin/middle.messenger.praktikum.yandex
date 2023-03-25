@@ -67,6 +67,7 @@ export class ChangePassword extends Block {
                 onValidationSuccess: console.log,
               }),
             },
+            className: "rows",
           }).markup,
         }),
       }).markup,

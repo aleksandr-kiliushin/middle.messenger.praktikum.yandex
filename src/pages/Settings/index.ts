@@ -115,6 +115,7 @@ export class Settings extends Block {
                 onValidationSuccess: console.log,
               }),
             },
+            className: "rows",
           }).markup,
         }),
       }).markup,

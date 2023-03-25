@@ -3,7 +3,7 @@ import { Block, TBlockBaseProps } from "../../utils/Block"
 
 interface IRowProps extends TBlockBaseProps {
   field: Block["markup"]
-  label: string
+  label?: string
   name: string
 }
 
