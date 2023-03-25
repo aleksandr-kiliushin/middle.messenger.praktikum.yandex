@@ -10,19 +10,7 @@ import "./script"
 import "./index.css"
 import { Block } from "../../utils/Block"
 import { chatListItems, messages } from "./data"
-import { fieldsRulesConfig, isEventTargetField } from "./helpers"
-import { validateFields } from "../../utils/form-validator"
-
-const validateField = (event: HTMLElementEventMap["input"] | HTMLElementEventMap["blur"]) => {
-  if (!(event.target instanceof HTMLInputElement) && !(event.target instanceof HTMLTextAreaElement)) return
-  const fieldName = event.target.getAttribute("name")
-  if (!isEventTargetField(fieldName)) return
-
-  validateFields({
-    rules: { [fieldName]: fieldsRulesConfig[fieldName] },
-    values: { [fieldName]: event.target.value },
-  }).renderErrors()
-}
+import { validateField } from "./helpers"
 
 export class Chats extends Block {
   constructor() {
