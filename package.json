@@ -49,6 +49,7 @@
     "parcel:watch": "rm -rf ./dist && rm -rf .parcel-cache && parcel ./static/index.html",
     "prepare": "husky install",
     "prettier": "prettier --write \"**/*.{css,js,json,md,ts}\"",
+    "dev:container": "rm -rf ./dist && rm -rf .parcel-cache && docker-compose -f ./compose.dev.yml up",
     "serve-static": "ts-node ./serve-static.ts",
     "serve-static:watch": "nodemon ./serve-static.ts",
     "start": "npm run build && npm run serve-static",
