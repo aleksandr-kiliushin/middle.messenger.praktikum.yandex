@@ -4,11 +4,25 @@ import { PageWrapper } from "../../components/PageWrapper"
 import { ChatListItem } from "../../components/ChatListItem"
 import { Message } from "../../components/Message"
 import { FileInput } from "../../components/FileInput"
+import { TextArea } from "../../components/TextArea"
 import { template } from "./template"
 import "./script"
 import "./index.css"
 import { Block } from "../../utils/Block"
 import { chatListItems, messages } from "./data"
+import { fieldsRulesConfig, isEventTargetField } from "./helpers"
+import { validateFields } from "../../utils/form-validator"
+
+const validateField = (event: HTMLElementEventMap["input"] | HTMLElementEventMap["blur"]) => {
+  if (!(event.target instanceof HTMLInputElement) && !(event.target instanceof HTMLTextAreaElement)) return
+  const fieldName = event.target.getAttribute("name")
+  if (!isEventTargetField(fieldName)) return
+
+  validateFields({
+    rules: { [fieldName]: fieldsRulesConfig[fieldName] },
+    values: { [fieldName]: event.target.value },
+  }).renderErrors()
+}
 
 export class Chats extends Block {
   constructor() {
@@ -21,6 +35,13 @@ export class Chats extends Block {
           }).markup,
           FileInput: new FileInput({
             name: "attachment",
+          }).markup,
+          MessageField: new TextArea({
+            name: "message",
+            eventsListeners: {
+              input: validateField,
+              blur: validateField,
+            },
           }).markup,
           SendMessageButton: new Button({
             startIconName: "send",

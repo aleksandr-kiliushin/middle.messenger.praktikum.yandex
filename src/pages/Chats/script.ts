@@ -1,10 +1,8 @@
 import { request } from "../../utils/request"
-import { FieldConfig, validateFields } from "../../utils/form-validator"
+import { validateFields } from "../../utils/form-validator"
 import "./index.css"
-
-interface IFormControlsCollection extends HTMLFormControlsCollection {
-  message: HTMLTextAreaElement
-}
+import { IFormControlsCollection } from "./types"
+import { fieldsRulesConfig } from "./helpers"
 
 const fieldClassByFieldName: [string, typeof HTMLElement][] = [["message", HTMLTextAreaElement]]
 
@@ -14,17 +12,6 @@ const doesFormContainCorrectFields = (
   return fieldClassByFieldName.every(([fieldName, fieldClass]) => {
     return chatFormElements.namedItem(fieldName) instanceof fieldClass
   })
-}
-
-const fieldsRulesConfig = {
-  message: new FieldConfig({ type: "string" }).isRequired({ value: true }).prohibitedWords({
-    value: ["блин"],
-    errorText: "Нецензурная лексика запрещена.",
-  }),
-}
-
-const isEventTargetField = (fieldName: unknown): fieldName is keyof typeof fieldsRulesConfig => {
-  return typeof fieldName === "string" && fieldName in fieldsRulesConfig
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -40,20 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const getFieldsValues = () => ({
     message: formElements.message.value,
   })
-
-  const validateField = (event: HTMLElementEventMap["focusout"] | HTMLElementEventMap["input"]) => {
-    if (!(event.target instanceof HTMLElement)) return
-    const fieldName = event.target.getAttribute("name")
-    if (!isEventTargetField(fieldName)) return
-
-    const fieldsValidationResult = validateFields({
-      rules: { [fieldName]: fieldsRulesConfig[fieldName] },
-      values: { [fieldName]: getFieldsValues()[fieldName] },
-    })
-    fieldsValidationResult.renderErrors()
-  }
-  form.addEventListener("focusout", validateField) // Используется "focusout" в качестве всплывающего аналога "blur".
-  form.addEventListener("input", validateField)
 
   form.addEventListener("submit", (event) => {
     event.preventDefault()

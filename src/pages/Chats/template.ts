@@ -46,7 +46,7 @@ export const template = `
     </div>
     <form class="chat_form">
       {{{ FileInput }}}
-      <textarea class="chat_message-field" name="message" placeholder="Сообщение" rows="1"></textarea>
+      {{{ MessageField }}}
       {{{ SendMessageButton }}}
     </form>
   </div>
