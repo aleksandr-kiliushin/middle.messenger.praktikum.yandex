@@ -42,14 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(getFieldsValues())
   })
 
-  const chatFormMessageField = document.querySelector("textarea[name='message']")
-  if (chatFormMessageField instanceof HTMLTextAreaElement) {
-    chatFormMessageField.addEventListener("input", () => {
-      chatFormMessageField.style.height = ""
-      chatFormMessageField.style.height = chatFormMessageField.scrollHeight + "px"
-    })
-  }
-
   const chatMessagesBlock = document.querySelector(".chat_messages")
   if (chatMessagesBlock instanceof HTMLDivElement) {
     chatMessagesBlock.scrollTo(0, chatMessagesBlock.scrollHeight)
