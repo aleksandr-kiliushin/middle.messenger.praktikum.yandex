@@ -2,8 +2,10 @@ import { nanoid } from "nanoid"
 import Handlebars from "handlebars"
 import { EventBus } from "./EventBus"
 
+type TEventsListeners = Partial<Record<keyof HTMLElementEventMap, (event: Event) => void>>
+
 export type TBlockBaseProps = Partial<{
-  eventsListeners: Partial<Record<keyof HTMLElementEventMap, (event: Event) => void>>
+  eventsListeners: TEventsListeners
   [key: string]: unknown
 }>
 
@@ -11,31 +13,21 @@ export abstract class Block<TProps extends TBlockBaseProps = Record<string, neve
   protected element: HTMLElement | null
   private blockId: string
   private eventBus: EventBus<"COMPONENT_DID_MOUNT" | "COMPONENT_DID_UPDATE" | "INITIALIZE" | "RERENDER">
+  private eventsListeners: TEventsListeners
   public props: TProps
 
   constructor(protected template: string, props: TProps) {
     this.blockId = nanoid(4)
     this.element = null
     this.props = this.makePropsProxy(props)
+    this.eventsListeners = this.makeEventsListenersBound({ eventsListeners: props.eventsListeners })
 
     this.eventBus = new EventBus()
 
-    this.eventBus.registerEventListener({
-      eventListener: this.initialize.bind(this),
-      eventName: "INITIALIZE",
-    })
-    this.eventBus.registerEventListener({
-      eventListener: this.componentDidMount.bind(this),
-      eventName: "COMPONENT_DID_MOUNT",
-    })
-    this.eventBus.registerEventListener({
-      eventListener: this.componentDidUpdate.bind(this),
-      eventName: "COMPONENT_DID_UPDATE",
-    })
-    this.eventBus.registerEventListener({
-      eventListener: this.rerender.bind(this),
-      eventName: "RERENDER",
-    })
+    this.eventBus.registerEventListener({ eventName: "INITIALIZE", eventListener: this.initialize.bind(this) })
+    this.eventBus.registerEventListener({ eventName: "COMPONENT_DID_MOUNT", eventListener: this.componentDidMount.bind(this) })
+    this.eventBus.registerEventListener({ eventName: "COMPONENT_DID_UPDATE", eventListener: this.componentDidUpdate.bind(this) })
+    this.eventBus.registerEventListener({ eventName: "RERENDER", eventListener: this.rerender.bind(this) })
 
     this.eventBus.emitEvent({ eventName: "INITIALIZE" })
   }
@@ -48,10 +40,6 @@ export abstract class Block<TProps extends TBlockBaseProps = Record<string, neve
     })
   }
 
-  protected componentDidMount() {}
-
-  protected componentDidUpdate() {}
-
   private generateHtmlElement(): HTMLElement {
     const container = document.createElement("template")
     container.innerHTML = Handlebars.compile(this.template)(this.props).trim()
@@ -63,13 +51,35 @@ export abstract class Block<TProps extends TBlockBaseProps = Record<string, neve
     return element
   }
 
-  private hangEventsListeners = () => {
-    if (this.props.eventsListeners === undefined) return
-
-    for (const eventName in this.props.eventsListeners) {
-      const eventListener = this.props.eventsListeners[eventName as keyof HTMLElementEventMap]
+  private makeEventsListenersBound = ({
+    eventsListeners,
+  }: {
+    eventsListeners: TEventsListeners | undefined
+  }): TEventsListeners => {
+    if (eventsListeners === undefined) return {}
+    const result: TEventsListeners = {}
+    for (const eventName in eventsListeners) {
+      const _eventName = eventName as keyof HTMLElementEventMap
+      const eventListener = eventsListeners[_eventName]
       if (eventListener === undefined) continue
-      this.elementOnPage.addEventListener(eventName, eventListener.bind(this))
+      result[_eventName] = eventListener.bind(this)
+    }
+    return result
+  }
+
+  private hangEventsListeners = () => {
+    for (const eventName in this.eventsListeners) {
+      const eventListener = this.eventsListeners[eventName as keyof HTMLElementEventMap]
+      if (eventListener === undefined) continue
+      this.elementOnPage.addEventListener(eventName, eventListener)
+    }
+  }
+
+  private removeEventsListeners = () => {
+    for (const eventName in this.eventsListeners) {
+      const eventListener = this.eventsListeners[eventName as keyof HTMLElementEventMap]
+      if (eventListener === undefined) continue
+      this.elementOnPage.removeEventListener(eventName, eventListener)
     }
   }
 
@@ -98,9 +108,14 @@ export abstract class Block<TProps extends TBlockBaseProps = Record<string, neve
   }
 
   private rerender() {
+    this.removeEventsListeners()
     this.props = this.makePropsProxy(this.props)
     this.element = this.generateHtmlElement()
     this.elementOnPage.outerHTML = this.markup
     this.hangEventsListeners()
   }
+
+  protected componentDidMount() {}
+
+  protected componentDidUpdate() {}
 }
