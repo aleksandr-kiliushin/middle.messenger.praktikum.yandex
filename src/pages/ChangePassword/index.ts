@@ -11,13 +11,13 @@ import { Form } from "../../components/Form"
 import { createFormSubmitter } from "../../utils/createFormSubmitter"
 import { Row } from "../../components/Row"
 
-export const fieldsRulesConfig = {
+const fieldsRulesConfig = {
   oldPassword: new FieldConfig({ type: "string" }).isRequired({ value: true }),
   newPassword: validations.password,
   newPasswordConfirmation: new FieldConfig({ type: "string" }).isRequired({ value: true }),
 }
 
-export const validateField = createFieldValidator({ fieldsRulesConfig })
+const validateField = createFieldValidator({ fieldsRulesConfig })
 
 export class ChangePassword extends Block {
   constructor() {

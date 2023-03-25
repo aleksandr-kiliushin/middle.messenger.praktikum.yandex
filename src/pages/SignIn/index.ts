@@ -15,7 +15,7 @@ const fieldsRulesConfig = {
   password: new FieldConfig({ type: "string" }).isRequired({ value: true }),
 }
 
-export const validateField = createFieldValidator({ fieldsRulesConfig })
+const validateField = createFieldValidator({ fieldsRulesConfig })
 
 export class SignIn extends Block {
   constructor() {
