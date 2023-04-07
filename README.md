@@ -1,6 +1,6 @@
 # Приложение "Мессенджер"
 
-Данная ветка задеплоена [тут](https://deploy-preview-3--mmmessenger.netlify.app/).
+Данная ветка задеплоена [тут](https://deploy-preview-4--mmmessenger.netlify.app).
 
 Используемые макеты лежат [тут](https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat?node-id=0%3A1&t=2x1eRIAnZXzV4C3C-0).
 
