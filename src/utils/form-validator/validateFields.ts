@@ -1,5 +1,5 @@
 import { FieldConfig } from "./index"
-import { TFieldName, TErrorText } from "./types"
+import { TErrorText, TFieldName } from "./types"
 
 export interface IValidateFieldsParams {
   rules: Record<TFieldName, FieldConfig>

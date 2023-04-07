@@ -1,5 +1,5 @@
-import { template } from "./template"
 import { Block, TBlockBaseProps } from "../../utils/Block"
+import { template } from "./template"
 
 interface IInputProps extends TBlockBaseProps {
   name: string

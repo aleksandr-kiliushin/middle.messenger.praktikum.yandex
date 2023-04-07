@@ -1,5 +1,5 @@
 import { FieldConfig, validateFields } from "./index"
-import { IValidateFieldsParams, FieldsValidationResult } from "./validateFields"
+import { FieldsValidationResult, IValidateFieldsParams } from "./validateFields"
 
 describe("validate", () => {
   test.each<{

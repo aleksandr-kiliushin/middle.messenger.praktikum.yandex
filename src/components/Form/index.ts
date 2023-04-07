@@ -1,7 +1,7 @@
-import { template } from "./template"
 import { Block, TBlockBaseProps } from "../../utils/Block"
-import { Row } from "../Row"
 import { Button } from "../Button"
+import { Row } from "../Row"
+import { template } from "./template"
 
 interface IFormProps extends TBlockBaseProps {
   rows: Row["markup"][]

@@ -1,6 +1,6 @@
-import { template } from "./template"
-import "./index.css"
 import { Block, TBlockBaseProps } from "../../utils/Block"
+import "./index.css"
+import { template } from "./template"
 
 interface IButtonProps extends TBlockBaseProps {
   endIconName?: string

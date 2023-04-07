@@ -1,15 +1,18 @@
 import Handlebars from "handlebars"
+
 import { Button } from "@components/Button"
-import { PageWrapper } from "@components/PageWrapper"
-import { template } from "./template"
-import { Block } from "@utils/Block"
-import { Input } from "@components/Input"
-import { validations } from "@utils/validations"
-import { FieldConfig } from "@utils/form-validator"
-import { createFieldValidator } from "@utils/createFieldValidator"
 import { Form } from "@components/Form"
-import { createFormSubmitter } from "@utils/createFormSubmitter"
+import { Input } from "@components/Input"
+import { PageWrapper } from "@components/PageWrapper"
 import { Row } from "@components/Row"
+
+import { Block } from "@utils/Block"
+import { createFieldValidator } from "@utils/createFieldValidator"
+import { createFormSubmitter } from "@utils/createFormSubmitter"
+import { FieldConfig } from "@utils/form-validator"
+import { validations } from "@utils/validations"
+
+import { template } from "./template"
 
 const fieldsRulesConfig = {
   email: validations.email,

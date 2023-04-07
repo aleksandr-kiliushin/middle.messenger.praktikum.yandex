@@ -1,6 +1,9 @@
 {
   "arrowParens": "always",
   "bracketSpacing": true,
+  "importOrder": ["^@components", "^@utils", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
   "printWidth": 130,
   "semi": false,
   "singleQuote": false,

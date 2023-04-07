@@ -1,6 +1,7 @@
 import { Block } from "@utils/Block"
-import { template } from "./template"
+
 import "./index.css"
+import { template } from "./template"
 
 export type TMessageProps = {
   imageSrc?: string

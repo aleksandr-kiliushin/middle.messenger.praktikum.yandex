@@ -1,5 +1,6 @@
-import { nanoid } from "nanoid"
 import Handlebars from "handlebars"
+import { nanoid } from "nanoid"
+
 import { EventBus } from "./EventBus"
 
 type TEventsListeners = Partial<Record<keyof HTMLElementEventMap, (event: Event) => void>>

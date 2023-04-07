@@ -1,14 +1,17 @@
 import Handlebars from "handlebars"
+
 import { Button } from "@components/Button"
-import { PageWrapper } from "@components/PageWrapper"
-import { template } from "./template"
-import { Block } from "@utils/Block"
-import { Input } from "@components/Input"
 import { Form } from "@components/Form"
+import { Input } from "@components/Input"
+import { PageWrapper } from "@components/PageWrapper"
 import { Row } from "@components/Row"
+
+import { Block } from "@utils/Block"
+import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
-import { createFieldValidator } from "@utils/createFieldValidator"
+
+import { template } from "./template"
 
 const fieldsRulesConfig = {
   login: new FieldConfig({ type: "string" }).isRequired({ value: true }),

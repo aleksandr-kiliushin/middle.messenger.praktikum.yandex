@@ -1,19 +1,22 @@
 import Handlebars from "handlebars"
+
 import { Button } from "@components/Button"
-import { PageWrapper } from "@components/PageWrapper"
 import { ChatListItem } from "@components/ChatListItem"
-import { Message } from "@components/Message"
 import { FileInput } from "@components/FileInput"
-import { TextArea } from "@components/TextArea"
-import { template } from "./template"
-import "./index.css"
-import { Block } from "@utils/Block"
-import { chatListItems, messages } from "./data"
-import { FieldConfig } from "@utils/form-validator"
-import { createFieldValidator } from "@utils/createFieldValidator"
 import { Form } from "@components/Form"
-import { createFormSubmitter } from "@utils/createFormSubmitter"
+import { Message } from "@components/Message"
+import { PageWrapper } from "@components/PageWrapper"
 import { Row } from "@components/Row"
+import { TextArea } from "@components/TextArea"
+
+import { Block } from "@utils/Block"
+import { createFieldValidator } from "@utils/createFieldValidator"
+import { createFormSubmitter } from "@utils/createFormSubmitter"
+import { FieldConfig } from "@utils/form-validator"
+
+import { chatListItems, messages } from "./data"
+import "./index.css"
+import { template } from "./template"
 
 const fieldsRulesConfig = {
   message: new FieldConfig({ type: "string" }).isRequired({ value: true }),
