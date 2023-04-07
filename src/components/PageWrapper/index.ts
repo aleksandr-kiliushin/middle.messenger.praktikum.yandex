@@ -1,5 +1,5 @@
 import Handlebars from "handlebars"
-import { Block } from "../../utils/Block"
+import { Block } from "@utils/Block"
 import { Navigation } from "../Navigation"
 import { template } from "./template"
 

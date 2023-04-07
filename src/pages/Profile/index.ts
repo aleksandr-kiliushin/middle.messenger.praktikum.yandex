@@ -1,7 +1,7 @@
 import Handlebars from "handlebars"
-import { Block } from "../../utils/Block"
-import { Button } from "../../components/Button"
-import { PageWrapper } from "../../components/PageWrapper"
+import { Block } from "@utils/Block"
+import { Button } from "@components/Button"
+import { PageWrapper } from "@components/PageWrapper"
 import { template } from "./template"
 
 let demoCounter = 0 // Remonstrates component renrender.

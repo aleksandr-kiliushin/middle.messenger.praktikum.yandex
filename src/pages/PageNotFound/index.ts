@@ -1,6 +1,6 @@
 import Handlebars from "handlebars"
-import { Block } from "../../utils/Block"
-import { PageWrapper } from "../../components/PageWrapper"
+import { Block } from "@utils/Block"
+import { PageWrapper } from "@components/PageWrapper"
 import { template } from "./template"
 
 export class PageNotFound extends Block {

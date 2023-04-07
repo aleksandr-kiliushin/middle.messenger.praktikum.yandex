@@ -1,5 +1,5 @@
-import { TChatListItemProps } from "../../components/ChatListItem"
-import { TMessageProps } from "../../components/Message"
+import { TChatListItemProps } from "@components/ChatListItem"
+import { TMessageProps } from "@components/Message"
 
 export const chatListItems = {
   ChatListItem1: {
@@ -10,15 +10,13 @@ export const chatListItems = {
   },
   ChatListItem2: {
     datetime: "12:00",
-    message:
-      "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
+    message: "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
     name: "Киноклуб",
     unreadMessagesCount: 0,
   },
   ChatListItem3: {
     datetime: "12:00",
-    message:
-      "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
+    message: "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
     name: "Константинопольский Константин Константинович",
     unreadMessagesCount: 0,
   },
@@ -36,8 +34,7 @@ export const chatListItems = {
   },
   ChatListItem6: {
     datetime: "12:00",
-    message:
-      "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
+    message: "Здравствуй! Я надеюсь, у тебя всё хорошо. Я только что закончил свой экзамен и чувствую себя облегченным.",
     name: "Киноклуб 2",
     unreadMessagesCount: 0,
   },

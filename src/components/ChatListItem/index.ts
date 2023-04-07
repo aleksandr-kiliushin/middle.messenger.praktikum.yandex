@@ -1,6 +1,6 @@
 import { template } from "./template"
 import "./index.css"
-import { Block } from "../../utils/Block"
+import { Block } from "@utils/Block"
 
 export type TChatListItemProps = {
   datetime: string
