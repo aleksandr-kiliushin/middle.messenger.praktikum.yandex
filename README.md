@@ -35,4 +35,4 @@ npm run dev
 
 ## Другое
 
-Ссылка на PR для спринта №2 [тут](https://github.com/aleksandr-kiliushin/middle.messenger.praktikum.yandex/pull/3).
+Ссылка на PR для спринта №3 [тут](https://github.com/aleksandr-kiliushin/middle.messenger.praktikum.yandex/pull/4).
