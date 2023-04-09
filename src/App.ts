@@ -11,13 +11,13 @@ export const App = () => {
   switch (window.location.pathname) {
     case "/change-password":
       return new ChangePassword().markup
-    case "/chats":
+    case "/messenger":
       return new Chats().markup
     case "/profile":
       return new Profile().markup
     case "/settings":
       return new Settings().markup
-    case "/sign-in":
+    case "/":
       return new SignIn().markup
     case "/sign-up":
       return new SignUp().markup

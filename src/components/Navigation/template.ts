@@ -2,7 +2,7 @@ export const template = `
 <nav class="navigation">
   <ul>
     <li>
-      <a href="/chats">Чаты</a>
+      <a href="/messenger">Чаты</a>
     </li>
     <li>
       <a href="/profile">Профиль</a>
@@ -14,7 +14,7 @@ export const template = `
       <a href="/change-password">Изменить пароль</a>
     </li>
     <li>
-      <a href="/sign-in">Войти</a>
+      <a href="/">Войти</a>
     </li>
     <li>
       <a href="/sign-up">Зарегистрироваться</a>
