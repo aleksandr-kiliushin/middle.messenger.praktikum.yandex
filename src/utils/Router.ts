@@ -1,15 +1,22 @@
 import { PageNotFound } from "@pages/PageNotFound"
-import { Profile } from "@pages/Profile"
+
+import { Block } from "./Block"
+
+export class PageBlock extends Block {
+  constructor() {
+    super("", {})
+  }
+}
 
 class Route {
   private pathname: string
-  private blockClass: typeof Profile
-  private block: Profile | null
+  private pageBlockClass: typeof PageBlock
+  private pageBlock: PageBlock | null
 
-  constructor({ blockClass, pathname }: { blockClass: typeof Profile; pathname: string }) {
+  constructor({ pageBlockClass, pathname }: { pageBlockClass: typeof PageBlock; pathname: string }) {
     this.pathname = pathname
-    this.blockClass = blockClass
-    this.block = null
+    this.pageBlockClass = pageBlockClass
+    this.pageBlock = null
   }
 
   public match({ pathname }: { pathname: string }) {
@@ -24,28 +31,28 @@ class Route {
   }
 
   public leave() {
-    if (this.block === null) {
-      console.error("this.block is null.")
+    if (this.pageBlock === null) {
+      console.error("this.pageBlock is null.")
       return
     }
 
-    this.block.hide()
+    this.pageBlock.hide()
   }
 
   public render() {
-    if (this.block === null) {
-      this.block = new this.blockClass()
+    if (this.pageBlock === null) {
+      this.pageBlock = new this.pageBlockClass()
 
       const root = document.querySelector("#root")
       if (root === null) {
         throw new Error("#root is not found.")
       }
-      root.innerHTML = this.block.markup
+      root.innerHTML = this.pageBlock.markup
 
       return
     }
 
-    this.block.show()
+    this.pageBlock.show()
   }
 }
 
@@ -60,15 +67,15 @@ export class Router {
     this.routes = []
     this.history = window.history
     this.currentRoute = null
-    this.pageNotFoundRoute = new Route({ blockClass: PageNotFound, pathname: "does-not-matter" })
+    this.pageNotFoundRoute = new Route({ pageBlockClass: PageNotFound, pathname: "does-not-matter" })
 
     if (Router.instance !== null) {
       return Router.instance
     }
   }
 
-  public use({ blockClass, pathname }: { blockClass: typeof Profile; pathname: string }) {
-    this.routes.push(new Route({ blockClass, pathname }))
+  public use({ pageBlockClass, pathname }: { pageBlockClass: typeof PageBlock; pathname: string }) {
+    this.routes.push(new Route({ pageBlockClass, pathname }))
     return this
   }
 
