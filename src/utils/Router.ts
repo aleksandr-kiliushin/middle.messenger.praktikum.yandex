@@ -11,12 +11,10 @@ export class PageBlock extends Block {
 class Route {
   private pathname: string
   private pageBlockClass: typeof PageBlock
-  private pageBlock: PageBlock | null
 
   constructor({ pageBlockClass, pathname }: { pageBlockClass: typeof PageBlock; pathname: string }) {
     this.pathname = pathname
     this.pageBlockClass = pageBlockClass
-    this.pageBlock = null
   }
 
   public match({ pathname }: { pathname: string }) {
@@ -31,13 +29,11 @@ class Route {
   }
 
   public render() {
-    this.pageBlock = new this.pageBlockClass()
-
     const root = document.querySelector("#root")
     if (root === null) {
       throw new Error("#root is not found.")
     }
-    root.innerHTML = this.pageBlock.markup
+    root.innerHTML = new this.pageBlockClass().markup
   }
 }
 
