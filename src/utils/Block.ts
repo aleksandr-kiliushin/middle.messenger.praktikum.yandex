@@ -10,7 +10,7 @@ export type TBlockBaseProps = Partial<{
   [key: string]: unknown
 }>
 
-export abstract class Block<TProps extends TBlockBaseProps = Record<string, never>> {
+export class Block<TProps extends TBlockBaseProps = Record<string, never>> {
   protected element: HTMLElement | null
   private blockId: string
   private eventBus: EventBus<"COMPONENT_DID_MOUNT" | "COMPONENT_DID_UPDATE" | "INITIALIZE" | "RERENDER">
@@ -114,6 +114,14 @@ export abstract class Block<TProps extends TBlockBaseProps = Record<string, neve
     this.element = this.generateHtmlElement()
     this.elementOnPage.outerHTML = this.markup
     this.hangEventsListeners()
+  }
+
+  public show() {
+    console.log(this.blockId + " show().")
+  }
+
+  public hide() {
+    console.log(this.blockId + " hide().")
   }
 
   protected componentDidMount() {}
