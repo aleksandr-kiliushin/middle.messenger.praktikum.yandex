@@ -87,9 +87,9 @@ export class Router {
     }
 
     window.addEventListener("click", (event) => {
-      if (!(event.currentTarget instanceof HTMLElement)) return
+      if (!(event.target instanceof HTMLElement)) return
 
-      const clickedAnchor = event.currentTarget.closest("a")
+      const clickedAnchor = event.target.closest("a")
       if (!(clickedAnchor instanceof HTMLAnchorElement)) return
 
       event.preventDefault()
