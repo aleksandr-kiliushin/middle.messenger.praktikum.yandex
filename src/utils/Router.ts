@@ -1,4 +1,4 @@
-import { Block, TBlockBaseProps } from "./Block"
+import { Profile } from "@pages/Profile"
 
 const render = (...args: unknown[]) => {
   console.log(args)
@@ -6,11 +6,11 @@ const render = (...args: unknown[]) => {
 
 class Route {
   private pathname: string
-  private blockClass: typeof Block
-  private block: Block | null
-  private props: TBlockBaseProps
+  private blockClass: typeof Profile
+  private block: Profile | null
+  private props: unknown
 
-  constructor({ blockClass, pathname, props }: { blockClass: typeof Block; pathname: string; props: TBlockBaseProps }) {
+  constructor({ blockClass, pathname, props }: { blockClass: typeof Profile; pathname: string; props: unknown }) {
     this.pathname = pathname
     this.blockClass = blockClass
     this.block = null
@@ -39,8 +39,8 @@ class Route {
 
   public render() {
     if (this.block === null) {
-      this.block = new this.blockClass("", {})
-      render(this.props.rootQuery, this.block)
+      this.block = new this.blockClass()
+      render(this.props, this.block)
       return
     }
 
@@ -64,7 +64,7 @@ export class Router {
     }
   }
 
-  public use({ blockClass, pathname }: { blockClass: typeof Block; pathname: string }) {
+  public use({ blockClass, pathname }: { blockClass: typeof Profile; pathname: string }) {
     this.routes.push(new Route({ blockClass, pathname, props: {} }))
     return this
   }

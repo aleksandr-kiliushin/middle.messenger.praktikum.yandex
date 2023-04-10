@@ -9,9 +9,7 @@ import { template } from "./template"
 
 let demoCounter = 0 // Remonstrates component renrender.
 
-interface IProfileProps {}
-
-export class Profile extends Block<IProfileProps> {
+export class Profile extends Block {
   constructor() {
     super(
       new PageWrapper({
