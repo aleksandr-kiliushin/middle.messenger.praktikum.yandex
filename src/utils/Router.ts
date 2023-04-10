@@ -30,29 +30,14 @@ class Route {
     this.render()
   }
 
-  public leave() {
-    if (this.pageBlock === null) {
-      console.error("this.pageBlock is null.")
-      return
-    }
-
-    this.pageBlock.hide()
-  }
-
   public render() {
-    if (this.pageBlock === null) {
-      this.pageBlock = new this.pageBlockClass()
+    this.pageBlock = new this.pageBlockClass()
 
-      const root = document.querySelector("#root")
-      if (root === null) {
-        throw new Error("#root is not found.")
-      }
-      root.innerHTML = this.pageBlock.markup
-
-      return
+    const root = document.querySelector("#root")
+    if (root === null) {
+      throw new Error("#root is not found.")
     }
-
-    this.pageBlock.show()
+    root.innerHTML = this.pageBlock.markup
   }
 }
 
@@ -60,13 +45,11 @@ export class Router {
   private static instance: Router | null
   private history: History
   private routes: Route[]
-  private currentRoute: Route | null
   private pageNotFoundRoute: Route
 
   constructor() {
     this.routes = []
     this.history = window.history
-    this.currentRoute = null
     this.pageNotFoundRoute = new Route({ pageBlockClass: PageNotFound, pathname: "does-not-matter" })
 
     if (Router.instance !== null) {
@@ -81,8 +64,6 @@ export class Router {
 
   private onRoute({ pathname }: { pathname: string }) {
     const route = this.routes.find((route) => route.match({ pathname }))
-
-    this.currentRoute?.leave()
 
     if (route === undefined) {
       this.pageNotFoundRoute.render()

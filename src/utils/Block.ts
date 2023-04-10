@@ -116,14 +116,6 @@ export class Block<TProps extends TBlockBaseProps = Record<string, never>> {
     this.hangEventsListeners()
   }
 
-  public show() {
-    console.log(this.blockId + " show().")
-  }
-
-  public hide() {
-    console.log(this.blockId + " hide().")
-  }
-
   protected componentDidMount() {}
 
   protected componentDidUpdate() {}
