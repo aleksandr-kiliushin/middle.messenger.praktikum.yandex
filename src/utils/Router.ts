@@ -109,6 +109,19 @@ export class Router {
       this.onRoute({ pathname: event.currentTarget.location.pathname })
     }
 
+    window.addEventListener("click", (event) => {
+      event.preventDefault()
+      if (!(event.target instanceof HTMLElement)) return
+
+      const clickedAnchor = event.target.closest("a")
+      if (!(clickedAnchor instanceof HTMLAnchorElement)) return
+
+      const href = clickedAnchor.getAttribute("href")
+      if (href === null) return
+
+      this.go({ pathname: href })
+    })
+
     this.onRoute({ pathname: window.location.pathname })
   }
 
