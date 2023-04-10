@@ -8,13 +8,11 @@ class Route {
   private pathname: string
   private blockClass: typeof Profile
   private block: Profile | null
-  private props: unknown
 
-  constructor({ blockClass, pathname, props }: { blockClass: typeof Profile; pathname: string; props: unknown }) {
+  constructor({ blockClass, pathname }: { blockClass: typeof Profile; pathname: string }) {
     this.pathname = pathname
     this.blockClass = blockClass
     this.block = null
-    this.props = props
   }
 
   public match({ pathname }: { pathname: string }) {
@@ -40,7 +38,7 @@ class Route {
   public render() {
     if (this.block === null) {
       this.block = new this.blockClass()
-      render(this.props, this.block)
+      render(this.block)
       return
     }
 
@@ -65,7 +63,7 @@ export class Router {
   }
 
   public use({ blockClass, pathname }: { blockClass: typeof Profile; pathname: string }) {
-    this.routes.push(new Route({ blockClass, pathname, props: {} }))
+    this.routes.push(new Route({ blockClass, pathname }))
     return this
   }
 
