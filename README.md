@@ -20,6 +20,12 @@ npm run dev
 
 После запуска приложение будет доступно по адресу `http://localhost:3000`.
 
+## Запуск тестов
+
+```
+npm run test
+```
+
 ## Основные функции
 
 - Создание новых чатов (coming soon).
@@ -31,6 +37,8 @@ npm run dev
 - TypeScript;
 - Handlebars;
 - PostCSS;
+- WebSockets;
+- Jest;
 - Node.js и Express (для разработки).
 
 ## Другое
