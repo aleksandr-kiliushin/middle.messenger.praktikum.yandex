@@ -1,3 +1,4 @@
+import { PageNotFound } from "@pages/PageNotFound"
 import { Profile } from "@pages/Profile"
 
 class Route {
@@ -53,11 +54,13 @@ export class Router {
   private history: History
   private routes: Route[]
   private currentRoute: Route | null
+  private pageNotFoundRoute: Route
 
   constructor() {
     this.routes = []
     this.history = window.history
     this.currentRoute = null
+    this.pageNotFoundRoute = new Route({ blockClass: PageNotFound, pathname: "does-not-matter" })
 
     if (Router.instance !== null) {
       return Router.instance
@@ -71,14 +74,14 @@ export class Router {
 
   private onRoute({ pathname }: { pathname: string }) {
     const route = this.routes.find((route) => route.match({ pathname }))
-    if (route === undefined) {
-      console.error("route is not found.")
-      return
-    }
 
     this.currentRoute?.leave()
 
-    route.render()
+    if (route === undefined) {
+      this.pageNotFoundRoute.render()
+    } else {
+      route.render()
+    }
   }
 
   public start() {
