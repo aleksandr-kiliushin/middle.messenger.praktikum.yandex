@@ -1,9 +1,5 @@
 import { Profile } from "@pages/Profile"
 
-const render = (...args: unknown[]) => {
-  console.log(args)
-}
-
 class Route {
   private pathname: string
   private blockClass: typeof Profile
@@ -38,7 +34,13 @@ class Route {
   public render() {
     if (this.block === null) {
       this.block = new this.blockClass()
-      render(this.block)
+
+      const root = document.querySelector("#root")
+      if (root === null) {
+        throw new Error("#root is not found.")
+      }
+      root.innerHTML = this.block.markup
+
       return
     }
 
