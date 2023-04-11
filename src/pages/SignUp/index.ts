@@ -9,7 +9,9 @@ import { Row } from "@components/Row"
 import { Block } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
+import { fillFormWithSampleValues } from "@utils/fillFormWithSampleValues"
 import { FieldConfig } from "@utils/form-validator"
+import { request } from "@utils/request"
 import { validations } from "@utils/validations"
 
 import { template } from "./template"
@@ -102,11 +104,34 @@ export class SignUp extends Block {
                 text: "Зарегистрироваться",
                 type: "submit",
               }).markup,
+              new Button({
+                text: "Заполнить поля",
+                type: "button",
+                eventsListeners: {
+                  click: () => {
+                    fillFormWithSampleValues({
+                      email: "hello@world.ru",
+                      login: "helloworld",
+                      first_name: "Hello",
+                      second_name: "World",
+                      phone: "0123456789",
+                      password: "Qwerty123",
+                      passwordConfirmation: "Qwerty123",
+                    })
+                  },
+                },
+              }).markup,
             ],
             eventsListeners: {
               submit: createFormSubmitter({
                 fieldsRulesConfig,
-                onValidationSuccess: console.log,
+                onValidationSuccess: ({ formValues }) => {
+                  request({
+                    method: "POST",
+                    url: "https://ya-praktikum.tech/api/v2/auth/signup",
+                    body: formValues,
+                  })
+                },
               }),
             },
             className: "rows",

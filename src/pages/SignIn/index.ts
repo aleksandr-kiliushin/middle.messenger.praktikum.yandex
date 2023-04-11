@@ -9,7 +9,9 @@ import { Row } from "@components/Row"
 import { Block } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
+import { fillFormWithSampleValues } from "@utils/fillFormWithSampleValues"
 import { FieldConfig } from "@utils/form-validator"
+import { request } from "@utils/request"
 
 import { template } from "./template"
 
@@ -52,11 +54,29 @@ export class SignIn extends Block {
                 text: "Авторизоваться",
                 type: "submit",
               }).markup,
+              new Button({
+                text: "Заполнить поля",
+                type: "button",
+                eventsListeners: {
+                  click: () => {
+                    fillFormWithSampleValues({
+                      login: "helloworld",
+                      password: "Qwerty123",
+                    })
+                  },
+                },
+              }).markup,
             ],
             eventsListeners: {
               submit: createFormSubmitter({
                 fieldsRulesConfig,
-                onValidationSuccess: console.log,
+                onValidationSuccess: ({ formValues }) => {
+                  request({
+                    method: "POST",
+                    url: "https://ya-praktikum.tech/api/v2/auth/signin",
+                    body: formValues,
+                  })
+                },
               }),
             },
             className: "rows",

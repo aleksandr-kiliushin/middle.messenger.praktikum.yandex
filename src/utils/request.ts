@@ -9,13 +9,11 @@ export const request = ({
   body,
   method,
   query,
-  timeout,
   url,
 }: {
   body?: Record<string, unknown>
   method: keyof typeof methodsNames
   query?: Record<string, unknown>
-  timeout?: number
   url: string
 }): Promise<XMLHttpRequest> => {
   return new Promise((resolve, reject) => {
@@ -27,7 +25,7 @@ export const request = ({
     xhr.onabort = reject
     xhr.onerror = reject
     xhr.ontimeout = reject
-    xhr.timeout = timeout ?? 5000
+    xhr.timeout = 5000
 
     switch (method) {
       case methodsNames.GET: {
@@ -45,16 +43,19 @@ export const request = ({
       }
       case methodsNames.POST: {
         xhr.open(method, url)
+        xhr.setRequestHeader("Content-Type", "application/json")
         xhr.send(JSON.stringify(body ?? {}))
         break
       }
       case methodsNames.PUT: {
         xhr.open(method, url)
+        xhr.setRequestHeader("Content-Type", "application/json")
         xhr.send(JSON.stringify(body ?? {}))
         break
       }
       case methodsNames.DELETE: {
         xhr.open(method, url)
+        xhr.setRequestHeader("Content-Type", "application/json")
         xhr.send(JSON.stringify(body ?? {}))
         break
       }
