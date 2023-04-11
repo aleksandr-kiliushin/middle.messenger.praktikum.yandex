@@ -173,6 +173,18 @@ describe("validate", () => {
       },
       output: { first_name: "Из символов разрешен только дефис." },
     },
+    {
+      input: {
+        rules: {
+          first_name: new FieldConfig({ type: "string" }).equals({
+            errorText: "В качестве имени укажите 'Иван'.",
+            value: "Иван",
+          }),
+        },
+        values: { first_name: "Ваня" },
+      },
+      output: { first_name: "В качестве имени укажите 'Иван'." },
+    },
   ])("$output", async ({ input, output }) => {
     expect(validateFields(input).errorTextByFieldName).toEqual(output)
   })

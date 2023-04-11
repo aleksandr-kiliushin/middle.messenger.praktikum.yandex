@@ -6,6 +6,7 @@ type TRuleBase<TRuleName, TRuleValue> = {
   value: TRuleValue
 }
 
+type TRule_equals = TRuleBase<"equals", string>
 type TRule_isRequired = TRuleBase<"isRequired", boolean>
 type TRule_matches = TRuleBase<"matches", RegExp>
 type TRule_maximumLength = TRuleBase<"maximumLength", number>
@@ -13,7 +14,14 @@ type TRule_minimumLength = TRuleBase<"minimumLength", number>
 type TRule_prohibitedWords = TRuleBase<"prohibitedWords", string[]>
 type TRule_type = TRuleBase<"type", TValueType>
 
-type TRule = TRule_isRequired | TRule_matches | TRule_maximumLength | TRule_minimumLength | TRule_prohibitedWords | TRule_type
+type TRule =
+  | TRule_equals
+  | TRule_isRequired
+  | TRule_matches
+  | TRule_maximumLength
+  | TRule_minimumLength
+  | TRule_prohibitedWords
+  | TRule_type
 
 type TRuleRegistrationParams<TFieldRule extends TRuleBase<unknown, unknown>> = Pick<TFieldRule, "value" | "errorText">
 
@@ -28,6 +36,11 @@ export class FieldConfig {
         errorText: null,
       },
     ]
+  }
+
+  public equals(params: TRuleRegistrationParams<TRule_equals>) {
+    this.rules.push({ ruleName: "equals", ...params })
+    return this
   }
 
   public isRequired(params: TRuleRegistrationParams<TRule_isRequired>) {

@@ -45,6 +45,9 @@ export const validateFields = ({ rules, values }: IValidateFieldsParams): Fields
   const fieldsValidationResult = new FieldsValidationResult()
 
   fieldsNamesIteration: for (const fieldName in values) {
+    const areRulesDefinedForField = fieldName in rules
+    if (!areRulesDefinedForField) continue
+
     const fieldValue = values[fieldName]
     const fieldRules = rules[fieldName].rules
     const valueTypeDefinedByRules = fieldRules[0].value
@@ -86,6 +89,14 @@ export const validateFields = ({ rules, values }: IValidateFieldsParams): Fields
         if (rule.ruleName === "prohibitedWords" && rule.value.some((word) => new RegExp(word, "gi").test(fieldValue))) {
           fieldsValidationResult.setFieldError({
             errorText: rule.errorText ?? "Найдены недопустимые символы.",
+            fieldName,
+          })
+          continue fieldsNamesIteration
+        }
+
+        if (rule.ruleName === "equals" && fieldValue !== rule.value) {
+          fieldsValidationResult.setFieldError({
+            errorText: rule.errorText ?? "Некорректное значение.",
             fieldName,
           })
           continue fieldsNamesIteration
