@@ -150,8 +150,27 @@ export class Settings extends Block {
     if (authorizedUser.data.avatar !== null) {
       const avatarNode = document.querySelector("label[for='avatar'] img")
       if (avatarNode instanceof HTMLImageElement) {
-        avatarNode.src = "https://ya-praktikum.tech/api/v2" + authorizedUser.data.avatar
+        avatarNode.src = "https://ya-praktikum.tech/api/v2/resources" + authorizedUser.data.avatar
       }
+    }
+
+    const avatarForm = document.querySelector("#avatar-form")
+    if (avatarForm instanceof HTMLFormElement) {
+      avatarForm.addEventListener("change", () => {
+        const formData = new FormData(avatarForm)
+
+        fetch(`https://ya-praktikum.tech/api/v2/user/profile/avatar`, {
+          method: "PUT",
+          credentials: "include",
+          mode: "cors",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data)
+            return data
+          })
+      })
     }
   }
 }

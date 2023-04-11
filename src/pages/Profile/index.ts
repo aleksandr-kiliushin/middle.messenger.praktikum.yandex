@@ -46,5 +46,12 @@ export class Profile extends Block {
         fieldNode.textContent = authorizedUser.data[fieldName] ?? "--"
       }
     }
+
+    if (authorizedUser.data.avatar !== null) {
+      const avatarNode = document.querySelector("img.avatar")
+      if (avatarNode instanceof HTMLImageElement) {
+        avatarNode.src = "https://ya-praktikum.tech/api/v2/resources" + authorizedUser.data.avatar
+      }
+    }
   }
 }

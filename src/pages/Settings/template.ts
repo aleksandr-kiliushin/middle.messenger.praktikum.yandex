@@ -1,7 +1,7 @@
 export const template = `
 <div class="rows">
   <h1>Настройки профиля</h1>
-  <div class="row">
+  <form class="row" id="avatar-form">
     <label class="row-label" for="avatar">Аватар</label>
     <label for="avatar">
       <img
@@ -13,7 +13,7 @@ export const template = `
       />
     </label>
     <input id="avatar" name="avatar" type="file" />
-  </div>
+  </form>
   {{{ form }}}
 </div>
 `
