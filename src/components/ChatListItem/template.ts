@@ -4,7 +4,7 @@ export const template = `
     alt="Chat avatar"
     class="avatar chats-list-item_avatar"
     height="48"
-    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
+    src="https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
     width="48"
   />
   <p class="chats-list-item_name">{{name}}</p>
