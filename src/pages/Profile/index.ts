@@ -4,8 +4,8 @@ import { Button } from "@components/Button"
 import { PageWrapper } from "@components/PageWrapper"
 
 import { Block } from "@utils/Block"
-import { router } from "@utils/Router"
 import { request } from "@utils/request"
+import { router } from "@utils/router"
 
 import { template } from "./template"
 

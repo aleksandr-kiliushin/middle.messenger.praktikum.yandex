@@ -1,4 +1,4 @@
-import { router } from "@utils/Router"
+import { router } from "@utils/router"
 
 import { ChangePassword } from "./pages/ChangePassword"
 import { Chats } from "./pages/Chats"
