@@ -140,9 +140,17 @@ export class Settings extends Block {
     })
 
     for (const fieldName in authorizedUser.data) {
+      if (fieldName === "avatar") continue
       const fieldNode = document.querySelector(`[name="${fieldName}"]`)
       if (fieldNode instanceof HTMLInputElement) {
         fieldNode.value = authorizedUser.data[fieldName] ?? ""
+      }
+    }
+
+    if (authorizedUser.data.avatar !== null) {
+      const avatarNode = document.querySelector("label[for='avatar'] img")
+      if (avatarNode instanceof HTMLImageElement) {
+        avatarNode.src = "https://ya-praktikum.tech/api/v2" + authorizedUser.data.avatar
       }
     }
   }
