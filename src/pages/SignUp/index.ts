@@ -12,6 +12,7 @@ import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { fillFormWithSampleValues } from "@utils/fillFormWithSampleValues"
 import { FieldConfig } from "@utils/form-validator"
 import { request } from "@utils/request"
+import { router } from "@utils/router"
 import { validations } from "@utils/validations"
 
 import { template } from "./template"
@@ -130,6 +131,8 @@ export class SignUp extends Block {
                     method: "POST",
                     url: "https://ya-praktikum.tech/api/v2/auth/signup",
                     body: formValues,
+                  }).then(() => {
+                    router.go({ pathname: "/messenger" })
                   })
                 },
               }),
