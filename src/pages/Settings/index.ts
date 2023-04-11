@@ -116,7 +116,13 @@ export class Settings extends Block {
             eventsListeners: {
               submit: createFormSubmitter({
                 fieldsRulesConfig,
-                onValidationSuccess: console.log,
+                onValidationSuccess: ({ formValues }) => {
+                  request({
+                    method: "PUT",
+                    url: "https://ya-praktikum.tech/api/v2/user/profile",
+                    body: formValues,
+                  })
+                },
               }),
             },
             className: "rows",
