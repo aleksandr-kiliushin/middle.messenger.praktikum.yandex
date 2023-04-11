@@ -4,6 +4,7 @@ import { Button } from "@components/Button"
 import { PageWrapper } from "@components/PageWrapper"
 
 import { Block } from "@utils/Block"
+import { request } from "@utils/request"
 
 import { template } from "./template"
 
@@ -28,5 +29,19 @@ export class Profile extends Block {
       }).markup,
       {}
     )
+  }
+
+  async componentDidMount() {
+    const authorizedUser = await request({
+      method: "GET",
+      url: "https://ya-praktikum.tech/api/v2/auth/user",
+    })
+
+    for (const fieldName in authorizedUser.data) {
+      const fieldNode = document.querySelector("#" + fieldName)
+      if (fieldNode !== null) {
+        fieldNode.textContent = authorizedUser.data[fieldName] ?? "--"
+      }
+    }
   }
 }

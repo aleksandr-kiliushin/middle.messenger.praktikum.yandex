@@ -13,27 +13,27 @@ export const template = `
   </div>
   <div class="row">
     <label class="row-label">Почта</label>
-    <span class="row-value">pochta@yandex.ru</span>
+    <span class="row-value" id="email"></span>
   </div>
   <div class="row">
     <label class="row-label">Логин</label>
-    <span class="row-value">ivanivanov</span>
+    <span class="row-value" id="login"></span>
   </div>
   <div class="row">
     <label class="row-label">Имя</label>
-    <span class="row-value">ivan</span>
+    <span class="row-value" id="first_name"></span>
   </div>
   <div class="row">
     <label class="row-label">Фамилия</label>
-    <span class="row-value">ivanov</span>
+    <span class="row-value" id="second_name"></span>
   </div>
   <div class="row">
     <label class="row-label">Имя в чате</label>
-    <span class="row-value">Иван</span>
+    <span class="row-value" id="display_name"></span>
   </div>
   <div class="row">
     <label class="row-label">Телефон</label>
-    <span class="row-value">+7 (909) 967 30 30</span>
+    <span class="row-value" id="phone"></span>
   </div>
   <a href="/settings">Изменить данные</a>
   <a href="/change-password">Изменить пароль</a>

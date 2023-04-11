@@ -15,17 +15,22 @@ export const request = ({
   method: keyof typeof methodsNames
   query?: Record<string, unknown>
   url: string
-}): Promise<XMLHttpRequest> => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+}): Promise<{ request: XMLHttpRequest; data: any }> => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.onload = () => {
-      resolve(xhr)
+      resolve({
+        request: xhr,
+        data: JSON.parse(xhr.response),
+      })
     }
 
     xhr.onabort = reject
     xhr.onerror = reject
     xhr.ontimeout = reject
     xhr.timeout = 5000
+    xhr.withCredentials = true
 
     switch (method) {
       case methodsNames.GET: {
