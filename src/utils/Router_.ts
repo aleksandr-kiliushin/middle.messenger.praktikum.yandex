@@ -2,7 +2,7 @@ import { PageNotFound } from "@pages/PageNotFound"
 
 import { Block } from "./Block"
 
-export class PageBlock extends Block {
+class PageBlock extends Block {
   constructor() {
     super("", {})
   }
@@ -37,7 +37,7 @@ class Route {
   }
 }
 
-export class Router {
+class Router {
   private static instance: Router | null
   private history: History
   private routes: Route[]
@@ -115,3 +115,5 @@ export class Router {
     this.history.forward()
   }
 }
+
+export const router = new Router()

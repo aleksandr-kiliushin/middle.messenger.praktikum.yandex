@@ -1,4 +1,4 @@
-import { Router } from "@utils/Router"
+import { router } from "@utils/Router"
 
 import { ChangePassword } from "./pages/ChangePassword"
 import { Chats } from "./pages/Chats"
@@ -7,8 +7,6 @@ import { Profile } from "./pages/Profile"
 import { Settings } from "./pages/Settings"
 import { SignIn } from "./pages/SignIn"
 import { SignUp } from "./pages/SignUp"
-
-const router = new Router()
 
 export const App = () => {
   router

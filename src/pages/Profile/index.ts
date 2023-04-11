@@ -4,11 +4,10 @@ import { Button } from "@components/Button"
 import { PageWrapper } from "@components/PageWrapper"
 
 import { Block } from "@utils/Block"
+import { router } from "@utils/Router"
 import { request } from "@utils/request"
 
 import { template } from "./template"
-
-let demoCounter = 0 // Remonstrates component renrender.
 
 export class Profile extends Block {
   constructor() {
@@ -17,8 +16,12 @@ export class Profile extends Block {
         content: Handlebars.compile(template)({
           LogoutButton: new Button({
             eventsListeners: {
-              click() {
-                ;(this as Button).props.text = `Вы вышли ${++demoCounter} раз.`
+              click: async () => {
+                await request({
+                  method: "POST",
+                  url: "https://ya-praktikum.tech/api/v2/auth/logout",
+                })
+                router.go({ pathname: "/" })
               },
             },
             startIconName: "logout",
