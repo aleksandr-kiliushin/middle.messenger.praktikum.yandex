@@ -10,6 +10,7 @@ import { Block } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
+import { request } from "@utils/request"
 import { validations } from "@utils/validations"
 
 import { template } from "./template"
@@ -124,5 +125,19 @@ export class Settings extends Block {
       }).markup,
       {}
     )
+  }
+
+  async componentDidMount() {
+    const authorizedUser = await request({
+      method: "GET",
+      url: "https://ya-praktikum.tech/api/v2/auth/user",
+    })
+
+    for (const fieldName in authorizedUser.data) {
+      const fieldNode = document.querySelector(`[name="${fieldName}"]`)
+      if (fieldNode instanceof HTMLInputElement) {
+        fieldNode.value = authorizedUser.data[fieldName] ?? ""
+      }
+    }
   }
 }
