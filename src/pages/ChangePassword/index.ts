@@ -9,7 +9,8 @@ import { Row } from "@components/Row"
 import { Block } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
-import { FieldConfig } from "@utils/form-validator"
+import { FieldConfig, validateFields } from "@utils/form-validator"
+import { request } from "@utils/request"
 import { validations } from "@utils/validations"
 
 import { template } from "./template"
@@ -67,7 +68,30 @@ export class ChangePassword extends Block {
             eventsListeners: {
               submit: createFormSubmitter({
                 fieldsRulesConfig,
-                onValidationSuccess: console.log,
+                onValidationSuccess: ({ formValues }) => {
+                  const passwordsMatchingValidationConfig = validateFields({
+                    rules: {
+                      newPassword: new FieldConfig({ type: "string" }).equals({
+                        value: formValues.newPasswordConfirmation as string,
+                        errorText: "Пароли не совпадают.",
+                      }),
+                      newPasswordConfirmation: new FieldConfig({ type: "string" }).equals({
+                        value: formValues.newPassword as string,
+                        errorText: "Пароли не совпадают.",
+                      }),
+                    },
+                    values: formValues,
+                  })
+
+                  passwordsMatchingValidationConfig.renderErrors()
+                  if (!passwordsMatchingValidationConfig.isValid()) return
+
+                  request({
+                    method: "PUT",
+                    url: "https://ya-praktikum.tech/api/v2/user/password",
+                    body: formValues,
+                  })
+                },
               }),
             },
             className: "rows",
