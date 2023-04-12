@@ -1,3 +1,4 @@
+import { TSignInPayload, authApi } from "@api/authApi"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -11,7 +12,7 @@ import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { fillFormWithSampleValues } from "@utils/fillFormWithSampleValues"
 import { FieldConfig } from "@utils/form-validator"
-import { request } from "@utils/request"
+import { router } from "@utils/router"
 
 import { template } from "./template"
 
@@ -68,14 +69,11 @@ export class SignIn extends Block {
               }).markup,
             ],
             eventsListeners: {
-              submit: createFormSubmitter({
+              submit: createFormSubmitter<TSignInPayload>({
                 fieldsRulesConfig,
-                onValidationSuccess: ({ formValues }) => {
-                  request({
-                    method: "POST",
-                    url: "https://ya-praktikum.tech/api/v2/auth/signin",
-                    body: formValues,
-                  })
+                onValidationSuccess: async ({ formValues }) => {
+                  await authApi.signIn({ payload: formValues })
+                  router.go({ pathname: "/messenger" })
                 },
               }),
             },

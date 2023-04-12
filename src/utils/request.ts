@@ -6,31 +6,41 @@ const methodsNames = {
 }
 
 export const request = ({
-  body,
   method,
-  query,
   url,
+  query,
+  payload,
 }: {
-  body?: Record<string, unknown>
   method: keyof typeof methodsNames
-  query?: Record<string, unknown>
   url: string
+  query?: Record<string, unknown>
+  payload?: Record<string, unknown>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }): Promise<{ request: XMLHttpRequest; data: any }> => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.onload = () => {
-      resolve({
-        request: xhr,
-        data: JSON.parse(xhr.response),
-      })
+      if (xhr.status >= 400) {
+        try {
+          reject({ request: xhr, data: JSON.parse(xhr.response) })
+        } catch {
+          reject({ request: xhr, data: null })
+        }
+      }
+
+      try {
+        resolve({ request: xhr, data: JSON.parse(xhr.response) })
+      } catch {
+        resolve({ request: xhr, data: null })
+      }
     }
 
-    xhr.onabort = reject
     xhr.onerror = reject
     xhr.ontimeout = reject
     xhr.timeout = 5000
     xhr.withCredentials = true
+
+    const _url = "https://ya-praktikum.tech/api/v2" + url
 
     switch (method) {
       case methodsNames.GET: {
@@ -42,26 +52,26 @@ export const request = ({
               .map(([key, value]) => `${key}=${value}`)
               .join("&")
         }
-        xhr.open(method, url + queryString)
+        xhr.open(method, _url + queryString)
         xhr.send()
         break
       }
       case methodsNames.POST: {
-        xhr.open(method, url)
+        xhr.open(method, _url)
         xhr.setRequestHeader("Content-Type", "application/json")
-        xhr.send(JSON.stringify(body ?? {}))
+        xhr.send(JSON.stringify(payload ?? {}))
         break
       }
       case methodsNames.PUT: {
-        xhr.open(method, url)
+        xhr.open(method, _url)
         xhr.setRequestHeader("Content-Type", "application/json")
-        xhr.send(JSON.stringify(body ?? {}))
+        xhr.send(JSON.stringify(payload ?? {}))
         break
       }
       case methodsNames.DELETE: {
-        xhr.open(method, url)
+        xhr.open(method, _url)
         xhr.setRequestHeader("Content-Type", "application/json")
-        xhr.send(JSON.stringify(body ?? {}))
+        xhr.send(JSON.stringify(payload ?? {}))
         break
       }
       default: {

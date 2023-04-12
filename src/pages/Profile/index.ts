@@ -1,10 +1,10 @@
+import { authApi } from "@api/authApi"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
 import { PageWrapper } from "@components/PageWrapper"
 
 import { Block } from "@utils/Block"
-import { request } from "@utils/request"
 import { router } from "@utils/router"
 
 import { template } from "./template"
@@ -17,10 +17,7 @@ export class Profile extends Block {
           LogoutButton: new Button({
             eventsListeners: {
               click: async () => {
-                await request({
-                  method: "POST",
-                  url: "https://ya-praktikum.tech/api/v2/auth/logout",
-                })
+                await authApi.signOut()
                 router.go({ pathname: "/" })
               },
             },
@@ -35,10 +32,7 @@ export class Profile extends Block {
   }
 
   async componentDidMount() {
-    const authorizedUser = await request({
-      method: "GET",
-      url: "https://ya-praktikum.tech/api/v2/auth/user",
-    })
+    const authorizedUser = await authApi.getAuthorizedUser()
 
     for (const fieldName in authorizedUser.data) {
       const fieldNode = document.querySelector("#" + fieldName)

@@ -1,11 +1,11 @@
 import { FieldConfig, validateFields } from "./form-validator"
 
-export const createFormSubmitter = ({
+export const createFormSubmitter = <TFormFields extends Record<string, FormDataEntryValue>>({
   fieldsRulesConfig,
   onValidationSuccess,
 }: {
   fieldsRulesConfig: Record<string, FieldConfig>
-  onValidationSuccess: ({ formValues }: { formValues: Record<string, FormDataEntryValue> }) => void
+  onValidationSuccess: (params: { formValues: TFormFields }) => void
 }) => {
   return (event: Event) => {
     event.preventDefault()
@@ -26,6 +26,6 @@ export const createFormSubmitter = ({
 
     if (!fieldsValidationResult.isValid()) return
 
-    onValidationSuccess({ formValues })
+    onValidationSuccess({ formValues: formValues as TFormFields })
   }
 }
