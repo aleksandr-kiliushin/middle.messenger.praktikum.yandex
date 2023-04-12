@@ -12,7 +12,7 @@ export type TEditSettingsPayload = {
   newPasswordConfirmation: string
 }
 
-class UsersApi {
+export class UsersApi {
   public changePassword({ payload }: { payload: TChangePasswordPayload }) {
     return request({ method: "PUT", url: "/user/password", payload })
   }
@@ -22,4 +22,7 @@ class UsersApi {
   }
 }
 
+/**
+ * @deprecated
+ */
 export const usersApi = new UsersApi()

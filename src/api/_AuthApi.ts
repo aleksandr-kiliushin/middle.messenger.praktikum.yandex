@@ -14,7 +14,7 @@ export type TSignInPayload = {
   password: string
 }
 
-class AuthApi {
+export class AuthApi {
   public signUp({ payload }: { payload: TSignUpPayload }) {
     return request({ method: "POST", url: "/auth/signup", payload })
   }
@@ -32,4 +32,7 @@ class AuthApi {
   }
 }
 
+/**
+ * @deprecated
+ */
 export const authApi = new AuthApi()
