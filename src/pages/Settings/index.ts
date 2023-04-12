@@ -1,3 +1,5 @@
+import { authApi } from "@api/authApi"
+import { TEditSettingsPayload, usersApi } from "@api/usersApi"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -10,7 +12,6 @@ import { Block } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
-import { request } from "@utils/request"
 import { validations } from "@utils/validations"
 
 import { template } from "./template"
@@ -114,14 +115,10 @@ export class Settings extends Block {
               }).markup,
             ],
             eventsListeners: {
-              submit: createFormSubmitter({
+              submit: createFormSubmitter<TEditSettingsPayload>({
                 fieldsRulesConfig,
                 onValidationSuccess: ({ formValues }) => {
-                  request({
-                    method: "PUT",
-                    url: "https://ya-praktikum.tech/api/v2/user/profile",
-                    body: formValues,
-                  })
+                  usersApi.editSettings({ payload: formValues })
                 },
               }),
             },
@@ -134,10 +131,7 @@ export class Settings extends Block {
   }
 
   async componentDidMount() {
-    const authorizedUser = await request({
-      method: "GET",
-      url: "https://ya-praktikum.tech/api/v2/auth/user",
-    })
+    const authorizedUser = await authApi.getAuthorizedUser()
 
     for (const fieldName in authorizedUser.data) {
       if (fieldName === "avatar") continue

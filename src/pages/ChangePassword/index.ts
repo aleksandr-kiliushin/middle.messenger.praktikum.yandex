@@ -1,3 +1,4 @@
+import { TChangePasswordPayload, usersApi } from "@api/usersApi"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -10,7 +11,6 @@ import { Block } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig, validateFields } from "@utils/form-validator"
-import { request } from "@utils/request"
 import { validations } from "@utils/validations"
 
 import { template } from "./template"
@@ -66,13 +66,13 @@ export class ChangePassword extends Block {
               }).markup,
             ],
             eventsListeners: {
-              submit: createFormSubmitter({
+              submit: createFormSubmitter<TChangePasswordPayload>({
                 fieldsRulesConfig,
                 onValidationSuccess: ({ formValues }) => {
                   const passwordsMatchingValidationConfig = validateFields({
                     rules: {
                       newPassword: new FieldConfig({ type: "string" }).equals({
-                        value: formValues.newPasswordConfirmation as string,
+                        value: formValues.newPasswordConfirmation,
                         errorText: "Пароли не совпадают.",
                       }),
                       newPasswordConfirmation: new FieldConfig({ type: "string" }).equals({
@@ -86,11 +86,7 @@ export class ChangePassword extends Block {
                   passwordsMatchingValidationConfig.renderErrors()
                   if (!passwordsMatchingValidationConfig.isValid()) return
 
-                  request({
-                    method: "PUT",
-                    url: "https://ya-praktikum.tech/api/v2/user/password",
-                    body: formValues,
-                  })
+                  usersApi.changePassword({ payload: formValues })
                 },
               }),
             },
