@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export const deepMergeObjects = <T extends Record<string, any>>(object1: T, object2: T): T => {
-  const result: Record<string, any> = {}
+  const result: any = Array.isArray(object1) ? [] : {}
 
   for (const key of Object.keys(object1)) {
     if (key in object2) {
