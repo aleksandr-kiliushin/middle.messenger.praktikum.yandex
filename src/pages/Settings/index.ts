@@ -1,5 +1,5 @@
-import { authApi } from "@api/authApi"
-import { TEditSettingsPayload, usersApi } from "@api/usersApi"
+import { TEditSettingsPayload, usersApi } from "@api/UsersApi"
+import { authController } from "@controllers/authController"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -131,7 +131,7 @@ export class Settings extends Block {
   }
 
   async componentDidMount() {
-    const authorizedUser = await authApi.getAuthorizedUser()
+    const authorizedUser = await authController.getAuthorizedUser()
 
     for (const fieldName in authorizedUser.data) {
       if (fieldName === "avatar") continue

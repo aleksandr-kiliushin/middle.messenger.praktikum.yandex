@@ -1,4 +1,4 @@
-import { authApi } from "@api/authApi"
+import { authController } from "@controllers/authController"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -17,7 +17,7 @@ export class Profile extends Block {
           LogoutButton: new Button({
             eventsListeners: {
               click: async () => {
-                await authApi.signOut()
+                await authController.signOut()
                 router.go({ pathname: "/" })
               },
             },
@@ -32,7 +32,7 @@ export class Profile extends Block {
   }
 
   async componentDidMount() {
-    const authorizedUser = await authApi.getAuthorizedUser()
+    const authorizedUser = await authController.getAuthorizedUser()
 
     for (const fieldName in authorizedUser.data) {
       const fieldNode = document.querySelector("#" + fieldName)

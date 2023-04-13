@@ -1,4 +1,5 @@
-import { TSignInPayload, authApi } from "@api/authApi"
+import { TSignInPayload } from "@api/AuthApi"
+import { authController } from "@controllers/authController"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -72,7 +73,7 @@ export class SignIn extends Block {
               submit: createFormSubmitter<TSignInPayload>({
                 fieldsRulesConfig,
                 onValidationSuccess: async ({ formValues }) => {
-                  await authApi.signIn({ payload: formValues })
+                  await authController.signIn({ payload: formValues })
                   router.go({ pathname: "/messenger" })
                 },
               }),

@@ -1,4 +1,4 @@
-import { TChangePasswordPayload, usersApi } from "@api/usersApi"
+import { TChangePasswordPayload, usersApi } from "@api/UsersApi"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"

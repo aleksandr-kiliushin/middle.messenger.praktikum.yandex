@@ -31,8 +31,3 @@ export class AuthApi {
     return request({ method: "GET", url: "/auth/user" })
   }
 }
-
-/**
- * @deprecated
- */
-export const authApi = new AuthApi()
