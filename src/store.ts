@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PageBlock, TLoadingStatus, TUser } from "@types"
 
 import { Block } from "@utils/Block"
 import { EventBus } from "@utils/EventBus"
 import { setToObject } from "@utils/setToObject"
 
-type TMapStateToProps = (state: TStoreState) => any
+type TMapStateToProps<TMappedState> = (state: TStoreState) => TMappedState
 
 type TStoreState = {
   authorizedUser: {
@@ -42,7 +41,7 @@ class Store extends EventBus<{
 
 export const store = new Store()
 
-export const withStore = (mapStateToProps: TMapStateToProps) => {
+export const withStore = <TMappedState>(mapStateToProps: TMapStateToProps<TMappedState>) => {
   return (_Block: typeof Block | typeof PageBlock) => {
     return class BlockWithStore extends Block {
       constructor(template: string, ownProps: any) {
