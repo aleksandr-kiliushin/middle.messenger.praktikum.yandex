@@ -1,6 +1,6 @@
 export const testUsers = {
   johnDoe: {
-    email: "john-doe@example.com",
+    email: "johndoe@example.com",
     first_name: "John",
     id: 42,
     login: "john-doe",
