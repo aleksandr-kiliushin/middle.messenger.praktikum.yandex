@@ -76,7 +76,7 @@ export class ChangePassword extends Block {
                         errorText: "Пароли не совпадают.",
                       }),
                       newPasswordConfirmation: new FieldConfig({ type: "string" }).equals({
-                        value: formValues.newPassword as string,
+                        value: formValues.newPassword,
                         errorText: "Пароли не совпадают.",
                       }),
                     },
