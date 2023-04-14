@@ -1,5 +1,4 @@
 import { authController } from "@controllers/authController"
-import { usersController } from "@controllers/usersController"
 import { withStore } from "@store"
 import Handlebars from "handlebars"
 
@@ -31,10 +30,6 @@ class _Profile extends Block {
       }).markup,
       {}
     )
-  }
-
-  componentDidMount() {
-    usersController.fetchAndSetAuthorizedUser()
   }
 }
 

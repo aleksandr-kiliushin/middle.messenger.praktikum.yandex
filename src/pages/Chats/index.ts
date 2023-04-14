@@ -92,7 +92,7 @@ export class Chats extends Block {
     )
   }
 
-  protected componentDidMount() {
+  componentDidMount() {
     const chatMessagesBlock = document.querySelector(".chat_messages")
     if (chatMessagesBlock instanceof HTMLDivElement) {
       chatMessagesBlock.scrollTo(0, chatMessagesBlock.scrollHeight)

@@ -1,5 +1,4 @@
 import { TEditSettingsPayload, usersApi } from "@api/UsersApi"
-import { usersController } from "@controllers/usersController"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -128,9 +127,5 @@ export class Settings extends Block {
       }).markup,
       {}
     )
-  }
-
-  componentDidMount() {
-    usersController.fetchAndSetAuthorizedUser()
   }
 }
