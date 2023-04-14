@@ -1,5 +1,4 @@
 import { authController } from "@controllers/authController"
-import { withStore } from "@store"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -10,7 +9,7 @@ import { router } from "@utils/router"
 
 import { template } from "./template"
 
-class _Profile extends Block {
+export class Profile extends Block {
   constructor() {
     super(
       new PageWrapper({
@@ -32,7 +31,3 @@ class _Profile extends Block {
     )
   }
 }
-
-export const Profile = withStore((store) => ({
-  authorizedUser: store.authorizedUser,
-}))(_Profile)
