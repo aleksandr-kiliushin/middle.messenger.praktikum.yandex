@@ -5,7 +5,7 @@ module.exports = {
     node: true,
   },
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  ignorePatterns: ["dist", "node_modules", ".parcel-cache"],
+  ignorePatterns: ["dist", "cypress", "cypress.config.ts", "node_modules", ".parcel-cache"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 13,

@@ -1,4 +1,4 @@
 {
-  "*.{js,ts}": "eslint --max-warnings=0",
-  "*.css": "stylelint"
+  "./src/**/*.ts": "eslint --max-warnings=0",
+  "./src/**/*.css": "stylelint"
 }
