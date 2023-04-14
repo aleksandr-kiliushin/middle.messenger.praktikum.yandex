@@ -1,5 +1,6 @@
 import { authController } from "@controllers/authController"
 import { usersController } from "@controllers/usersController"
+import { withStore } from "@store"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -10,7 +11,7 @@ import { router } from "@utils/router"
 
 import { template } from "./template"
 
-export class Profile extends Block {
+class _Profile extends Block {
   constructor() {
     super(
       new PageWrapper({
@@ -32,21 +33,11 @@ export class Profile extends Block {
     )
   }
 
-  async componentDidMount() {
-    const authorizedUser = await usersController.getAuthorizedUser()
-
-    for (const fieldName in authorizedUser.data) {
-      const fieldNode = document.querySelector("#" + fieldName)
-      if (fieldNode !== null) {
-        fieldNode.textContent = authorizedUser.data[fieldName] ?? "--"
-      }
-    }
-
-    if (authorizedUser.data.avatar !== null) {
-      const avatarNode = document.querySelector("img.avatar")
-      if (avatarNode instanceof HTMLImageElement) {
-        avatarNode.src = "https://ya-praktikum.tech/api/v2/resources" + authorizedUser.data.avatar
-      }
-    }
+  componentDidMount() {
+    usersController.fetchAndSetAuthorizedUser()
   }
 }
+
+export const Profile = withStore((store) => ({
+  authorizedUser: store.authorizedUser,
+}))(_Profile)

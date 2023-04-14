@@ -20,4 +20,8 @@ import "./commands"
 
 beforeEach(() => {
   localStorage.clear()
+  cy.intercept("POST", "https://ya-praktikum.tech/api/v2/auth/signin", { statusCode: 200 })
+  cy.intercept("POST", "https://ya-praktikum.tech/api/v2/auth/logout", { statusCode: 200 })
+  cy.intercept("POST", "https://ya-praktikum.tech/api/v2/auth/signup", { fixture: "registration.json" })
+  cy.intercept("GET", "https://ya-praktikum.tech/api/v2/auth/user", { fixture: "authorized-user.json" })
 })

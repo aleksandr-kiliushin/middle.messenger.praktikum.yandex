@@ -10,7 +10,7 @@ export type TBlockBaseProps = Partial<{
   [key: string]: unknown
 }>
 
-export class Block<TProps extends TBlockBaseProps = Record<string, never>> {
+export class Block<TProps extends TBlockBaseProps = Record<string, unknown>> {
   protected element: HTMLElement | null
   private blockId: string
   private eventBus: EventBus<"COMPONENT_DID_MOUNT" | "COMPONENT_DID_UPDATE" | "INITIALIZE" | "RERENDER">
@@ -18,6 +18,8 @@ export class Block<TProps extends TBlockBaseProps = Record<string, never>> {
   public props: TProps
 
   constructor(protected template: string, props: TProps) {
+    // check authorizedUser in props of ProfilePage component here
+    // debugger
     this.blockId = nanoid(4)
     this.element = null
     this.props = this.makePropsProxy(props)

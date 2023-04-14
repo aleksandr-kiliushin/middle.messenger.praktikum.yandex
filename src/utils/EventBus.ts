@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export class EventBus<TEventName extends string> {
   private eventsHandlersByEventName: Partial<Record<TEventName, ((params: unknown) => void)[]>>
 
@@ -5,7 +6,7 @@ export class EventBus<TEventName extends string> {
     this.eventsHandlersByEventName = {}
   }
 
-  public registerEventListener({ eventListener, eventName }: { eventName: TEventName; eventListener: () => void }) {
+  public registerEventListener({ eventListener, eventName }: { eventName: TEventName; eventListener: (params: any) => void }) {
     if (this.eventsHandlersByEventName[eventName] === undefined) {
       this.eventsHandlersByEventName[eventName] = []
     }

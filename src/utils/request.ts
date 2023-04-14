@@ -5,7 +5,7 @@ const methodsNames = {
   DELETE: "DELETE",
 }
 
-export const request = ({
+export const request = <T>({
   method,
   url,
   query,
@@ -15,8 +15,7 @@ export const request = ({
   url: string
   query?: Record<string, unknown>
   payload?: Record<string, unknown>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-}): Promise<{ request: XMLHttpRequest; data: any }> => {
+}): Promise<{ request: XMLHttpRequest; data: T | null }> => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.onload = () => {

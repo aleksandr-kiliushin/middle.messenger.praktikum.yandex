@@ -1,4 +1,7 @@
 import { AuthApi, TSignInPayload, TSignUpPayload } from "@api/AuthApi"
+import { store } from "@store"
+
+import { usersController } from "./usersController"
 
 class AuthController {
   private api: AuthApi
@@ -8,15 +11,38 @@ class AuthController {
   }
 
   public async signUp({ payload }: { payload: TSignUpPayload }) {
-    await this.api.signUp({ payload })
+    store.set({ keyPath: "authorizedUser.loadingStatus", value: "LOADING" })
+
+    try {
+      await this.api.signUp({ payload })
+      await usersController.fetchAndSetAuthorizedUser()
+    } catch {
+      store.set({ keyPath: "user.loadingStatus", value: "FAILED" })
+    }
   }
 
-  public signIn({ payload }: { payload: TSignInPayload }) {
-    return this.api.signIn({ payload })
+  public async signIn({ payload }: { payload: TSignInPayload }) {
+    store.set({ keyPath: "authorizedUser.loadingStatus", value: "LOADING" })
+
+    try {
+      await this.api.signIn({ payload })
+      await usersController.fetchAndSetAuthorizedUser()
+    } catch {
+      store.set({ keyPath: "user.loadingStatus", value: "FAILED" })
+    }
   }
 
-  public signOut() {
-    return this.api.signOut()
+  public async signOut() {
+    store.set({ keyPath: "authorizedUser.loadingStatus", value: "LOADING" })
+
+    try {
+      await this.api.signOut()
+      store
+        .set({ keyPath: "authorizedUser.loadingStatus", value: "INITIAL" })
+        .set({ keyPath: "authorizedUser.data", value: null })
+    } catch {
+      store.set({ keyPath: "authorizedUser.loadingStatus", value: "FAILED" })
+    }
   }
 }
 

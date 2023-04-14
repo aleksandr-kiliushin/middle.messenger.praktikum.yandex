@@ -130,41 +130,7 @@ export class Settings extends Block {
     )
   }
 
-  async componentDidMount() {
-    const authorizedUser = await usersController.getAuthorizedUser()
-
-    for (const fieldName in authorizedUser.data) {
-      if (fieldName === "avatar") continue
-      const fieldNode = document.querySelector(`[name="${fieldName}"]`)
-      if (fieldNode instanceof HTMLInputElement) {
-        fieldNode.value = authorizedUser.data[fieldName] ?? ""
-      }
-    }
-
-    if (authorizedUser.data.avatar !== null) {
-      const avatarNode = document.querySelector("label[for='avatar'] img")
-      if (avatarNode instanceof HTMLImageElement) {
-        avatarNode.src = "https://ya-praktikum.tech/api/v2/resources" + authorizedUser.data.avatar
-      }
-    }
-
-    const avatarForm = document.querySelector("#avatar-form")
-    if (avatarForm instanceof HTMLFormElement) {
-      avatarForm.addEventListener("change", () => {
-        const formData = new FormData(avatarForm)
-
-        fetch(`https://ya-praktikum.tech/api/v2/user/profile/avatar`, {
-          method: "PUT",
-          credentials: "include",
-          mode: "cors",
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data)
-            return data
-          })
-      })
-    }
+  componentDidMount() {
+    usersController.fetchAndSetAuthorizedUser()
   }
 }

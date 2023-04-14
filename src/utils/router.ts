@@ -1,18 +1,11 @@
 import { PageNotFound } from "@pages/PageNotFound"
-
-import { Block } from "./Block"
-
-class PageBlock extends Block {
-  constructor() {
-    super("", {})
-  }
-}
+import { TPageBlock } from "@types"
 
 class Route {
   private pathname: string
-  private pageBlockClass: typeof PageBlock
+  private pageBlockClass: TPageBlock
 
-  constructor({ pageBlockClass, pathname }: { pageBlockClass: typeof PageBlock; pathname: string }) {
+  constructor({ pageBlockClass, pathname }: { pageBlockClass: TPageBlock; pathname: string }) {
     this.pathname = pathname
     this.pageBlockClass = pageBlockClass
   }
@@ -33,7 +26,7 @@ class Route {
     if (root === null) {
       throw new Error("#root is not found.")
     }
-    root.innerHTML = new this.pageBlockClass().markup
+    root.innerHTML = new this.pageBlockClass("", {}).markup
   }
 }
 
@@ -53,7 +46,7 @@ class Router {
     }
   }
 
-  public use({ pageBlockClass, pathname }: { pageBlockClass: typeof PageBlock; pathname: string }) {
+  public use({ pageBlockClass, pathname }: { pageBlockClass: TPageBlock; pathname: string }) {
     this.routes.push(new Route({ pageBlockClass, pathname }))
     return this
   }

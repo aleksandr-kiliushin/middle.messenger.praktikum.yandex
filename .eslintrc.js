@@ -41,5 +41,6 @@ module.exports = {
         types: ["boolean"],
       },
     ],
+    "@typescript-eslint/sort-type-union-intersection-members": "warn",
   },
 }

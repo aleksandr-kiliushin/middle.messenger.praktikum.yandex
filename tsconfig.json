@@ -21,6 +21,8 @@
       "@controllers/*": ["src/controllers/*"],
       "@cypress/*": ["cypress/*"],
       "@pages/*": ["src/pages/*"],
+      "@store": ["src/store.ts"],
+      "@types": ["src/types.ts"],
       "@utils/*": ["src/utils/*"]
     },
     "removeComments": true,

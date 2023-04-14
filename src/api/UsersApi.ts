@@ -1,3 +1,5 @@
+import { TUser } from "src/types"
+
 import { request } from "@utils/request"
 
 export type TChangePasswordPayload = {
@@ -14,7 +16,7 @@ export type TEditSettingsPayload = {
 
 export class UsersApi {
   public getAuthorizedUser() {
-    return request({ method: "GET", url: "/auth/user" })
+    return request<TUser>({ method: "GET", url: "/auth/user" })
   }
 
   public changePassword({ payload }: { payload: TChangePasswordPayload }) {
