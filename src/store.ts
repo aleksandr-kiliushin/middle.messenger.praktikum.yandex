@@ -14,7 +14,9 @@ type TStoreState = {
   }
 }
 
-class Store extends EventBus<"UPDATED"> {
+class Store extends EventBus<{
+  UPDATED: { newState: TStoreState }
+}> {
   private state: TStoreState
 
   constructor() {
@@ -29,7 +31,7 @@ class Store extends EventBus<"UPDATED"> {
 
   public set({ keyPath, value }: { keyPath: string; value: unknown }) {
     setToObject({ object: this.state, keyPath, value })
-    this.emitEvent({ eventName: "UPDATED", eventListenerArguments: { newState: this.state } })
+    this.emitEvent({ eventName: "UPDATED", eventListenerParams: { newState: this.state } })
     return this
   }
 
