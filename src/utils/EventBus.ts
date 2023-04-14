@@ -1,37 +1,56 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export class EventBus<TEventName extends string> {
-  private eventsHandlersByEventName: Partial<Record<TEventName, ((params: unknown) => void)[]>>
+export class EventBus<TEventParamsByEventName extends Record<string, unknown>> {
+  private eventsHandlersByEventName: {
+    [TEventName in keyof TEventParamsByEventName]?: ((params: TEventParamsByEventName[TEventName]) => void)[]
+  }
 
   constructor() {
     this.eventsHandlersByEventName = {}
   }
 
-  public registerEventListener({ eventListener, eventName }: { eventName: TEventName; eventListener: (params: any) => void }) {
+  public registerEventListener<TEventName extends keyof TEventParamsByEventName>({
+    eventListener,
+    eventName,
+  }: {
+    eventName: TEventName
+    eventListener: (params: TEventParamsByEventName[TEventName]) => void
+  }) {
     if (this.eventsHandlersByEventName[eventName] === undefined) {
       this.eventsHandlersByEventName[eventName] = []
     }
     this.eventsHandlersByEventName[eventName]?.push(eventListener)
   }
 
-  public removeEventListener({ eventListener, eventName }: { eventName: TEventName; eventListener: () => void }) {
+  public removeEventListener<TEventName extends keyof TEventParamsByEventName>({
+    eventListener,
+    eventName,
+  }: {
+    eventName: TEventName
+    eventListener: (params: TEventParamsByEventName[TEventName]) => void
+  }) {
     const eventsListeners = this.eventsHandlersByEventName[eventName]
 
     if (eventsListeners === undefined) {
-      throw new Error(`There is no "${eventName}" event.`)
+      throw new Error(`There is no "${String(eventName)}" event.`)
     }
 
     eventsListeners.push(eventListener)
   }
 
-  public emitEvent({ eventListenerArguments, eventName }: { eventListenerArguments?: unknown; eventName: TEventName }) {
+  public emitEvent<TEventName extends keyof TEventParamsByEventName>({
+    eventListenerParams,
+    eventName,
+  }: {
+    eventListenerParams: TEventParamsByEventName[TEventName]
+    eventName: TEventName
+  }) {
     const eventsListeners = this.eventsHandlersByEventName[eventName]
 
     if (eventsListeners === undefined) {
-      throw new Error(`There is no "${eventName}" event.`)
+      throw new Error(`There is no "${String(eventName)}" event.`)
     }
 
     eventsListeners.forEach((eventListener) => {
-      eventListener(eventListenerArguments)
+      eventListener(eventListenerParams)
     })
   }
 }

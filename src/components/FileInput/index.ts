@@ -1,9 +1,9 @@
-import { Block } from "@utils/Block"
+import { Block, TBlockBaseProps } from "@utils/Block"
 
 import "./index.css"
 import { template } from "./template"
 
-type TFileInputProps = {
+type TFileInputProps = TBlockBaseProps & {
   name: string
 }
 

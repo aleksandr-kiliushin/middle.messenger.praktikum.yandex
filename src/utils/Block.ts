@@ -5,21 +5,23 @@ import { EventBus } from "./EventBus"
 
 type TEventsListeners = Partial<Record<keyof HTMLElementEventMap, (event: Event) => void>>
 
-export type TBlockBaseProps = Partial<{
-  eventsListeners: TEventsListeners
-  [key: string]: unknown
-}>
+export type TBlockBaseProps = {
+  eventsListeners?: TEventsListeners
+}
 
-export class Block<TProps extends TBlockBaseProps = Record<string, unknown>> {
+export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
   protected element: HTMLElement | null
   private blockId: string
-  private eventBus: EventBus<"COMPONENT_DID_MOUNT" | "COMPONENT_DID_UPDATE" | "INITIALIZE" | "RERENDER">
+  private eventBus: EventBus<{
+    INITIALIZE: null
+    COMPONENT_DID_MOUNT: null
+    COMPONENT_DID_UPDATE: null
+    RERENDER: null
+  }>
   private eventsListeners: TEventsListeners
   public props: TProps
 
   constructor(protected template: string, props: TProps) {
-    // check authorizedUser in props of ProfilePage component here
-    // debugger
     this.blockId = nanoid(4)
     this.element = null
     this.props = this.makePropsProxy(props)
@@ -32,14 +34,14 @@ export class Block<TProps extends TBlockBaseProps = Record<string, unknown>> {
     this.eventBus.registerEventListener({ eventName: "COMPONENT_DID_UPDATE", eventListener: this.componentDidUpdate.bind(this) })
     this.eventBus.registerEventListener({ eventName: "RERENDER", eventListener: this.rerender.bind(this) })
 
-    this.eventBus.emitEvent({ eventName: "INITIALIZE" })
+    this.eventBus.emitEvent({ eventName: "INITIALIZE", eventListenerParams: null })
   }
 
   private initialize = () => {
     this.element = this.generateHtmlElement()
     document.addEventListener("DOMContentLoaded", () => {
       this.hangEventsListeners()
-      this.eventBus.emitEvent({ eventName: "COMPONENT_DID_MOUNT" })
+      this.eventBus.emitEvent({ eventName: "COMPONENT_DID_MOUNT", eventListenerParams: null })
     })
   }
 
@@ -90,8 +92,8 @@ export class Block<TProps extends TBlockBaseProps = Record<string, unknown>> {
     return new Proxy(props, {
       set: (previousProps: TProps, propName, value: TProps[keyof TProps]) => {
         this.props = { ...previousProps, [propName]: value }
-        this.eventBus.emitEvent({ eventName: "COMPONENT_DID_UPDATE" })
-        this.eventBus.emitEvent({ eventName: "RERENDER" })
+        this.eventBus.emitEvent({ eventName: "COMPONENT_DID_UPDATE", eventListenerParams: null })
+        this.eventBus.emitEvent({ eventName: "RERENDER", eventListenerParams: null })
         return true
       },
     })
