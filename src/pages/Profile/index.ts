@@ -1,4 +1,5 @@
 import { authController } from "@controllers/authController"
+import { usersController } from "@controllers/usersController"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -32,7 +33,7 @@ export class Profile extends Block {
   }
 
   async componentDidMount() {
-    const authorizedUser = await authController.getAuthorizedUser()
+    const authorizedUser = await usersController.getAuthorizedUser()
 
     for (const fieldName in authorizedUser.data) {
       const fieldNode = document.querySelector("#" + fieldName)

@@ -18,10 +18,6 @@ class AuthController {
   public signOut() {
     return this.api.signOut()
   }
-
-  public getAuthorizedUser() {
-    return this.api.getAuthorizedUser()
-  }
 }
 
 export const authController = new AuthController()

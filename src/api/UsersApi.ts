@@ -13,6 +13,10 @@ export type TEditSettingsPayload = {
 }
 
 export class UsersApi {
+  public getAuthorizedUser() {
+    return request({ method: "GET", url: "/auth/user" })
+  }
+
   public changePassword({ payload }: { payload: TChangePasswordPayload }) {
     return request({ method: "PUT", url: "/user/password", payload })
   }

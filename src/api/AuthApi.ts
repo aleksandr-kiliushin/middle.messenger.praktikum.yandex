@@ -26,8 +26,4 @@ export class AuthApi {
   public signOut() {
     return request({ method: "POST", url: "/auth/logout" })
   }
-
-  public getAuthorizedUser() {
-    return request({ method: "GET", url: "/auth/user" })
-  }
 }
