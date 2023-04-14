@@ -1,10 +1,10 @@
-import { PageBlock, TLoadingStatus, TUser } from "@types"
+import { TLoadingStatus, TUser } from "@types"
 
-import { Block } from "@utils/Block"
+import { Block, TBlockBaseProps } from "@utils/Block"
 import { EventBus } from "@utils/EventBus"
 import { setToObject } from "@utils/setToObject"
 
-type TMapStateToProps<TMappedState> = (state: TStoreState) => TMappedState
+type TGetPropsFromStore<TPropsFromStore> = (state: TStoreState) => TPropsFromStore
 
 type TStoreState = {
   authorizedUser: {
@@ -41,16 +41,18 @@ class Store extends EventBus<{
 
 export const store = new Store()
 
-export const withStore = <TMappedState>(mapStateToProps: TMapStateToProps<TMappedState>) => {
-  return (_Block: typeof Block | typeof PageBlock) => {
+export const withStore = <TOwnProps extends TBlockBaseProps, TPropsFromStore>(
+  getPropsFromStore: TGetPropsFromStore<TPropsFromStore>
+) => {
+  return (_Block: typeof Block) => {
     return class BlockWithStore extends Block {
-      constructor(template: string, ownProps: any) {
-        const mappedState = mapStateToProps(store.getState())
-        super(template, { ...mappedState, ...ownProps })
+      constructor(template: string, ownProps: TOwnProps) {
+        const propsFromStore = getPropsFromStore(store.getState())
+        super(template, { ...propsFromStore, ...ownProps })
         store.registerEventListener({
           eventName: "UPDATED",
           eventListener: ({ newState }: { newState: TStoreState }) => {
-            const newMappedState = mapStateToProps(newState)
+            const newMappedState = getPropsFromStore(newState)
             this.props = { ...this.props, ...newMappedState }
           },
         })
