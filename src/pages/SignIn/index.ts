@@ -53,7 +53,7 @@ export class SignIn extends Block {
             buttons: [
               new Button({
                 startIconName: "login",
-                text: "Авторизоваться",
+                text: "Войти",
                 type: "submit",
               }).markup,
               new Button({
