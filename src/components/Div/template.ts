@@ -1,5 +1,5 @@
 export const template = `
-<div class="detail">
+<div class="{{className}}">
   {{content}}
 </div>
 `

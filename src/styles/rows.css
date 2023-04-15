@@ -19,6 +19,10 @@
   line-height: 36px;
 }
 
+.row-detail {
+  line-height: 36px;
+}
+
 .row-error {
   position: absolute;
   top: 38px;

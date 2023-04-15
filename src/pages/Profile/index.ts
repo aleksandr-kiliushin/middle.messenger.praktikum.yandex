@@ -2,7 +2,7 @@ import { withStore } from "@store"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
-import { Detail } from "@components/Detail"
+import { Div } from "@components/Div"
 import { Form } from "@components/Form"
 import { PageWrapper } from "@components/PageWrapper"
 import { Row } from "@components/Row"
@@ -21,32 +21,32 @@ export class _Profile<TProps extends TBlockBaseProps> extends Block {
           Details: new Form({
             rows: [
               new Row({
-                field: new Detail({ content: props.authorizedUserData?.email }).markup,
+                field: new Div({ content: props.authorizedUserData?.email, className: "row-detail" }).markup,
                 name: "email",
                 label: "Почта",
               }).markup,
               new Row({
-                field: new Detail({ content: props.authorizedUserData?.login }).markup,
+                field: new Div({ content: props.authorizedUserData?.login, className: "row-detail" }).markup,
                 name: "login",
                 label: "Логин",
               }).markup,
               new Row({
-                field: new Detail({ content: props.authorizedUserData?.first_name }).markup,
+                field: new Div({ content: props.authorizedUserData?.first_name, className: "row-detail" }).markup,
                 name: "first_name",
                 label: "Имя",
               }).markup,
               new Row({
-                field: new Detail({ content: props.authorizedUserData?.second_name }).markup,
+                field: new Div({ content: props.authorizedUserData?.second_name, className: "row-detail" }).markup,
                 name: "second_name",
                 label: "Фамилия",
               }).markup,
               new Row({
-                field: new Detail({ content: props.authorizedUserData?.display_name }).markup,
+                field: new Div({ content: props.authorizedUserData?.display_name, className: "row-detail" }).markup,
                 name: "display_name",
                 label: "Имя в чате",
               }).markup,
               new Row({
-                field: new Detail({ content: props.authorizedUserData?.phone }).markup,
+                field: new Div({ content: props.authorizedUserData?.phone, className: "row-detail" }).markup,
                 name: "phone",
                 label: "Телефон",
               }).markup,
