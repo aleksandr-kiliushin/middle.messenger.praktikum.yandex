@@ -1,12 +1,26 @@
+import { ChangePassword } from "@pages/ChangePassword"
+import { Chats } from "@pages/Chats"
+import { InternalServerError } from "@pages/InternalServerError"
 import { PageNotFound } from "@pages/PageNotFound"
+import { Profile } from "@pages/Profile"
+import { Settings } from "@pages/Settings"
+import { SignIn } from "@pages/SignIn"
+import { SignUp } from "@pages/SignUp"
 
-import { Block, TBlockBaseProps } from "./Block"
+type TRouteBlock =
+  | typeof ChangePassword
+  | typeof Chats
+  | typeof InternalServerError
+  | typeof Profile
+  | typeof Settings
+  | typeof SignIn
+  | typeof SignUp
 
 class Route {
   private pathname: string
-  private RouteBlock: typeof Block<TBlockBaseProps>
+  private RouteBlock: TRouteBlock
 
-  constructor({ pathname, RouteBlock }: { pathname: string; RouteBlock: typeof Block<TBlockBaseProps> }) {
+  constructor({ pathname, RouteBlock }: { pathname: string; RouteBlock: TRouteBlock }) {
     this.pathname = pathname
     this.RouteBlock = RouteBlock
   }
@@ -27,7 +41,7 @@ class Route {
     if (root === null) {
       throw new Error("#root is not found.")
     }
-    root.innerHTML = new this.RouteBlock(this.RouteBlock.template, {}).markup
+    root.innerHTML = new this.RouteBlock().markup
   }
 }
 
@@ -46,7 +60,7 @@ class Router {
     }
   }
 
-  public use({ pathname, RouteBlock }: { pathname: string; RouteBlock: typeof Block<TBlockBaseProps> }) {
+  public use({ pathname, RouteBlock }: { pathname: string; RouteBlock: TRouteBlock }) {
     this.routes.push(new Route({ pathname, RouteBlock }))
     return this
   }
