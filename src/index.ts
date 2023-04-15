@@ -27,12 +27,12 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 
   router
-    .use({ pathname: "/", RouteBlock: SignIn, routeBlockProps: {} })
-    .use({ pathname: "/500", RouteBlock: InternalServerError, routeBlockProps: {} })
-    .use({ pathname: "/change-password", RouteBlock: ChangePassword, routeBlockProps: {} })
-    .use({ pathname: "/messenger", RouteBlock: Chats, routeBlockProps: {} })
-    .use({ pathname: "/profile", RouteBlock: Profile, routeBlockProps: {} })
-    .use({ pathname: "/settings", RouteBlock: Settings, routeBlockProps: {} })
-    .use({ pathname: "/sign-up", RouteBlock: SignUp, routeBlockProps: {} })
+    .use({ pathname: "/", RouteBlock: SignIn })
+    .use({ pathname: "/500", RouteBlock: InternalServerError })
+    .use({ pathname: "/change-password", RouteBlock: ChangePassword })
+    .use({ pathname: "/messenger", RouteBlock: Chats })
+    .use({ pathname: "/profile", RouteBlock: Profile })
+    .use({ pathname: "/settings", RouteBlock: Settings })
+    .use({ pathname: "/sign-up", RouteBlock: SignUp })
     .start()
 })
