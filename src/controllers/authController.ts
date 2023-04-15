@@ -11,37 +11,36 @@ class AuthController {
   }
 
   public async signUp({ payload }: { payload: TSignUpPayload }) {
-    store.set({ keyPath: "authorizedUser.loadingStatus", value: "LOADING" })
+    store.state.authorizedUserLoadingStatus = "LOADING"
 
     try {
       await this.api.signUp({ payload })
       await usersController.fetchAndSetAuthorizedUser()
     } catch {
-      store.set({ keyPath: "user.loadingStatus", value: "FAILED" })
+      store.state.authorizedUserLoadingStatus = "FAILED"
     }
   }
 
   public async signIn({ payload }: { payload: TSignInPayload }) {
-    store.set({ keyPath: "authorizedUser.loadingStatus", value: "LOADING" })
+    store.state.authorizedUserLoadingStatus = "LOADING"
 
     try {
       await this.api.signIn({ payload })
       await usersController.fetchAndSetAuthorizedUser()
     } catch {
-      store.set({ keyPath: "user.loadingStatus", value: "FAILED" })
+      store.state.authorizedUserLoadingStatus = "FAILED"
     }
   }
 
   public async signOut() {
-    store.set({ keyPath: "authorizedUser.loadingStatus", value: "LOADING" })
+    store.state.authorizedUserLoadingStatus = "LOADING"
 
     try {
       await this.api.signOut()
-      store
-        .set({ keyPath: "authorizedUser.loadingStatus", value: "INITIAL" })
-        .set({ keyPath: "authorizedUser.data", value: null })
+      store.state.authorizedUserLoadingStatus = "INITIAL"
+      store.state.authorizedUserData = null
     } catch {
-      store.set({ keyPath: "authorizedUser.loadingStatus", value: "FAILED" })
+      store.state.authorizedUserLoadingStatus = "FAILED"
     }
   }
 }

@@ -9,18 +9,19 @@ class UsersController {
   }
 
   public async fetchAndSetAuthorizedUser() {
-    store.set({ keyPath: "authorizedUser.loadingStatus", value: "LOADING" })
+    store.state.authorizedUserLoadingStatus = "LOADING"
 
     try {
       const response = await this.api.getAuthorizedUser()
       const authorizedUser = response.data
       if (authorizedUser === null) {
-        store.set({ keyPath: "user.loadingStatus", value: "FAILED" })
+        store.state.authorizedUserLoadingStatus = "FAILED"
       } else {
-        store.set({ keyPath: "user.loadingStatus", value: "DONE" }).set({ keyPath: "user.data", value: authorizedUser })
+        store.state.authorizedUserLoadingStatus = "DONE"
+        store.state.authorizedUserData = authorizedUser
       }
     } catch {
-      store.set({ keyPath: "user.loadingStatus", value: "FAILED" })
+      store.state.authorizedUserLoadingStatus = "FAILED"
     }
   }
 }

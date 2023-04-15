@@ -1,37 +1,40 @@
+import { _Profile } from "@pages/Profile"
 import { TLoadingStatus, TUser } from "@types"
 
-import { Block, TBlockBaseProps } from "@utils/Block"
+import { TBlockBaseProps } from "@utils/Block"
 import { EventBus } from "@utils/EventBus"
-import { setToObject } from "@utils/setToObject"
 
 type TGetPropsFromStore<TPropsFromStore> = (state: TStoreState) => TPropsFromStore
 
 type TStoreState = {
-  authorizedUser: {
-    data: TUser | null
-    loadingStatus: TLoadingStatus
-  }
+  authorizedUserData: TUser | null
+  authorizedUserLoadingStatus: TLoadingStatus
+}
+
+const initialState: TStoreState = {
+  authorizedUserData: null,
+  authorizedUserLoadingStatus: "INITIAL",
 }
 
 class Store extends EventBus<{
-  UPDATED: { newState: TStoreState }
+  STORE_STATE_UPDATED: null
 }> {
-  private state: TStoreState
+  public state: TStoreState
 
   constructor() {
     super()
-    this.state = {
-      authorizedUser: {
-        data: null,
-        loadingStatus: "INITIAL",
+    this.state = new Proxy(initialState, {
+      set: (previousState: TStoreState, keyName, value: TStoreState[keyof TStoreState]) => {
+        this.state = { ...previousState, [keyName]: value }
+        this.emitEvent({ eventName: "STORE_STATE_UPDATED", eventListenerParams: null })
+        return true
       },
-    }
-  }
+    })
 
-  public set({ keyPath, value }: { keyPath: string; value: unknown }) {
-    setToObject({ object: this.state, keyPath, value })
-    this.emitEvent({ eventName: "UPDATED", eventListenerParams: { newState: this.state } })
-    return this
+    this.registerEventListener({
+      eventName: "STORE_STATE_UPDATED",
+      eventListener: () => {},
+    })
   }
 
   public getState() {
@@ -41,19 +44,20 @@ class Store extends EventBus<{
 
 export const store = new Store()
 
+type TBlockToBeWrappedWithStore = typeof _Profile
+
 export const withStore = <TOwnProps extends TBlockBaseProps, TPropsFromStore>(
   getPropsFromStore: TGetPropsFromStore<TPropsFromStore>
 ) => {
-  return (_Block: typeof Block) => {
-    return class BlockWithStore extends Block {
-      constructor(template: string, ownProps: TOwnProps) {
+  return (BlockToBeWrappedWithStore: TBlockToBeWrappedWithStore) => {
+    return class BlockWithStore extends BlockToBeWrappedWithStore<TOwnProps & TPropsFromStore> {
+      constructor({ ownProps }: { ownProps: TOwnProps }) {
         const propsFromStore = getPropsFromStore(store.getState())
-        super(template, { ...propsFromStore, ...ownProps })
+        super({ props: { ...propsFromStore, ...ownProps } })
         store.registerEventListener({
-          eventName: "UPDATED",
-          eventListener: ({ newState }: { newState: TStoreState }) => {
-            const newMappedState = getPropsFromStore(newState)
-            this.props = { ...this.props, ...newMappedState }
+          eventName: "STORE_STATE_UPDATED",
+          eventListener: () => {
+            this.props = { ...this.props, ...getPropsFromStore(store.getState()) }
           },
         })
       }
