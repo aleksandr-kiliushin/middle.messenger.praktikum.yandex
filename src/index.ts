@@ -1,7 +1,5 @@
 import { usersController } from "@controllers/usersController"
-import { store } from "@store"
 
-import { isCurrentPathnameProtected } from "@utils/isCurrentPathnameProtected"
 import { router } from "@utils/router"
 
 import { ChangePassword } from "./pages/ChangePassword"
@@ -29,21 +27,4 @@ window.addEventListener("DOMContentLoaded", async () => {
     .use({ pathname: "/settings", RouteBlock: Settings })
     .use({ pathname: "/sign-up", RouteBlock: SignUp })
     .start()
-})
-
-window.addEventListener("load", () => {
-  let oldHref = document.location.href
-
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach(() => {
-      if (oldHref === document.location.href) return
-      oldHref = document.location.href
-      if (store.getState().authorizedUser.data !== null) return
-      if (isCurrentPathnameProtected()) {
-        router.go({ pathname: "/" })
-      }
-    })
-  })
-
-  observer.observe(window.document, { childList: true, subtree: true })
 })
