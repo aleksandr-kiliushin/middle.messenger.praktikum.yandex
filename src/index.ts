@@ -20,7 +20,7 @@ const isPathnameProtected = () => {
 window.addEventListener("DOMContentLoaded", async () => {
   try {
     await usersController.fetchAndSetAuthorizedUser()
-  } catch (error) {
+  } catch {
     if (isPathnameProtected()) {
       router.go({ pathname: "/" })
     }

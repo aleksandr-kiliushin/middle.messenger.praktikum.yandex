@@ -2,6 +2,7 @@ import Handlebars from "handlebars"
 import { nanoid } from "nanoid"
 
 import { EventBus } from "./EventBus"
+import { wait } from "./wait"
 
 type TEventsListeners = Partial<Record<keyof HTMLElementEventMap, (event: Event) => void>>
 
@@ -38,12 +39,11 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
     this.eventBus.emitEvent({ eventName: "INITIALIZE", eventListenerParams: null })
   }
 
-  private initialize = () => {
+  private initialize = async () => {
     this.element = this.generateHtmlElement()
-    document.addEventListener("DOMContentLoaded", () => {
-      this.hangEventsListeners()
-      this.eventBus.emitEvent({ eventName: "COMPONENT_DID_MOUNT", eventListenerParams: null })
-    })
+    await wait(0) // Прежде, чем навешивать обработчики событий, ждем, пока компонент вмонтируется в DOM.
+    this.hangEventsListeners()
+    this.eventBus.emitEvent({ eventName: "COMPONENT_DID_MOUNT", eventListenerParams: null })
   }
 
   private generateHtmlElement(): HTMLElement {
