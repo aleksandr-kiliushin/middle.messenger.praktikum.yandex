@@ -35,6 +35,7 @@ export class ChangePassword extends Block {
                 field: new Input({
                   name: "oldPassword",
                   type: "password",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Старый пароль",
@@ -44,6 +45,7 @@ export class ChangePassword extends Block {
                 field: new Input({
                   name: "newPassword",
                   type: "password",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Новый пароль",
@@ -53,6 +55,7 @@ export class ChangePassword extends Block {
                 field: new Input({
                   name: "newPasswordConfirmation",
                   type: "password",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Повторите новый пароль",

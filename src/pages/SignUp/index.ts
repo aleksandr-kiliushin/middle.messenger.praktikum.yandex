@@ -41,6 +41,7 @@ export class SignUp extends Block {
                 field: new Input({
                   name: "email",
                   type: "text",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Почта",
@@ -50,6 +51,7 @@ export class SignUp extends Block {
                 field: new Input({
                   name: "login",
                   type: "text",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Логин",
@@ -59,6 +61,7 @@ export class SignUp extends Block {
                 field: new Input({
                   name: "first_name",
                   type: "text",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Имя",
@@ -68,6 +71,7 @@ export class SignUp extends Block {
                 field: new Input({
                   name: "second_name",
                   type: "text",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Фамилия",
@@ -77,6 +81,7 @@ export class SignUp extends Block {
                 field: new Input({
                   name: "phone",
                   type: "text",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Телефон",
@@ -86,6 +91,7 @@ export class SignUp extends Block {
                 field: new Input({
                   name: "password",
                   type: "password",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Пароль",
@@ -95,6 +101,7 @@ export class SignUp extends Block {
                 field: new Input({
                   name: "passwordConfirmation",
                   type: "password",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Повторите пароль",

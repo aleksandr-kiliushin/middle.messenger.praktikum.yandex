@@ -38,10 +38,8 @@ export class Settings extends Block {
                 field: new Input({
                   name: "email",
                   type: "text",
-                  eventsListeners: {
-                    input: validateField,
-                    blur: validateField,
-                  },
+                  initialValue: "",
+                  eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Почта",
                 name: "email",
@@ -50,10 +48,8 @@ export class Settings extends Block {
                 field: new Input({
                   name: "login",
                   type: "text",
-                  eventsListeners: {
-                    input: validateField,
-                    blur: validateField,
-                  },
+                  initialValue: "",
+                  eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Логин",
                 name: "login",
@@ -62,10 +58,8 @@ export class Settings extends Block {
                 field: new Input({
                   name: "first_name",
                   type: "text",
-                  eventsListeners: {
-                    input: validateField,
-                    blur: validateField,
-                  },
+                  initialValue: "",
+                  eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Имя",
                 name: "first_name",
@@ -74,10 +68,8 @@ export class Settings extends Block {
                 field: new Input({
                   name: "second_name",
                   type: "text",
-                  eventsListeners: {
-                    input: validateField,
-                    blur: validateField,
-                  },
+                  initialValue: "",
+                  eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Фамилия",
                 name: "second_name",
@@ -86,10 +78,8 @@ export class Settings extends Block {
                 field: new Input({
                   name: "display_name",
                   type: "text",
-                  eventsListeners: {
-                    input: validateField,
-                    blur: validateField,
-                  },
+                  initialValue: "",
+                  eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Имя в чате",
                 name: "display_name",
@@ -98,10 +88,8 @@ export class Settings extends Block {
                 field: new Input({
                   name: "phone",
                   type: "text",
-                  eventsListeners: {
-                    input: validateField,
-                    blur: validateField,
-                  },
+                  initialValue: "",
+                  eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Телефон",
                 name: "phone",

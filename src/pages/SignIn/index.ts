@@ -35,6 +35,7 @@ export class SignIn extends Block {
                 field: new Input({
                   name: "login",
                   type: "text",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Логин",
@@ -44,6 +45,7 @@ export class SignIn extends Block {
                 field: new Input({
                   name: "password",
                   type: "password",
+                  initialValue: "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Пароль",

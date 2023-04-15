@@ -104,7 +104,7 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
     return this.element.outerHTML
   }
 
-  private get elementOnPage() {
+  protected get elementOnPage() {
     const element = document.querySelector(`[block-id="${this.blockId}"]`)
     if (!(element instanceof HTMLElement)) {
       throw new Error("Block is not found in the web page.")
