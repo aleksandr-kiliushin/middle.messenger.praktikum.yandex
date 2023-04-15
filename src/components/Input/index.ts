@@ -1,9 +1,10 @@
-import { Block, TBlockBaseProps } from "../../utils/Block"
+import { Block, TBlockBaseProps } from "@utils/Block"
+
 import { template } from "./template"
 
 interface IInputProps extends TBlockBaseProps {
   name: string
-  type: "text" | "password"
+  type: "password" | "text"
 }
 
 export class Input extends Block<IInputProps> {
