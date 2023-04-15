@@ -4,6 +4,7 @@ import Handlebars from "handlebars"
 import { Button } from "@components/Button"
 import { Div } from "@components/Div"
 import { Form } from "@components/Form"
+import { Image } from "@components/Image"
 import { PageWrapper } from "@components/PageWrapper"
 import { Row } from "@components/Row"
 
@@ -20,6 +21,20 @@ export class _Profile<TProps extends TBlockBaseProps> extends Block {
         content: Handlebars.compile(template)({
           Details: new Form({
             rows: [
+              new Row({
+                field: new Image({
+                  src:
+                    props.authorizedUserData?.avatar === null
+                      ? "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
+                      : "https://ya-praktikum.tech/api/v2/resources" + props.authorizedUserData?.avatar,
+                  className: "avatar",
+                  alt: "Avatar",
+                  height: 200,
+                  width: 200,
+                }).markup,
+                name: "email",
+                label: "Почта",
+              }).markup,
               new Row({
                 field: new Div({ content: props.authorizedUserData?.email, className: "row-detail" }).markup,
                 name: "email",
