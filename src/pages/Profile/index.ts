@@ -1,3 +1,4 @@
+import { authController } from "@controllers/authController"
 import { TStoreState, withStore } from "@store"
 import Handlebars from "handlebars"
 
@@ -9,10 +10,9 @@ import { PageWrapper } from "@components/PageWrapper"
 import { Row } from "@components/Row"
 
 import { Block, TBlockBaseProps } from "@utils/Block"
+import { router } from "@utils/router"
 
 import { template } from "./template"
-
-let count = 0
 
 type TProfileOwnProps = TBlockBaseProps
 type TProfilePropsFromStore = Pick<TStoreState, "authorizedUserData" | "authorizedUserLoadingStatus">
@@ -73,10 +73,10 @@ export class _Profile extends Block {
             buttons: [
               new Button({
                 eventsListeners: {
-                  click() {
-                    ;(this as Button).props.text = "ВЫШЕЛ " + ++count
-                    // await authController.signOut()
-                    // router.go({ pathname: "/" })
+                  async click() {
+                    // ;(this as Button).props.text = "ВЫШЕЛ " + ++count
+                    await authController.signOut()
+                    router.go({ pathname: "/" })
                   },
                 },
                 startIconName: "logout",
