@@ -1,4 +1,5 @@
-import { TEditSettingsPayload, usersApi } from "@api/UsersApi"
+import { TEditSettingsPayload } from "@api/UsersApi"
+import { usersController } from "@controllers/usersController"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -117,7 +118,7 @@ export class Settings extends Block {
               submit: createFormSubmitter<TEditSettingsPayload>({
                 fieldsRulesConfig,
                 onValidationSuccess: ({ formValues }) => {
-                  usersApi.editSettings({ payload: formValues })
+                  usersController.editSettings({ payload: formValues })
                 },
               }),
             },

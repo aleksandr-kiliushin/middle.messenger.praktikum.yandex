@@ -1,4 +1,4 @@
-import { UsersApi } from "@api/UsersApi"
+import { TChangePasswordPayload, TEditSettingsPayload, UsersApi } from "@api/UsersApi"
 import { store } from "@store"
 
 class UsersController {
@@ -23,6 +23,14 @@ class UsersController {
     } catch {
       store.state.authorizedUserLoadingStatus = "FAILED"
     }
+  }
+
+  public async changePassword({ payload }: { payload: TChangePasswordPayload }) {
+    return this.api.changePassword({ payload })
+  }
+
+  public async editSettings({ payload }: { payload: TEditSettingsPayload }) {
+    return this.api.editSettings({ payload })
   }
 }
 

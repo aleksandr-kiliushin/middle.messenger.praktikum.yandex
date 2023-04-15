@@ -27,8 +27,3 @@ export class UsersApi {
     return request({ method: "PUT", url: "/user/profile", payload })
   }
 }
-
-/**
- * @deprecated
- */
-export const usersApi = new UsersApi()

@@ -1,4 +1,5 @@
-import { TChangePasswordPayload, usersApi } from "@api/UsersApi"
+import { TChangePasswordPayload } from "@api/UsersApi"
+import { usersController } from "@controllers/usersController"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -86,7 +87,7 @@ export class ChangePassword extends Block {
                   passwordsMatchingValidationConfig.renderErrors()
                   if (!passwordsMatchingValidationConfig.isValid()) return
 
-                  usersApi.changePassword({ payload: formValues })
+                  usersController.changePassword({ payload: formValues })
                 },
               }),
             },
