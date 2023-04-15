@@ -2,10 +2,6 @@ import { PageNotFound } from "@pages/PageNotFound"
 
 import { Block, TBlockBaseProps } from "./Block"
 
-// type TRouteConfigByPathname = {
-//   [key: string]: typeof Block<TBlockBaseProps>
-// }
-
 class Route {
   private pathname: string
   private RouteBlock: typeof Block<TBlockBaseProps>
