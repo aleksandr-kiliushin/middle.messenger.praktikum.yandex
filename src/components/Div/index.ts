@@ -2,7 +2,7 @@ import { Block, TBlockBaseProps } from "../../utils/Block"
 import { template } from "./template"
 
 interface IDivProps extends TBlockBaseProps {
-  content: string
+  content: string | undefined
   className?: string
 }
 

@@ -1,4 +1,4 @@
-import { withStore } from "@store"
+import { TStoreState, withStore } from "@store"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -14,8 +14,12 @@ import { template } from "./template"
 
 let count = 0
 
-export class _Profile<TProps extends TBlockBaseProps> extends Block {
-  constructor({ props }: { props: TProps }) {
+type TProfileOwnProps = TBlockBaseProps
+type TProfilePropsFromStore = Pick<TStoreState, "authorizedUserData" | "authorizedUserLoadingStatus">
+type TProfileProps = TProfileOwnProps & TProfilePropsFromStore
+
+export class _Profile extends Block {
+  constructor({ props }: { props: TProfileProps }) {
     super(
       new PageWrapper({
         content: Handlebars.compile(template)({
@@ -86,10 +90,6 @@ export class _Profile<TProps extends TBlockBaseProps> extends Block {
       }).markup,
       props
     )
-  }
-
-  componentDidUpdate() {
-    console.log("Profile update new this.props >>", this.props)
   }
 }
 

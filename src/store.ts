@@ -6,7 +6,7 @@ import { EventBus } from "@utils/EventBus"
 
 type TGetPropsFromStore<TPropsFromStore> = (state: TStoreState) => TPropsFromStore
 
-type TStoreState = {
+export type TStoreState = {
   authorizedUserData: TUser | null
   authorizedUserLoadingStatus: TLoadingStatus
 }
@@ -46,11 +46,16 @@ export const store = new Store()
 
 type TBlockToBeWrappedWithStore = typeof _Profile
 
-export const withStore = <TOwnProps extends TBlockBaseProps, TPropsFromStore>(
+export const withStore = <
+  TOwnProps extends TBlockBaseProps,
+  TPropsFromStore extends {
+    [key in keyof TStoreState]: TStoreState[key]
+  }
+>(
   getPropsFromStore: TGetPropsFromStore<TPropsFromStore>
 ) => {
   return (BlockToBeWrappedWithStore: TBlockToBeWrappedWithStore) => {
-    return class BlockWithStore extends BlockToBeWrappedWithStore<TOwnProps & TPropsFromStore> {
+    return class BlockWithStore extends BlockToBeWrappedWithStore {
       constructor({ ownProps }: { ownProps: TOwnProps }) {
         const propsFromStore = getPropsFromStore(store.getState())
         super({ props: { ...propsFromStore, ...ownProps } })
