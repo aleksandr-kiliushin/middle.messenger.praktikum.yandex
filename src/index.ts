@@ -11,19 +11,11 @@ import { SignIn } from "./pages/SignIn"
 import { SignUp } from "./pages/SignUp"
 import "./styles"
 
-const isPathnameProtected = () => {
-  if (window.location.pathname === "/") return false
-  if (window.location.pathname.startsWith("/sign-up")) return false
-  return true
-}
-
 window.addEventListener("DOMContentLoaded", async () => {
   try {
     await usersController.fetchAndSetAuthorizedUser()
-  } catch {
-    if (isPathnameProtected()) {
-      router.go({ pathname: "/" })
-    }
+  } catch (error) {
+    console.error(error)
   }
 
   router

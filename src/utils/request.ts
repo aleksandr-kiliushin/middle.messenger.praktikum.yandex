@@ -1,3 +1,11 @@
+import { router } from "./router"
+
+const isCurrentPathnameProtected = () => {
+  if (window.location.pathname === "/") return false
+  if (window.location.pathname.startsWith("/sign-up")) return false
+  return true
+}
+
 const methodsNames = {
   GET: "GET",
   POST: "POST",
@@ -19,6 +27,12 @@ export const request = <T>({
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.onload = () => {
+      if (xhr.status === 401) {
+        if (isCurrentPathnameProtected()) {
+          router.go({ pathname: "/" })
+        }
+      }
+
       if (xhr.status >= 400) {
         try {
           reject({ request: xhr, data: JSON.parse(xhr.response) })
