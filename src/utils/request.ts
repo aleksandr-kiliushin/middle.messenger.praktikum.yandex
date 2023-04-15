@@ -1,10 +1,5 @@
+import { isCurrentPathnameProtected } from "./isCurrentPathnameProtected"
 import { router } from "./router"
-
-const isCurrentPathnameProtected = () => {
-  if (window.location.pathname === "/") return false
-  if (window.location.pathname.startsWith("/sign-up")) return false
-  return true
-}
 
 const methodsNames = {
   GET: "GET",
