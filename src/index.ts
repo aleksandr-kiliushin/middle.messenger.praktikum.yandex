@@ -27,12 +27,12 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 
   router
-    .use({ pageBlockClass: ChangePassword, pathname: "/change-password" })
-    .use({ pageBlockClass: Profile, pathname: "/profile" })
-    .use({ pageBlockClass: Chats, pathname: "/messenger" })
-    .use({ pageBlockClass: Settings, pathname: "/settings" })
-    .use({ pageBlockClass: SignIn, pathname: "/" })
-    .use({ pageBlockClass: SignUp, pathname: "/sign-up" })
-    .use({ pageBlockClass: InternalServerError, pathname: "/500" })
+    .use({ pathname: "/", RouteBlock: SignIn, routeBlockProps: {} })
+    .use({ pathname: "/500", RouteBlock: InternalServerError, routeBlockProps: {} })
+    .use({ pathname: "/change-password", RouteBlock: ChangePassword, routeBlockProps: {} })
+    .use({ pathname: "/messenger", RouteBlock: Chats, routeBlockProps: {} })
+    .use({ pathname: "/profile", RouteBlock: Profile, routeBlockProps: {} })
+    .use({ pathname: "/settings", RouteBlock: Settings, routeBlockProps: {} })
+    .use({ pathname: "/sign-up", RouteBlock: SignUp, routeBlockProps: {} })
     .start()
 })

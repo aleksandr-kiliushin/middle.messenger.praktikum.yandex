@@ -10,6 +10,7 @@ export type TBlockBaseProps = {
 }
 
 export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
+  public static template: string
   protected element: HTMLElement | null
   private blockId: string
   private eventBus: EventBus<{

@@ -1,20 +1,52 @@
+import { InternalServerError } from "@pages/InternalServerError"
 import { PageNotFound } from "@pages/PageNotFound"
-import { TPageBlock } from "@types"
+import { Profile } from "@pages/Profile"
 
-class Route {
-  private pathname: string
-  private pageBlockClass: TPageBlock
+import { Block, TBlockBaseProps } from "./Block"
 
-  constructor({ pageBlockClass, pathname }: { pageBlockClass: TPageBlock; pathname: string }) {
+type TRouteConfigByPathname = {
+  "/500": {
+    RouteBlock: typeof InternalServerError
+    routeBlockProps: TBlockBaseProps
+  }
+  "/profile": {
+    RouteBlock: typeof Profile
+    routeBlockProps: TBlockBaseProps
+  }
+  [key: string]: {
+    RouteBlock: typeof PageNotFound
+    routeBlockProps: TBlockBaseProps
+  }
+}
+
+class Route<
+  TRoutePathname extends keyof TRouteConfigByPathname,
+  TRouteBlockProps extends TBlockBaseProps,
+  TRouteBlock extends typeof Block<TRouteBlockProps>
+> {
+  private pathname: TRoutePathname
+  private RouteBlock: TRouteBlock
+  private routeBlockProps: TRouteBlockProps
+
+  constructor({
+    pathname,
+    RouteBlock,
+    routeBlockProps,
+  }: {
+    pathname: TRoutePathname
+    RouteBlock: TRouteBlock
+    routeBlockProps: TRouteBlockProps
+  }) {
     this.pathname = pathname
-    this.pageBlockClass = pageBlockClass
+    this.RouteBlock = RouteBlock
+    this.routeBlockProps = routeBlockProps
   }
 
-  public match({ pathname }: { pathname: string }) {
+  public match({ pathname }: { pathname: TRoutePathname }) {
     return pathname === this.pathname
   }
 
-  public navigate({ pathname }: { pathname: string }) {
+  public navigate({ pathname }: { pathname: TRoutePathname }) {
     if (!this.match({ pathname })) return
 
     this.pathname = pathname
@@ -26,33 +58,54 @@ class Route {
     if (root === null) {
       throw new Error("#root is not found.")
     }
-    root.innerHTML = new this.pageBlockClass("", {}).markup
+    root.innerHTML = new this.RouteBlock(this.RouteBlock.template, this.routeBlockProps).markup
   }
 }
 
 class Router {
   private static instance: Router | null
   private history: History
-  private routes: Route[]
-  private pageNotFoundRoute: Route
+  private routes: Route<
+    keyof TRouteConfigByPathname,
+    TRouteConfigByPathname[keyof TRouteConfigByPathname]["routeBlockProps"],
+    TRouteConfigByPathname[keyof TRouteConfigByPathname]["RouteBlock"]
+  >[]
+  private pageNotFoundRoute: Route<string, TBlockBaseProps, typeof PageNotFound>
 
   constructor() {
-    this.routes = []
     this.history = window.history
-    this.pageNotFoundRoute = new Route({ pageBlockClass: PageNotFound, pathname: "does-not-matter" })
-
+    this.routes = []
+    this.pageNotFoundRoute = new Route({ pathname: "does-not-matter", RouteBlock: PageNotFound, routeBlockProps: {} })
     if (Router.instance !== null) {
       return Router.instance
     }
   }
 
-  public use({ pageBlockClass, pathname }: { pageBlockClass: TPageBlock; pathname: string }) {
-    this.routes.push(new Route({ pageBlockClass, pathname }))
+  public use<TRoutePathname extends keyof TRouteConfigByPathname>({
+    pathname,
+    RouteBlock,
+    routeBlockProps,
+  }: {
+    pathname: TRoutePathname
+    RouteBlock: TRouteConfigByPathname[TRoutePathname]["RouteBlock"]
+    routeBlockProps: TRouteConfigByPathname[TRoutePathname]["routeBlockProps"]
+  }) {
+    this.routes.push(
+      new Route<
+        TRoutePathname,
+        TRouteConfigByPathname[TRoutePathname]["routeBlockProps"],
+        TRouteConfigByPathname[TRoutePathname]["RouteBlock"]
+      >({
+        pathname,
+        RouteBlock,
+        routeBlockProps,
+      })
+    )
     return this
   }
 
-  private onRoute({ pathname }: { pathname: string }) {
-    const route = this.routes.find((route) => route.match({ pathname }))
+  private onRoute({ pathname }: { pathname: keyof TRouteConfigByPathname }) {
+    const route = this.routes.find((route) => route.match({ pathname: String(pathname) }))
 
     if (route === undefined) {
       this.pageNotFoundRoute.render()
@@ -95,8 +148,8 @@ class Router {
     this.onRoute({ pathname: window.location.pathname })
   }
 
-  public go({ pathname }: { pathname: string }) {
-    this.history.pushState({}, "", pathname)
+  public go({ pathname }: { pathname: keyof TRouteConfigByPathname }) {
+    this.history.pushState({}, "", String(pathname))
     this.onRoute({ pathname })
   }
 
