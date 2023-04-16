@@ -4,6 +4,7 @@ import { TStoreState, withStore } from "@store"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
+import { FileInput } from "@components/FileInput"
 import { Form } from "@components/Form"
 import { Image } from "@components/Image"
 import { Input } from "@components/Input"
@@ -47,6 +48,17 @@ export class _Settings extends Block {
                 ? "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
                 : "https://ya-praktikum.tech/api/v2/resources" + props.authorizedUserData?.avatar,
             className: "avatar",
+          }).markup,
+          AvatarInput: new FileInput({
+            name: "avatar",
+            className: "display_none",
+            eventsListeners: {
+              change: (event) => {
+                if (!(event.target instanceof HTMLInputElement)) return
+                if (event.target.files === null) return
+                usersController.changeAvatar({ avatar: event.target.files[0] })
+              },
+            },
           }).markup,
           form: new Form({
             rows: [

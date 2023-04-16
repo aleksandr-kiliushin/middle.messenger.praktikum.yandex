@@ -6,7 +6,7 @@ export const template = `
     <label for="avatar">
       {{{ Avatar }}}
     </label>
-    <input id="avatar" name="avatar" type="file" />
+    {{{ AvatarInput }}}
   </form>
   {{{ form }}}
 </div>

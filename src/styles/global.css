@@ -173,3 +173,7 @@ input {
   border-radius: 18px;
   font-size: 1.6rem;
 }
+
+.display_none {
+  display: none;
+}
