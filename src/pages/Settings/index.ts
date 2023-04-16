@@ -5,6 +5,7 @@ import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
 import { Form } from "@components/Form"
+import { Image } from "@components/Image"
 import { Input } from "@components/Input"
 import { PageWrapper } from "@components/PageWrapper"
 import { Row } from "@components/Row"
@@ -37,6 +38,16 @@ export class _Settings extends Block {
     super(
       new PageWrapper({
         content: Handlebars.compile(template)({
+          Avatar: new Image({
+            alt: "Avatar",
+            height: 200,
+            width: 200,
+            src:
+              props.authorizedUserData?.avatar === null
+                ? "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
+                : "https://ya-praktikum.tech/api/v2/resources" + props.authorizedUserData?.avatar,
+            className: "avatar",
+          }).markup,
           form: new Form({
             rows: [
               new Row({
