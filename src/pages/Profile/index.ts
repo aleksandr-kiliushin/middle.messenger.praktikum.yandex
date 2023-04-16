@@ -15,7 +15,7 @@ import { router } from "@utils/router"
 import { template } from "./template"
 
 type TProfileOwnProps = TBlockBaseProps
-type TProfilePropsFromStore = Pick<TStoreState, "authorizedUserData" | "authorizedUserLoadingStatus">
+type TProfilePropsFromStore = Pick<TStoreState, "authorizedUserData">
 type TProfileProps = TProfileOwnProps & TProfilePropsFromStore
 
 export class _Profile extends Block {
@@ -93,7 +93,4 @@ export class _Profile extends Block {
   }
 }
 
-export const Profile = withStore((store) => ({
-  authorizedUserData: store.authorizedUserData,
-  authorizedUserLoadingStatus: store.authorizedUserLoadingStatus,
-}))(_Profile)
+export const Profile = withStore(["authorizedUserData"])(_Profile)

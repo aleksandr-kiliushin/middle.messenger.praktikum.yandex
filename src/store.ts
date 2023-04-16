@@ -4,8 +4,6 @@ import { TLoadingStatus, TUser } from "@types"
 import { TBlockBaseProps } from "@utils/Block"
 import { EventBus } from "@utils/EventBus"
 
-type TGetPropsFromStore<TPropsFromStore> = (state: TStoreState) => TPropsFromStore
-
 export type TStoreState = {
   authorizedUserData: TUser | null
   authorizedUserLoadingStatus: TLoadingStatus
@@ -46,23 +44,30 @@ export const store = new Store()
 
 type TBlockToBeWrappedWithStore = typeof _Profile
 
-export const withStore = <
-  TOwnProps extends TBlockBaseProps,
-  TPropsFromStore extends {
-    [key in keyof TStoreState]: TStoreState[key]
+const getPropsFromStore = <TStoreStateKey extends keyof TStoreState>({
+  storeStateKeys,
+}: {
+  storeStateKeys: TStoreStateKey[]
+}) => {
+  const result: Partial<TStoreState> = {}
+  for (const key of storeStateKeys) {
+    result[key] = store.getState()[key]
   }
->(
-  getPropsFromStore: TGetPropsFromStore<TPropsFromStore>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return result as any
+}
+
+export const withStore = <TOwnProps extends TBlockBaseProps, TStoreStateKey extends keyof TStoreState>(
+  storeStateKeys: TStoreStateKey[]
 ) => {
   return (BlockToBeWrappedWithStore: TBlockToBeWrappedWithStore) => {
     return class BlockWithStore extends BlockToBeWrappedWithStore {
       constructor({ ownProps }: { ownProps: TOwnProps }) {
-        const propsFromStore = getPropsFromStore(store.getState())
-        super({ props: { ...propsFromStore, ...ownProps } })
+        super({ props: { ...getPropsFromStore({ storeStateKeys }), ...ownProps } })
         store.registerEventListener({
           eventName: "STORE_STATE_UPDATED",
           eventListener: () => {
-            this.props = { ...this.props, ...getPropsFromStore(store.getState()) }
+            this.props = { ...this.props, ...getPropsFromStore({ storeStateKeys }) }
           },
         })
       }
