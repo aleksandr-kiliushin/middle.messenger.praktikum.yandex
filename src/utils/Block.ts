@@ -13,7 +13,7 @@ export type TBlockBaseProps = {
 export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
   protected element: HTMLElement | null
   private blockId: string
-  private eventBus: EventBus<{
+  protected eventBus: EventBus<{
     INITIALIZE: null
     COMPONENT_DID_MOUNT: null
     COMPONENT_DID_UPDATE: null

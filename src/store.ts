@@ -1,4 +1,3 @@
-import { _Profile } from "@pages/Profile"
 import { _Settings } from "@pages/Settings"
 import { TLoadingStatus, TUser } from "@types"
 
@@ -38,7 +37,7 @@ class Store extends EventBus<{
 
 export const store = new Store()
 
-type TBlockToBeWrappedWithStore = typeof _Profile | typeof _Settings
+type TBlockToBeWrappedWithStore = typeof _Settings
 
 const getPropsFromStore = <TStoreStateKey extends keyof TStoreState>({
   storeStateKeys,
@@ -58,15 +57,14 @@ export const withStore = <TOwnProps extends TBlockBaseProps, TStoreStateKey exte
 ) => {
   return (BlockToBeWrappedWithStore: TBlockToBeWrappedWithStore) => {
     return class BlockWithStore extends BlockToBeWrappedWithStore {
-      private props: Pick<TStoreState, TStoreStateKey> & TOwnProps
       constructor({ ownProps }: { ownProps: TOwnProps }) {
-        const props = { ...getPropsFromStore({ storeStateKeys }), ...ownProps }
-        super({ props })
-        this.props = props
+        super({ props: { ...getPropsFromStore({ storeStateKeys }), ...ownProps } })
         store.registerEventListener({
           eventName: "STORE_STATE_UPDATED",
           eventListener: () => {
             this.props = { ...this.props, ...getPropsFromStore({ storeStateKeys }) }
+            this.eventBus.emitEvent({ eventName: "COMPONENT_DID_UPDATE", eventListenerParams: null })
+            this.eventBus.emitEvent({ eventName: "RERENDER", eventListenerParams: null })
           },
         })
       }
