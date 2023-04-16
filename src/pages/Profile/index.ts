@@ -36,8 +36,8 @@ export class _Profile extends Block {
                   height: 200,
                   width: 200,
                 }).markup,
-                name: "email",
-                label: "Почта",
+                name: "avatar",
+                label: "Аватар",
               }).markup,
               new Row({
                 field: new Div({ content: props.authorizedUserData?.email, className: "row-detail" }).markup,

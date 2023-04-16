@@ -17,7 +17,7 @@ export const request = <T>({
   method: keyof typeof methodsNames
   url: string
   query?: Record<string, unknown>
-  payload?: Record<string, unknown>
+  payload?: FormData | Record<string, unknown>
 }): Promise<{ request: XMLHttpRequest; data: T | null }> => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
@@ -48,38 +48,34 @@ export const request = <T>({
     xhr.timeout = 5000
     xhr.withCredentials = true
 
-    const _url = "https://ya-praktikum.tech/api/v2" + url
+    let _url = "https://ya-praktikum.tech/api/v2" + url
+    if (query !== undefined) {
+      _url +=
+        "?" +
+        Object.entries(query)
+          .map(([key, value]) => `${key}=${value}`)
+          .join("&")
+    }
+
+    xhr.open(method, _url)
+
+    if (payload !== undefined && !(payload instanceof FormData)) {
+      xhr.setRequestHeader("Content-Type", "application/json")
+    }
 
     switch (method) {
       case methodsNames.GET: {
-        let queryString = ""
-        if (query !== undefined) {
-          queryString =
-            "?" +
-            Object.entries(query)
-              .map(([key, value]) => `${key}=${value}`)
-              .join("&")
-        }
-        xhr.open(method, _url + queryString)
         xhr.send()
         break
       }
-      case methodsNames.POST: {
-        xhr.open(method, _url)
-        xhr.setRequestHeader("Content-Type", "application/json")
-        xhr.send(JSON.stringify(payload ?? {}))
-        break
-      }
-      case methodsNames.PUT: {
-        xhr.open(method, _url)
-        xhr.setRequestHeader("Content-Type", "application/json")
-        xhr.send(JSON.stringify(payload ?? {}))
-        break
-      }
+      case methodsNames.POST:
+      case methodsNames.PUT:
       case methodsNames.DELETE: {
-        xhr.open(method, _url)
-        xhr.setRequestHeader("Content-Type", "application/json")
-        xhr.send(JSON.stringify(payload ?? {}))
+        if (payload instanceof FormData) {
+          xhr.send(payload)
+        } else {
+          xhr.send(JSON.stringify(payload ?? {}))
+        }
         break
       }
       default: {

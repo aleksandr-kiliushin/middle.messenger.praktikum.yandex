@@ -35,18 +35,8 @@ class UsersController {
   }
 
   public async changeAvatar({ avatar }: { avatar: File }) {
-    const xhr = new XMLHttpRequest()
-    xhr.open("PUT", "https://ya-praktikum.tech/api/v2/user/profile/avatar")
-    xhr.withCredentials = true
-
-    const formData = new FormData()
-    formData.append("avatar", avatar, avatar.name)
-
-    xhr.send(formData)
-
-    xhr.onload = () => {
-      this.fetchAndSetAuthorizedUser()
-    }
+    await this.api.changeAvatar({ avatar })
+    await this.fetchAndSetAuthorizedUser()
   }
 }
 
