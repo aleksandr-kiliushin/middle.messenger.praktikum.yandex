@@ -18,26 +18,21 @@ const initialState: TStoreState = {
 class Store extends EventBus<{
   STORE_STATE_UPDATED: null
 }> {
-  public state: TStoreState
+  private state: TStoreState
 
   constructor() {
     super()
-    this.state = new Proxy(initialState, {
-      set: (previousState: TStoreState, keyName, value: TStoreState[keyof TStoreState]) => {
-        this.state = { ...previousState, [keyName]: value }
-        this.emitEvent({ eventName: "STORE_STATE_UPDATED", eventListenerParams: null })
-        return true
-      },
-    })
-
-    this.registerEventListener({
-      eventName: "STORE_STATE_UPDATED",
-      eventListener: () => {},
-    })
+    this.state = initialState
+    this.registerEventListener({ eventName: "STORE_STATE_UPDATED", eventListener: () => {} })
   }
 
   public getState() {
     return this.state
+  }
+
+  public setState<TKey extends keyof TStoreState>(key: TKey, value: TStoreState[TKey]) {
+    this.state[key] = value
+    this.emitEvent({ eventName: "STORE_STATE_UPDATED", eventListenerParams: null })
   }
 }
 

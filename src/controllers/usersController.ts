@@ -9,19 +9,19 @@ class UsersController {
   }
 
   public async fetchAndSetAuthorizedUser() {
-    store.state.authorizedUserLoadingStatus = "LOADING"
+    store.setState("authorizedUserLoadingStatus", "LOADING")
 
     try {
       const response = await this.api.getAuthorizedUser()
       const authorizedUser = response.data
       if (authorizedUser === null) {
-        store.state.authorizedUserLoadingStatus = "FAILED"
+        store.setState("authorizedUserLoadingStatus", "FAILED")
       } else {
-        store.state.authorizedUserLoadingStatus = "DONE"
-        store.state.authorizedUserData = authorizedUser
+        store.setState("authorizedUserLoadingStatus", "DONE")
+        store.setState("authorizedUserData", authorizedUser)
       }
     } catch {
-      store.state.authorizedUserLoadingStatus = "FAILED"
+      store.setState("authorizedUserLoadingStatus", "FAILED")
     }
   }
 
@@ -32,14 +32,14 @@ class UsersController {
   public async editSettings({ payload }: { payload: TEditSettingsPayload }) {
     const response = await this.api.editSettings({ payload })
     if (response !== null) {
-      store.state.authorizedUserData = response.data
+      store.setState("authorizedUserData", response.data)
     }
   }
 
   public async changeAvatar({ avatar }: { avatar: File }) {
     const response = await this.api.changeAvatar({ avatar })
     if (response !== null) {
-      store.state.authorizedUserData = response.data
+      store.setState("authorizedUserData", response.data)
     }
   }
 }

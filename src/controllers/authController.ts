@@ -11,36 +11,36 @@ class AuthController {
   }
 
   public async signUp({ payload }: { payload: TSignUpPayload }) {
-    store.state.authorizedUserLoadingStatus = "LOADING"
+    store.setState("authorizedUserLoadingStatus", "LOADING")
 
     try {
       await this.api.signUp({ payload })
       await usersController.fetchAndSetAuthorizedUser()
     } catch {
-      store.state.authorizedUserLoadingStatus = "FAILED"
+      store.setState("authorizedUserLoadingStatus", "FAILED")
     }
   }
 
   public async signIn({ payload }: { payload: TSignInPayload }) {
-    store.state.authorizedUserLoadingStatus = "LOADING"
+    store.setState("authorizedUserLoadingStatus", "LOADING")
 
     try {
       await this.api.signIn({ payload })
       await usersController.fetchAndSetAuthorizedUser()
     } catch {
-      store.state.authorizedUserLoadingStatus = "FAILED"
+      store.setState("authorizedUserLoadingStatus", "FAILED")
     }
   }
 
   public async signOut() {
-    store.state.authorizedUserLoadingStatus = "LOADING"
+    store.setState("authorizedUserLoadingStatus", "LOADING")
 
     try {
       await this.api.signOut()
-      store.state.authorizedUserLoadingStatus = "INITIAL"
-      store.state.authorizedUserData = null
+      store.setState("authorizedUserLoadingStatus", "INITIAL")
+      store.setState("authorizedUserData", null)
     } catch {
-      store.state.authorizedUserLoadingStatus = "FAILED"
+      store.setState("authorizedUserLoadingStatus", "FAILED")
     }
   }
 }
