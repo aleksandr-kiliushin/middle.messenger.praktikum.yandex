@@ -26,11 +26,12 @@ class UsersController {
   }
 
   public async changePassword({ payload }: { payload: TChangePasswordPayload }) {
-    return this.api.changePassword({ payload })
+    await this.api.changePassword({ payload })
   }
 
   public async editSettings({ payload }: { payload: TEditSettingsPayload }) {
-    return this.api.editSettings({ payload })
+    await this.api.editSettings({ payload })
+    await this.fetchAndSetAuthorizedUser()
   }
 }
 
