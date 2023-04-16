@@ -7,6 +7,7 @@ interface IButtonProps extends TBlockBaseProps {
   startIconName?: string
   text?: string
   type: "button" | "submit"
+  className?: string
 }
 
 export class Button extends Block<IButtonProps> {

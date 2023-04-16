@@ -29,13 +29,7 @@ export class Chats extends Block {
     super(
       new PageWrapper({
         content: Handlebars.compile(template)({
-          ChatOptionsButton: new Button({
-            startIconName: "more_vert",
-            type: "button",
-          }).markup,
-          FileInput: new FileInput({
-            name: "attachment",
-          }).markup,
+          ChatOptionsButton: new Button({ startIconName: "more_vert", type: "button" }).markup,
 
           ChatListItem1: new ChatListItem(chatListItems.ChatListItem1).markup,
           ChatListItem2: new ChatListItem(chatListItems.ChatListItem2).markup,
@@ -73,9 +67,14 @@ export class Chats extends Block {
               }).markup,
             ],
             buttons: [
+              new FileInput({
+                name: "attachment",
+                className: "chat_form-attach_file_button",
+              }).markup,
               new Button({
                 startIconName: "send",
                 type: "submit",
+                className: "chat_form-send_message_button",
               }).markup,
             ],
             eventsListeners: {

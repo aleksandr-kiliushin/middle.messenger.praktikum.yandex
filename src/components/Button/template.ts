@@ -1,5 +1,5 @@
 export const template = `
-<button class="button button__primary" type="{{type}}">
+<button class="button button__primary {{className}}" type="{{type}}">
   {{#if startIconName}}
     <span class="material-icons">
       {{startIconName}}

@@ -1,6 +1,6 @@
 export const template = `
 <label
-  class="button button__primary"
+  class="button button__primary {{className}}"
   onkeypress="if (event.key === 'Enter') { event.target.click() }"
   tabindex="0"
 >

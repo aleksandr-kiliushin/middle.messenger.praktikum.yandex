@@ -5,6 +5,7 @@ import { template } from "./template"
 
 type TFileInputProps = TBlockBaseProps & {
   name: string
+  className?: string
 }
 
 export class FileInput extends Block<TFileInputProps> {
