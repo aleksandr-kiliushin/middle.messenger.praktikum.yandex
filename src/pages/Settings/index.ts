@@ -1,5 +1,6 @@
 import { TEditSettingsPayload } from "@api/UsersApi"
 import { usersController } from "@controllers/usersController"
+import { TStoreState, withStore } from "@store"
 import Handlebars from "handlebars"
 
 import { Button } from "@components/Button"
@@ -8,7 +9,7 @@ import { Input } from "@components/Input"
 import { PageWrapper } from "@components/PageWrapper"
 import { Row } from "@components/Row"
 
-import { Block } from "@utils/Block"
+import { Block, TBlockBaseProps } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
@@ -27,8 +28,13 @@ const fieldsRulesConfig = {
 
 const validateField = createFieldValidator({ fieldsRulesConfig })
 
-export class Settings extends Block {
-  constructor() {
+type TSettingsOwnProps = TBlockBaseProps
+type TSettingsPropsFromStore = Pick<TStoreState, "authorizedUserData">
+type TSettingsProps = TSettingsOwnProps & TSettingsPropsFromStore
+
+export class _Settings extends Block {
+  constructor({ props }: { props: TSettingsProps }) {
+    console.log("props >>", props)
     super(
       new PageWrapper({
         content: Handlebars.compile(template)({
@@ -38,7 +44,7 @@ export class Settings extends Block {
                 field: new Input({
                   name: "email",
                   type: "text",
-                  initialValue: "",
+                  initialValue: props.authorizedUserData?.email ?? "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Почта",
@@ -48,7 +54,7 @@ export class Settings extends Block {
                 field: new Input({
                   name: "login",
                   type: "text",
-                  initialValue: "",
+                  initialValue: props.authorizedUserData?.login ?? "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Логин",
@@ -58,7 +64,7 @@ export class Settings extends Block {
                 field: new Input({
                   name: "first_name",
                   type: "text",
-                  initialValue: "",
+                  initialValue: props.authorizedUserData?.first_name ?? "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Имя",
@@ -68,7 +74,7 @@ export class Settings extends Block {
                 field: new Input({
                   name: "second_name",
                   type: "text",
-                  initialValue: "",
+                  initialValue: props.authorizedUserData?.second_name ?? "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Фамилия",
@@ -78,7 +84,7 @@ export class Settings extends Block {
                 field: new Input({
                   name: "display_name",
                   type: "text",
-                  initialValue: "",
+                  initialValue: props.authorizedUserData?.display_name ?? "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Имя в чате",
@@ -88,7 +94,7 @@ export class Settings extends Block {
                 field: new Input({
                   name: "phone",
                   type: "text",
-                  initialValue: "",
+                  initialValue: props.authorizedUserData?.phone ?? "",
                   eventsListeners: { input: validateField, blur: validateField },
                 }).markup,
                 label: "Телефон",
@@ -114,7 +120,9 @@ export class Settings extends Block {
           }).markup,
         }),
       }).markup,
-      {}
+      props
     )
   }
 }
+
+export const Settings = withStore(["authorizedUserData"])(_Settings)

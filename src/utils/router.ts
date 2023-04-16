@@ -41,7 +41,8 @@ class Route {
     if (root === null) {
       throw new Error("#root is not found.")
     }
-    root.innerHTML = new this.RouteBlock({ ownProps: {} }).markup
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    root.innerHTML = (new this.RouteBlock({ ownProps: {} }) as any).markup
   }
 }
 
