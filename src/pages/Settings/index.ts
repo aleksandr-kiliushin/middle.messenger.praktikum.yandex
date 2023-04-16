@@ -34,7 +34,6 @@ type TSettingsProps = TSettingsOwnProps & TSettingsPropsFromStore
 
 export class _Settings extends Block {
   constructor({ props }: { props: TSettingsProps }) {
-    console.log("props >>", props)
     super(
       new PageWrapper({
         content: Handlebars.compile(template)({
