@@ -24,13 +24,13 @@ export class UsersApi {
   }
 
   public editSettings({ payload }: { payload: TEditSettingsPayload }) {
-    return request({ method: "PUT", url: "/user/profile", payload })
+    return request<TUser>({ method: "PUT", url: "/user/profile", payload })
   }
 
   public changeAvatar({ avatar }: { avatar: File }) {
     const payload = new FormData()
     payload.append("avatar", avatar, avatar.name)
 
-    return request({ method: "PUT", url: "/user/profile/avatar", payload })
+    return request<TUser>({ method: "PUT", url: "/user/profile/avatar", payload })
   }
 }

@@ -30,13 +30,17 @@ class UsersController {
   }
 
   public async editSettings({ payload }: { payload: TEditSettingsPayload }) {
-    await this.api.editSettings({ payload })
-    await this.fetchAndSetAuthorizedUser()
+    const response = await this.api.editSettings({ payload })
+    if (response !== null) {
+      store.state.authorizedUserData = response.data
+    }
   }
 
   public async changeAvatar({ avatar }: { avatar: File }) {
-    await this.api.changeAvatar({ avatar })
-    await this.fetchAndSetAuthorizedUser()
+    const response = await this.api.changeAvatar({ avatar })
+    if (response !== null) {
+      store.state.authorizedUserData = response.data
+    }
   }
 }
 
