@@ -30,7 +30,7 @@ const fieldsRulesConfig = {
 const validateField = createFieldValidator({ fieldsRulesConfig })
 
 type TChatOwnProps = TBlockBaseProps
-type TChatPropsFromStore = Pick<TStoreState, "activeChatId" | "chats" | "isChatCreationModalOpen">
+type TChatPropsFromStore = Pick<TStoreState, "activeChatId" | "chats" | "isChatCreationDialogOpen">
 type TChatProps = TChatOwnProps & TChatPropsFromStore
 
 class _Chats extends Block<TChatProps> {
@@ -72,7 +72,7 @@ class _Chats extends Block<TChatProps> {
                     type: "button",
                     text: "Создать чат",
                     className: "cleate_chat_button",
-                    eventsListeners: { click: () => store.setState("isChatCreationModalOpen", true) },
+                    eventsListeners: { click: () => store.setState("isChatCreationDialogOpen", true) },
                   }),
                   new Anchor({ content: "Профиль", href: "/profile", className: "profile_anchor" }),
                 ],
@@ -175,20 +175,20 @@ class _Chats extends Block<TChatProps> {
       }),
     ]
 
-    if (this.props.isChatCreationModalOpen) {
+    if (this.props.isChatCreationDialogOpen) {
       const createChat = createFormSubmitter<TCreateChatPayload>({
         fieldsRulesConfig: {},
         onValidationSuccess: async ({ formValues }) => {
           console.log("formValues >>", formValues)
           await chatsController.createChat({ payload: formValues })
-          store.setState("isChatCreationModalOpen", false)
+          store.setState("isChatCreationDialogOpen", false)
         },
       })
 
       children.push(
         new Dialog({
           heading: "Создать чат",
-          onClose: () => store.setState("isChatCreationModalOpen", false),
+          onClose: () => store.setState("isChatCreationDialogOpen", false),
           children: [
             new Box({
               tag: "form",
@@ -208,4 +208,4 @@ class _Chats extends Block<TChatProps> {
   }
 }
 
-export const Chats = withStore(["chats", "isChatCreationModalOpen", "activeChatId"])(_Chats)
+export const Chats = withStore(["chats", "isChatCreationDialogOpen", "activeChatId"])(_Chats)
