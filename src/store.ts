@@ -8,6 +8,7 @@ export type TStoreState = {
   authorizedUserData: TUser | null
   chats: TChat[]
   isChatCreationDialogOpen: boolean
+  isAddingUserToChatDialogOpen: boolean
   activeChatId: TChat["id"] | null
 }
 
@@ -15,6 +16,7 @@ const initialState: TStoreState = {
   authorizedUserData: null,
   chats: [],
   isChatCreationDialogOpen: false,
+  isAddingUserToChatDialogOpen: false,
   activeChatId: null,
 }
 

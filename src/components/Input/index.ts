@@ -4,7 +4,7 @@ import { template } from "./template"
 
 interface IInputProps extends TBlockBaseProps {
   name: string
-  type: "password" | "text"
+  type: "number" | "password" | "text"
   initialValue: string
   className?: string
   placeholder?: string

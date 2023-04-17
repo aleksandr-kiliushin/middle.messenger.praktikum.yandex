@@ -1,5 +1,12 @@
 export const template = `
-<button class="button button__primary {{className}}" type="{{type}}">
+<button
+  class="button button__primary {{className}}"
+  type="{{type}}"
+
+  {{#if isDisabled}}
+    disabled
+  {{/if}}
+>
   {{#if startIconName}}
     <span class="material-icons">
       {{startIconName}}
@@ -11,5 +18,6 @@ export const template = `
       {{endIconName}}
     </span>
   {{/if}}
+  
 </button>
 `

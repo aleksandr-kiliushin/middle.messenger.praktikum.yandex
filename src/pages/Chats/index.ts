@@ -30,7 +30,10 @@ const fieldsRulesConfig = {
 const validateField = createFieldValidator({ fieldsRulesConfig })
 
 type TChatOwnProps = TBlockBaseProps
-type TChatPropsFromStore = Pick<TStoreState, "activeChatId" | "chats" | "isChatCreationDialogOpen">
+type TChatPropsFromStore = Pick<
+  TStoreState,
+  "activeChatId" | "chats" | "isAddingUserToChatDialogOpen" | "isChatCreationDialogOpen"
+>
 type TChatProps = TChatOwnProps & TChatPropsFromStore
 
 class _Chats extends Block<TChatProps> {
@@ -125,7 +128,12 @@ class _Chats extends Block<TChatProps> {
                       }),
                     ],
                   }),
-                  new Button({ startIconName: "more_vert", type: "button" }),
+                  new Button({
+                    startIconName: "person_add",
+                    type: "button",
+                    isDisabled: this.props.activeChatId === null,
+                    eventsListeners: { click: () => store.setState("isAddingUserToChatDialogOpen", true) },
+                  }),
                 ],
               }),
               new Box({
@@ -179,12 +187,10 @@ class _Chats extends Block<TChatProps> {
       const createChat = createFormSubmitter<TCreateChatPayload>({
         fieldsRulesConfig: {},
         onValidationSuccess: async ({ formValues }) => {
-          console.log("formValues >>", formValues)
           await chatsController.createChat({ payload: formValues })
           store.setState("isChatCreationDialogOpen", false)
         },
       })
-
       children.push(
         new Dialog({
           heading: "Создать чат",
@@ -204,8 +210,38 @@ class _Chats extends Block<TChatProps> {
       )
     }
 
+    if (this.props.isAddingUserToChatDialogOpen) {
+      const addUserToChat = createFormSubmitter({
+        fieldsRulesConfig: {},
+        onValidationSuccess: async ({ formValues }) => {
+          if (this.props.activeChatId === null) return
+          await chatsController.addUserToChat({
+            payload: { users: [Number(formValues.userId)], chatId: this.props.activeChatId },
+          })
+          store.setState("isAddingUserToChatDialogOpen", false)
+        },
+      })
+      children.push(
+        new Dialog({
+          heading: "Добавить пользователя в чат",
+          onClose: () => store.setState("isAddingUserToChatDialogOpen", false),
+          children: [
+            new Box({
+              tag: "form",
+              className: "rows",
+              eventsListeners: { submit: addUserToChat },
+              children: [
+                new Input({ initialValue: "", name: "userId", type: "number", placeholder: "ID пользователя ..." }),
+                new Button({ type: "submit", text: "Добавить" }),
+              ],
+            }),
+          ],
+        })
+      )
+    }
+
     return { children }
   }
 }
 
-export const Chats = withStore(["chats", "isChatCreationDialogOpen", "activeChatId"])(_Chats)
+export const Chats = withStore(["chats", "isChatCreationDialogOpen", "isAddingUserToChatDialogOpen", "activeChatId"])(_Chats)

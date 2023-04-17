@@ -1,4 +1,4 @@
-import { ChatsApi, TCreateChatPayload } from "@api/ChatsApi"
+import { ChatsApi, TAddUserToChatPayload, TCreateChatPayload } from "@api/ChatsApi"
 import { store } from "@store"
 
 class ChatsController {
@@ -17,6 +17,10 @@ class ChatsController {
   public async createChat({ payload }: { payload: TCreateChatPayload }) {
     await this.api.createChat({ payload })
     await this.fetchAndSetChats()
+  }
+
+  public async addUserToChat({ payload }: { payload: TAddUserToChatPayload }) {
+    await this.api.addUserToChat({ payload })
   }
 }
 

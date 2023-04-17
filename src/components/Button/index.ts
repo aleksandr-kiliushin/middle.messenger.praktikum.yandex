@@ -8,6 +8,7 @@ interface IButtonProps extends TBlockBaseProps {
   text?: string
   type: "button" | "submit"
   className?: string
+  isDisabled?: boolean
 }
 
 export class Button extends Block<IButtonProps> {

@@ -17,6 +17,11 @@
   color: white;
 }
 
-.button__primary:hover {
+.button__primary:disabled {
+  background-color: var(--secondary-400);
+  color: var(--secondary-600);
+}
+
+.button__primary:not(:disabled):hover {
   background-color: var(--primary-800);
 }
