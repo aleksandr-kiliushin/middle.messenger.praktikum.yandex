@@ -1,3 +1,4 @@
+import { TCreateChatPayload } from "@api/ChatsApi"
 import { chatsController } from "@controllers/chatsController"
 import { TStoreState, store, withStore } from "@store"
 
@@ -37,11 +38,12 @@ class _Chats extends Block<TChatProps> {
   }
 
   render() {
-    const createChat = createFormSubmitter({
+    const createChat = createFormSubmitter<TCreateChatPayload>({
       fieldsRulesConfig: {},
       onValidationSuccess: async ({ formValues }) => {
         console.log("formValues >>", formValues)
-        // chatsController.createChat({ payload: formValues })
+        await chatsController.createChat({ payload: formValues })
+        store.setState("isChatCreationModalOpen", false)
       },
     })
 
@@ -153,25 +155,25 @@ class _Chats extends Block<TChatProps> {
             }),
           ],
         }),
-        // ...(this.props.isChatCreationModalOpen
-        //   ? [
-        new Dialog({
-          heading: "Создать чат",
-          onClose: () => store.setState("isChatCreationModalOpen", false),
-          children: [
-            new Box({
-              tag: "form",
-              className: "rows",
-              eventsListeners: { submit: createChat },
-              children: [
-                new Input({ initialValue: "", name: "chatName", type: "text", placeholder: "Имя чата ..." }),
-                new Button({ type: "submit", text: "Создать" }),
-              ],
-            }),
-          ],
-        }),
-        //   ]
-        // : []),
+        ...(this.props.isChatCreationModalOpen
+          ? [
+              new Dialog({
+                heading: "Создать чат",
+                onClose: () => store.setState("isChatCreationModalOpen", false),
+                children: [
+                  new Box({
+                    tag: "form",
+                    className: "rows",
+                    eventsListeners: { submit: createChat },
+                    children: [
+                      new Input({ initialValue: "", name: "title", type: "text", placeholder: "Имя чата ..." }),
+                      new Button({ type: "submit", text: "Создать" }),
+                    ],
+                  }),
+                ],
+              }),
+            ]
+          : []),
       ],
     }
   }
@@ -186,4 +188,4 @@ class _Chats extends Block<TChatProps> {
   }
 }
 
-export const Chats = withStore(["chats"])(_Chats)
+export const Chats = withStore(["chats", "isChatCreationModalOpen"])(_Chats)

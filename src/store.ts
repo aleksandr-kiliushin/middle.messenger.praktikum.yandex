@@ -13,7 +13,7 @@ export type TStoreState = {
 const initialState: TStoreState = {
   authorizedUserData: null,
   chats: [],
-  isChatCreationModalOpen: true,
+  isChatCreationModalOpen: false,
 }
 
 class Store extends EventBus<{
