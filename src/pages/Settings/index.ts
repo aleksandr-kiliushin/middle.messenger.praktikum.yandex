@@ -32,19 +32,21 @@ type TSettingsPropsFromStore = Pick<TStoreState, "authorizedUserData">
 type TSettingsProps = TSettingsOwnProps & TSettingsPropsFromStore
 
 export class _Settings extends Block<TSettingsProps> {
+  constructor(props: TSettingsProps) {
+    super({ props })
+  }
+
   // componentDidMount() {
   //   console.log("    SETTINGS MOUNTED EMAIL:", this.props.authorizedUserData?.email)
   //   console.log("")
   // }
-
   // componentDidUpdate(previousProps: TSettingsProps) {
   //   console.log("    SETTINGS PREVIOUS EMAIL >>", previousProps.authorizedUserData?.email)
   //   console.log("    SETTINGS UPDATED EMAIL:", this.props.authorizedUserData?.email)
   // }
 
-  protected render(): TSettingsProps {
+  render() {
     return {
-      ...this.props,
       children: [
         new PageWrapper({
           children: [

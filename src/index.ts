@@ -13,10 +13,7 @@ import "./styles"
 
 window.addEventListener("DOMContentLoaded", async () => {
   try {
-    setTimeout(() => {
-      // console.log("        Loading started.")
-      usersController.fetchAndSetAuthorizedUser()
-    }, 1000)
+    await usersController.fetchAndSetAuthorizedUser()
   } catch (error) {
     console.error(error)
   }
