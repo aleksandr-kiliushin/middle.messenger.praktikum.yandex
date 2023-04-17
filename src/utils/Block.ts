@@ -112,6 +112,10 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
     return this.element.outerHTML
   }
 
+  private get isElementMounted() {
+    return document.querySelector(`[block-id="${this.blockId}"]`) !== null
+  }
+
   protected get elementOnPage() {
     const element = document.querySelector(`[block-id="${this.blockId}"]`)
     if (!(element instanceof HTMLElement)) {
@@ -121,6 +125,7 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
   }
 
   private rerender() {
+    if (!this.isElementMounted) return
     this.removeEventsListeners()
     this.makePropsProxy()
     this.element = this.generateHtmlElement()
