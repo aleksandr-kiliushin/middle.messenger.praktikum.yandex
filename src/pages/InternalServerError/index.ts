@@ -1,18 +1,21 @@
-import Handlebars from "handlebars"
-
+import { Anchor } from "@components/Anchor"
+import { Box } from "@components/Box"
 import { PageWrapper } from "@components/PageWrapper"
 
 import { Block } from "@utils/Block"
 
-import { template } from "./template"
-
 export class InternalServerError extends Block {
-  constructor() {
-    super(
-      new PageWrapper({
-        content: Handlebars.compile(template)({}),
-      }).markup,
-      {}
-    )
+  render() {
+    return {
+      children: [
+        new PageWrapper({
+          children: [
+            new Box({ tag: "h1", content: "500" }),
+            new Box({ tag: "p", content: "Мы уже фиксим." }),
+            new Anchor({ href: "/messenger", content: "Назад к чатам" }),
+          ],
+        }),
+      ],
+    }
   }
 }

@@ -1,22 +1,26 @@
-import Handlebars from "handlebars"
+import { Box } from "@components/Box"
+import { Navigation } from "@components/Navigation"
 
 import { Block, TBlockBaseProps } from "@utils/Block"
 
-import { Navigation } from "../Navigation"
-import { template } from "./template"
-
 type TPageWrapperProps = TBlockBaseProps & {
-  content: string
+  mainClass?: string
 }
 
 export class PageWrapper extends Block<TPageWrapperProps> {
   constructor(props: TPageWrapperProps) {
-    super(
-      Handlebars.compile(template)({
-        Navigation: new Navigation().markup,
-        content: props.content,
-      }),
-      props
-    )
+    super({
+      template: '<div id="page-wrapper"></div>',
+      props: {
+        children: [
+          new Navigation(),
+          new Box({
+            tag: "main",
+            children: props.children ?? [],
+            className: props.mainClass ?? "",
+          }),
+        ],
+      },
+    })
   }
 }

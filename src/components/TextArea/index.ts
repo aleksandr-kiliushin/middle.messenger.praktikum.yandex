@@ -1,4 +1,5 @@
-import { Block, TBlockBaseProps } from "../../utils/Block"
+import { Block, TBlockBaseProps } from "@utils/Block"
+
 import { template } from "./template"
 
 interface ITextAreaProps extends TBlockBaseProps {
@@ -7,6 +8,6 @@ interface ITextAreaProps extends TBlockBaseProps {
 
 export class TextArea extends Block<ITextAreaProps> {
   constructor(props: ITextAreaProps) {
-    super(template, props)
+    super({ template, props })
   }
 }

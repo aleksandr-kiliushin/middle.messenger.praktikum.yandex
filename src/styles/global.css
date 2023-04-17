@@ -21,6 +21,7 @@ button {
 }
 
 #root,
+#root > div,
 #page-wrapper {
   height: 100%;
 }

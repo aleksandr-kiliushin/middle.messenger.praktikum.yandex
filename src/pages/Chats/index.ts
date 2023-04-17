@@ -1,12 +1,12 @@
-import Handlebars from "handlebars"
-
+import { Anchor } from "@components/Anchor"
+import { Box } from "@components/Box"
 import { Button } from "@components/Button"
 import { ChatListItem } from "@components/ChatListItem"
 import { FileInput } from "@components/FileInput"
-import { Form } from "@components/Form"
+import { Image } from "@components/Image"
+import { Input } from "@components/Input"
 import { Message } from "@components/Message"
 import { PageWrapper } from "@components/PageWrapper"
-import { Row } from "@components/Row"
 import { TextArea } from "@components/TextArea"
 
 import { Block } from "@utils/Block"
@@ -14,9 +14,8 @@ import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
 
-import { chatListItems, messages } from "./data"
+import { chatListItems, messagesByDate } from "./data"
 import "./index.css"
-import { template } from "./template"
 
 const fieldsRulesConfig = {
   message: new FieldConfig({ type: "string" }).isRequired({ value: true }),
@@ -25,70 +24,103 @@ const fieldsRulesConfig = {
 const validateField = createFieldValidator({ fieldsRulesConfig })
 
 export class Chats extends Block {
-  constructor() {
-    super(
-      new PageWrapper({
-        content: Handlebars.compile(template)({
-          ChatOptionsButton: new Button({ startIconName: "more_vert", type: "button" }).markup,
-
-          ChatListItem1: new ChatListItem(chatListItems.ChatListItem1).markup,
-          ChatListItem2: new ChatListItem(chatListItems.ChatListItem2).markup,
-          ChatListItem3: new ChatListItem(chatListItems.ChatListItem3).markup,
-          ChatListItem4: new ChatListItem(chatListItems.ChatListItem4).markup,
-          ChatListItem5: new ChatListItem(chatListItems.ChatListItem5).markup,
-          ChatListItem6: new ChatListItem(chatListItems.ChatListItem6).markup,
-          ChatListItem7: new ChatListItem(chatListItems.ChatListItem7).markup,
-
-          Message1: new Message(messages.Message1).markup,
-          Message2: new Message(messages.Message2).markup,
-          Message3: new Message(messages.Message3).markup,
-          Message4: new Message(messages.Message4).markup,
-          Message5: new Message(messages.Message5).markup,
-          Message6: new Message(messages.Message6).markup,
-          Message7: new Message(messages.Message7).markup,
-
-          form: new Form({
-            rows: [
-              new Row({
-                field: new TextArea({
-                  name: "message",
+  render() {
+    return {
+      children: [
+        new PageWrapper({
+          mainClass: "chats",
+          children: [
+            new Box({
+              className: "chats-pane",
+              tag: "div",
+              children: [
+                new Box({
+                  className: "chats-pane_header",
+                  tag: "div",
+                  children: [
+                    new Anchor({ content: "Профиль", href: "/profile" }),
+                    new Input({ initialValue: "", name: "search", type: "text", placeholder: "Поиск ..." }),
+                  ],
+                }),
+                new Box({
+                  className: "chats-pane_chats-list",
+                  tag: "div",
+                  children: chatListItems.map((item) => new ChatListItem(item)),
+                }),
+              ],
+            }),
+            new Box({
+              className: "chats-pane",
+              tag: "div",
+              children: [
+                new Box({
+                  className: "chat_header",
+                  tag: "div",
+                  children: [
+                    new Box({
+                      tag: "div",
+                      className: "currently-open-chat",
+                      children: [
+                        new Image({
+                          alt: "Chat avatar",
+                          className: "avatar",
+                          height: 36,
+                          src: "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg",
+                          width: 36,
+                        }),
+                        new Box({ tag: "span", content: "Вадим", className: "currently-open-chat_name" }),
+                      ],
+                    }),
+                    new Button({ startIconName: "more_vert", type: "button" }),
+                  ],
+                }),
+                new Box({
+                  className: "chat_messages",
+                  tag: "div",
+                  children: messagesByDate.map(({ date, messages }) => {
+                    return new Box({
+                      tag: "div",
+                      className: "messages-date-block",
+                      children: [
+                        new Box({ tag: "p", className: "messages-date-block_date", content: date }),
+                        ...messages.map((message) => new Message(message)),
+                      ],
+                    })
+                  }),
+                }),
+                new Box({
+                  className: "chat_form",
+                  tag: "form",
                   eventsListeners: {
-                    input: (event) => {
-                      validateField(event)
-                      if (event.target instanceof HTMLTextAreaElement) {
-                        event.target.style.height = ""
-                        event.target.style.height = event.target.scrollHeight + "px"
-                      }
-                    },
-                    blur: validateField,
+                    submit: createFormSubmitter({
+                      fieldsRulesConfig,
+                      onValidationSuccess: console.log,
+                    }),
                   },
-                }).markup,
-                name: "message",
-              }).markup,
-            ],
-            buttons: [
-              new FileInput({
-                name: "attachment",
-                className: "chat_form-attach_file_button",
-              }).markup,
-              new Button({
-                startIconName: "send",
-                type: "submit",
-                className: "chat_form-send_message_button",
-              }).markup,
-            ],
-            eventsListeners: {
-              submit: createFormSubmitter({
-                fieldsRulesConfig,
-                onValidationSuccess: console.log,
-              }),
-            },
-            className: "chat_form",
-          }).markup,
+                  children: [
+                    new FileInput({ name: "attachment" }),
+                    new TextArea({
+                      name: "message",
+                      eventsListeners: {
+                        input: (event) => {
+                          validateField(event)
+                          if (event.target instanceof HTMLTextAreaElement) {
+                            event.target.style.height = ""
+                            event.target.style.height = event.target.scrollHeight + "px"
+                          }
+                        },
+                        blur: validateField,
+                      },
+                    }),
+                    new Button({ startIconName: "send", type: "submit" }),
+                  ],
+                }),
+              ],
+            }),
+          ],
         }),
-      }).markup,
-      {}
-    )
+      ],
+    }
   }
 
   componentDidMount() {

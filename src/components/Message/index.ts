@@ -12,6 +12,6 @@ export type TMessageProps = TBlockBaseProps & {
 
 export class Message extends Block<TMessageProps> {
   constructor(props: TMessageProps) {
-    super(template, props)
+    super({ template, props })
   }
 }

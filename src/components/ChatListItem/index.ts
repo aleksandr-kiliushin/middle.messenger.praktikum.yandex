@@ -12,6 +12,6 @@ export type TChatListItemProps = TBlockBaseProps & {
 
 export class ChatListItem extends Block<TChatListItemProps> {
   constructor(props: TChatListItemProps) {
-    super(template, props)
+    super({ template, props })
   }
 }

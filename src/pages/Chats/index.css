@@ -88,21 +88,12 @@
 
 .chat_form {
   display: grid;
-  grid-template-areas: "attach_file_button message_field send_message_button";
   align-items: end;
   grid-template-columns: min-content 1fr min-content;
   column-gap: 4px;
   margin-bottom: 0;
   padding: 8px;
   border-top: 1px solid var(--secondary-400);
-}
-
-.chat_form-attach_file_button {
-  grid-area: attach_file_button;
-}
-
-.chat_form > div:has(.chat_message-field) {
-  grid-area: message_field;
 }
 
 .chat_message-field {
@@ -114,8 +105,4 @@
   border-radius: 18px;
   font-size: 1.6rem;
   resize: none;
-}
-
-.chat_form-send_message_button {
-  grid-area: send_message_button;
 }

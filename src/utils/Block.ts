@@ -7,6 +7,7 @@ import { wait } from "./wait"
 type TEventsListeners = Partial<Record<keyof HTMLElementEventMap, (event: Event) => void>>
 
 export type TBlockBaseProps = {
+  children?: Block<any>[] // eslint-disable-line @typescript-eslint/no-explicit-any
   eventsListeners?: TEventsListeners
 }
 
@@ -16,16 +17,19 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
   protected eventBus: EventBus<{
     INITIALIZE: null
     COMPONENT_DID_MOUNT: null
-    COMPONENT_DID_UPDATE: null
+    COMPONENT_DID_UPDATE: TProps
     RERENDER: null
   }>
   private eventsListeners: TEventsListeners
+  protected template: string
   public props: TProps
 
-  constructor(protected template: string, props: TProps) {
+  constructor({ template = "<div></div>", props = {} as TProps }: { template?: string; props?: TProps }) {
+    this.template = template
     this.blockId = nanoid(4)
     this.element = null
-    this.props = this.makePropsProxy(props)
+    this.props = props
+    this.makePropsProxy()
     this.eventsListeners = this.makeEventsListenersBound({ eventsListeners: props.eventsListeners })
 
     this.eventBus = new EventBus()
@@ -53,6 +57,9 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
       throw new Error("`element` is not an HTMLElement instance.")
     }
     element.setAttribute("block-id", this.blockId)
+    this.props.children?.forEach((child) => {
+      element.appendChild(child.generateHtmlElement())
+    })
     return element
   }
 
@@ -88,11 +95,12 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
     }
   }
 
-  private makePropsProxy = (props: TProps): TProps => {
-    return new Proxy(props, {
+  private makePropsProxy = () => {
+    const nonProxifyedProps = { ...this.props, ...this.render() }
+    this.props = new Proxy(nonProxifyedProps, {
       set: (previousProps: TProps, propName, value: TProps[keyof TProps]) => {
         this.props = { ...previousProps, [propName]: value }
-        this.eventBus.emitEvent({ eventName: "COMPONENT_DID_UPDATE", eventListenerParams: null })
+        this.eventBus.emitEvent({ eventName: "COMPONENT_DID_UPDATE", eventListenerParams: previousProps })
         this.eventBus.emitEvent({ eventName: "RERENDER", eventListenerParams: null })
         return true
       },
@@ -114,7 +122,7 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
 
   private rerender() {
     this.removeEventsListeners()
-    this.props = this.makePropsProxy(this.props)
+    this.makePropsProxy()
     this.element = this.generateHtmlElement()
     this.elementOnPage.outerHTML = this.markup
     this.hangEventsListeners()
@@ -122,5 +130,9 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
 
   protected componentDidMount() {}
 
-  protected componentDidUpdate() {}
+  protected componentDidUpdate(_previousProps: TProps) {}
+
+  protected render(): Partial<TProps> {
+    return {}
+  }
 }

@@ -12,6 +12,6 @@ interface IButtonProps extends TBlockBaseProps {
 
 export class Button extends Block<IButtonProps> {
   constructor(props: IButtonProps) {
-    super(template, props)
+    super({ template, props })
   }
 }

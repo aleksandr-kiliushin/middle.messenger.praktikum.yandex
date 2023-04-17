@@ -1,17 +1,17 @@
 import { _Settings } from "@pages/Settings"
-import { TLoadingStatus, TUser } from "@types"
+import { TUser } from "@types"
 
 import { TBlockBaseProps } from "@utils/Block"
 import { EventBus } from "@utils/EventBus"
 
 export type TStoreState = {
   authorizedUserData: TUser | null
-  authorizedUserLoadingStatus: TLoadingStatus
+  // authorizedUserLoadingStatus: TLoadingStatus
 }
 
 const initialState: TStoreState = {
   authorizedUserData: null,
-  authorizedUserLoadingStatus: "INITIAL",
+  // authorizedUserLoadingStatus: "INITIAL",
 }
 
 class Store extends EventBus<{
@@ -37,8 +37,6 @@ class Store extends EventBus<{
 
 export const store = new Store()
 
-type TBlockToBeWrappedWithStore = typeof _Settings
-
 const getPropsFromStore = <TStoreStateKey extends keyof TStoreState>({
   storeStateKeys,
 }: {
@@ -55,15 +53,17 @@ const getPropsFromStore = <TStoreStateKey extends keyof TStoreState>({
 export const withStore = <TOwnProps extends TBlockBaseProps, TStoreStateKey extends keyof TStoreState>(
   storeStateKeys: TStoreStateKey[]
 ) => {
-  return (BlockToBeWrappedWithStore: TBlockToBeWrappedWithStore) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (BlockToBeWrappedWithStore: any) => {
     return class BlockWithStore extends BlockToBeWrappedWithStore {
-      constructor({ ownProps }: { ownProps: TOwnProps }) {
-        super({ props: { ...getPropsFromStore({ storeStateKeys }), ...ownProps } })
+      constructor(ownProps: TOwnProps) {
+        super({ ...getPropsFromStore({ storeStateKeys }), ...ownProps })
         store.registerEventListener({
           eventName: "STORE_STATE_UPDATED",
           eventListener: () => {
+            const previousProps = { ...this.props }
             this.props = { ...this.props, ...getPropsFromStore({ storeStateKeys }) }
-            this.eventBus.emitEvent({ eventName: "COMPONENT_DID_UPDATE", eventListenerParams: null })
+            this.eventBus.emitEvent({ eventName: "COMPONENT_DID_UPDATE", eventListenerParams: previousProps })
             this.eventBus.emitEvent({ eventName: "RERENDER", eventListenerParams: null })
           },
         })

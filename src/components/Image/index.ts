@@ -11,6 +11,14 @@ interface IImageProps extends TBlockBaseProps {
 
 export class Image extends Block<IImageProps> {
   constructor(props: IImageProps) {
-    super(template, props)
+    super({ template, props })
   }
+
+  // componentDidMount() {
+  //   console.log("IMAGE MOUNTED SRC:", this.props.src)
+  // }
+
+  // componentDidUpdate() {
+  //   console.log("IMAGE UPDATED SRC:", this.props.src)
+  // }
 }

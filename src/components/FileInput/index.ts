@@ -10,6 +10,6 @@ type TFileInputProps = TBlockBaseProps & {
 
 export class FileInput extends Block<TFileInputProps> {
   constructor(props: TFileInputProps) {
-    super(template, props)
+    super({ template, props })
   }
 }
