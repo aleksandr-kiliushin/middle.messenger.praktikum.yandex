@@ -1,5 +1,10 @@
 export const template = `
-<div class="chats-list-item">
+<div
+  class="
+    chats-list-item
+    {{#if isActive}}chats-list-item-active{{/if}}
+  "
+>
   <img
     alt="Chat avatar"
     class="avatar chats-list-item_avatar"

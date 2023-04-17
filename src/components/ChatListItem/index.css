@@ -7,6 +7,7 @@
   column-gap: 8px;
   row-gap: 4px;
   height: 48px;
+  cursor: pointer;
 }
 
 .chats-list-item_avatar {
@@ -20,6 +21,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.chats-list-item-active .chats-list-item_name,
+.chats-list-item:hover .chats-list-item_name {
+  color: var(--primary-500);
 }
 
 .chats-list-item_message {

@@ -8,6 +8,7 @@ export type TChatListItemProps = TBlockBaseProps & {
   message: string
   name: string
   unreadMessagesCount: number
+  isActive: boolean
 }
 
 export class ChatListItem extends Block<TChatListItemProps> {

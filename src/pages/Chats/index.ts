@@ -29,7 +29,7 @@ const fieldsRulesConfig = {
 const validateField = createFieldValidator({ fieldsRulesConfig })
 
 type TChatOwnProps = TBlockBaseProps
-type TChatPropsFromStore = Pick<TStoreState, "chats" | "isChatCreationModalOpen">
+type TChatPropsFromStore = Pick<TStoreState, "chats" | "isChatCreationModalOpen" | "openChatId">
 type TChatProps = TChatOwnProps & TChatPropsFromStore
 
 class _Chats extends Block<TChatProps> {
@@ -80,6 +80,12 @@ class _Chats extends Block<TChatProps> {
                       message: chat.last_message === null ? "Нет сообщений" : chat.last_message.content,
                       name: chat.title,
                       unreadMessagesCount: chat.unread_count,
+                      eventsListeners: {
+                        click: () => {
+                          store.setState("openChatId", chat.id)
+                        },
+                      },
+                      isActive: store.getState().openChatId === chat.id,
                     })
                   }),
                 }),
@@ -188,4 +194,4 @@ class _Chats extends Block<TChatProps> {
   }
 }
 
-export const Chats = withStore(["chats", "isChatCreationModalOpen"])(_Chats)
+export const Chats = withStore(["chats", "isChatCreationModalOpen", "openChatId"])(_Chats)
