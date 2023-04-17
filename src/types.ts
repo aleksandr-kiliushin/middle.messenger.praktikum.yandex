@@ -10,3 +10,15 @@ export type TUser = {
 }
 
 export type TLoadingStatus = "DONE" | "FAILED" | "INITIAL" | "LOADING"
+
+export type TChat = {
+  id: number
+  title: string
+  avatar: string
+  unread_count: number
+  last_message: {
+    user: TUser
+    time: string
+    content: string
+  } | null
+}

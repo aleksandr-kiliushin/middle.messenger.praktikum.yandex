@@ -1,4 +1,4 @@
-import { TUser } from "src/types"
+import { TUser } from "@types"
 
 import { request } from "@utils/request"
 

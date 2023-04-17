@@ -1,3 +1,6 @@
+import { chatsController } from "@controllers/chatsController"
+import { TStoreState, withStore } from "@store"
+
 import { Anchor } from "@components/Anchor"
 import { Box } from "@components/Box"
 import { Button } from "@components/Button"
@@ -9,12 +12,12 @@ import { Message } from "@components/Message"
 import { PageWrapper } from "@components/PageWrapper"
 import { TextArea } from "@components/TextArea"
 
-import { Block } from "@utils/Block"
+import { Block, TBlockBaseProps } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
 
-import { chatListItems, messagesByDate } from "./data"
+import { messagesByDate } from "./data"
 import "./index.css"
 
 const fieldsRulesConfig = {
@@ -23,7 +26,15 @@ const fieldsRulesConfig = {
 
 const validateField = createFieldValidator({ fieldsRulesConfig })
 
-export class Chats extends Block {
+type TChatOwnProps = TBlockBaseProps
+type TChatPropsFromStore = Pick<TStoreState, "chats">
+type TChatProps = TChatOwnProps & TChatPropsFromStore
+
+class _Chats extends Block<TChatProps> {
+  constructor(props: TChatProps) {
+    super({ props })
+  }
+
   render() {
     return {
       children: [
@@ -45,12 +56,19 @@ export class Chats extends Block {
                 new Box({
                   className: "chats-pane_chats-list",
                   tag: "div",
-                  children: chatListItems.map((item) => new ChatListItem(item)),
+                  // children: chatListItems.map((item) => new ChatListItem(item)),
+                  children: this.props.chats.map((chat) => {
+                    return new ChatListItem({
+                      datetime: chat.last_message === null ? "" : chat.last_message.time,
+                      message: chat.last_message === null ? "Нет сообщений" : chat.last_message.content,
+                      name: chat.title,
+                      unreadMessagesCount: chat.unread_count,
+                    })
+                  }),
                 }),
               ],
             }),
             new Box({
-              className: "chats-pane",
               tag: "div",
               children: [
                 new Box({
@@ -123,10 +141,14 @@ export class Chats extends Block {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await chatsController.fetchAndSetChats()
+
     const chatMessagesBlock = document.querySelector(".chat_messages")
     if (chatMessagesBlock instanceof HTMLDivElement) {
       chatMessagesBlock.scrollTo(0, chatMessagesBlock.scrollHeight)
     }
   }
 }
+
+export const Chats = withStore(["chats"])(_Chats)

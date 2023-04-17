@@ -1,16 +1,18 @@
 import { _Settings } from "@pages/Settings"
-import { TUser } from "@types"
+import { TChat, TUser } from "@types"
 
 import { TBlockBaseProps } from "@utils/Block"
 import { EventBus } from "@utils/EventBus"
 
 export type TStoreState = {
   authorizedUserData: TUser | null
+  chats: TChat[]
   // authorizedUserLoadingStatus: TLoadingStatus
 }
 
 const initialState: TStoreState = {
   authorizedUserData: null,
+  chats: [],
   // authorizedUserLoadingStatus: "INITIAL",
 }
 
@@ -46,8 +48,7 @@ const getPropsFromStore = <TStoreStateKey extends keyof TStoreState>({
   for (const key of storeStateKeys) {
     result[key] = store.getState()[key]
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return result as any
+  return result as any // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export const withStore = <TOwnProps extends TBlockBaseProps, TStoreStateKey extends keyof TStoreState>(
