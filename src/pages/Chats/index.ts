@@ -118,7 +118,11 @@ class _Chats extends Block<TChatProps> {
                         src: "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg",
                         width: 36,
                       }),
-                      new Box({ tag: "span", content: "Вадим", className: "currently-open-chat_name" }),
+                      new Box({
+                        tag: "span",
+                        content: this.props.chats.find((chat) => chat.id === this.props.activeChatId)?.title ?? "Чат не выбран",
+                        className: "currently-open-chat_name",
+                      }),
                     ],
                   }),
                   new Button({ startIconName: "more_vert", type: "button" }),
