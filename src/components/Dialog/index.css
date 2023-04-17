@@ -1,0 +1,35 @@
+.dialog {
+  position: absolute;
+  display: grid;
+  row-gap: 16px;
+  left: 50%;
+  top: 50%;
+  background-color: gray;
+  border-radius: 8px;
+  transform: translate(-50%, -50%);
+}
+
+.dialog::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -1000px;
+  top: -1000px;
+  height: 4000px;
+  width: 4000px;
+  background-color: #6668;
+}
+
+.dialog-header {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 16px;
+  padding: 8px;
+  color: white;
+}
+
+.dialog-body {
+  padding: 8px;
+}

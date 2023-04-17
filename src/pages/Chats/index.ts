@@ -5,6 +5,7 @@ import { Anchor } from "@components/Anchor"
 import { Box } from "@components/Box"
 import { Button } from "@components/Button"
 import { ChatListItem } from "@components/ChatListItem"
+import { Dialog } from "@components/Dialog"
 import { FileInput } from "@components/FileInput"
 import { Image } from "@components/Image"
 import { Input } from "@components/Input"
@@ -36,6 +37,14 @@ class _Chats extends Block<TChatProps> {
   }
 
   render() {
+    const createChat = createFormSubmitter({
+      fieldsRulesConfig: {},
+      onValidationSuccess: async ({ formValues }) => {
+        console.log("formValues >>", formValues)
+        // chatsController.createChat({ payload: formValues })
+      },
+    })
+
     return {
       children: [
         new PageWrapper({
@@ -146,12 +155,23 @@ class _Chats extends Block<TChatProps> {
         }),
         // ...(this.props.isChatCreationModalOpen
         //   ? [
-        //       new Box({
-        //         tag: "div",
-        //         content: "HER",
-        //       }),
-        //     ]
-        //   : []),
+        new Dialog({
+          heading: "Создать чат",
+          onClose: () => store.setState("isChatCreationModalOpen", false),
+          children: [
+            new Box({
+              tag: "form",
+              className: "rows",
+              eventsListeners: { submit: createChat },
+              children: [
+                new Input({ initialValue: "", name: "chatName", type: "text", placeholder: "Имя чата ..." }),
+                new Button({ type: "submit", text: "Создать" }),
+              ],
+            }),
+          ],
+        }),
+        //   ]
+        // : []),
       ],
     }
   }
