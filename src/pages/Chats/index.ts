@@ -39,150 +39,151 @@ class _Chats extends Block<TChatProps> {
   }
 
   render() {
-    const createChat = createFormSubmitter<TCreateChatPayload>({
-      fieldsRulesConfig: {},
-      onValidationSuccess: async ({ formValues }) => {
-        console.log("formValues >>", formValues)
-        await chatsController.createChat({ payload: formValues })
-        store.setState("isChatCreationModalOpen", false)
-      },
-    })
+    const children: TBlockBaseProps["children"] = [
+      new PageWrapper({
+        mainClass: "chats",
+        children: [
+          new Box({
+            className: "chats-pane",
+            tag: "div",
+            children: [
+              new Box({
+                className: "chats-pane_header",
+                tag: "div",
+                children: [
+                  new Button({
+                    type: "button",
+                    text: "Создать чат",
+                    className: "cleate_chat_button",
+                    eventsListeners: { click: () => store.setState("isChatCreationModalOpen", true) },
+                  }),
+                  new Anchor({ content: "Профиль", href: "/profile", className: "profile_anchor" }),
+                ],
+              }),
+              new Input({ initialValue: "", name: "search", type: "text", placeholder: "Поиск ..." }),
+              new Box({
+                className: "chats-pane_chats-list",
+                tag: "div",
+                // children: chatListItems.map((item) => new ChatListItem(item)),
+                children: this.props.chats.map((chat) => {
+                  return new ChatListItem({
+                    datetime: chat.last_message === null ? "" : chat.last_message.time,
+                    message: chat.last_message === null ? "Нет сообщений" : chat.last_message.content,
+                    name: chat.title,
+                    unreadMessagesCount: chat.unread_count,
+                    eventsListeners: {
+                      click: () => {
+                        store.setState("activeChatId", chat.id)
+                      },
+                    },
+                    isActive: store.getState().activeChatId === chat.id,
+                  })
+                }),
+              }),
+            ],
+          }),
+          new Box({
+            tag: "div",
+            className: "chat",
+            children: [
+              new Box({
+                className: "chat_header",
+                tag: "div",
+                children: [
+                  new Box({
+                    tag: "div",
+                    className: "currently-open-chat",
+                    children: [
+                      new Image({
+                        alt: "Chat avatar",
+                        className: "avatar",
+                        height: 36,
+                        src: "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg",
+                        width: 36,
+                      }),
+                      new Box({ tag: "span", content: "Вадим", className: "currently-open-chat_name" }),
+                    ],
+                  }),
+                  new Button({ startIconName: "more_vert", type: "button" }),
+                ],
+              }),
+              new Box({
+                className: "chat_messages",
+                tag: "div",
+                children: messagesByDate.map(({ date, messages }) => {
+                  return new Box({
+                    tag: "div",
+                    className: "messages-date-block",
+                    children: [
+                      new Box({ tag: "p", className: "messages-date-block_date", content: date }),
+                      ...messages.map((message) => new Message(message)),
+                    ],
+                  })
+                }),
+              }),
+              new Box({
+                className: "chat_form",
+                tag: "form",
+                eventsListeners: {
+                  submit: createFormSubmitter({
+                    fieldsRulesConfig,
+                    onValidationSuccess: console.log,
+                  }),
+                },
+                children: [
+                  new FileInput({ name: "attachment" }),
+                  new TextArea({
+                    name: "message",
+                    eventsListeners: {
+                      input: (event) => {
+                        validateField(event)
+                        if (event.target instanceof HTMLTextAreaElement) {
+                          event.target.style.height = ""
+                          event.target.style.height = event.target.scrollHeight + "px"
+                        }
+                      },
+                      blur: validateField,
+                    },
+                  }),
+                  new Button({ startIconName: "send", type: "submit" }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      }),
+    ]
 
-    return {
-      children: [
-        new PageWrapper({
-          mainClass: "chats",
+    if (this.props.isChatCreationModalOpen) {
+      const createChat = createFormSubmitter<TCreateChatPayload>({
+        fieldsRulesConfig: {},
+        onValidationSuccess: async ({ formValues }) => {
+          console.log("formValues >>", formValues)
+          await chatsController.createChat({ payload: formValues })
+          store.setState("isChatCreationModalOpen", false)
+        },
+      })
+
+      children.push(
+        new Dialog({
+          heading: "Создать чат",
+          onClose: () => store.setState("isChatCreationModalOpen", false),
           children: [
             new Box({
-              className: "chats-pane",
-              tag: "div",
+              tag: "form",
+              className: "rows",
+              eventsListeners: { submit: createChat },
               children: [
-                new Box({
-                  className: "chats-pane_header",
-                  tag: "div",
-                  children: [
-                    new Button({
-                      type: "button",
-                      text: "Создать чат",
-                      className: "cleate_chat_button",
-                      eventsListeners: { click: () => store.setState("isChatCreationModalOpen", true) },
-                    }),
-                    new Anchor({ content: "Профиль", href: "/profile", className: "profile_anchor" }),
-                  ],
-                }),
-                new Input({ initialValue: "", name: "search", type: "text", placeholder: "Поиск ..." }),
-                new Box({
-                  className: "chats-pane_chats-list",
-                  tag: "div",
-                  // children: chatListItems.map((item) => new ChatListItem(item)),
-                  children: this.props.chats.map((chat) => {
-                    return new ChatListItem({
-                      datetime: chat.last_message === null ? "" : chat.last_message.time,
-                      message: chat.last_message === null ? "Нет сообщений" : chat.last_message.content,
-                      name: chat.title,
-                      unreadMessagesCount: chat.unread_count,
-                      eventsListeners: {
-                        click: () => {
-                          store.setState("activeChatId", chat.id)
-                        },
-                      },
-                      isActive: store.getState().activeChatId === chat.id,
-                    })
-                  }),
-                }),
-              ],
-            }),
-            new Box({
-              tag: "div",
-              className: "chat",
-              children: [
-                new Box({
-                  className: "chat_header",
-                  tag: "div",
-                  children: [
-                    new Box({
-                      tag: "div",
-                      className: "currently-open-chat",
-                      children: [
-                        new Image({
-                          alt: "Chat avatar",
-                          className: "avatar",
-                          height: 36,
-                          src: "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg",
-                          width: 36,
-                        }),
-                        new Box({ tag: "span", content: "Вадим", className: "currently-open-chat_name" }),
-                      ],
-                    }),
-                    new Button({ startIconName: "more_vert", type: "button" }),
-                  ],
-                }),
-                new Box({
-                  className: "chat_messages",
-                  tag: "div",
-                  children: messagesByDate.map(({ date, messages }) => {
-                    return new Box({
-                      tag: "div",
-                      className: "messages-date-block",
-                      children: [
-                        new Box({ tag: "p", className: "messages-date-block_date", content: date }),
-                        ...messages.map((message) => new Message(message)),
-                      ],
-                    })
-                  }),
-                }),
-                new Box({
-                  className: "chat_form",
-                  tag: "form",
-                  eventsListeners: {
-                    submit: createFormSubmitter({
-                      fieldsRulesConfig,
-                      onValidationSuccess: console.log,
-                    }),
-                  },
-                  children: [
-                    new FileInput({ name: "attachment" }),
-                    new TextArea({
-                      name: "message",
-                      eventsListeners: {
-                        input: (event) => {
-                          validateField(event)
-                          if (event.target instanceof HTMLTextAreaElement) {
-                            event.target.style.height = ""
-                            event.target.style.height = event.target.scrollHeight + "px"
-                          }
-                        },
-                        blur: validateField,
-                      },
-                    }),
-                    new Button({ startIconName: "send", type: "submit" }),
-                  ],
-                }),
+                new Input({ initialValue: "", name: "title", type: "text", placeholder: "Имя чата ..." }),
+                new Button({ type: "submit", text: "Создать" }),
               ],
             }),
           ],
-        }),
-        ...(this.props.isChatCreationModalOpen
-          ? [
-              new Dialog({
-                heading: "Создать чат",
-                onClose: () => store.setState("isChatCreationModalOpen", false),
-                children: [
-                  new Box({
-                    tag: "form",
-                    className: "rows",
-                    eventsListeners: { submit: createChat },
-                    children: [
-                      new Input({ initialValue: "", name: "title", type: "text", placeholder: "Имя чата ..." }),
-                      new Button({ type: "submit", text: "Создать" }),
-                    ],
-                  }),
-                ],
-              }),
-            ]
-          : []),
-      ],
+        })
+      )
     }
+
+    return { children }
   }
 
   async componentDidMount() {
