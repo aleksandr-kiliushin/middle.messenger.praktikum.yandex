@@ -1,5 +1,5 @@
 import { chatsController } from "@controllers/chatsController"
-import { TStoreState, withStore } from "@store"
+import { TStoreState, store, withStore } from "@store"
 
 import { Anchor } from "@components/Anchor"
 import { Box } from "@components/Box"
@@ -27,7 +27,7 @@ const fieldsRulesConfig = {
 const validateField = createFieldValidator({ fieldsRulesConfig })
 
 type TChatOwnProps = TBlockBaseProps
-type TChatPropsFromStore = Pick<TStoreState, "chats">
+type TChatPropsFromStore = Pick<TStoreState, "chats" | "isChatCreationModalOpen">
 type TChatProps = TChatOwnProps & TChatPropsFromStore
 
 class _Chats extends Block<TChatProps> {
@@ -49,10 +49,16 @@ class _Chats extends Block<TChatProps> {
                   className: "chats-pane_header",
                   tag: "div",
                   children: [
-                    new Anchor({ content: "Профиль", href: "/profile" }),
-                    new Input({ initialValue: "", name: "search", type: "text", placeholder: "Поиск ..." }),
+                    new Button({
+                      type: "button",
+                      text: "Создать чат",
+                      className: "cleate_chat_button",
+                      eventsListeners: { click: () => store.setState("isChatCreationModalOpen", true) },
+                    }),
+                    new Anchor({ content: "Профиль", href: "/profile", className: "profile_anchor" }),
                   ],
                 }),
+                new Input({ initialValue: "", name: "search", type: "text", placeholder: "Поиск ..." }),
                 new Box({
                   className: "chats-pane_chats-list",
                   tag: "div",
@@ -70,6 +76,7 @@ class _Chats extends Block<TChatProps> {
             }),
             new Box({
               tag: "div",
+              className: "chat",
               children: [
                 new Box({
                   className: "chat_header",
@@ -137,6 +144,14 @@ class _Chats extends Block<TChatProps> {
             }),
           ],
         }),
+        // ...(this.props.isChatCreationModalOpen
+        //   ? [
+        //       new Box({
+        //         tag: "div",
+        //         content: "HER",
+        //       }),
+        //     ]
+        //   : []),
       ],
     }
   }

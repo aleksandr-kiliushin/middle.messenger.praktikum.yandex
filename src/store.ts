@@ -7,13 +7,13 @@ import { EventBus } from "@utils/EventBus"
 export type TStoreState = {
   authorizedUserData: TUser | null
   chats: TChat[]
-  // authorizedUserLoadingStatus: TLoadingStatus
+  isChatCreationModalOpen: boolean
 }
 
 const initialState: TStoreState = {
   authorizedUserData: null,
   chats: [],
-  // authorizedUserLoadingStatus: "INITIAL",
+  isChatCreationModalOpen: false,
 }
 
 class Store extends EventBus<{

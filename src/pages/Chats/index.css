@@ -7,7 +7,7 @@
 
 .chats-pane {
   display: grid;
-  grid-template-rows: min-content auto;
+  grid-template-rows: min-content min-content auto;
   row-gap: 16px;
   padding: 8px 8px 0;
   overflow-y: hidden;
@@ -17,11 +17,9 @@
 
 .chats-pane_header {
   display: grid;
-}
-
-.chats-pane_header a {
-  height: min-content;
-  margin: 4px 12px 16px auto;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .chats-pane_chats-list {

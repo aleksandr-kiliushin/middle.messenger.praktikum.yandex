@@ -7,5 +7,9 @@ export const template = `
   {{#if placeholder}}
     placeholder="{{placeholder}}"
   {{/if}}
+
+  {{#if className}}
+    class="{{className}}"
+  {{/if}}
 />
 `

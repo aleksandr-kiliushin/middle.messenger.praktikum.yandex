@@ -6,6 +6,7 @@ interface IInputProps extends TBlockBaseProps {
   name: string
   type: "password" | "text"
   initialValue: string
+  className?: string
   placeholder?: string
 }
 
