@@ -38,6 +38,23 @@ class _Chats extends Block<TChatProps> {
     super({ props })
   }
 
+  async componentDidMount() {
+    await chatsController.fetchAndSetChats()
+
+    const chatMessagesBlock = document.querySelector(".chat_messages")
+    if (chatMessagesBlock instanceof HTMLDivElement) {
+      chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
+    }
+  }
+
+  async componentDidUpdate() {
+    await wait(0)
+    const chatMessagesBlock = document.querySelector(".chat_messages")
+    if (chatMessagesBlock instanceof HTMLDivElement) {
+      chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
+    }
+  }
+
   render() {
     const children: TBlockBaseProps["children"] = [
       new PageWrapper({
@@ -184,23 +201,6 @@ class _Chats extends Block<TChatProps> {
     }
 
     return { children }
-  }
-
-  async componentDidMount() {
-    await chatsController.fetchAndSetChats()
-
-    const chatMessagesBlock = document.querySelector(".chat_messages")
-    if (chatMessagesBlock instanceof HTMLDivElement) {
-      chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
-    }
-  }
-
-  async componentDidUpdate() {
-    await wait(0)
-    const chatMessagesBlock = document.querySelector(".chat_messages")
-    if (chatMessagesBlock instanceof HTMLDivElement) {
-      chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
-    }
   }
 }
 
