@@ -18,6 +18,7 @@ import { Block, TBlockBaseProps } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
+import { wait } from "@utils/wait"
 
 import { messagesByDate } from "./data"
 import "./index.css"
@@ -29,7 +30,7 @@ const fieldsRulesConfig = {
 const validateField = createFieldValidator({ fieldsRulesConfig })
 
 type TChatOwnProps = TBlockBaseProps
-type TChatPropsFromStore = Pick<TStoreState, "chats" | "isChatCreationModalOpen" | "openChatId">
+type TChatPropsFromStore = Pick<TStoreState, "activeChatId" | "chats" | "isChatCreationModalOpen">
 type TChatProps = TChatOwnProps & TChatPropsFromStore
 
 class _Chats extends Block<TChatProps> {
@@ -82,10 +83,10 @@ class _Chats extends Block<TChatProps> {
                       unreadMessagesCount: chat.unread_count,
                       eventsListeners: {
                         click: () => {
-                          store.setState("openChatId", chat.id)
+                          store.setState("activeChatId", chat.id)
                         },
                       },
-                      isActive: store.getState().openChatId === chat.id,
+                      isActive: store.getState().activeChatId === chat.id,
                     })
                   }),
                 }),
@@ -189,9 +190,17 @@ class _Chats extends Block<TChatProps> {
 
     const chatMessagesBlock = document.querySelector(".chat_messages")
     if (chatMessagesBlock instanceof HTMLDivElement) {
-      chatMessagesBlock.scrollTo(0, chatMessagesBlock.scrollHeight)
+      chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
+    }
+  }
+
+  async componentDidUpdate() {
+    await wait(0)
+    const chatMessagesBlock = document.querySelector(".chat_messages")
+    if (chatMessagesBlock instanceof HTMLDivElement) {
+      chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
     }
   }
 }
 
-export const Chats = withStore(["chats", "isChatCreationModalOpen", "openChatId"])(_Chats)
+export const Chats = withStore(["chats", "isChatCreationModalOpen", "activeChatId"])(_Chats)

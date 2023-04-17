@@ -8,14 +8,14 @@ export type TStoreState = {
   authorizedUserData: TUser | null
   chats: TChat[]
   isChatCreationModalOpen: boolean
-  openChatId: TChat["id"] | null
+  activeChatId: TChat["id"] | null
 }
 
 const initialState: TStoreState = {
   authorizedUserData: null,
   chats: [],
   isChatCreationModalOpen: false,
-  openChatId: null,
+  activeChatId: null,
 }
 
 class Store extends EventBus<{
