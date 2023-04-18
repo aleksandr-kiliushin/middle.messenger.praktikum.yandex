@@ -5,7 +5,7 @@ import { template } from "./template"
 
 export type TMessageProps = TBlockBaseProps & {
   imageSrc?: string
-  isMessageByAuthorizedUser?: boolean
+  isMessageByAuthorizedUser: boolean
   text?: string
   time: string
 }

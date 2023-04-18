@@ -20,8 +20,8 @@ import { Block, TBlockBaseProps } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
+import { formatDatetime } from "@utils/formatDatetime"
 
-import { messagesByDate } from "./data"
 import "./index.css"
 
 const fieldsRulesConfig = {
@@ -36,6 +36,7 @@ type TChatPropsFromStore = Pick<
   | "activeChatId"
   | "activeChatMessages"
   | "activeChatParticipants"
+  | "authorizedUserData"
   | "chats"
   | "isAddingUserToChatDialogOpen"
   | "isChatCreationDialogOpen"
@@ -56,6 +57,7 @@ class _Chats extends Block<TChatProps> {
     const { activeChatId } = this.props
 
     if (activeChatId !== null && activeChatId !== prevProps.activeChatId) {
+      store.setState("activeChatMessages", [])
       await chatsController.fetchAndSetChatParticipants()
       await chatsController.setupChatConnection()
 
@@ -69,12 +71,16 @@ class _Chats extends Block<TChatProps> {
   render() {
     const {
       activeChatId,
+      activeChatMessages,
       activeChatParticipants,
+      authorizedUserData,
       chats,
       isAddingUserToChatDialogOpen,
       isChatCreationDialogOpen,
       isChatParticipantsDialogOpen,
     } = this.props
+
+    if (authorizedUserData === null) return { children: [] }
 
     const activeChat = chats.find((chat) => chat.id === activeChatId)
 
@@ -148,13 +154,11 @@ class _Chats extends Block<TChatProps> {
               }),
               new Box({
                 className: "chat_messages",
-                children: messagesByDate.map(({ date, messages }) => {
-                  return new Box({
-                    className: "messages-date-block",
-                    children: [
-                      new Box({ tag: "p", className: "messages-date-block_date", content: date }),
-                      ...messages.map((message) => new Message(message)),
-                    ],
+                children: activeChatMessages.map((message) => {
+                  return new Message({
+                    isMessageByAuthorizedUser: message.user_id === authorizedUserData.id,
+                    time: formatDatetime(new Date(message.time)),
+                    text: message.content,
                   })
                 }),
               }),
@@ -271,6 +275,7 @@ export const Chats = withStore([
   "activeChatParticipants",
   "activeChatId",
   "activeChatMessages",
+  "authorizedUserData",
   "chats",
   "isAddingUserToChatDialogOpen",
   "isChatCreationDialogOpen",

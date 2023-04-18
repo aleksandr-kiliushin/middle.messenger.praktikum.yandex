@@ -24,6 +24,7 @@ export type TChat = {
 }
 
 export type TMessage = {
+  id: number
   chat_id: TChat["id"]
   time: string
   type: string

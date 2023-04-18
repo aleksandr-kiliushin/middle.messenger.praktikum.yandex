@@ -77,7 +77,7 @@ export class _Profile extends Block<TProfileProps> {
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Имя в чате" }),
-                    new Box({ className: "row-detail", content: authorizedUserData?.display_name }),
+                    new Box({ className: "row-detail", content: authorizedUserData?.display_name ?? "--" }),
                   ],
                 }),
                 new Box({

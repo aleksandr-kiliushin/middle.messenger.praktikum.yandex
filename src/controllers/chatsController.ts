@@ -53,6 +53,7 @@ class ChatsController {
     const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${authorizedUserData.id}/${activeChatId}/${token}`)
     socket.addEventListener("open", () => {
       console.log("Соединение установлено")
+      socket.send(JSON.stringify({ content: "Моё первое сообщение миру!", type: "message" }))
     })
     socket.addEventListener("close", (event) => {
       if (event.wasClean) {
@@ -64,6 +65,7 @@ class ChatsController {
     })
     socket.addEventListener("message", (event) => {
       console.log("Получены данные:", event.data)
+      store.setState("activeChatMessages", [...store.getState().activeChatMessages, JSON.parse(event.data)])
     })
     socket.addEventListener("error", (event) => {
       if ("message" in event) {
