@@ -37,15 +37,6 @@ export class _Settings extends Block<TSettingsProps> {
     super({ props })
   }
 
-  // componentDidMount() {
-  //   console.log("    SETTINGS MOUNTED EMAIL:", this.props.authorizedUserData?.email)
-  //   console.log("")
-  // }
-  // componentDidUpdate(previousProps: TSettingsProps) {
-  //   console.log("    SETTINGS PREVIOUS EMAIL >>", previousProps.authorizedUserData?.email)
-  //   console.log("    SETTINGS UPDATED EMAIL:", this.props.authorizedUserData?.email)
-  // }
-
   render() {
     const { authorizedUserData } = this.props
 

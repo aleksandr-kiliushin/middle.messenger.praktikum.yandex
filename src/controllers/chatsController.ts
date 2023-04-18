@@ -66,7 +66,6 @@ class ChatsController {
     })
     socket.addEventListener("message", (event) => {
       const eventData = JSON.parse(event.data)
-      // console.log("Получены данные:", eventData)
 
       if (eventData instanceof Array) {
         store.setState("activeChatMessages", [...eventData.reverse(), ...store.getState().activeChatMessages])

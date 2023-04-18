@@ -12,13 +12,4 @@ export class Box extends Block<TBoxProps> {
   constructor(props: TBoxProps) {
     super({ template, props })
   }
-
-  // componentDidMount() {
-  //   console.log("BOX MOUNTS, EMAIL:", this.props.content)
-  // }
-
-  // componentDidUpdate(prevProps: TBoxProps) {
-  //   console.log("BOX UPDATES, PREV EMAIL:", prevProps.content)
-  //   console.log("BOX UPDATES, NEXT EMAIL:", this.props.content)
-  // }
 }
