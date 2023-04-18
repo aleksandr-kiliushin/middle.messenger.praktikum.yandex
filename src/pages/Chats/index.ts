@@ -185,6 +185,15 @@ class _Chats extends Block<TChatProps> {
                           event.target.style.height = event.target.scrollHeight + "px"
                         }
                       },
+                      keypress: (event) => {
+                        if (!(event instanceof KeyboardEvent)) return
+                        if (!(event.target instanceof HTMLTextAreaElement)) return
+
+                        if (event && event.key === "Enter" && !event.shiftKey) {
+                          event.preventDefault()
+                          chatsController.sendMessage({ content: event.target.value })
+                        }
+                      },
                       blur: validateField,
                     },
                   }),
