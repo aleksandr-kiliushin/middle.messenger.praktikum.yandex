@@ -30,7 +30,7 @@ export class EventBus<TEventParamsByEventName extends Record<string, unknown>> {
     const eventsListeners = this.eventsHandlersByEventName[eventName]
 
     if (eventsListeners === undefined) {
-      throw new Error(`There is no "${String(eventName)}" event.`)
+      throw new Error(`There is no "${String(eventName)}" event registered.`)
     }
 
     eventsListeners.push(eventListener)
@@ -46,7 +46,7 @@ export class EventBus<TEventParamsByEventName extends Record<string, unknown>> {
     const eventsListeners = this.eventsHandlersByEventName[eventName]
 
     if (eventsListeners === undefined) {
-      throw new Error(`There is no "${String(eventName)}" event.`)
+      throw new Error(`There is no "${String(eventName)}" event registered.`)
     }
 
     eventsListeners.forEach((eventListener) => {
