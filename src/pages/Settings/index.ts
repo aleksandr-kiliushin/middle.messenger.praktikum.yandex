@@ -1,4 +1,5 @@
 import { TEditSettingsPayload } from "@api/UsersApi"
+import { DEFUALT_AVATAR_SRC, RESOURCES_BASE_URL } from "@constants"
 import { usersController } from "@controllers/usersController"
 import { TStoreState, withStore } from "@store"
 
@@ -46,6 +47,8 @@ export class _Settings extends Block<TSettingsProps> {
   // }
 
   render() {
+    const { authorizedUserData } = this.props
+
     return {
       children: [
         new PageWrapper({
@@ -67,10 +70,7 @@ export class _Settings extends Block<TSettingsProps> {
                           alt: "Avatar",
                           height: 200,
                           width: 200,
-                          src:
-                            this.props.authorizedUserData?.avatar === null
-                              ? "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
-                              : "https://ya-praktikum.tech/api/v2/resources" + this.props.authorizedUserData?.avatar,
+                          src: authorizedUserData?.avatar ? RESOURCES_BASE_URL + authorizedUserData.avatar : DEFUALT_AVATAR_SRC,
                           className: "avatar",
                         }),
                       ],
@@ -108,7 +108,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "email",
                           type: "text",
-                          initialValue: this.props.authorizedUserData?.email ?? "",
+                          initialValue: authorizedUserData?.email ?? "",
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],
@@ -121,7 +121,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "login",
                           type: "text",
-                          initialValue: this.props.authorizedUserData?.login ?? "",
+                          initialValue: authorizedUserData?.login ?? "",
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],
@@ -134,7 +134,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "first_name",
                           type: "text",
-                          initialValue: this.props.authorizedUserData?.first_name ?? "",
+                          initialValue: authorizedUserData?.first_name ?? "",
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],
@@ -147,7 +147,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "second_name",
                           type: "text",
-                          initialValue: this.props.authorizedUserData?.second_name ?? "",
+                          initialValue: authorizedUserData?.second_name ?? "",
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],
@@ -160,7 +160,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "display_name",
                           type: "text",
-                          initialValue: this.props.authorizedUserData?.display_name ?? "",
+                          initialValue: authorizedUserData?.display_name ?? "",
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],
@@ -173,7 +173,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "phone",
                           type: "text",
-                          initialValue: this.props.authorizedUserData?.phone ?? "",
+                          initialValue: authorizedUserData?.phone ?? "",
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],

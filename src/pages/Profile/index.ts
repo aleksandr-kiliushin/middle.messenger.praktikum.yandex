@@ -1,3 +1,4 @@
+import { DEFUALT_AVATAR_SRC, RESOURCES_BASE_URL } from "@constants"
 import { authController } from "@controllers/authController"
 import { TStoreState, withStore } from "@store"
 
@@ -21,6 +22,8 @@ export class _Profile extends Block<TProfileProps> {
   }
 
   render() {
+    const { authorizedUserData } = this.props
+
     return {
       children: [
         new PageWrapper({
@@ -36,10 +39,7 @@ export class _Profile extends Block<TProfileProps> {
                   children: [
                     new Label({ className: "row-label", content: "Аватар" }),
                     new Image({
-                      src:
-                        this.props.authorizedUserData?.avatar === null
-                          ? "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
-                          : "https://ya-praktikum.tech/api/v2/resources" + this.props.authorizedUserData?.avatar,
+                      src: authorizedUserData?.avatar ? RESOURCES_BASE_URL + authorizedUserData.avatar : DEFUALT_AVATAR_SRC,
                       className: "avatar",
                       alt: "Avatar",
                       height: 200,
@@ -52,7 +52,7 @@ export class _Profile extends Block<TProfileProps> {
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Почта" }),
-                    new Box({ className: "row-detail", tag: "div", content: this.props.authorizedUserData?.email }),
+                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.email }),
                   ],
                 }),
                 new Box({
@@ -60,7 +60,7 @@ export class _Profile extends Block<TProfileProps> {
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Логин" }),
-                    new Box({ className: "row-detail", tag: "div", content: this.props.authorizedUserData?.login }),
+                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.login }),
                   ],
                 }),
                 new Box({
@@ -68,7 +68,7 @@ export class _Profile extends Block<TProfileProps> {
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Имя" }),
-                    new Box({ className: "row-detail", tag: "div", content: this.props.authorizedUserData?.first_name }),
+                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.first_name }),
                   ],
                 }),
                 new Box({
@@ -76,7 +76,7 @@ export class _Profile extends Block<TProfileProps> {
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Фамилия" }),
-                    new Box({ className: "row-detail", tag: "div", content: this.props.authorizedUserData?.second_name }),
+                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.second_name }),
                   ],
                 }),
                 new Box({
@@ -84,7 +84,7 @@ export class _Profile extends Block<TProfileProps> {
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Имя в чате" }),
-                    new Box({ className: "row-detail", tag: "div", content: this.props.authorizedUserData?.display_name }),
+                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.display_name }),
                   ],
                 }),
                 new Box({
@@ -92,7 +92,7 @@ export class _Profile extends Block<TProfileProps> {
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Телефон" }),
-                    new Box({ className: "row-detail", tag: "div", content: this.props.authorizedUserData?.phone }),
+                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.phone }),
                   ],
                 }),
                 new Anchor({ content: "Изменить данные", href: "/settings" }),

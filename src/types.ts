@@ -14,7 +14,7 @@ export type TLoadingStatus = "DONE" | "FAILED" | "INITIAL" | "LOADING"
 export type TChat = {
   id: number
   title: string
-  avatar: string
+  avatar: string | null
   unread_count: number
   last_message: {
     user: TUser

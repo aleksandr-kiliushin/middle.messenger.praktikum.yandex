@@ -1,4 +1,5 @@
 import { TCreateChatPayload } from "@api/ChatsApi"
+import { DEFUALT_AVATAR_SRC, RESOURCES_BASE_URL } from "@constants"
 import { chatsController } from "@controllers/chatsController"
 import { TStoreState, store, withStore } from "@store"
 
@@ -61,6 +62,17 @@ class _Chats extends Block<TChatProps> {
   }
 
   render() {
+    const {
+      activeChatId,
+      activeChatParticipants,
+      chats,
+      isAddingUserToChatDialogOpen,
+      isChatCreationDialogOpen,
+      isChatParticipantsDialogOpen,
+    } = this.props
+
+    const activeChat = chats.find((chat) => chat.id === activeChatId)
+
     const children: TBlockBaseProps["children"] = [
       new PageWrapper({
         mainClass: "chats",
@@ -86,7 +98,7 @@ class _Chats extends Block<TChatProps> {
               new Box({
                 className: "chats-pane_chats-list",
                 tag: "div",
-                children: this.props.chats.map((chat) => {
+                children: chats.map((chat) => {
                   return new ChatListItem({
                     datetime: chat.last_message === null ? "" : chat.last_message.time,
                     message: chat.last_message === null ? "Нет сообщений" : chat.last_message.content,
@@ -119,12 +131,12 @@ class _Chats extends Block<TChatProps> {
                         alt: "Chat avatar",
                         className: "avatar",
                         height: 36,
-                        src: "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg",
+                        src: activeChat?.avatar ? RESOURCES_BASE_URL + activeChat.avatar : DEFUALT_AVATAR_SRC,
                         width: 36,
                       }),
                       new Box({
                         tag: "span",
-                        content: this.props.chats.find((chat) => chat.id === this.props.activeChatId)?.title ?? "Чат не выбран",
+                        content: activeChat?.title ?? "Чат не выбран",
                         className: "currently-open-chat_name",
                       }),
                     ],
@@ -136,13 +148,13 @@ class _Chats extends Block<TChatProps> {
                       new Button({
                         startIconName: "group",
                         type: "button",
-                        className: this.props.activeChatId === null ? "display_none" : "",
+                        className: activeChatId === null ? "display_none" : "",
                         eventsListeners: { click: () => store.setState("isChatParticipantsDialogOpen", true) },
                       }),
                       new Button({
                         startIconName: "person_add",
                         type: "button",
-                        className: this.props.activeChatId === null ? "display_none" : "",
+                        className: activeChatId === null ? "display_none" : "",
                         eventsListeners: { click: () => store.setState("isAddingUserToChatDialogOpen", true) },
                       }),
                     ],
@@ -196,7 +208,7 @@ class _Chats extends Block<TChatProps> {
       }),
     ]
 
-    if (this.props.isChatCreationDialogOpen) {
+    if (isChatCreationDialogOpen) {
       const createChat = createFormSubmitter<TCreateChatPayload>({
         fieldsRulesConfig: {},
         onValidationSuccess: async ({ formValues }) => {
@@ -223,13 +235,13 @@ class _Chats extends Block<TChatProps> {
       )
     }
 
-    if (this.props.isAddingUserToChatDialogOpen) {
+    if (isAddingUserToChatDialogOpen) {
       const addUserToChat = createFormSubmitter({
         fieldsRulesConfig: {},
         onValidationSuccess: async ({ formValues }) => {
-          if (this.props.activeChatId === null) return
+          if (activeChatId === null) return
           await chatsController.addUserToChat({
-            payload: { users: [Number(formValues.userId)], chatId: this.props.activeChatId },
+            payload: { users: [Number(formValues.userId)], chatId: activeChatId },
           })
           store.setState("isAddingUserToChatDialogOpen", false)
         },
@@ -253,7 +265,7 @@ class _Chats extends Block<TChatProps> {
       )
     }
 
-    if (this.props.isChatParticipantsDialogOpen) {
+    if (isChatParticipantsDialogOpen) {
       children.push(
         new Dialog({
           heading: "Участники чата",
@@ -262,7 +274,7 @@ class _Chats extends Block<TChatProps> {
             new Box({
               tag: "div",
               className: "rows",
-              children: this.props.activeChatParticipants.map((participant) => {
+              children: activeChatParticipants.map((participant) => {
                 return new Box({ content: participant.display_name, tag: "div" })
               }),
             }),
