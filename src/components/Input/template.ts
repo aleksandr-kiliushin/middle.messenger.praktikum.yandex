@@ -2,7 +2,12 @@ export const template = `
 <input
   id="{{name}}"
   name="{{name}}"
-  type="{{type}}"
+
+  {{#if type}}
+    type="{{type}}"
+  {{else}}
+    type="text"
+  {{/if}}
 
   {{#if placeholder}}
     placeholder="{{placeholder}}"

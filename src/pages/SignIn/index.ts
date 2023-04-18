@@ -48,7 +48,6 @@ export class SignIn extends Block {
                     new Label({ content: "Логин", className: "row-label", for: "login" }),
                     new Input({
                       name: "login",
-                      type: "text",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                     new Box({ className: "row-error" }),

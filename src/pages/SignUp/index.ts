@@ -52,11 +52,7 @@ export class SignUp extends Block {
                   className: "row",
                   children: [
                     new Label({ content: "Почта", className: "row-label", for: "email" }),
-                    new Input({
-                      name: "email",
-                      type: "text",
-                      eventsListeners: { input: validateField, blur: validateField },
-                    }),
+                    new Input({ name: "email", eventsListeners: { input: validateField, blur: validateField } }),
                     new Box({ className: "row-error" }),
                   ],
                 }),
@@ -64,11 +60,7 @@ export class SignUp extends Block {
                   className: "row",
                   children: [
                     new Label({ content: "Логин", className: "row-label", for: "login" }),
-                    new Input({
-                      name: "login",
-                      type: "text",
-                      eventsListeners: { input: validateField, blur: validateField },
-                    }),
+                    new Input({ name: "login", eventsListeners: { input: validateField, blur: validateField } }),
                     new Box({ className: "row-error" }),
                   ],
                 }),
@@ -76,11 +68,7 @@ export class SignUp extends Block {
                   className: "row",
                   children: [
                     new Label({ content: "Имя", className: "row-label", for: "first_name" }),
-                    new Input({
-                      name: "first_name",
-                      type: "text",
-                      eventsListeners: { input: validateField, blur: validateField },
-                    }),
+                    new Input({ name: "first_name", eventsListeners: { input: validateField, blur: validateField } }),
                     new Box({ className: "row-error" }),
                   ],
                 }),
@@ -88,11 +76,7 @@ export class SignUp extends Block {
                   className: "row",
                   children: [
                     new Label({ content: "Фамилия", className: "row-label", for: "second_name" }),
-                    new Input({
-                      name: "second_name",
-                      type: "text",
-                      eventsListeners: { input: validateField, blur: validateField },
-                    }),
+                    new Input({ name: "second_name", eventsListeners: { input: validateField, blur: validateField } }),
                     new Box({ className: "row-error" }),
                   ],
                 }),
@@ -100,11 +84,7 @@ export class SignUp extends Block {
                   className: "row",
                   children: [
                     new Label({ content: "Телефон", className: "row-label", for: "phone" }),
-                    new Input({
-                      name: "phone",
-                      type: "text",
-                      eventsListeners: { input: validateField, blur: validateField },
-                    }),
+                    new Input({ name: "phone", eventsListeners: { input: validateField, blur: validateField } }),
                     new Box({ className: "row-error" }),
                   ],
                 }),

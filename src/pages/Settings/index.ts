@@ -97,7 +97,6 @@ export class _Settings extends Block<TSettingsProps> {
                         new Label({ content: "Почта", className: "row-label", for: "email" }),
                         new Input({
                           name: "email",
-                          type: "text",
                           initialValue: authorizedUserData.email,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
@@ -110,7 +109,6 @@ export class _Settings extends Block<TSettingsProps> {
                         new Label({ content: "Логин", className: "row-label", for: "login" }),
                         new Input({
                           name: "login",
-                          type: "text",
                           initialValue: authorizedUserData.login,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
@@ -123,7 +121,6 @@ export class _Settings extends Block<TSettingsProps> {
                         new Label({ content: "Имя", className: "row-label", for: "first_name" }),
                         new Input({
                           name: "first_name",
-                          type: "text",
                           initialValue: authorizedUserData.first_name,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
@@ -136,7 +133,6 @@ export class _Settings extends Block<TSettingsProps> {
                         new Label({ content: "Фамилия", className: "row-label", for: "second_name" }),
                         new Input({
                           name: "second_name",
-                          type: "text",
                           initialValue: authorizedUserData.second_name,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
@@ -149,7 +145,6 @@ export class _Settings extends Block<TSettingsProps> {
                         new Label({ content: "Имя в чате", className: "row-label", for: "display_name" }),
                         new Input({
                           name: "display_name",
-                          type: "text",
                           initialValue: authorizedUserData.display_name ?? "",
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
@@ -162,7 +157,6 @@ export class _Settings extends Block<TSettingsProps> {
                         new Label({ content: "Телефон", className: "row-label", for: "phone" }),
                         new Input({
                           name: "phone",
-                          type: "text",
                           initialValue: authorizedUserData.phone,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
