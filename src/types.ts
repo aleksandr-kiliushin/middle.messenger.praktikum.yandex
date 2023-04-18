@@ -22,3 +22,11 @@ export type TChat = {
     content: string
   } | null
 }
+
+export type TMessage = {
+  chat_id: TChat["id"]
+  time: string
+  type: string
+  user_id: TUser["id"]
+  content: string
+}

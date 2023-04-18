@@ -34,6 +34,7 @@ type TChatOwnProps = TBlockBaseProps
 type TChatPropsFromStore = Pick<
   TStoreState,
   | "activeChatId"
+  | "activeChatMessages"
   | "activeChatParticipants"
   | "chats"
   | "isAddingUserToChatDialogOpen"
@@ -110,7 +111,7 @@ class _Chats extends Block<TChatProps> {
             ],
           }),
           new Box({
-            className: "chat",
+            className: `chat ${activeChatId === null ? " display_none" : ""}`,
             children: [
               new Box({
                 className: "chat_header",
@@ -134,13 +135,11 @@ class _Chats extends Block<TChatProps> {
                       new Button({
                         startIconName: "group",
                         type: "button",
-                        className: activeChatId === null ? "display_none" : "",
                         eventsListeners: { click: () => store.setState("isChatParticipantsDialogOpen", true) },
                       }),
                       new Button({
                         startIconName: "person_add",
                         type: "button",
-                        className: activeChatId === null ? "display_none" : "",
                         eventsListeners: { click: () => store.setState("isAddingUserToChatDialogOpen", true) },
                       }),
                     ],
@@ -271,6 +270,7 @@ class _Chats extends Block<TChatProps> {
 export const Chats = withStore([
   "activeChatParticipants",
   "activeChatId",
+  "activeChatMessages",
   "chats",
   "isAddingUserToChatDialogOpen",
   "isChatCreationDialogOpen",

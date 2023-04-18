@@ -1,11 +1,12 @@
 import { _Settings } from "@pages/Settings"
-import { TChat, TUser } from "@types"
+import { TChat, TMessage, TUser } from "@types"
 
 import { TBlockBaseProps } from "@utils/Block"
 import { EventBus } from "@utils/EventBus"
 
 export type TStoreState = {
   activeChatId: TChat["id"] | null
+  activeChatMessages: TMessage[]
   activeChatParticipants: TUser[]
   authorizedUserData: TUser | null
   chats: TChat[]
@@ -16,6 +17,7 @@ export type TStoreState = {
 
 const initialState: TStoreState = {
   activeChatId: null,
+  activeChatMessages: [],
   activeChatParticipants: [],
   authorizedUserData: null,
   chats: [],

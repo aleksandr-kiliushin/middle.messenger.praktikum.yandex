@@ -48,21 +48,22 @@ class ChatsController {
 
     const { token } = chatTokenResponse.data
 
+    this.activeChatSocket?.close(1000, "Чат был закрыт и открыт другой")
+
     const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${authorizedUserData.id}/${activeChatId}/${token}`)
     socket.addEventListener("open", () => {
       console.log("Соединение установлено")
-      socket.send(JSON.stringify({ content: "Моё первое сообщение миру!", type: "message" }))
     })
     socket.addEventListener("close", (event) => {
       if (event.wasClean) {
-        console.log("Соединение закрыто чисто")
+        console.log("Соединение закрыто чисто.")
       } else {
-        console.error("Обрыв соединения")
+        console.error("Обрыв соединения.")
       }
-      console.log(`Код: ${event.code} | Причина: ${event.reason}`)
+      console.log(`Код: ${event.code} | Причина: ${event.reason || "Неизвестна"}.`)
     })
     socket.addEventListener("message", (event) => {
-      console.log("Получены данные", event.data)
+      console.log("Получены данные:", event.data)
     })
     socket.addEventListener("error", (event) => {
       if ("message" in event) {
