@@ -1,6 +1,6 @@
-import { TUser } from "@types"
-
 import { Block, TBlockBaseProps } from "@utils/Block"
+
+import { TUser } from "@types"
 
 import "./index.css"
 import { template } from "./template"

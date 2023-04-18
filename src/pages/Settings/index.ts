@@ -1,7 +1,8 @@
-import { TEditSettingsPayload } from "@api/UsersApi"
-import { DEFUALT_AVATAR_SRC, RESOURCES_BASE_URL } from "@constants"
-import { usersController } from "@controllers/usersController"
 import { TStoreState, withStore } from "@store"
+
+import { usersController } from "@controllers/usersController"
+
+import { TEditSettingsPayload } from "@api/UsersApi"
 
 import { Box } from "@components/Box"
 import { Button } from "@components/Button"
@@ -16,6 +17,8 @@ import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
 import { validations } from "@utils/validations"
+
+import { DEFUALT_AVATAR_SRC, RESOURCES_BASE_URL } from "@constants"
 
 const fieldsRulesConfig = {
   display_name: new FieldConfig({ type: "string" }).isRequired({ value: true }),

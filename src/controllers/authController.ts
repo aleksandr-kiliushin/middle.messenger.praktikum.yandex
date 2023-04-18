@@ -1,5 +1,6 @@
-import { AuthApi, TSignInPayload, TSignUpPayload } from "@api/AuthApi"
 import { store } from "@store"
+
+import { AuthApi, TSignInPayload, TSignUpPayload } from "@api/AuthApi"
 
 import { usersController } from "./usersController"
 

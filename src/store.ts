@@ -1,8 +1,9 @@
 import { _Settings } from "@pages/Settings"
-import { TChat, TMessage, TUser } from "@types"
 
 import { TBlockBaseProps } from "@utils/Block"
 import { EventBus } from "@utils/EventBus"
+
+import { TChat, TMessage, TUser } from "@types"
 
 export type TStoreState = {
   activeChatId: TChat["id"] | null

@@ -1,5 +1,6 @@
-import { TSignUpPayload } from "@api/AuthApi"
 import { authController } from "@controllers/authController"
+
+import { TSignUpPayload } from "@api/AuthApi"
 
 import { Anchor } from "@components/Anchor"
 import { Box } from "@components/Box"
@@ -9,11 +10,11 @@ import { Label } from "@components/Label"
 import { PageWrapper } from "@components/PageWrapper"
 
 import { Block } from "@utils/Block"
+import { router } from "@utils/Router"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { fillFormWithSampleValues } from "@utils/fillFormWithSampleValues"
 import { FieldConfig } from "@utils/form-validator"
-import { router } from "@utils/router"
 import { validations } from "@utils/validations"
 
 const fieldsRulesConfig = {

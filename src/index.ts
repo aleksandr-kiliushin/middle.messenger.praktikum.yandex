@@ -1,6 +1,6 @@
 import { usersController } from "@controllers/usersController"
 
-import { router } from "@utils/router"
+import { router } from "@utils/Router"
 
 import { ChangePassword } from "./pages/ChangePassword"
 import { Chats } from "./pages/Chats"

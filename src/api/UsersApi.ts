@@ -1,6 +1,6 @@
-import { TUser } from "@types"
-
 import { request } from "@utils/request"
+
+import { TUser } from "@types"
 
 export type TChangePasswordPayload = {
   oldPassword: string

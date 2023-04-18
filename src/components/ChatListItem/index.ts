@@ -1,7 +1,7 @@
-import { TChat } from "@types"
-
 import { Block, TBlockBaseProps } from "@utils/Block"
 import { formatDatetime } from "@utils/formatDatetime"
+
+import { TChat } from "@types"
 
 import "./index.css"
 import { template } from "./template"

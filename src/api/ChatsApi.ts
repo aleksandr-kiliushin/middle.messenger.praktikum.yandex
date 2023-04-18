@@ -1,6 +1,6 @@
-import { TChat, TUser } from "@types"
-
 import { request } from "@utils/request"
+
+import { TChat, TUser } from "@types"
 
 export type TCreateChatPayload = {
   title: string

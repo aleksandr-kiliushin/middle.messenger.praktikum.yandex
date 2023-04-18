@@ -1,5 +1,6 @@
-import { TChangePasswordPayload } from "@api/UsersApi"
 import { usersController } from "@controllers/usersController"
+
+import { TChangePasswordPayload } from "@api/UsersApi"
 
 import { Box } from "@components/Box"
 import { Button } from "@components/Button"

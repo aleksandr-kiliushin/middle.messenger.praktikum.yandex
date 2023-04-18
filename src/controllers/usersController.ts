@@ -1,5 +1,6 @@
-import { TChangePasswordPayload, TEditSettingsPayload, UsersApi } from "@api/UsersApi"
 import { store } from "@store"
+
+import { TChangePasswordPayload, TEditSettingsPayload, UsersApi } from "@api/UsersApi"
 
 class UsersController {
   private api: UsersApi

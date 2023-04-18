@@ -1,3 +1,5 @@
+import { store } from "@store"
+
 import { ChangePassword } from "@pages/ChangePassword"
 import { Chats } from "@pages/Chats"
 import { InternalServerError } from "@pages/InternalServerError"
@@ -6,9 +8,8 @@ import { Profile } from "@pages/Profile"
 import { Settings } from "@pages/Settings"
 import { SignIn } from "@pages/SignIn"
 import { SignUp } from "@pages/SignUp"
-import { store } from "@store"
 
-import { isCurrentPathnameProtected } from "./isCurrentPathnameProtected"
+import { isCurrentPathnameProtected } from "@utils/isCurrentPathnameProtected"
 
 type TRouteBlock =
   | typeof ChangePassword

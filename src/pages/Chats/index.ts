@@ -1,7 +1,8 @@
-import { TCreateChatPayload } from "@api/ChatsApi"
-import { DEFUALT_AVATAR_SRC, RESOURCES_BASE_URL } from "@constants"
-import { chatsController } from "@controllers/chatsController"
 import { TStoreState, store, withStore } from "@store"
+
+import { chatsController } from "@controllers/chatsController"
+
+import { TCreateChatPayload } from "@api/ChatsApi"
 
 import { Anchor } from "@components/Anchor"
 import { Box } from "@components/Box"
@@ -21,6 +22,8 @@ import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
 import { formatDatetime } from "@utils/formatDatetime"
+
+import { DEFUALT_AVATAR_SRC, RESOURCES_BASE_URL } from "@constants"
 
 import "./index.css"
 

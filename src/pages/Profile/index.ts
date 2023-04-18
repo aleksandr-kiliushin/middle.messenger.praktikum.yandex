@@ -1,6 +1,6 @@
-import { DEFUALT_AVATAR_SRC, RESOURCES_BASE_URL } from "@constants"
-import { authController } from "@controllers/authController"
 import { TStoreState, withStore } from "@store"
+
+import { authController } from "@controllers/authController"
 
 import { Anchor } from "@components/Anchor"
 import { Box } from "@components/Box"
@@ -10,7 +10,9 @@ import { Label } from "@components/Label"
 import { PageWrapper } from "@components/PageWrapper"
 
 import { Block, TBlockBaseProps } from "@utils/Block"
-import { router } from "@utils/router"
+import { router } from "@utils/Router"
+
+import { DEFUALT_AVATAR_SRC, RESOURCES_BASE_URL } from "@constants"
 
 type TProfileOwnProps = TBlockBaseProps
 type TProfilePropsFromStore = Pick<TStoreState, "authorizedUserData">

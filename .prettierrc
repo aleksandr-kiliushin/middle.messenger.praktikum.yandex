@@ -1,7 +1,18 @@
 {
   "arrowParens": "always",
   "bracketSpacing": true,
-  "importOrder": ["^@components", "^@utils", "^[./]"],
+  "importOrder": [
+    "^@store",
+    "^@controllers",
+    "^@api",
+    "^@pages",
+    "^@components",
+    "^@utils",
+    "^@constants",
+    "^@types",
+    "^@cypress",
+    "^[./]"
+  ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "printWidth": 130,

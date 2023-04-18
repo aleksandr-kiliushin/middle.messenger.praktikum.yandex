@@ -1,5 +1,6 @@
+import { router } from "@utils/Router"
+
 import { isCurrentPathnameProtected } from "./isCurrentPathnameProtected"
-import { router } from "./router"
 
 const methodsNames = {
   GET: "GET",

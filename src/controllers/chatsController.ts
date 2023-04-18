@@ -1,6 +1,9 @@
-import { ChatsApi, TAddUserToChatPayload, TCreateChatPayload } from "@api/ChatsApi"
-import { scrollToTheLatestMessage } from "@pages/Chats/utils"
 import { store } from "@store"
+
+import { ChatsApi, TAddUserToChatPayload, TCreateChatPayload } from "@api/ChatsApi"
+
+import { scrollToTheLatestMessage } from "@pages/Chats/utils"
+
 import { TChat, TUser } from "@types"
 
 class ChatsController {
