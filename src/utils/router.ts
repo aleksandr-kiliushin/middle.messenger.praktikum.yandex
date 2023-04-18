@@ -6,6 +6,9 @@ import { Profile } from "@pages/Profile"
 import { Settings } from "@pages/Settings"
 import { SignIn } from "@pages/SignIn"
 import { SignUp } from "@pages/SignUp"
+import { store } from "@store"
+
+import { isCurrentPathnameProtected } from "./isCurrentPathnameProtected"
 
 type TRouteBlock =
   | typeof ChangePassword
@@ -70,25 +73,22 @@ class Router {
 
     if (route === undefined) {
       this.pageNotFoundRoute.render()
-    } else {
-      route.render()
+      return
     }
+
+    if (isCurrentPathnameProtected() && store.getState().authorizedUserData === null) {
+      this.go({ pathname: "/" })
+      return
+    }
+
+    route.render()
   }
 
   public start() {
     window.onpopstate = (event) => {
-      if (event.currentTarget === null) {
-        console.error("event.currentTarget is null.")
-        return
-      }
-      if (!("location" in event.currentTarget)) {
-        console.error("event.currentTarget does not contain 'location' field.")
-        return
-      }
-      if (!(event.currentTarget.location instanceof Location)) {
-        console.error("event.currentTarget.location is not instance of Location.")
-        return
-      }
+      if (event.currentTarget === null) return
+      if (!("location" in event.currentTarget)) return
+      if (!(event.currentTarget.location instanceof Location)) return
 
       this.onRoute({ pathname: event.currentTarget.location.pathname })
     }
