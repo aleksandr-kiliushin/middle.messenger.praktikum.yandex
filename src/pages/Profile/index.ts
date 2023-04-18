@@ -90,15 +90,14 @@ export class _Profile extends Block<TProfileProps> {
                 new Anchor({ content: "Изменить данные", href: "/settings" }),
                 new Anchor({ content: "Изменить пароль", href: "/change-password" }),
                 new Button({
+                  startIconName: "logout",
+                  text: "Выйти",
                   eventsListeners: {
                     async click() {
                       await authController.signOut()
                       router.go({ pathname: "/" })
                     },
                   },
-                  startIconName: "logout",
-                  text: "Выйти",
-                  type: "button",
                 }),
               ],
             }),

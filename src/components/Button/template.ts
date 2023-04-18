@@ -1,7 +1,12 @@
 export const template = `
 <button
   class="button button__primary {{className}}"
-  type="{{type}}"
+
+  {{#if type}}
+    type="{{type}}"
+  {{else}}
+    type="button"
+  {{/if}}
 
   {{#if isDisabled}}
     disabled

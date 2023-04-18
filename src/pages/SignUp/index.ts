@@ -115,7 +115,6 @@ export class SignUp extends Block {
                 new Button({ text: "Зарегистрироваться", type: "submit" }),
                 new Button({
                   text: "Заполнить поля",
-                  type: "button",
                   eventsListeners: {
                     click: () => {
                       fillFormWithSampleValues({

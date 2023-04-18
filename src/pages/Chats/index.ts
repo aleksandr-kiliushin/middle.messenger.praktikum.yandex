@@ -90,7 +90,6 @@ class _Chats extends Block<TChatProps> {
                 className: "chats-pane_header",
                 children: [
                   new Button({
-                    type: "button",
                     text: "Создать чат",
                     className: "cleate_chat_button",
                     eventsListeners: { click: () => store.setState("isChatCreationDialogOpen", true) },
@@ -135,12 +134,10 @@ class _Chats extends Block<TChatProps> {
                     children: [
                       new Button({
                         startIconName: "group",
-                        type: "button",
                         eventsListeners: { click: () => store.setState("isChatParticipantsDialogOpen", true) },
                       }),
                       new Button({
                         startIconName: "person_add",
-                        type: "button",
                         eventsListeners: { click: () => store.setState("isAddingUserToChatDialogOpen", true) },
                       }),
                     ],
@@ -273,7 +270,6 @@ class _Chats extends Block<TChatProps> {
                     new User(participant),
                     new Button({
                       text: "Удалить",
-                      type: "button",
                       className: participant.id === authorizedUserData.id ? "display_none" : "",
                       eventsListeners: { click: () => chatsController.deleteChatParticipant({ participantId: participant.id }) },
                     }),

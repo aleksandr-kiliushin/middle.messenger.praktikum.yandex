@@ -23,7 +23,7 @@ export class Dialog extends Block<TDialogProps> {
           className: "dialog-header",
           children: [
             new Box({ tag: "h2", content: this.props.heading }),
-            new Button({ startIconName: "close", type: "button", eventsListeners: { click: this.props.onClose } }),
+            new Button({ startIconName: "close", eventsListeners: { click: this.props.onClose } }),
           ],
         }),
         new Box({

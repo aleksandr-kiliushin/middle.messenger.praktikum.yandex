@@ -68,7 +68,6 @@ export class SignIn extends Block {
                 new Button({ startIconName: "login", text: "Войти", type: "submit" }),
                 new Button({
                   text: "Заполнить поля",
-                  type: "button",
                   eventsListeners: {
                     click: () => {
                       fillFormWithSampleValues({
