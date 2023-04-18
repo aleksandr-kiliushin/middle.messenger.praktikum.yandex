@@ -97,16 +97,9 @@ class _Chats extends Block<TChatProps> {
                 className: "chats-pane_chats-list",
                 children: chats.map((chat) => {
                   return new ChatListItem({
-                    datetime: chat.last_message === null ? "" : chat.last_message.time,
-                    message: chat.last_message === null ? "Нет сообщений" : chat.last_message.content,
-                    name: chat.title,
-                    unreadMessagesCount: chat.unread_count,
-                    eventsListeners: {
-                      click: () => {
-                        store.setState("activeChatId", chat.id)
-                      },
-                    },
+                    ...chat,
                     isActive: store.getState().activeChatId === chat.id,
+                    eventsListeners: { click: () => store.setState("activeChatId", chat.id) },
                   })
                 }),
               }),

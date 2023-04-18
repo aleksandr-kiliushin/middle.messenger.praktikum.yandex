@@ -1,15 +1,14 @@
+import { TChat } from "@types"
+
 import { Block, TBlockBaseProps } from "@utils/Block"
 
 import "./index.css"
 import { template } from "./template"
 
-export type TChatListItemProps = TBlockBaseProps & {
-  datetime: string
-  message: string
-  name: string
-  unreadMessagesCount: number
-  isActive: boolean
-}
+export type TChatListItemProps = TBlockBaseProps &
+  TChat & {
+    isActive: boolean
+  }
 
 export class ChatListItem extends Block<TChatListItemProps> {
   constructor(props: TChatListItemProps) {
