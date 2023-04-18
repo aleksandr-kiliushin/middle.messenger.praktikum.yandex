@@ -1,0 +1,8 @@
+.user {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: start;
+  column-gap: 8px;
+  width: fit-content;
+}

@@ -14,6 +14,7 @@ import { Input } from "@components/Input"
 import { Message } from "@components/Message"
 import { PageWrapper } from "@components/PageWrapper"
 import { TextArea } from "@components/TextArea"
+import { User } from "@components/User"
 
 import { Block, TBlockBaseProps } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
@@ -121,11 +122,7 @@ class _Chats extends Block<TChatProps> {
                         src: activeChat?.avatar ? RESOURCES_BASE_URL + activeChat.avatar : DEFUALT_AVATAR_SRC,
                         width: 36,
                       }),
-                      new Box({
-                        tag: "span",
-                        content: activeChat?.title ?? "Чат не выбран",
-                        className: "currently-open-chat_name",
-                      }),
+                      new Box({ tag: "span", content: activeChat?.title ?? "Чат не выбран" }),
                     ],
                   }),
                   new Box({
@@ -257,9 +254,7 @@ class _Chats extends Block<TChatProps> {
           children: [
             new Box({
               className: "rows",
-              children: activeChatParticipants.map((participant) => {
-                return new Box({ content: participant.display_name })
-              }),
+              children: activeChatParticipants.map((participant) => new User(participant)),
             }),
           ],
         })
