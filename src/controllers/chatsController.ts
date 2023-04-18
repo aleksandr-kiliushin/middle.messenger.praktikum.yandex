@@ -65,7 +65,9 @@ class ChatsController {
     })
     socket.addEventListener("message", (event) => {
       console.log("Получены данные:", event.data)
-      store.setState("activeChatMessages", [...store.getState().activeChatMessages, JSON.parse(event.data)])
+      const eventData = JSON.parse(event.data)
+      if (eventData.type !== "message") return
+      store.setState("activeChatMessages", [...store.getState().activeChatMessages, eventData])
     })
     socket.addEventListener("error", (event) => {
       if ("message" in event) {
@@ -75,6 +77,11 @@ class ChatsController {
       }
     })
     this.activeChatSocket = socket
+  }
+
+  public sendMessage({ content }: { content: string }) {
+    if (this.activeChatSocket === null) return
+    this.activeChatSocket.send(JSON.stringify({ content, type: "message" }))
   }
 }
 

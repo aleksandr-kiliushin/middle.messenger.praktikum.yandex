@@ -166,9 +166,11 @@ class _Chats extends Block<TChatProps> {
                 className: "chat_form",
                 tag: "form",
                 eventsListeners: {
-                  submit: createFormSubmitter({
+                  submit: createFormSubmitter<{ message: string }>({
                     fieldsRulesConfig,
-                    onValidationSuccess: console.log,
+                    onValidationSuccess: ({ formValues }) => {
+                      chatsController.sendMessage({ content: formValues.message })
+                    },
                   }),
                 },
                 children: [
