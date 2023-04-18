@@ -43,7 +43,6 @@ export class SignIn extends Block {
               children: [
                 new Box({ tag: "h1", content: "Вход" }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Логин", className: "row-label", for: "login" }),
@@ -56,7 +55,6 @@ export class SignIn extends Block {
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Пароль", className: "row-label", for: "password" }),

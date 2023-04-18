@@ -54,12 +54,10 @@ export class _Settings extends Block<TSettingsProps> {
         new PageWrapper({
           children: [
             new Box({
-              tag: "div",
               className: "rows centered",
               children: [
                 new Box({ tag: "h1", content: "Настройки профиля" }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Аватар", for: "avatar", className: "row-label" }),
@@ -101,7 +99,6 @@ export class _Settings extends Block<TSettingsProps> {
                   },
                   children: [
                     new Box({
-                      tag: "div",
                       className: "row",
                       children: [
                         new Label({ content: "Почта", className: "row-label", for: "email" }),
@@ -114,7 +111,6 @@ export class _Settings extends Block<TSettingsProps> {
                       ],
                     }),
                     new Box({
-                      tag: "div",
                       className: "row",
                       children: [
                         new Label({ content: "Логин", className: "row-label", for: "login" }),
@@ -127,7 +123,6 @@ export class _Settings extends Block<TSettingsProps> {
                       ],
                     }),
                     new Box({
-                      tag: "div",
                       className: "row",
                       children: [
                         new Label({ content: "Имя", className: "row-label", for: "first_name" }),
@@ -140,7 +135,6 @@ export class _Settings extends Block<TSettingsProps> {
                       ],
                     }),
                     new Box({
-                      tag: "div",
                       className: "row",
                       children: [
                         new Label({ content: "Фамилия", className: "row-label", for: "second_name" }),
@@ -153,7 +147,6 @@ export class _Settings extends Block<TSettingsProps> {
                       ],
                     }),
                     new Box({
-                      tag: "div",
                       className: "row",
                       children: [
                         new Label({ content: "Имя в чате", className: "row-label", for: "display_name" }),
@@ -166,7 +159,6 @@ export class _Settings extends Block<TSettingsProps> {
                       ],
                     }),
                     new Box({
-                      tag: "div",
                       className: "row",
                       children: [
                         new Label({ content: "Телефон", className: "row-label", for: "phone" }),

@@ -49,7 +49,6 @@ export class SignUp extends Block {
               children: [
                 new Box({ tag: "h1", content: "Регистрация" }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Почта", className: "row-label", for: "email" }),
@@ -62,7 +61,6 @@ export class SignUp extends Block {
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Логин", className: "row-label", for: "login" }),
@@ -75,7 +73,6 @@ export class SignUp extends Block {
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Имя", className: "row-label", for: "first_name" }),
@@ -88,7 +85,6 @@ export class SignUp extends Block {
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Фамилия", className: "row-label", for: "second_name" }),
@@ -101,7 +97,6 @@ export class SignUp extends Block {
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Телефон", className: "row-label", for: "phone" }),
@@ -114,7 +109,6 @@ export class SignUp extends Block {
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Пароль", className: "row-label", for: "password" }),
@@ -127,7 +121,6 @@ export class SignUp extends Block {
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Повторите пароль", className: "row-label", for: "passwordConfirmation" }),

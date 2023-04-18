@@ -29,12 +29,10 @@ export class _Profile extends Block<TProfileProps> {
         new PageWrapper({
           children: [
             new Box({
-              tag: "div",
               className: "rows centered",
               children: [
                 new Box({ tag: "h1", content: "Профиль" }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Аватар" }),
@@ -48,51 +46,45 @@ export class _Profile extends Block<TProfileProps> {
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Почта" }),
-                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.email }),
+                    new Box({ className: "row-detail", content: authorizedUserData?.email }),
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Логин" }),
-                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.login }),
+                    new Box({ className: "row-detail", content: authorizedUserData?.login }),
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Имя" }),
-                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.first_name }),
+                    new Box({ className: "row-detail", content: authorizedUserData?.first_name }),
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Фамилия" }),
-                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.second_name }),
+                    new Box({ className: "row-detail", content: authorizedUserData?.second_name }),
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Имя в чате" }),
-                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.display_name }),
+                    new Box({ className: "row-detail", content: authorizedUserData?.display_name }),
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ className: "row-label", content: "Телефон" }),
-                    new Box({ className: "row-detail", tag: "div", content: authorizedUserData?.phone }),
+                    new Box({ className: "row-detail", content: authorizedUserData?.phone }),
                   ],
                 }),
                 new Anchor({ content: "Изменить данные", href: "/settings" }),

@@ -79,11 +79,9 @@ class _Chats extends Block<TChatProps> {
         children: [
           new Box({
             className: "chats-pane",
-            tag: "div",
             children: [
               new Box({
                 className: "chats-pane_header",
-                tag: "div",
                 children: [
                   new Button({
                     type: "button",
@@ -97,7 +95,6 @@ class _Chats extends Block<TChatProps> {
               new Input({ initialValue: "", name: "search", type: "text", placeholder: "Поиск ..." }),
               new Box({
                 className: "chats-pane_chats-list",
-                tag: "div",
                 children: chats.map((chat) => {
                   return new ChatListItem({
                     datetime: chat.last_message === null ? "" : chat.last_message.time,
@@ -116,15 +113,12 @@ class _Chats extends Block<TChatProps> {
             ],
           }),
           new Box({
-            tag: "div",
             className: "chat",
             children: [
               new Box({
                 className: "chat_header",
-                tag: "div",
                 children: [
                   new Box({
-                    tag: "div",
                     className: "currently-open-chat",
                     children: [
                       new Image({
@@ -142,7 +136,6 @@ class _Chats extends Block<TChatProps> {
                     ],
                   }),
                   new Box({
-                    tag: "div",
                     className: "chat_header-controls",
                     children: [
                       new Button({
@@ -163,10 +156,8 @@ class _Chats extends Block<TChatProps> {
               }),
               new Box({
                 className: "chat_messages",
-                tag: "div",
                 children: messagesByDate.map(({ date, messages }) => {
                   return new Box({
-                    tag: "div",
                     className: "messages-date-block",
                     children: [
                       new Box({ tag: "p", className: "messages-date-block_date", content: date }),
@@ -272,10 +263,9 @@ class _Chats extends Block<TChatProps> {
           onClose: () => store.setState("isChatParticipantsDialogOpen", false),
           children: [
             new Box({
-              tag: "div",
               className: "rows",
               children: activeChatParticipants.map((participant) => {
-                return new Box({ content: participant.display_name, tag: "div" })
+                return new Box({ content: participant.display_name })
               }),
             }),
           ],

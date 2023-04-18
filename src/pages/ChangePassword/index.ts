@@ -58,7 +58,6 @@ export class ChangePassword extends Block {
               children: [
                 new Box({ tag: "h1", content: "Изменить пароль" }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Старый пароль", className: "row-label", for: "oldPassword" }),
@@ -71,7 +70,6 @@ export class ChangePassword extends Block {
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Новый пароль", className: "row-label", for: "newPassword" }),
@@ -84,7 +82,6 @@ export class ChangePassword extends Block {
                   ],
                 }),
                 new Box({
-                  tag: "div",
                   className: "row",
                   children: [
                     new Label({ content: "Повторите новый пароль", className: "row-label", for: "newPasswordConfirmation" }),

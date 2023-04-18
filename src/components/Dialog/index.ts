@@ -20,7 +20,6 @@ export class Dialog extends Block<TDialogProps> {
     return {
       children: [
         new Box({
-          tag: "div",
           className: "dialog-header",
           children: [
             new Box({ tag: "h2", content: this.props.heading }),
@@ -28,7 +27,6 @@ export class Dialog extends Block<TDialogProps> {
           ],
         }),
         new Box({
-          tag: "div",
           className: "dialog-body",
           children: this.props.children ?? [],
         }),
