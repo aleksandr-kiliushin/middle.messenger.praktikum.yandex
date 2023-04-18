@@ -6,7 +6,7 @@ interface IButtonProps extends TBlockBaseProps {
   endIconName?: string
   startIconName?: string
   text?: string
-  type: "button" | "submit"
+  type: "button" | "submit" // TODO: Make button default and remove "button" specifyings.
   className?: string
   isDisabled?: boolean
 }

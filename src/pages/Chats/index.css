@@ -99,3 +99,11 @@
   grid-auto-flow: column;
   column-gap: 8px;
 }
+
+.chat_participant {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 8px;
+}

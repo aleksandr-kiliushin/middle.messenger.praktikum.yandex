@@ -11,6 +11,11 @@ export type TAddUserToChatPayload = {
   users: TUser["id"][]
 }
 
+export type TDeleteChatParticipantPayload = {
+  chatId: TChat["id"]
+  users: TUser["id"][]
+}
+
 export class ChatsApi {
   public fetchChats() {
     return request<TChat[]>({ method: "GET", url: "/chats" })
@@ -22,6 +27,10 @@ export class ChatsApi {
 
   public addUserToChat({ payload }: { payload: TAddUserToChatPayload }) {
     return request({ method: "PUT", url: "/chats/users", payload })
+  }
+
+  public deleteChatParticipant({ payload }: { payload: TDeleteChatParticipantPayload }) {
+    return request({ method: "DELETE", url: "/chats/users", payload })
   }
 
   public async fetchChatParticipants({ chatId }: { chatId: TChat["id"] }) {

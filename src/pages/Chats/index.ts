@@ -266,7 +266,20 @@ class _Chats extends Block<TChatProps> {
           children: [
             new Box({
               className: "rows",
-              children: activeChatParticipants.map((participant) => new User(participant)),
+              children: activeChatParticipants.map((participant) => {
+                return new Box({
+                  className: "chat_participant",
+                  children: [
+                    new User(participant),
+                    new Button({
+                      text: "Удалить",
+                      type: "button",
+                      className: participant.id === authorizedUserData.id ? "display_none" : "",
+                      eventsListeners: { click: () => chatsController.deleteChatParticipant({ participantId: participant.id }) },
+                    }),
+                  ],
+                })
+              }),
             }),
           ],
         })
