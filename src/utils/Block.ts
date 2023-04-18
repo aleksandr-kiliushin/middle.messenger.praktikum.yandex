@@ -83,7 +83,7 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
     for (const eventName in this.eventsListeners) {
       const eventListener = this.eventsListeners[eventName as keyof HTMLElementEventMap]
       if (eventListener === undefined) continue
-      this.elementOnPage.addEventListener(eventName, eventListener)
+      this.elementOnPage?.addEventListener(eventName, eventListener)
     }
   }
 
@@ -91,7 +91,7 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
     for (const eventName in this.eventsListeners) {
       const eventListener = this.eventsListeners[eventName as keyof HTMLElementEventMap]
       if (eventListener === undefined) continue
-      this.elementOnPage.removeEventListener(eventName, eventListener)
+      this.elementOnPage?.removeEventListener(eventName, eventListener)
     }
   }
 
@@ -112,24 +112,17 @@ export class Block<TProps extends TBlockBaseProps = TBlockBaseProps> {
     return this.element.outerHTML
   }
 
-  private get isElementMounted() {
-    return document.querySelector(`[block-id="${this.blockId}"]`) !== null
-  }
-
   protected get elementOnPage() {
-    const element = document.querySelector(`[block-id="${this.blockId}"]`)
-    if (!(element instanceof HTMLElement)) {
-      throw new Error("Block is not found in the web page.")
-    }
-    return element
+    return document.querySelector(`[block-id="${this.blockId}"]`)
   }
 
   private rerender() {
-    if (!this.isElementMounted) return
     this.removeEventsListeners()
     this.makePropsProxy()
     this.element = this.generateHtmlElement()
-    this.elementOnPage.outerHTML = this.markup
+    if (this.elementOnPage !== null) {
+      this.elementOnPage.outerHTML = this.markup
+    }
     this.hangEventsListeners()
   }
 
