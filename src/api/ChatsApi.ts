@@ -6,6 +6,10 @@ export type TCreateChatPayload = {
   title: string
 }
 
+export type TDeleteChatPayload = {
+  chatId: TChat["id"]
+}
+
 export type TAddUserToChatPayload = {
   chatId: TChat["id"]
   users: TUser["id"][]
@@ -23,6 +27,10 @@ export class ChatsApi {
 
   public createChat({ payload }: { payload: TCreateChatPayload }) {
     return request({ method: "POST", url: "/chats", payload })
+  }
+
+  public deleteChat({ payload }: { payload: TDeleteChatPayload }) {
+    return request({ method: "DELETE", url: "/chats", payload })
   }
 
   public addUserToChat({ payload }: { payload: TAddUserToChatPayload }) {

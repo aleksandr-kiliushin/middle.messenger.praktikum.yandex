@@ -12,6 +12,7 @@ export type TStoreState = {
   chats: TChat[]
   isAddingUserToChatDialogOpen: boolean
   isChatCreationDialogOpen: boolean
+  isChatDeletionDialogOpen: boolean
   isChatParticipantsDialogOpen: boolean
 }
 
@@ -23,6 +24,7 @@ const initialState: TStoreState = {
   chats: [],
   isAddingUserToChatDialogOpen: false,
   isChatCreationDialogOpen: false,
+  isChatDeletionDialogOpen: false,
   isChatParticipantsDialogOpen: false,
 }
 

@@ -1,7 +1,7 @@
 import { ChatsApi, TAddUserToChatPayload, TCreateChatPayload } from "@api/ChatsApi"
 import { scrollToTheLatestMessage } from "@pages/Chats/utils"
 import { store } from "@store"
-import { TUser } from "@types"
+import { TChat, TUser } from "@types"
 
 class ChatsController {
   private api: ChatsApi
@@ -20,6 +20,11 @@ class ChatsController {
 
   public async createChat({ payload }: { payload: TCreateChatPayload }) {
     await this.api.createChat({ payload })
+    await this.fetchAndSetChats()
+  }
+
+  public async deleteChat({ chatId }: { chatId: TChat["id"] }) {
+    await this.api.deleteChat({ payload: { chatId } })
     await this.fetchAndSetChats()
   }
 

@@ -40,6 +40,7 @@ type TChatPropsFromStore = Pick<
   | "chats"
   | "isAddingUserToChatDialogOpen"
   | "isChatCreationDialogOpen"
+  | "isChatDeletionDialogOpen"
   | "isChatParticipantsDialogOpen"
 >
 type TChatProps = TChatOwnProps & TChatPropsFromStore
@@ -72,6 +73,7 @@ class _Chats extends Block<TChatProps> {
       chats,
       isAddingUserToChatDialogOpen,
       isChatCreationDialogOpen,
+      isChatDeletionDialogOpen,
       isChatParticipantsDialogOpen,
     } = this.props
 
@@ -139,6 +141,10 @@ class _Chats extends Block<TChatProps> {
                       new Button({
                         startIconName: "person_add",
                         eventsListeners: { click: () => store.setState("isAddingUserToChatDialogOpen", true) },
+                      }),
+                      new Button({
+                        startIconName: "close",
+                        eventsListeners: { click: () => store.setState("isChatDeletionDialogOpen", true) },
                       }),
                     ],
                   }),
@@ -282,6 +288,34 @@ class _Chats extends Block<TChatProps> {
       )
     }
 
+    if (isChatDeletionDialogOpen) {
+      children.push(
+        new Dialog({
+          heading: "Удаление чата",
+          onClose: () => store.setState("isChatDeletionDialogOpen", false),
+          children: [
+            new Box({
+              className: "rows",
+              children: [
+                new Box({ content: `Вы уверены, что хотите удалить чат "${activeChat?.title}"?` }),
+                new Button({
+                  text: "Удалить",
+                  eventsListeners: {
+                    click: async () => {
+                      if (activeChatId === null) return
+                      await chatsController.deleteChat({ chatId: activeChatId })
+                      store.setState("isChatDeletionDialogOpen", false)
+                      store.setState("activeChatId", null)
+                    },
+                  },
+                }),
+              ],
+            }),
+          ],
+        })
+      )
+    }
+
     return { children }
   }
 }
@@ -294,5 +328,6 @@ export const Chats = withStore([
   "chats",
   "isAddingUserToChatDialogOpen",
   "isChatCreationDialogOpen",
+  "isChatDeletionDialogOpen",
   "isChatParticipantsDialogOpen",
 ])(_Chats)
