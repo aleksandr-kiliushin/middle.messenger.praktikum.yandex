@@ -1,7 +1,7 @@
 import { Block, TBlockBaseProps } from "../../utils/Block"
 import { template } from "./template"
 
-interface IImageProps extends TBlockBaseProps {
+type TImageProps = TBlockBaseProps & {
   src: string
   height: number
   width: number
@@ -9,8 +9,8 @@ interface IImageProps extends TBlockBaseProps {
   className?: string
 }
 
-export class Image extends Block<IImageProps> {
-  constructor(props: IImageProps) {
+export class Image extends Block<TImageProps> {
+  constructor(props: TImageProps) {
     super({ template, props })
   }
 }

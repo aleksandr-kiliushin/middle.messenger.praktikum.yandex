@@ -2,12 +2,12 @@ import { Block, TBlockBaseProps } from "@utils/Block"
 
 import { template } from "./template"
 
-interface ITextAreaProps extends TBlockBaseProps {
+type TTextAreaProps = TBlockBaseProps & {
   name: string
 }
 
-export class TextArea extends Block<ITextAreaProps> {
-  constructor(props: ITextAreaProps) {
+export class TextArea extends Block<TTextAreaProps> {
+  constructor(props: TTextAreaProps) {
     super({ template, props })
   }
 }

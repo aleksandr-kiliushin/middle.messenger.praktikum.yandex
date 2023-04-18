@@ -1,9 +1,9 @@
 import { FieldConfig, validateFields } from "./index"
-import { FieldsValidationResult, IValidateFieldsParams } from "./validateFields"
+import { FieldsValidationResult, TValidateFieldsParams } from "./validateFields"
 
 describe("validate", () => {
   test.each<{
-    input: IValidateFieldsParams
+    input: TValidateFieldsParams
     output: FieldsValidationResult["errorTextByFieldName"]
   }>([
     {

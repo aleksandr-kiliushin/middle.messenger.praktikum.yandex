@@ -1,7 +1,7 @@
 import { FieldConfig } from "./index"
 import { TErrorText, TFieldName } from "./types"
 
-export interface IValidateFieldsParams {
+export type TValidateFieldsParams = {
   rules: Record<TFieldName, FieldConfig>
   values: Record<TFieldName, unknown>
 }
@@ -41,7 +41,7 @@ export class FieldsValidationResult {
   }
 }
 
-export const validateFields = ({ rules, values }: IValidateFieldsParams): FieldsValidationResult => {
+export const validateFields = ({ rules, values }: TValidateFieldsParams): FieldsValidationResult => {
   const fieldsValidationResult = new FieldsValidationResult()
 
   fieldsNamesIteration: for (const fieldName in values) {

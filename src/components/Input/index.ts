@@ -2,7 +2,7 @@ import { Block, TBlockBaseProps } from "@utils/Block"
 
 import { template } from "./template"
 
-interface IInputProps extends TBlockBaseProps {
+type TInputProps = TBlockBaseProps & {
   name: string
   type?: "number" | "password" | "text"
   initialValue?: string | undefined
@@ -10,8 +10,8 @@ interface IInputProps extends TBlockBaseProps {
   placeholder?: string
 }
 
-export class Input extends Block<IInputProps> {
-  constructor(props: IInputProps) {
+export class Input extends Block<TInputProps> {
+  constructor(props: TInputProps) {
     super({ template, props })
   }
 
