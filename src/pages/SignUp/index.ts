@@ -57,6 +57,7 @@ export class SignUp extends Block {
                       type: "text",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Box({
@@ -68,6 +69,7 @@ export class SignUp extends Block {
                       type: "text",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Box({
@@ -79,6 +81,7 @@ export class SignUp extends Block {
                       type: "text",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Box({
@@ -90,6 +93,7 @@ export class SignUp extends Block {
                       type: "text",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Box({
@@ -101,6 +105,7 @@ export class SignUp extends Block {
                       type: "text",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Box({
@@ -112,6 +117,7 @@ export class SignUp extends Block {
                       type: "password",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Box({
@@ -123,6 +129,7 @@ export class SignUp extends Block {
                       type: "password",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Button({ text: "Зарегистрироваться", type: "submit" }),

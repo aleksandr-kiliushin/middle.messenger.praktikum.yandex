@@ -51,6 +51,7 @@ export class SignIn extends Block {
                       type: "text",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Box({
@@ -62,6 +63,7 @@ export class SignIn extends Block {
                       type: "password",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Button({ startIconName: "login", text: "Войти", type: "submit" }),

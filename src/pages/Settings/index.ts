@@ -101,6 +101,7 @@ export class _Settings extends Block<TSettingsProps> {
                           initialValue: authorizedUserData.email,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
+                        new Box({ className: "row-error" }),
                       ],
                     }),
                     new Box({
@@ -113,6 +114,7 @@ export class _Settings extends Block<TSettingsProps> {
                           initialValue: authorizedUserData.login,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
+                        new Box({ className: "row-error" }),
                       ],
                     }),
                     new Box({
@@ -125,6 +127,7 @@ export class _Settings extends Block<TSettingsProps> {
                           initialValue: authorizedUserData.first_name,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
+                        new Box({ className: "row-error" }),
                       ],
                     }),
                     new Box({
@@ -137,6 +140,7 @@ export class _Settings extends Block<TSettingsProps> {
                           initialValue: authorizedUserData.second_name,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
+                        new Box({ className: "row-error" }),
                       ],
                     }),
                     new Box({
@@ -149,6 +153,7 @@ export class _Settings extends Block<TSettingsProps> {
                           initialValue: authorizedUserData.display_name ?? "",
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
+                        new Box({ className: "row-error" }),
                       ],
                     }),
                     new Box({
@@ -161,6 +166,7 @@ export class _Settings extends Block<TSettingsProps> {
                           initialValue: authorizedUserData.phone,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
+                        new Box({ className: "row-error" }),
                       ],
                     }),
                     new Button({ startIconName: "save", text: "Сохранить", type: "submit" }),

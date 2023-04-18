@@ -33,7 +33,7 @@ export class FieldsValidationResult {
       }
 
       const fieldErrorNode = document.querySelector(`[name="${fieldName}"] + .row-error`)
-      if (fieldErrorNode instanceof HTMLParagraphElement) {
+      if (fieldErrorNode instanceof HTMLElement) {
         fieldErrorNode.innerText = errorText === null ? "" : errorText
       }
     }

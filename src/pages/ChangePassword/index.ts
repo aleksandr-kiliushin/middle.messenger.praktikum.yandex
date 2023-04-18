@@ -66,6 +66,7 @@ export class ChangePassword extends Block {
                       type: "password",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Box({
@@ -77,6 +78,7 @@ export class ChangePassword extends Block {
                       type: "password",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Box({
@@ -88,6 +90,7 @@ export class ChangePassword extends Block {
                       type: "password",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
+                    new Box({ className: "row-error" }),
                   ],
                 }),
                 new Button({ startIconName: "save", text: "Сохранить", type: "submit" }),
