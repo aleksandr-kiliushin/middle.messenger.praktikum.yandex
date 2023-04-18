@@ -131,7 +131,7 @@ class _Chats extends Block<TChatProps> {
                   new Button({
                     startIconName: "person_add",
                     type: "button",
-                    isDisabled: this.props.activeChatId === null,
+                    className: this.props.activeChatId === null ? "display_none" : "",
                     eventsListeners: { click: () => store.setState("isAddingUserToChatDialogOpen", true) },
                   }),
                 ],
