@@ -13,12 +13,18 @@ export type TChatListItemProps = TBlockBaseProps &
 
 export class ChatListItem extends Block<TChatListItemProps> {
   constructor(props: TChatListItemProps) {
-    const _props = { ...props }
-
-    if (_props.last_message !== null) {
-      _props.last_message.time = formatDatetime(new Date(_props.last_message.time))
-    }
-
-    super({ template, props: _props })
+    super({
+      template,
+      props: {
+        ...props,
+        last_message:
+          props.last_message === null
+            ? null
+            : {
+                ...props.last_message,
+                time: formatDatetime(new Date(props.last_message.time)),
+              },
+      },
+    })
   }
 }
