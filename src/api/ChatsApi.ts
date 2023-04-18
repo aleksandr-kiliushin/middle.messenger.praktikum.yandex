@@ -27,4 +27,8 @@ export class ChatsApi {
   public async fetchChatParticipants({ chatId }: { chatId: TChat["id"] }) {
     return request<TUser[]>({ method: "GET", url: `/chats/${chatId}/users` })
   }
+
+  public async fetchChatToken({ chatId }: { chatId: TChat["id"] }) {
+    return request<{ token: string }>({ method: "POST", url: `/chats/token/${chatId}` })
+  }
 }

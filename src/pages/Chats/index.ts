@@ -52,13 +52,16 @@ class _Chats extends Block<TChatProps> {
   }
 
   async componentDidUpdate(prevProps: TChatProps) {
-    if (this.props.activeChatId !== null && this.props.activeChatId !== prevProps.activeChatId) {
-      await chatsController.fetchAndSetChatParticipants({ chatId: this.props.activeChatId })
-    }
+    const { activeChatId } = this.props
 
-    const chatMessagesBlock = document.querySelector(".chat_messages")
-    if (chatMessagesBlock instanceof HTMLDivElement) {
-      chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
+    if (activeChatId !== null && activeChatId !== prevProps.activeChatId) {
+      await chatsController.fetchAndSetChatParticipants()
+      await chatsController.setupChatConnection()
+
+      const chatMessagesBlock = document.querySelector(".chat_messages")
+      if (chatMessagesBlock instanceof HTMLDivElement) {
+        chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
+      }
     }
   }
 
