@@ -30,7 +30,7 @@ export class SignIn extends Block {
           children: [
             new Box({
               tag: "form",
-              className: "rows",
+              className: "rows centered",
               eventsListeners: {
                 submit: createFormSubmitter<TSignInPayload>({
                   fieldsRulesConfig,

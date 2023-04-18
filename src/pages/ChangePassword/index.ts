@@ -53,7 +53,7 @@ export class ChangePassword extends Block {
           children: [
             new Box({
               tag: "form",
-              className: "rows",
+              className: "rows centered",
               eventsListeners: { submit },
               children: [
                 new Box({ tag: "h1", content: "Изменить пароль" }),

@@ -27,7 +27,7 @@ export class _Profile extends Block<TProfileProps> {
           children: [
             new Box({
               tag: "div",
-              className: "rows",
+              className: "rows centered",
               children: [
                 new Box({ tag: "h1", content: "Профиль" }),
                 new Box({
