@@ -68,7 +68,7 @@ class ChatsController {
       console.log("Получены данные:", eventData)
 
       if (eventData instanceof Array) {
-        store.setState("activeChatMessages", [...store.getState().activeChatMessages, ...eventData.reverse()])
+        store.setState("activeChatMessages", [...eventData.reverse(), ...store.getState().activeChatMessages])
       }
       if (eventData.type === "message") {
         store.setState("activeChatMessages", [...store.getState().activeChatMessages, eventData])
