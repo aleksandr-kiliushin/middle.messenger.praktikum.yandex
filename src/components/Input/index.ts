@@ -16,19 +16,8 @@ export class Input extends Block<IInputProps> {
   }
 
   componentDidMount() {
-    // if (this.props.name === "email") {
-    //   console.log("INPUT MOUNTED EMAIL:", this.props.initialValue || "empty")
-    // }
-
     if (this.props.initialValue !== undefined && this.elementOnPage instanceof HTMLInputElement) {
       this.elementOnPage.value = this.props.initialValue
     }
   }
-
-  // componentDidUpdate(previousProps: IInputProps) {
-  //   if (this.props.name === "email") {
-  //     console.log("INPUT PREVIOUS EMAIL:", previousProps.initialValue || "empty")
-  //     console.log("INPUT UPDATED EMAIL:", this.props.initialValue || "empty")
-  //   }
-  // }
 }
