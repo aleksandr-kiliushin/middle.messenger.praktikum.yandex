@@ -158,7 +158,7 @@ class _Chats extends Block<TChatProps> {
                   return new Message({
                     isMessageByAuthorizedUser: message.user_id === authorizedUserData.id,
                     time: formatDatetime(new Date(message.time)),
-                    text: message.content,
+                    text: message.content.replaceAll("\n", "<br>"),
                   })
                 }),
               }),
