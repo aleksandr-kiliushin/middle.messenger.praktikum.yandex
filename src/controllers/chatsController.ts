@@ -53,7 +53,7 @@ class ChatsController {
     const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${authorizedUserData.id}/${activeChatId}/${token}`)
     socket.addEventListener("open", () => {
       console.log("Соединение установлено")
-      socket.send(JSON.stringify({ content: "Моё первое сообщение миру!", type: "message" }))
+      socket.send(JSON.stringify({ content: "0", type: "get old" }))
     })
     socket.addEventListener("close", (event) => {
       if (event.wasClean) {
@@ -64,10 +64,15 @@ class ChatsController {
       console.log(`Код: ${event.code} | Причина: ${event.reason || "Неизвестна"}.`)
     })
     socket.addEventListener("message", (event) => {
-      console.log("Получены данные:", event.data)
       const eventData = JSON.parse(event.data)
-      if (eventData.type !== "message") return
-      store.setState("activeChatMessages", [...store.getState().activeChatMessages, eventData])
+      console.log("Получены данные:", eventData)
+
+      if (eventData.type instanceof Array) {
+        store.setState("activeChatMessages", [...store.getState().activeChatMessages, ...eventData])
+      }
+      if (eventData.type === "message") {
+        store.setState("activeChatMessages", [...store.getState().activeChatMessages, eventData])
+      }
     })
     socket.addEventListener("error", (event) => {
       if ("message" in event) {
