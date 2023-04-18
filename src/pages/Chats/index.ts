@@ -18,7 +18,6 @@ import { Block, TBlockBaseProps } from "@utils/Block"
 import { createFieldValidator } from "@utils/createFieldValidator"
 import { createFormSubmitter } from "@utils/createFormSubmitter"
 import { FieldConfig } from "@utils/form-validator"
-import { wait } from "@utils/wait"
 
 import { messagesByDate } from "./data"
 import "./index.css"
@@ -32,7 +31,12 @@ const validateField = createFieldValidator({ fieldsRulesConfig })
 type TChatOwnProps = TBlockBaseProps
 type TChatPropsFromStore = Pick<
   TStoreState,
-  "activeChatId" | "chats" | "isAddingUserToChatDialogOpen" | "isChatCreationDialogOpen"
+  | "activeChatId"
+  | "activeChatParticipants"
+  | "chats"
+  | "isAddingUserToChatDialogOpen"
+  | "isChatCreationDialogOpen"
+  | "isChatParticipantsDialogOpen"
 >
 type TChatProps = TChatOwnProps & TChatPropsFromStore
 
@@ -43,15 +47,9 @@ class _Chats extends Block<TChatProps> {
 
   async componentDidMount() {
     await chatsController.fetchAndSetChats()
-
-    const chatMessagesBlock = document.querySelector(".chat_messages")
-    if (chatMessagesBlock instanceof HTMLDivElement) {
-      chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
-    }
   }
 
   async componentDidUpdate() {
-    await wait(0)
     const chatMessagesBlock = document.querySelector(".chat_messages")
     if (chatMessagesBlock instanceof HTMLDivElement) {
       chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
@@ -128,11 +126,23 @@ class _Chats extends Block<TChatProps> {
                       }),
                     ],
                   }),
-                  new Button({
-                    startIconName: "person_add",
-                    type: "button",
-                    className: this.props.activeChatId === null ? "display_none" : "",
-                    eventsListeners: { click: () => store.setState("isAddingUserToChatDialogOpen", true) },
+                  new Box({
+                    tag: "div",
+                    className: "chat_header-controls",
+                    children: [
+                      new Button({
+                        startIconName: "group",
+                        type: "button",
+                        className: this.props.activeChatId === null ? "display_none" : "",
+                        eventsListeners: { click: () => store.setState("isAddingUserToChatDialogOpen", true) },
+                      }),
+                      new Button({
+                        startIconName: "person_add",
+                        type: "button",
+                        className: this.props.activeChatId === null ? "display_none" : "",
+                        eventsListeners: { click: () => store.setState("isAddingUserToChatDialogOpen", true) },
+                      }),
+                    ],
                   }),
                 ],
               }),
@@ -240,8 +250,33 @@ class _Chats extends Block<TChatProps> {
       )
     }
 
+    if (this.props.isChatParticipantsDialogOpen) {
+      children.push(
+        new Dialog({
+          heading: "Участники чата",
+          onClose: () => store.setState("isChatParticipantsDialogOpen", false),
+          children: [
+            new Box({
+              tag: "div",
+              className: "rows",
+              children: this.props.activeChatParticipants.map((participant) => {
+                return new Box({ content: participant.display_name, tag: "div" })
+              }),
+            }),
+          ],
+        })
+      )
+    }
+
     return { children }
   }
 }
 
-export const Chats = withStore(["chats", "isChatCreationDialogOpen", "isAddingUserToChatDialogOpen", "activeChatId"])(_Chats)
+export const Chats = withStore([
+  "activeChatParticipants",
+  "activeChatId",
+  "chats",
+  "isAddingUserToChatDialogOpen",
+  "isChatCreationDialogOpen",
+  "isChatParticipantsDialogOpen",
+])(_Chats)

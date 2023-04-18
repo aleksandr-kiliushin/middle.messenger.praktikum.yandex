@@ -104,3 +104,9 @@
   font-size: 1.6rem;
   resize: none;
 }
+
+.chat_header-controls {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 8px;
+}

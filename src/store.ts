@@ -5,19 +5,23 @@ import { TBlockBaseProps } from "@utils/Block"
 import { EventBus } from "@utils/EventBus"
 
 export type TStoreState = {
+  activeChatId: TChat["id"] | null
+  activeChatParticipants: TUser[]
   authorizedUserData: TUser | null
   chats: TChat[]
-  isChatCreationDialogOpen: boolean
   isAddingUserToChatDialogOpen: boolean
-  activeChatId: TChat["id"] | null
+  isChatCreationDialogOpen: boolean
+  isChatParticipantsDialogOpen: boolean
 }
 
 const initialState: TStoreState = {
+  activeChatId: null,
+  activeChatParticipants: [],
   authorizedUserData: null,
   chats: [],
-  isChatCreationDialogOpen: false,
   isAddingUserToChatDialogOpen: false,
-  activeChatId: null,
+  isChatCreationDialogOpen: false,
+  isChatParticipantsDialogOpen: true,
 }
 
 class Store extends EventBus<{
