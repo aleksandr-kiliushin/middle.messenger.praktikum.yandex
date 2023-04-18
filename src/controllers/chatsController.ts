@@ -67,7 +67,7 @@ class ChatsController {
       const eventData = JSON.parse(event.data)
       console.log("Получены данные:", eventData)
 
-      if (eventData.type instanceof Array) {
+      if (eventData instanceof Array) {
         store.setState("activeChatMessages", [...store.getState().activeChatMessages, ...eventData])
       }
       if (eventData.type === "message") {
