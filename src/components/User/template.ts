@@ -9,6 +9,10 @@ export const template = `
     src="{{#if avatar}}${RESOURCES_BASE_URL}{{avatar}}{{else}}${DEFUALT_AVATAR_SRC}{{/if}}"
     width="48"
   />
-  {{display_name}}
+  {{#if display_name}}
+    {{display_name}}
+  {{else}}
+    {{first_name}}
+  {{/if}}
 </div>
 `
