@@ -60,11 +60,6 @@ class _Chats extends Block<TChatProps> {
       store.setState("activeChatMessages", [])
       await chatsController.fetchAndSetChatParticipants()
       await chatsController.setupChatConnection()
-
-      const chatMessagesBlock = document.querySelector(".chat_messages")
-      if (chatMessagesBlock instanceof HTMLDivElement) {
-        chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
-      }
     }
   }
 

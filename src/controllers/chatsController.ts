@@ -1,4 +1,5 @@
 import { ChatsApi, TAddUserToChatPayload, TCreateChatPayload } from "@api/ChatsApi"
+import { scrollToTheLatestMessage } from "@pages/Chats/utils"
 import { store } from "@store"
 
 class ChatsController {
@@ -69,9 +70,11 @@ class ChatsController {
 
       if (eventData instanceof Array) {
         store.setState("activeChatMessages", [...eventData.reverse(), ...store.getState().activeChatMessages])
+        scrollToTheLatestMessage()
       }
       if (eventData.type === "message") {
         store.setState("activeChatMessages", [...store.getState().activeChatMessages, eventData])
+        scrollToTheLatestMessage()
       }
     })
     socket.addEventListener("error", (event) => {
