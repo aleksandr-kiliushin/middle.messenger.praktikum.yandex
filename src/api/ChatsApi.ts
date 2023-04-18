@@ -23,4 +23,8 @@ export class ChatsApi {
   public addUserToChat({ payload }: { payload: TAddUserToChatPayload }) {
     return request({ method: "PUT", url: "/chats/users", payload })
   }
+
+  public async fetchChatParticipants({ chatId }: { chatId: TChat["id"] }) {
+    return request<TUser[]>({ method: "GET", url: `/chats/${chatId}/users` })
+  }
 }

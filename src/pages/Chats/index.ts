@@ -49,7 +49,11 @@ class _Chats extends Block<TChatProps> {
     await chatsController.fetchAndSetChats()
   }
 
-  async componentDidUpdate() {
+  async componentDidUpdate(prevProps: TChatProps) {
+    if (this.props.activeChatId !== null && this.props.activeChatId !== prevProps.activeChatId) {
+      await chatsController.fetchAndSetChatParticipants({ chatId: this.props.activeChatId })
+    }
+
     const chatMessagesBlock = document.querySelector(".chat_messages")
     if (chatMessagesBlock instanceof HTMLDivElement) {
       chatMessagesBlock.scrollTo({ top: chatMessagesBlock.scrollHeight })
@@ -82,7 +86,6 @@ class _Chats extends Block<TChatProps> {
               new Box({
                 className: "chats-pane_chats-list",
                 tag: "div",
-                // children: chatListItems.map((item) => new ChatListItem(item)),
                 children: this.props.chats.map((chat) => {
                   return new ChatListItem({
                     datetime: chat.last_message === null ? "" : chat.last_message.time,
@@ -134,7 +137,7 @@ class _Chats extends Block<TChatProps> {
                         startIconName: "group",
                         type: "button",
                         className: this.props.activeChatId === null ? "display_none" : "",
-                        eventsListeners: { click: () => store.setState("isAddingUserToChatDialogOpen", true) },
+                        eventsListeners: { click: () => store.setState("isChatParticipantsDialogOpen", true) },
                       }),
                       new Button({
                         startIconName: "person_add",
