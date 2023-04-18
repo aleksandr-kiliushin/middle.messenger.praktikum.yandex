@@ -49,6 +49,8 @@ export class _Settings extends Block<TSettingsProps> {
   render() {
     const { authorizedUserData } = this.props
 
+    if (authorizedUserData === null) return { children: [] }
+
     return {
       children: [
         new PageWrapper({
@@ -68,7 +70,7 @@ export class _Settings extends Block<TSettingsProps> {
                           alt: "Avatar",
                           height: 200,
                           width: 200,
-                          src: authorizedUserData?.avatar ? RESOURCES_BASE_URL + authorizedUserData.avatar : DEFUALT_AVATAR_SRC,
+                          src: authorizedUserData.avatar ? RESOURCES_BASE_URL + authorizedUserData.avatar : DEFUALT_AVATAR_SRC,
                           className: "avatar",
                         }),
                       ],
@@ -105,7 +107,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "email",
                           type: "text",
-                          initialValue: authorizedUserData?.email ?? "",
+                          initialValue: authorizedUserData.email,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],
@@ -117,7 +119,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "login",
                           type: "text",
-                          initialValue: authorizedUserData?.login ?? "",
+                          initialValue: authorizedUserData.login,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],
@@ -129,7 +131,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "first_name",
                           type: "text",
-                          initialValue: authorizedUserData?.first_name ?? "",
+                          initialValue: authorizedUserData.first_name,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],
@@ -141,7 +143,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "second_name",
                           type: "text",
-                          initialValue: authorizedUserData?.second_name ?? "",
+                          initialValue: authorizedUserData.second_name,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],
@@ -153,7 +155,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "display_name",
                           type: "text",
-                          initialValue: authorizedUserData?.display_name ?? "",
+                          initialValue: authorizedUserData.display_name ?? "",
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],
@@ -165,7 +167,7 @@ export class _Settings extends Block<TSettingsProps> {
                         new Input({
                           name: "phone",
                           type: "text",
-                          initialValue: authorizedUserData?.phone ?? "",
+                          initialValue: authorizedUserData.phone,
                           eventsListeners: { input: validateField, blur: validateField },
                         }),
                       ],

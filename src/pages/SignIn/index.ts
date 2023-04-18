@@ -49,7 +49,6 @@ export class SignIn extends Block {
                     new Input({
                       name: "login",
                       type: "text",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],
@@ -61,7 +60,6 @@ export class SignIn extends Block {
                     new Input({
                       name: "password",
                       type: "password",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],

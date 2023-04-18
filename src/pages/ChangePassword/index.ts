@@ -64,7 +64,6 @@ export class ChangePassword extends Block {
                     new Input({
                       name: "oldPassword",
                       type: "password",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],
@@ -76,7 +75,6 @@ export class ChangePassword extends Block {
                     new Input({
                       name: "newPassword",
                       type: "password",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],
@@ -88,7 +86,6 @@ export class ChangePassword extends Block {
                     new Input({
                       name: "newPasswordConfirmation",
                       type: "password",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],

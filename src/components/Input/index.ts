@@ -5,7 +5,7 @@ import { template } from "./template"
 interface IInputProps extends TBlockBaseProps {
   name: string
   type: "number" | "password" | "text"
-  initialValue: string
+  initialValue?: string | undefined
   className?: string
   placeholder?: string
 }
@@ -20,7 +20,7 @@ export class Input extends Block<IInputProps> {
     //   console.log("INPUT MOUNTED EMAIL:", this.props.initialValue || "empty")
     // }
 
-    if (this.elementOnPage instanceof HTMLInputElement) {
+    if (this.props.initialValue !== undefined && this.elementOnPage instanceof HTMLInputElement) {
       this.elementOnPage.value = this.props.initialValue
     }
   }

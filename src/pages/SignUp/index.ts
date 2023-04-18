@@ -55,7 +55,6 @@ export class SignUp extends Block {
                     new Input({
                       name: "email",
                       type: "text",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],
@@ -67,7 +66,6 @@ export class SignUp extends Block {
                     new Input({
                       name: "login",
                       type: "text",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],
@@ -79,7 +77,6 @@ export class SignUp extends Block {
                     new Input({
                       name: "first_name",
                       type: "text",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],
@@ -91,7 +88,6 @@ export class SignUp extends Block {
                     new Input({
                       name: "second_name",
                       type: "text",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],
@@ -103,7 +99,6 @@ export class SignUp extends Block {
                     new Input({
                       name: "phone",
                       type: "text",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],
@@ -115,7 +110,6 @@ export class SignUp extends Block {
                     new Input({
                       name: "password",
                       type: "password",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],
@@ -127,7 +121,6 @@ export class SignUp extends Block {
                     new Input({
                       name: "passwordConfirmation",
                       type: "password",
-                      initialValue: "",
                       eventsListeners: { input: validateField, blur: validateField },
                     }),
                   ],

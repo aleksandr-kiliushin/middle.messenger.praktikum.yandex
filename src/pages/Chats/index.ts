@@ -98,7 +98,7 @@ class _Chats extends Block<TChatProps> {
                   new Anchor({ content: "Профиль", href: "/profile", className: "profile_anchor" }),
                 ],
               }),
-              new Input({ initialValue: "", name: "search", type: "text", placeholder: "Поиск ..." }),
+              new Input({ name: "search", type: "text", placeholder: "Поиск ..." }),
               new Box({
                 className: "chats-pane_chats-list",
                 children: chats.map((chat) => {
@@ -219,7 +219,7 @@ class _Chats extends Block<TChatProps> {
               className: "rows",
               eventsListeners: { submit: createChat },
               children: [
-                new Input({ initialValue: "", name: "title", type: "text", placeholder: "Имя чата ..." }),
+                new Input({ name: "title", type: "text", placeholder: "Имя чата ..." }),
                 new Button({ type: "submit", text: "Создать" }),
               ],
             }),
@@ -249,7 +249,7 @@ class _Chats extends Block<TChatProps> {
               className: "rows",
               eventsListeners: { submit: addUserToChat },
               children: [
-                new Input({ initialValue: "", name: "userId", type: "number", placeholder: "ID пользователя ..." }),
+                new Input({ name: "userId", type: "number", placeholder: "ID пользователя ..." }),
                 new Button({ type: "submit", text: "Добавить" }),
               ],
             }),
