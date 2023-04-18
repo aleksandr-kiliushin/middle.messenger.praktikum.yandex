@@ -16,15 +16,15 @@ export const template = `
   />
   <p class="chats-list-item_name">{{title}}</p>
   <p class="chats-list-item_message">
-    {{#if last_messsage}}
-      {{last_messsage.content}}
+    {{#if last_message}}
+      {{last_message.content}}
     {{else}}
       Нет сообщений
     {{/if}}
   </p>
   <p class="chats-list-item_datetime">
-    {{#if last_messsage}}
-      {{last_messsage.time}}
+    {{#if last_message}}
+      {{last_message.time}}
     {{/if}}
   </p>
   {{#if unread_count}}
