@@ -21,7 +21,7 @@ const initialState: TStoreState = {
   chats: [],
   isAddingUserToChatDialogOpen: false,
   isChatCreationDialogOpen: false,
-  isChatParticipantsDialogOpen: true,
+  isChatParticipantsDialogOpen: false,
 }
 
 class Store extends EventBus<{
