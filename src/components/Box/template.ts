@@ -8,13 +8,3 @@ export const template = `
   {{content}}
 </{{#if tag}}{{tag}}{{else}}div{{/if}}>
 `
-
-// export const template = `
-// <{{tag}}
-//   {{#if className}}
-//     class="{{className}}"
-//   {{/if}}
-// >
-//   {{content}}
-// </{{tag}}>
-// `

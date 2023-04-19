@@ -10,19 +10,10 @@ class UsersController {
   }
 
   public async fetchAndSetAuthorizedUser() {
-    // store.setState("authorizedUserLoadingStatus", "LOADING")
-
-    try {
-      const response = await this.api.getAuthorizedUser()
-      const authorizedUser = response.data
-      if (authorizedUser === null) {
-        // store.setState("authorizedUserLoadingStatus", "FAILED")
-      } else {
-        // store.setState("authorizedUserLoadingStatus", "DONE")
-        store.setState("authorizedUserData", authorizedUser)
-      }
-    } catch {
-      // store.setState("authorizedUserLoadingStatus", "FAILED")
+    const response = await this.api.getAuthorizedUser()
+    const authorizedUser = response.data
+    if (authorizedUser !== null) {
+      store.setState("authorizedUserData", authorizedUser)
     }
   }
 
