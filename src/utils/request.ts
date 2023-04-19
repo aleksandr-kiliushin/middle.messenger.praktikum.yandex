@@ -1,5 +1,7 @@
 import { router } from "@utils/Router"
 
+import { API_BASE_URL } from "@constants"
+
 import { isCurrentPathnameProtected } from "./isCurrentPathnameProtected"
 
 const methodsNames = {
@@ -49,7 +51,7 @@ export const request = <T>({
     xhr.timeout = 5000
     xhr.withCredentials = true
 
-    let _url = "https://ya-praktikum.tech/api/v2" + url
+    let _url = API_BASE_URL + url
     if (query !== undefined) {
       _url +=
         "?" +

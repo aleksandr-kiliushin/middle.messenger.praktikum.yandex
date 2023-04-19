@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "@constants"
+
 // ***********************************************************
 // This example support/e2e.ts is processed and
 // loaded automatically before your test files.
@@ -20,8 +22,8 @@ import "./commands"
 
 beforeEach(() => {
   localStorage.clear()
-  cy.intercept("POST", "https://ya-praktikum.tech/api/v2/auth/signin", { statusCode: 200 })
-  cy.intercept("POST", "https://ya-praktikum.tech/api/v2/auth/logout", { statusCode: 200 })
-  cy.intercept("POST", "https://ya-praktikum.tech/api/v2/auth/signup", { fixture: "registration.json" })
-  cy.intercept("GET", "https://ya-praktikum.tech/api/v2/auth/user", { fixture: "authorized-user.json" })
+  cy.intercept("POST", API_BASE_URL + "/auth/signin", { statusCode: 200 })
+  cy.intercept("POST", API_BASE_URL + "/auth/logout", { statusCode: 200 })
+  cy.intercept("POST", API_BASE_URL + "/auth/signup", { fixture: "registration.json" })
+  cy.intercept("GET", API_BASE_URL + "/auth/user", { fixture: "authorized-user.json" })
 })
