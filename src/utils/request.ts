@@ -9,7 +9,7 @@ const methodsNames = {
   POST: "POST",
   PUT: "PUT",
   DELETE: "DELETE",
-}
+} as const
 
 export const request = <T>({
   method,
