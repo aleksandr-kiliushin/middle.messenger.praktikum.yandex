@@ -37,5 +37,5 @@
     "target": "es6"
   },
   "exclude": ["node_modules"],
-  "include": ["src/**/*.ts", ".eslintrc.js", "serve-static.ts", "jest.config.ts"]
+  "include": ["src/**/*.ts", ".eslintrc.js", "serve-static.ts", "jest.config.ts", "webpack.config.js"]
 }
