@@ -62,7 +62,7 @@
     "dev:container": "rm -rf ./dist && docker-compose -f ./compose.dev.yml up",
     "serve-static": "ts-node ./serve-static.ts",
     "serve-static:watch": "nodemon ./serve-static.ts",
-    "start": "npm run build && npm run serve-static",
+    "start": "npm run webpack:build && npm run serve-static",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:e2e": "cypress run --e2e --browser chrome",
