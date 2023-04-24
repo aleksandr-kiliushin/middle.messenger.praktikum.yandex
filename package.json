@@ -61,7 +61,6 @@
     "lint-staged": "lint-staged",
     "prepare": "husky install",
     "prettier": "prettier --write \"**/*.{css,js,json,md,ts}\"",
-    "dev:container": "rm -rf ./dist && docker-compose -f ./compose.dev.yml up",
     "serve-static": "ts-node ./serve-static.ts",
     "serve-static:watch": "nodemon ./serve-static.ts",
     "start": "npm run webpack:build && npm run serve-static",
