@@ -1,6 +1,6 @@
 # Приложение "Мессенджер"
 
-Данная ветка задеплоена [тут](https://deploy-preview-5--mmmessenger.netlify.app/).
+Данная ветка задеплоена на [Netlify](https://deploy-preview-5--mmmessenger.netlify.app/) и на [Render](https://messenger-yw7c.onrender.com/) (отвечает не сразу).
 
 Используемые макеты лежат [тут](https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat?node-id=0%3A1&t=2x1eRIAnZXzV4C3C-0).
 
@@ -15,10 +15,10 @@
 
 ```
 npm install
-npm run dev
+npm run webpack:dev
 ```
 
-После запуска приложение будет доступно по адресу `http://localhost:3000`.
+После запуска приложение будет доступно по адресу `http://localhost:4000`.
 
 ## Запуск тестов
 
@@ -28,19 +28,24 @@ npm run test
 
 ## Основные функции
 
-- Создание новых чатов (coming soon).
-- Общение с друзьями в режиме реального времени (coming soon).
-- Отправка файлов (coming soon).
+- Регистрация, вход, выход.
+- Настройки профиля.
+- Загрузка аватара.
+- Создание новых чатов и их удаление.
+- Добавление пользователей в чат.
+- Общение с другими пользователями в режиме реального времени.
 
 ## Технологии
 
 - TypeScript;
-- Handlebars;
-- PostCSS;
+- Webpack;
 - WebSockets;
+- Docker;
+- PostCSS;
 - Jest;
-- Node.js и Express (для разработки).
+- Node.js и Express (для разработки);
+- Handlebars.
 
 ## Другое
 
-Ссылка на PR для спринта №3 [тут](https://github.com/aleksandr-kiliushin/middle.messenger.praktikum.yandex/pull/4).
+Ссылка на PR для спринта №4 [тут](https://github.com/aleksandr-kiliushin/middle.messenger.praktikum.yandex/pull/5).
