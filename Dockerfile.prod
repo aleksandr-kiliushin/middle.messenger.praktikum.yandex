@@ -1,0 +1,17 @@
+FROM ubuntu:22.04
+
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install curl -y
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && apt-get install -y nodejs
+
+CMD node -v
+
+WORKDIR /var/app
+COPY ./ ./
+RUN npm install
+RUN npm run webpack:build
+
+EXPOSE 3000
+
+CMD npm run serve-static
