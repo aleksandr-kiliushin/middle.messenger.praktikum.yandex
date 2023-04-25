@@ -1,6 +1,6 @@
 # Приложение "Мессенджер"
 
-Данная ветка задеплоена на [Netlify](https://deploy-preview-5--mmmessenger.netlify.app/) и на [Render](https://messenger-yw7c.onrender.com/) (отвечает не сразу).
+Проект задеплоен на [Netlify](https://mmmessenger.netlify.app/) и на [Render](https://messenger-yw7c.onrender.com/) (отвечает не сразу).
 
 Используемые макеты лежат [тут](https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat?node-id=0%3A1&t=2x1eRIAnZXzV4C3C-0).
 
@@ -45,7 +45,3 @@ npm run test
 - Jest;
 - Node.js и Express (для разработки);
 - Handlebars.
-
-## Другое
-
-Ссылка на PR для спринта №4 [тут](https://github.com/aleksandr-kiliushin/middle.messenger.praktikum.yandex/pull/5).
